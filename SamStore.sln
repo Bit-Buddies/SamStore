@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{561F1A00-0709-4EE9-924A-58534177D72A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D3934CAB-6B9C-4AF0-986F-7ABE8E61B60E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Core", "src\BuildingBlocks\SamStore.Core\SamStore.Core.csproj", "{A22B939A-E057-4731-AFFB-C0C40FF5F3C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identidade", "Identidade", "{0B99B87C-0E9B-4057-9AFE-A2E9041815AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Identidade.API", "src\Services\Identidade\SamStore.Identidade.API\SamStore.Identidade.API.csproj", "{01B233AF-860D-4160-B3ED-644FFCB4FCBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carrinho", "Carrinho", "{7A2A63A2-E9B3-410F-AD09-C9D359FDA899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Carrinho.API", "src\Services\Carrinho\SamStore.Carrinho.API\SamStore.Carrinho.API.csproj", "{2F2730F7-B28E-491E-B969-FEA561D305FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalogo", "Catalogo", "{AB6B8ECB-3B3F-4566-B8F8-1D5C49400197}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Catalogo.API", "src\Services\Catalogo\SamStore.Catalogo.API\SamStore.Catalogo.API.csproj", "{9777E97C-5406-424D-912F-3AB5D4A43753}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cliente", "Cliente", "{EDCEEF4C-5F7A-42CE-9FDB-99FAF8376EEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Cliente.API", "src\Services\Cliente\SamStore.Cliente.API\SamStore.Cliente.API.csproj", "{42AF8A6C-182E-4677-AEDB-B68431235E1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A22B939A-E057-4731-AFFB-C0C40FF5F3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A22B939A-E057-4731-AFFB-C0C40FF5F3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A22B939A-E057-4731-AFFB-C0C40FF5F3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A22B939A-E057-4731-AFFB-C0C40FF5F3C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01B233AF-860D-4160-B3ED-644FFCB4FCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01B233AF-860D-4160-B3ED-644FFCB4FCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01B233AF-860D-4160-B3ED-644FFCB4FCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01B233AF-860D-4160-B3ED-644FFCB4FCBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F2730F7-B28E-491E-B969-FEA561D305FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F2730F7-B28E-491E-B969-FEA561D305FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F2730F7-B28E-491E-B969-FEA561D305FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F2730F7-B28E-491E-B969-FEA561D305FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9777E97C-5406-424D-912F-3AB5D4A43753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9777E97C-5406-424D-912F-3AB5D4A43753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9777E97C-5406-424D-912F-3AB5D4A43753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9777E97C-5406-424D-912F-3AB5D4A43753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42AF8A6C-182E-4677-AEDB-B68431235E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42AF8A6C-182E-4677-AEDB-B68431235E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42AF8A6C-182E-4677-AEDB-B68431235E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42AF8A6C-182E-4677-AEDB-B68431235E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A22B939A-E057-4731-AFFB-C0C40FF5F3C8} = {561F1A00-0709-4EE9-924A-58534177D72A}
+		{0B99B87C-0E9B-4057-9AFE-A2E9041815AA} = {0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}
+		{01B233AF-860D-4160-B3ED-644FFCB4FCBD} = {0B99B87C-0E9B-4057-9AFE-A2E9041815AA}
+		{7A2A63A2-E9B3-410F-AD09-C9D359FDA899} = {0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}
+		{2F2730F7-B28E-491E-B969-FEA561D305FF} = {7A2A63A2-E9B3-410F-AD09-C9D359FDA899}
+		{AB6B8ECB-3B3F-4566-B8F8-1D5C49400197} = {0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}
+		{9777E97C-5406-424D-912F-3AB5D4A43753} = {AB6B8ECB-3B3F-4566-B8F8-1D5C49400197}
+		{EDCEEF4C-5F7A-42CE-9FDB-99FAF8376EEE} = {0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}
+		{42AF8A6C-182E-4677-AEDB-B68431235E1E} = {EDCEEF4C-5F7A-42CE-9FDB-99FAF8376EEE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC44D549-4D22-4C8A-AB48-25643068B33C}
+	EndGlobalSection
+EndGlobal
