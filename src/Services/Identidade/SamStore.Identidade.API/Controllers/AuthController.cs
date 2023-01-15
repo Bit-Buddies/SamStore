@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
+using SamStore.Core.API.Controllers;
 using SamStore.Identidade.API.Extensions;
 using SamStore.Identidade.API.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,7 +14,7 @@ namespace SamStore.Identidade.API.Controllers
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController : Controller
+    public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
@@ -30,7 +30,7 @@ namespace SamStore.Identidade.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterViewModel registerData)
         {
-            if(!ModelState.IsValid) return BadRequest();
+            if(!ModelState.IsValid) return CustomResponse(ModelState);
 
             IdentityUser user = new IdentityUser()
             {
@@ -43,26 +43,43 @@ namespace SamStore.Identidade.API.Controllers
 
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return Ok(await GenerateJwt(user.Email));
+                return CustomResponse(await GenerateJwt(user.Email));
             }
 
-            return BadRequest();
+            foreach (IdentityError error in result.Errors)
+            {
+                AddError(error.Description);
+            }
+
+            return CustomResponse();
         }
 
         [HttpPost("authenticate")]
         public async Task<IActionResult> Login(LoginViewModel loginData)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            SignInResult result = await _signInManager.PasswordSignInAsync(loginData.Email, loginData.Password, false, false);
+            SignInResult result = await _signInManager.PasswordSignInAsync(loginData.Email, loginData.Password, false, true);
 
             if (result.Succeeded)
             {
-                return Ok(await GenerateJwt(loginData.Email));
+                return CustomResponse(await GenerateJwt(loginData.Email));
             }
 
-            return BadRequest();
+            if(result.IsLockedOut)
+            {
+                AddError("Usuário temporariamente bloqueado por tentativas inválidas");
+                return CustomResponse();
+            }
+
+            if(result.IsNotAllowed)
+            {
+                AddError("Usuário sem permissão para efetuar login");
+                return CustomResponse();
+            }
+
+            AddError("E-mail ou senha inválidos");
+            return CustomResponse();
         }
 
         private async Task<UserData> GenerateJwt(string email)
