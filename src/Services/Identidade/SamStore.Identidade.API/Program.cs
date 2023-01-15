@@ -1,11 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using SamStore.Identidade.API.Configurations;
-using SamStore.Identidade.API.Data;
-using SamStore.Identidade.API.Extensions;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -9,31 +9,53 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D3934CAB-6B9C-4AF0-986F-7ABE8E61B60E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Core", "src\BuildingBlocks\SamStore.Core\SamStore.Core.csproj", "{A22B939A-E057-4731-AFFB-C0C40FF5F3C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Core", "src\BuildingBlocks\SamStore.Core\SamStore.Core.csproj", "{A22B939A-E057-4731-AFFB-C0C40FF5F3C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identidade", "Identidade", "{0B99B87C-0E9B-4057-9AFE-A2E9041815AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Identidade.API", "src\Services\Identidade\SamStore.Identidade.API\SamStore.Identidade.API.csproj", "{01B233AF-860D-4160-B3ED-644FFCB4FCBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Identidade.API", "src\Services\Identidade\SamStore.Identidade.API\SamStore.Identidade.API.csproj", "{01B233AF-860D-4160-B3ED-644FFCB4FCBD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carrinho", "Carrinho", "{7A2A63A2-E9B3-410F-AD09-C9D359FDA899}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Carrinho.API", "src\Services\Carrinho\SamStore.Carrinho.API\SamStore.Carrinho.API.csproj", "{2F2730F7-B28E-491E-B969-FEA561D305FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Carrinho.API", "src\Services\Carrinho\SamStore.Carrinho.API\SamStore.Carrinho.API.csproj", "{2F2730F7-B28E-491E-B969-FEA561D305FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalogo", "Catalogo", "{AB6B8ECB-3B3F-4566-B8F8-1D5C49400197}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Catalogo.API", "src\Services\Catalogo\SamStore.Catalogo.API\SamStore.Catalogo.API.csproj", "{9777E97C-5406-424D-912F-3AB5D4A43753}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Catalogo.API", "src\Services\Catalogo\SamStore.Catalogo.API\SamStore.Catalogo.API.csproj", "{9777E97C-5406-424D-912F-3AB5D4A43753}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cliente", "Cliente", "{EDCEEF4C-5F7A-42CE-9FDB-99FAF8376EEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Cliente.API", "src\Services\Cliente\SamStore.Cliente.API\SamStore.Cliente.API.csproj", "{42AF8A6C-182E-4677-AEDB-B68431235E1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Cliente.API", "src\Services\Cliente\SamStore.Cliente.API\SamStore.Cliente.API.csproj", "{42AF8A6C-182E-4677-AEDB-B68431235E1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamento", "Pagamento", "{E06AA8E2-3489-4C94-8E6C-D70938FEC659}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Pagamento.API", "src\Services\Pagamento\SamStore.Pagamento.API\SamStore.Pagamento.API.csproj", "{04C8E6A0-8A04-4F43-9238-9BD5D0AE9221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Pagamento.API", "src\Services\Pagamento\SamStore.Pagamento.API\SamStore.Pagamento.API.csproj", "{04C8E6A0-8A04-4F43-9238-9BD5D0AE9221}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pedido", "Pedido", "{8EEB97DF-FE70-4BD7-94E4-0284DCB2A511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Pedido.API", "src\Services\Pedido\SamStore.Pedido.API\SamStore.Pedido.API.csproj", "{A9F732ED-4D51-480B-B88F-CB8A929D6E17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Pedido.API", "src\Services\Pedido\SamStore.Pedido.API\SamStore.Pedido.API.csproj", "{A9F732ED-4D51-480B-B88F-CB8A929D6E17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{1678FD7B-5F26-4914-8077-A37DE5C34CCF}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SamStore.Web.UI", "src\Clients\Web\SamStore.Web.UI\", "{B3BF2F7C-849D-4981-BAC5-41EBAE9ED786}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_55612"
+		Debug.AspNetCompiler.PhysicalPath = "src\Clients\Web\SamStore.Web.UI\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55612\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_55612"
+		Release.AspNetCompiler.PhysicalPath = "src\Clients\Web\SamStore.Web.UI\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55612\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "55612"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +91,10 @@ Global
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3BF2F7C-849D-4981-BAC5-41EBAE9ED786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3BF2F7C-849D-4981-BAC5-41EBAE9ED786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3BF2F7C-849D-4981-BAC5-41EBAE9ED786}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3BF2F7C-849D-4981-BAC5-41EBAE9ED786}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +113,8 @@ Global
 		{04C8E6A0-8A04-4F43-9238-9BD5D0AE9221} = {E06AA8E2-3489-4C94-8E6C-D70938FEC659}
 		{8EEB97DF-FE70-4BD7-94E4-0284DCB2A511} = {0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17} = {8EEB97DF-FE70-4BD7-94E4-0284DCB2A511}
+		{1678FD7B-5F26-4914-8077-A37DE5C34CCF} = {D3934CAB-6B9C-4AF0-986F-7ABE8E61B60E}
+		{B3BF2F7C-849D-4981-BAC5-41EBAE9ED786} = {1678FD7B-5F26-4914-8077-A37DE5C34CCF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC44D549-4D22-4C8A-AB48-25643068B33C}
