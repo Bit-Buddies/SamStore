@@ -27,6 +27,11 @@ namespace SamStore.Identidade.API.Controllers
             _identitySettings = identitySettings.Value;
         }
 
+        /// <summary>
+        /// Registrar um novo usuário
+        /// </summary>
+        /// <param name="registerData"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterViewModel registerData)
         {
@@ -54,6 +59,11 @@ namespace SamStore.Identidade.API.Controllers
             return CustomResponse();
         }
 
+        /// <summary>
+        /// Realizar o login do usuário
+        /// </summary>
+        /// <param name="loginData"></param>
+        /// <returns></returns>
         [HttpPost("authenticate")]
         public async Task<IActionResult> Login(LoginViewModel loginData)
         {
@@ -85,23 +95,28 @@ namespace SamStore.Identidade.API.Controllers
         private async Task<UserData> GenerateJwt(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            var claims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
 
-            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub, user.Id));
-            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, user.Email));
-            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Nbf, ToUnixEpochDate(DateTime.UtcNow).ToString()));
-            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64));
+            ClaimsIdentity identityClaims = await GetCLaims(user, roles);
+            string encodedToken = EncodeToken(identityClaims);
 
-            foreach(var role in roles) 
+            UserData userData = new UserData()
             {
-                claims.Add(new Claim("role", role));
-            }
+                AccessToken = encodedToken,
+                HoursToExpire = TimeSpan.FromHours(_identitySettings.HoursToExpire).TotalSeconds,
+                UserToken = new UserToken()
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    Claims = identityClaims.Claims.Select(c => new UserClaim() { Type = c.Type, Value = c.Value })
+                }
+            };
 
-            ClaimsIdentity identityClaims = new ClaimsIdentity();
-            identityClaims.AddClaims(claims);
+            return userData;
+        }
 
+        private string EncodeToken(ClaimsIdentity identityClaims)
+        {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.ASCII.GetBytes(_identitySettings.Secret);
 
@@ -114,21 +129,27 @@ namespace SamStore.Identidade.API.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             });
 
-            string encodedToken = tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(token); ;
+        }
 
-            UserData userData = new UserData()
+        private async Task<ClaimsIdentity> GetCLaims(IdentityUser user, IList<string> roles)
+        {
+            var claims = await _userManager.GetClaimsAsync(user);
+
+            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub, user.Id));
+            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, user.Email));
+            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Nbf, ToUnixEpochDate(DateTime.UtcNow).ToString()));
+            claims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64));
+
+            foreach (var role in roles)
             {
-                AccessToken = encodedToken,
-                HoursToExpire = TimeSpan.FromHours(_identitySettings.HoursToExpire).TotalSeconds,
-                UserToken = new UserToken()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    Claims = claims.Select(c => new UserClaim() { Type = c.Type, Value = c.Value })
-                }
-            };
+                claims.Add(new Claim("role", role));
+            }
 
-            return userData;
+            ClaimsIdentity identityClaims = new ClaimsIdentity();
+            identityClaims.AddClaims(claims);
+            return identityClaims;
         }
 
         private static long ToUnixEpochDate(DateTime date) =>
