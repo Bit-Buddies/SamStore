@@ -5,6 +5,7 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace SamStore.Identidade.API.Controllers
 {
+    [ApiController]
     [Route("api/auth")]
     public class AuthController : Controller
     {
