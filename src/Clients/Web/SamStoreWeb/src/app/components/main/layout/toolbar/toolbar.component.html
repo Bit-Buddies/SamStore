@@ -1,28 +1,26 @@
-<div fxLayout="column">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>SamStore</span>
-      <span class="spacer"></span>
-      <button
-        *ngIf="this.logado"
-        mat-icon-button
-        matTooltip="Notificações"
-        class="icon-button notifications-icon-button"
-      >
-        <mat-icon matBadge="6" matBadgeColor="warn">notifications</mat-icon>
-      </button>
-      <button
-        *ngIf="logado; else enableLoginButton"
-        mat-icon-button
-        (click)="deslogar()"
-        matTooltip="Minha conta"
-        class="icon-button account-icon-button"
-      >
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="container">
+    <span>SamStore</span>
+    <span class="spacer"></span>
+    <button
+      *ngIf="this.logado"
+      mat-icon-button
+      matTooltip="Notificações"
+      class="icon-button notifications-icon-button"
+    >
+      <mat-icon matBadge="6" matBadgeColor="warn">notifications</mat-icon>
+    </button>
+    <button
+      *ngIf="logado; else enableLoginButton"
+      mat-icon-button
+      (click)="deslogar()"
+      matTooltip="Minha conta"
+      class="icon-button account-icon-button"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
 
 <ng-template #enableLoginButton>
   <button
@@ -36,7 +34,8 @@
     mat-button
     class="icon-button account-icon-button"
     [routerLink]="['/account/register']"
+    routerLinkActive="router-link-active"
   >
-    Cadastrar
+    Register
   </button>
 </ng-template>

@@ -1,3 +1,6 @@
+import { MaterialModule } from './../../../material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './../../../services/auth.service';
 import { AccountRoutingModule } from './account-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './register/register.component';
@@ -17,7 +20,9 @@ import { AccountComponent } from './account/account.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MaterialModule,
   ],
-  exports: [],
+  providers: [AuthService],
 })
 export class AccountModule {}

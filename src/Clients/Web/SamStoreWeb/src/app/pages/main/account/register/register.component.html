@@ -1,1 +1,56 @@
-<p>register works!</p>
+<div class="container">
+  <form fxLayoutAlign.gt-xs="center" class="form-container">
+    <mat-card fxLayout="column">
+      <mat-card-header>
+        <mat-card-title>Create new account</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Your name" />
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="youremail@email.com" />
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="16">
+          <div fxLayout="column" fxFlex="48%">
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+                type="password"
+              />
+
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hidePassword = !hidePassword"
+              >
+                <mat-icon>{{
+                  hidePassword ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <div fxLayout="column" fxFlex="48%">
+            <mat-form-field appearance="outline">
+              <mat-label>Repeat password</mat-label>
+              <input matInput type="password" />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="center">
+        <button mat-flat-button color="primary">Register</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
