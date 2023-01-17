@@ -1,6 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="container">
-    <span>SamStore</span>
+    <span [routerLink]="['/']" routerLinkActive="router-link-active">
+      SamStore
+    </span>
+
     <span class="spacer"></span>
     <button
       *ngIf="this.logado"
