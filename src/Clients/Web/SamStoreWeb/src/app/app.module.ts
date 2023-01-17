@@ -1,3 +1,5 @@
+import { AccountRoutingModule } from './pages/main/account/account-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -12,13 +14,22 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LoginComponent } from './pages/main/login/login.component';
+import { HomeComponent } from './pages/main/home/home.component';
+import { LoginComponent } from './pages/main/account/login/login.component';
+import { RegisterComponent } from './pages/main/account/register/register.component';
+import { NotfoundComponent } from './pages/main/notfound/notfound.component';
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    ToolbarComponent,
+    HomeComponent,
+    NotfoundComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatIconModule,

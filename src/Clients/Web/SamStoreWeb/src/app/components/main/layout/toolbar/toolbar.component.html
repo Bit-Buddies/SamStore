@@ -25,7 +25,18 @@
 </div>
 
 <ng-template #enableLoginButton>
-  <button mat-button class="icon-button account-icon-button" (click)="logar()">
+  <button
+    mat-button
+    class="icon-button account-icon-button"
+    [routerLink]="['/account/login']"
+  >
     Login
+  </button>
+  <button
+    mat-button
+    class="icon-button account-icon-button"
+    [routerLink]="['/account/register']"
+  >
+    Cadastrar
   </button>
 </ng-template>

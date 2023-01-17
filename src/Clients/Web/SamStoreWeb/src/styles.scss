@@ -1,18 +1,10 @@
-// @use '@angular/material/theming' as mat;
-// @include mat-core();
+@import "bootstrap/dist/css/bootstrap-grid.min.css";
 
-// $light-theme-primary: mat.define-pallete(mat.$grey-pallete, 800);
-// $light-theme-accent: mat.define-pallete(mat.$amber-pallete, 700, 600, 900);
-// $light-theme-warn: mat.define-pallete(mat.$red-pallete);
-
-// $custom-theme: mat.define-light-theme((
-//   color: (
-//     primary:
-//   )
-// ));
-
-// @include angular-material-theme($custom-theme);
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

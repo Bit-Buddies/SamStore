@@ -1,0 +1,23 @@
+div.notfound-container {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 348px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+div.notfound-container h1 {
+  font-size: 48px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+div.notfound-container p {
+  color: grey;
+}
