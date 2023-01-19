@@ -81,17 +81,17 @@ namespace SamStore.Identidade.API.Controllers
 
             if(result.IsLockedOut)
             {
-                AddError("Usuário temporariamente bloqueado por tentativas inválidas");
+                AddError("User has been blocked after too many attempts");
                 return CustomResponse();
             }
 
             if(result.IsNotAllowed)
             {
-                AddError("Usuário sem permissão para efetuar login");
+                AddError("User not allowed");
                 return CustomResponse();
             }
 
-            AddError("E-mail ou senha inválidos");
+            AddError("Invalid email or password");
             return CustomResponse();
         }
 
