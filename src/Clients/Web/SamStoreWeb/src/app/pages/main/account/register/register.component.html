@@ -1,5 +1,9 @@
 <div class="container">
-  <form fxLayoutAlign.gt-xs="center" class="form-container">
+  <form
+    fxLayoutAlign.gt-xs="center"
+    class="form-container"
+    [formGroup]="registerForm"
+    (ngSubmit)="registerUser()">
     <mat-card fxLayout="column">
       <mat-card-header>
         <mat-card-title>Create new account</mat-card-title>
@@ -8,48 +12,79 @@
         <div fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Your name" />
+            <input
+              matInput
+              placeholder="Your name"
+              formControlName="name" />
+            <mat-error *ngIf="getControlError('name', 'required')">Required field </mat-error>
+            <mat-error *ngIf="getControlError('name', 'minlength')">Minimum length is 3 </mat-error>
           </mat-form-field>
         </div>
 
         <div fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="email" placeholder="youremail@email.com" />
+            <input
+              matInput
+              type="email"
+              placeholder="youremail@email.com"
+              formControlName="email" />
+            <mat-error *ngIf="getControlError('email', 'required')">Required field </mat-error>
+            <mat-error *ngIf="getControlError('email', 'email')">Invalid email </mat-error>
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="16">
-          <div fxLayout="column" fxFlex="48%">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between"
+          fxLayoutGap="16">
+          <div
+            fxLayout="column"
+            fxFlex="48%">
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
               <input
                 matInput
                 [type]="hidePassword ? 'password' : 'text'"
                 type="password"
-              />
+                (change)="mustmatchValidator()"
+                formControlName="password" />
 
               <button
                 mat-icon-button
                 matSuffix
-                (click)="hidePassword = !hidePassword"
-              >
-                <mat-icon>{{
-                  hidePassword ? "visibility_off" : "visibility"
-                }}</mat-icon>
+                (click)="hidePassword = !hidePassword">
+                <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
               </button>
+              <mat-error *ngIf="getControlError('password', 'required')">Required field </mat-error>
+              <mat-error *ngIf="getControlError('password', 'minlength')">Minimum length is 6 </mat-error>
             </mat-form-field>
           </div>
-          <div fxLayout="column" fxFlex="48%">
+          <div
+            fxLayout="column"
+            fxFlex="48%">
             <mat-form-field appearance="outline">
               <mat-label>Repeat password</mat-label>
-              <input matInput type="password" />
+              <input
+                matInput
+                type="password"
+                (change)="mustmatchValidator()"
+                formControlName="repeatPassword" />
+              <mat-error *ngIf="getControlError('repeatPassword', 'required')">Required field </mat-error>
+              <mat-error *ngIf="getControlError('repeatPassword', 'passwordMismatched')">
+                Password mismatched</mat-error
+              >
             </mat-form-field>
           </div>
         </div>
       </mat-card-content>
       <mat-card-actions fxLayoutAlign="center">
-        <button mat-flat-button color="primary">Register</button>
+        <button
+          mat-flat-button
+          type="submit"
+          color="primary">
+          Register
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>
