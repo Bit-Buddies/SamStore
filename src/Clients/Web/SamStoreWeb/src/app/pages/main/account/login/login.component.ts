@@ -5,6 +5,7 @@ import { AccountService } from "./../../../../services/account.service";
 import { AuthService } from "./../../../../services/auth.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-login",
@@ -24,7 +25,8 @@ export class LoginComponent {
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _authService: AuthService,
-    private _accountService: AccountService
+    private _accountService: AccountService,
+    private _toastrService: ToastrService
   ) {
     this.loginForm = _formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
@@ -39,11 +41,22 @@ export class LoginComponent {
 
     this.loginData = { ...this.loginData, ...this.loginForm.value };
 
-    this._authService.login(this.loginData).subscribe((userData) => {
-      this._accountService.setCurrentUser(userData);
-      this._router.navigate(["/home"]);
+    this._authService.login(this.loginData).subscribe({
+      next: (userData) => {
+        this._accountService.setCurrentUser(userData);
+        this._router.navigate(["/home"]);
 
-      GlobalEventsService.userLoggedIn.emit();
+        GlobalEventsService.userLoggedIn.emit();
+      },
+      error: (response) => {
+        const errors = this._authService.extractErrors(response);
+
+        errors.errors.Mensagens.forEach((er) => {
+          this._toastrService.error(er, undefined, {
+            positionClass: "toast-bottom-right",
+          });
+        });
+      },
     });
   }
 

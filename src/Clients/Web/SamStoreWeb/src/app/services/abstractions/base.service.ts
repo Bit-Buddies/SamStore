@@ -1,12 +1,11 @@
+import { ResponseApiError } from "./../../models/response-api-error";
 import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { ErrorStateMatcher } from "@angular/material/core";
 import { throwError } from "rxjs";
 
-export abstract class BaseService {
+export abstract class BaseApiService {
   protected _baseUrlService: string = "http://localhost:5274/api";
 
-  /**
-   *
-   */
   constructor(protected controllerName: string) {
     this._baseUrlService += `/${controllerName}`;
   }
@@ -19,17 +18,7 @@ export abstract class BaseService {
     };
   }
 
-  protected extractErrors(response: Response | any) {
-    let customErrors: Array<string> = [];
-
-    if (response instanceof HttpErrorResponse) {
-      if (response.statusText == "Unknown Error") {
-        customErrors.push("Ocorreu um erro desconhecido");
-        response.error.errors = customErrors;
-      }
-    }
-
-    console.error(response);
-    return throwError(() => response);
+  public extractErrors(response: Response | any) {
+    return response.error as ResponseApiError;
   }
 }

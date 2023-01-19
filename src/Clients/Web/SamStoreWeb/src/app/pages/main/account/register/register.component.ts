@@ -1,3 +1,4 @@
+import { ToastrService } from "ngx-toastr";
 import { AccountService } from "./../../../../services/account.service";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
 import { UserData } from "./../../../../models/user-data";
@@ -22,6 +23,7 @@ export class RegisterComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
     private _accountService: AccountService,
+    private _toastrService: ToastrService,
     private _router: Router
   ) {}
 
@@ -30,11 +32,22 @@ export class RegisterComponent implements OnInit {
 
     this._registerData = { ...this._registerData, ...this.registerForm.value };
 
-    this._authService.registerUser(this._registerData).subscribe((userData) => {
-      this._accountService.setCurrentUser(userData);
-      this._router.navigate(["/home"]);
+    this._authService.registerUser(this._registerData).subscribe({
+      next: (userData) => {
+        this._accountService.setCurrentUser(userData);
+        this._router.navigate(["/home"]);
 
-      GlobalEventsService.userLoggedIn.emit();
+        GlobalEventsService.userLoggedIn.emit();
+      },
+      error: (response) => {
+        const errors = this._authService.extractErrors(response);
+
+        errors.errors.Mensagens.forEach((er) => {
+          this._toastrService.error(er, undefined, {
+            positionClass: "toast-bottom-right",
+          });
+        });
+      },
     });
   }
 

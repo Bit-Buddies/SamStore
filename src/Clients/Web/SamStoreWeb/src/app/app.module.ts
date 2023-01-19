@@ -12,10 +12,18 @@ import { ToolbarComponent } from "./components/main/layout/toolbar/toolbar.compo
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HomeComponent } from "./pages/main/home/home.component";
 import { NotfoundComponent } from "./pages/main/notfound/notfound.component";
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   declarations: [AppComponent, ToolbarComponent, HomeComponent, NotfoundComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, FlexLayoutModule, MaterialModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    FlexLayoutModule,
+    MaterialModule,
+    ToastrModule.forRoot(),
+  ],
   providers: [AccountService],
   bootstrap: [AppComponent],
 })
