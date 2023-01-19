@@ -2,6 +2,16 @@ using SamStore.Identidade.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", config =>
+    {
+        config.WithOrigins("http://localhost", "http://localhost:4200");
+        config.AllowAnyMethod();
+        config.AllowAnyHeader();
+    });
+});
+
 builder.Services.AddIdentityConfiguration(builder.Configuration);
 builder.Services.AddServicesConfiguration(builder.Configuration);
 
@@ -17,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

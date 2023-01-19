@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +33,7 @@ namespace SamStore.Identidade.API.Controllers
         /// </summary>
         /// <param name="registerData"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterViewModel registerData)
         {
@@ -64,6 +66,7 @@ namespace SamStore.Identidade.API.Controllers
         /// </summary>
         /// <param name="loginData"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Login(LoginViewModel loginData)
         {

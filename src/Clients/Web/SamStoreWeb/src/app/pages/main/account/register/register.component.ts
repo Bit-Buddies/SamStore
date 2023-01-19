@@ -1,3 +1,4 @@
+import { UserData } from "./../../../../models/user-data";
 import { AuthService } from "./../../../../services/auth.service";
 import { RegisterUserData } from "./../../../../models/register-user-data";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
@@ -21,7 +22,10 @@ export class RegisterComponent implements OnInit {
 
     this._registerData = { ...this._registerData, ...this.registerForm.value };
 
-    this._authService.registerUser(this._registerData);
+    this._authService.registerUser(this._registerData).subscribe((teste) => {
+      console.log("instâncioa? ", typeof teste);
+      console.log(teste.userToken.claims.forEach((x) => console.log(x)));
+    });
   }
 
   getControlError(controlName: string, errorCode: string): boolean {
