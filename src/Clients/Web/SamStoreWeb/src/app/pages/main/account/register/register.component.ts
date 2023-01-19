@@ -1,8 +1,11 @@
+import { AccountService } from "./../../../../services/account.service";
+import { GlobalEventsService } from "./../../../../services/events/global-events.service";
 import { UserData } from "./../../../../models/user-data";
 import { AuthService } from "./../../../../services/auth.service";
 import { RegisterUserData } from "./../../../../models/register-user-data";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register",
@@ -15,7 +18,12 @@ export class RegisterComponent implements OnInit {
 
   private _registerData!: RegisterUserData;
 
-  constructor(private _formBuilder: FormBuilder, private _authService: AuthService) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _authService: AuthService,
+    private _accountService: AccountService,
+    private _router: Router
+  ) {}
 
   registerUser() {
     if (!this.registerForm.dirty || this.registerForm.invalid) return;
@@ -23,8 +31,10 @@ export class RegisterComponent implements OnInit {
     this._registerData = { ...this._registerData, ...this.registerForm.value };
 
     this._authService.registerUser(this._registerData).subscribe((teste) => {
-      console.log("instâncioa? ", typeof teste);
-      console.log(teste.userToken.claims.forEach((x) => console.log(x)));
+      this._accountService.setCurrentUser(teste);
+      this._router.navigate(["/home"]);
+
+      GlobalEventsService.userLoggedIn.emit();
     });
   }
 
