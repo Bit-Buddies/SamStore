@@ -10,6 +10,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./toolbar.component.scss"],
 })
 export class ToolbarComponent implements OnInit {
+  userEmail: string = "";
   /**
    *
    */
@@ -30,6 +31,7 @@ export class ToolbarComponent implements OnInit {
       return;
     }
 
+    this.userEmail = user.userToken.email;
     this.logado = true;
   }
 

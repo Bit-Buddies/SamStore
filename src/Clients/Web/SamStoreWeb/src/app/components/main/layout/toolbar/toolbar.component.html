@@ -10,7 +10,7 @@
     <button
       *ngIf="this.logado"
       mat-icon-button
-      matTooltip="Notificações"
+      matTooltip="notifications"
       class="icon-button notifications-icon-button">
       <mat-icon
         matBadge="6"
@@ -21,7 +21,7 @@
     <button
       *ngIf="logado; else enableLoginButton"
       mat-icon-button
-      matTooltip="Minha conta"
+      [matTooltip]="userEmail"
       class="icon-button account-icon-button">
       <mat-icon>account_circle</mat-icon>
     </button>
