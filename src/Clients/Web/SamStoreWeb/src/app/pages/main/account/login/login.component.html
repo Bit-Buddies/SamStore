@@ -1,5 +1,9 @@
 <div class="container">
-  <form fxLayoutAlign.gt-xs="center" class="form-container">
+  <form
+    fxLayoutAlign.gt-xs="center"
+    class="form-container"
+    [formGroup]="this.loginForm"
+    (ngSubmit)="login()">
     <mat-card fxLayout="column">
       <mat-card-header>
         <mat-card-title>Access your account</mat-card-title>
@@ -8,7 +12,13 @@
         <div fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="email" placeholder="youremail@email.com" />
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="youremail@email.com" />
+            <mat-error *ngIf="getControlError('email', 'email')">Invalid email</mat-error>
+            <mat-error *ngIf="getControlError('email', 'required')">Type your email</mat-error>
           </mat-form-field>
         </div>
 
@@ -18,23 +28,25 @@
             <input
               matInput
               [type]="hidePassword ? 'password' : 'text'"
-              type="password"
-            />
+              formControlName="password"
+              type="password" />
 
             <button
               mat-icon-button
               matSuffix
-              (click)="hidePassword = !hidePassword"
-            >
-              <mat-icon>{{
-                hidePassword ? "visibility_off" : "visibility"
-              }}</mat-icon>
+              (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
+            <mat-error *ngIf="getControlError('password', 'required')">Type your password</mat-error>
           </mat-form-field>
         </div>
       </mat-card-content>
       <mat-card-actions fxLayoutAlign="center">
-        <button mat-flat-button color="primary">Login</button>
+        <button
+          mat-flat-button
+          color="primary">
+          Login
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>

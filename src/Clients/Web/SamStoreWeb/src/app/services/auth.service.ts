@@ -18,5 +18,7 @@ export class AuthService extends BaseService {
     return this._httpClient.post<UserData>(this._baseUrlService + "/register", registerData);
   }
 
-  login(loginData: LoginData) {}
+  login(loginData: LoginData): Observable<UserData> {
+    return this._httpClient.post<UserData>(this._baseUrlService + "/authenticate", loginData);
+  }
 }

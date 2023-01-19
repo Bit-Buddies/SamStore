@@ -30,8 +30,8 @@ export class RegisterComponent implements OnInit {
 
     this._registerData = { ...this._registerData, ...this.registerForm.value };
 
-    this._authService.registerUser(this._registerData).subscribe((teste) => {
-      this._accountService.setCurrentUser(teste);
+    this._authService.registerUser(this._registerData).subscribe((userData) => {
+      this._accountService.setCurrentUser(userData);
       this._router.navigate(["/home"]);
 
       GlobalEventsService.userLoggedIn.emit();
