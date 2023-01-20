@@ -1,3 +1,4 @@
+using SamStore.Core.API.Middlewares;
 using SamStore.Identidade.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,8 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 
