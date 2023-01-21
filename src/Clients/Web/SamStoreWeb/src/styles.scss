@@ -38,3 +38,12 @@ mat-card {
   left: 0;
   right: 0;
 }
+
+.mdc-button {
+  width: 100% !important;
+  max-width: 248px !important;
+}
+
+mat-card-actions{
+  padding-inline: 16px !important;
+}

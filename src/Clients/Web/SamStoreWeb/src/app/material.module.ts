@@ -27,8 +27,10 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTreeModule } from "@angular/material/tree";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import {MatBadgeModule} from '@angular/material/badge';
 
 const materialModules = [
+  MatBadgeModule,
   CdkTreeModule,
   MatAutocompleteModule,
   MatButtonModule,

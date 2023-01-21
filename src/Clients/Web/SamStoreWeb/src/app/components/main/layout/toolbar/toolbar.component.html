@@ -1,45 +1,35 @@
-<mat-toolbar class="toolbar">
+<mat-toolbar class="toolbar" color="accent">
   <mat-toolbar-row class="container">
     <span
-      [routerLink]="['/']"
-      routerLinkActive="router-link-active">
+      [routerLink]="['/']">
       SamStore
     </span>
 
     <span class="spacer"></span>
     <button
-      *ngIf="this.logado"
       mat-icon-button
-      matTooltip="notifications"
+      matTooltip="shop cart"
       class="icon-button notifications-icon-button">
       <mat-icon
-        matBadge="6"
+        matBadge="0"
+        matBadgeSize="small"
         matBadgeColor="warn"
-        >notifications</mat-icon
+        >shopping_cart</mat-icon
       >
     </button>
     <button
-      *ngIf="logado; else enableLoginButton"
+      *ngIf="logado; else loggedOut"
       mat-icon-button
       [matTooltip]="userEmail"
+      [routerLink]="['/account/login']"
       class="icon-button account-icon-button">
       <mat-icon>account_circle</mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<ng-template #enableLoginButton>
-  <button
-    mat-button
-    class="icon-button account-icon-button"
-    [routerLink]="['/account/login']">
-    Login
-  </button>
-  <button
-    mat-button
-    class="icon-button account-icon-button"
-    [routerLink]="['/account/register']"
-    routerLinkActive="router-link-active">
-    Register
-  </button>
+<ng-template #loggedOut>
+  <span class="account-buttons-container">
+    <a [routerLink]="['/account/register']">Create account</a> | <a [routerLink]="['/account/login']">Login</a>
+  </span>
 </ng-template>
