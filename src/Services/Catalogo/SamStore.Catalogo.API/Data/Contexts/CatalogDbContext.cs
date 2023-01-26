@@ -11,21 +11,8 @@ namespace SamStore.Catalogo.API.Data.Contexts
     {
         public DbSet<Product> Products { get; set; }
 
+
         public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options) { }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.UseDefaultTableConfiguration();
-
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseDefaultContextConfiguration();
-
-            base.OnConfiguring(optionsBuilder);
-        }
 
         public async Task Commit()
         {
@@ -55,6 +42,17 @@ namespace SamStore.Catalogo.API.Data.Contexts
             }
             
             await SaveChangesAsync();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.UseDefaultTableConfiguration();
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogDbContext).Assembly);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseDefaultContextConfiguration();
         }
     }
 }
