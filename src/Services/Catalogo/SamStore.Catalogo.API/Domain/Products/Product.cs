@@ -1,8 +1,9 @@
 ﻿using SamStore.Core.Domain;
+using SamStore.Core.Infrastructure.Data;
 
 namespace SamStore.Catalogo.API.Domain.Products
 {
-    public class Product : Entity
+    public class Product : Entity, IAggregateRoot
     {
         public string Name { get; private set; }
         public string Description { get; private set; }
