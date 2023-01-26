@@ -9,9 +9,9 @@ namespace SamStore.Core.Domain
     public abstract class Entity
     {
         public int Id { get; set; }
-        public DateTime CreatedAt { get; protected set; } = DateTime.Now;
-        public DateTime AlteredAt { get; protected set; } = DateTime.Now;
-        public bool Removed { get; protected set; } = false;
+        public DateTime CreatedAt { get; set; } = DateTime.MinValue;
+        public DateTime AlteredAt { get; set; } = DateTime.MinValue;
+        public bool Removed { get; set; } = false;
 
         public override string ToString()
         {
