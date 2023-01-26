@@ -8,6 +8,8 @@ namespace SamStore.Catalogo.API.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.ToTable("product");
+
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasColumnType("VARCHAR(250)");
