@@ -14,10 +14,10 @@ namespace SamStore.Catalogo.API.Data.Contexts
 
         public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options) { }
 
-        public async Task Commit()
+        public async Task<bool> Commit()
         {
             if (!ChangeTracker.HasChanges())
-                return;
+                return true;
 
             foreach (EntityEntry<Entity> entry in ChangeTracker.Entries<Entity>())
             {
@@ -40,8 +40,8 @@ namespace SamStore.Catalogo.API.Data.Contexts
                         break;
                 }
             }
-            
-            await SaveChangesAsync();
+
+            return await SaveChangesAsync() > 0;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

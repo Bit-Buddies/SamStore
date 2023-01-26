@@ -8,6 +8,6 @@ namespace SamStore.Core.Infrastructure.Data
 {
     public interface IUnitOfWork
     {
-        Task Commit();
+        Task<bool> Commit();
     }
 }

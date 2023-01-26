@@ -13,5 +13,6 @@ namespace SamStore.Core.Infrastructure.Data
         void Update(T entity);
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(int id);
+        IUnitOfWork UnitOfWork { get; }
     }
 }

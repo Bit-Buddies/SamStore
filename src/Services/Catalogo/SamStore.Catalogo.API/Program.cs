@@ -1,5 +1,8 @@
 using SamStore.Catalogo.API.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using SamStore.Catalogo.API.Domain.Interfaces;
+using SamStore.Catalogo.API.Data.Repositories;
+using SamStore.Core.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +15,13 @@ builder.Services.AddDbContext<CatalogDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerConfiguration("Catalog");
 
 var app = builder.Build();
 
@@ -26,6 +32,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(options => options
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 app.UseAuthorization();
 
