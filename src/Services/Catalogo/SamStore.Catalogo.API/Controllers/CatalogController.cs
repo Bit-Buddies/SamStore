@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SamStore.Catalogo.API.Domain.Interfaces;
 using SamStore.Catalogo.API.Domain.Products;
-using SamStore.Core.API.Controllers;
+using SamStore.WebAPI.Core.API.Controllers;
 
 namespace SamStore.Catalogo.API.Controllers
 {

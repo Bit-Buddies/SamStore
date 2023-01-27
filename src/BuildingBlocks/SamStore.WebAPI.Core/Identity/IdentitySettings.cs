@@ -1,4 +1,4 @@
-﻿namespace SamStore.Identidade.API.Extensions
+﻿namespace SamStore.WebAPI.Core.Identity
 {
     public class IdentitySettings
     {

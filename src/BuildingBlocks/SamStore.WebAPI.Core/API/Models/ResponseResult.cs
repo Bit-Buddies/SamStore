@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SamStore.Core.API.Models
+namespace SamStore.WebAPI.Core.API.Models
 {
     public class ResponseResult
     {

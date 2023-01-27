@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace SamStore.Core.API.Configurations
+namespace SamStore.WebAPI.Core.API.Configurations
 {
     public static class SwaggerConfiguration
     {

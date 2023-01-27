@@ -2,7 +2,7 @@ using SamStore.Catalogo.API.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using SamStore.Catalogo.API.Domain.Interfaces;
 using SamStore.Catalogo.API.Data.Repositories;
-using SamStore.Core.API.Configurations;
+using SamStore.WebAPI.Core.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 

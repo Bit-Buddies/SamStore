@@ -42,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.WebAPI.Core", "src\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj", "{B12AD5CF-D9E3-48A8-80B9-D4214528237C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B12AD5CF-D9E3-48A8-80B9-D4214528237C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B12AD5CF-D9E3-48A8-80B9-D4214528237C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B12AD5CF-D9E3-48A8-80B9-D4214528237C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B12AD5CF-D9E3-48A8-80B9-D4214528237C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{8EEB97DF-FE70-4BD7-94E4-0284DCB2A511} = {0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17} = {8EEB97DF-FE70-4BD7-94E4-0284DCB2A511}
 		{1678FD7B-5F26-4914-8077-A37DE5C34CCF} = {D3934CAB-6B9C-4AF0-986F-7ABE8E61B60E}
+		{B12AD5CF-D9E3-48A8-80B9-D4214528237C} = {561F1A00-0709-4EE9-924A-58534177D72A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC44D549-4D22-4C8A-AB48-25643068B33C}

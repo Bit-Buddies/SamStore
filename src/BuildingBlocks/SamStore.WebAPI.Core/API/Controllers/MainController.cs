@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace SamStore.Core.API.Controllers
+namespace SamStore.WebAPI.Core.API.Controllers
 {
     [ApiController]
     public abstract class MainController : ControllerBase
     {
         protected ICollection<string> Errors = new List<string>();
 
-        protected ActionResult CustomResponse(object result = null) 
+        protected ActionResult CustomResponse(object result = null)
         {
             if (OperationIsValid())
                 return Ok(result);
@@ -19,7 +19,7 @@ namespace SamStore.Core.API.Controllers
             }));
         }
 
-        protected ActionResult CustomResponse(ModelStateDictionary modelState) 
+        protected ActionResult CustomResponse(ModelStateDictionary modelState)
         {
             var errors = modelState.Values.SelectMany(x => x.Errors);
 
@@ -34,10 +34,10 @@ namespace SamStore.Core.API.Controllers
         protected bool OperationIsValid() =>
             !Errors.Any();
 
-        protected void AddError(string error) => 
+        protected void AddError(string error) =>
             Errors.Add(error);
 
-        protected void ClearErrors() => 
+        protected void ClearErrors() =>
             Errors.Clear();
     }
 }

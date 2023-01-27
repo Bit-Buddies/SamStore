@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using SamStore.Core.API.Models;
+using SamStore.WebAPI.Core.API.Models;
 using System.Net;
 
-namespace SamStore.Core.API.Middlewares
+namespace SamStore.WebAPI.Core.API.Middlewares
 {
     public class ExceptionMiddleware
     {
@@ -20,7 +20,7 @@ namespace SamStore.Core.API.Middlewares
             {
                 await _next(httpContext);
             }
-            catch(UnauthorizedAccessException exception)
+            catch (UnauthorizedAccessException exception)
             {
                 await HandleExceptionAsync(httpContext, exception, HttpStatusCode.Unauthorized);
             }
@@ -34,7 +34,7 @@ namespace SamStore.Core.API.Middlewares
         {
             ResponseResult errorResponse;
 
-            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
                 errorResponse = new ResponseResult(statusCode.ToString(), (int)statusCode);
                 string inner = exception.InnerException != null ? $"- Inner : {exception.InnerException}" : "";
@@ -49,7 +49,7 @@ namespace SamStore.Core.API.Middlewares
             httpContext.Response.StatusCode = (int)statusCode;
 
             var result = JsonConvert.SerializeObject(errorResponse);
-            httpContext.Response.ContentType  = "application/json";
+            httpContext.Response.ContentType = "application/json";
 
             return httpContext.Response.WriteAsync(result);
         }

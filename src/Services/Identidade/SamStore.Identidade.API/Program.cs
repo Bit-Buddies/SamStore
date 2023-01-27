@@ -1,6 +1,6 @@
-using SamStore.Core.API.Configurations;
-using SamStore.Core.API.Middlewares;
 using SamStore.Identidade.API.Configurations;
+using SamStore.WebAPI.Core.API.Configurations;
+using SamStore.WebAPI.Core.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
