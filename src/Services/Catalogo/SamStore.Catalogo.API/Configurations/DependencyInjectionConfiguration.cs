@@ -16,8 +16,7 @@ namespace SamStore.Catalogo.API.Configurations
                 throw new ArgumentNullException(nameof(connectionString));
 
             services.AddDbContext<CatalogDbContext>(options =>
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-);
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             services.AddScoped<IProductRepository, ProductRepository>();
         }
