@@ -1,7 +1,7 @@
 import { AccountService } from "./../../../services/account.service";
 import { MaterialModule } from "./../../../material.module";
 import { HttpClientModule } from "@angular/common/http";
-import { AuthService } from "./../../../services/auth.service";
+import { AuthenticationService } from "../../../services/authentication.service";
 import { AccountRoutingModule } from "./account-routing.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { RegisterComponent } from "./register/register.component";
@@ -24,6 +24,6 @@ import { AccountComponent } from "./account/account.component";
     HttpClientModule,
     MaterialModule,
   ],
-  providers: [AuthService, AccountService],
+  providers: [AuthenticationService, AccountService],
 })
 export class AccountModule {}

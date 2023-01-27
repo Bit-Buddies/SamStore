@@ -1,6 +1,5 @@
 import { Router } from "@angular/router";
 import { AccountService } from "./../../../../services/account.service";
-import { AuthService } from "./../../../../services/auth.service";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
 import { Component, OnInit } from "@angular/core";
 

@@ -2,7 +2,7 @@ import { Router } from "@angular/router";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
 import { LoginData } from "./../../../../models/login-data";
 import { AccountService } from "./../../../../services/account.service";
-import { AuthService } from "./../../../../services/auth.service";
+import { AuthenticationService } from "../../../../services/authentication.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
@@ -15,7 +15,6 @@ import { ToastrService } from "ngx-toastr";
 export class LoginComponent {
   loginForm!: FormGroup;
   loginData!: LoginData;
-
   hidePassword: boolean = true;
 
   /**
@@ -24,7 +23,7 @@ export class LoginComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private _router: Router,
-    private _authService: AuthService,
+    private _authenticationService: AuthenticationService,
     private _accountService: AccountService,
     private _toastrService: ToastrService
   ) {
@@ -41,7 +40,7 @@ export class LoginComponent {
 
     this.loginData = { ...this.loginData, ...this.loginForm.value };
 
-    this._authService.login(this.loginData).subscribe({
+    this._authenticationService.login(this.loginData).subscribe({
       next: (userData) => {
         this._accountService.setCurrentUser(userData);
         this._router.navigate(["/home"]);
@@ -49,7 +48,7 @@ export class LoginComponent {
         GlobalEventsService.userLoggedIn.emit();
       },
       error: (response) => {
-        const errors = this._authService.extractErrors(response);
+        const errors = this._authenticationService.extractErrors(response);
 
         errors.errors.Mensagens.forEach((er) => {
           this._toastrService.error(er, undefined, {

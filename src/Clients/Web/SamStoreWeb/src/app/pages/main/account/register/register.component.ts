@@ -2,7 +2,7 @@ import { ToastrService } from "ngx-toastr";
 import { AccountService } from "./../../../../services/account.service";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
 import { UserData } from "./../../../../models/user-data";
-import { AuthService } from "./../../../../services/auth.service";
+import { AuthenticationService } from "../../../../services/authentication.service";
 import { RegisterUserData } from "./../../../../models/register-user-data";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -21,18 +21,27 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _authService: AuthService,
+    private _authenticationService: AuthenticationService,
     private _accountService: AccountService,
     private _toastrService: ToastrService,
     private _router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.registerForm = this._formBuilder.group({
+      name: ["", Validators.compose([Validators.required, Validators.minLength(3)])],
+      email: ["", Validators.compose([Validators.required, Validators.email])],
+      password: ["", Validators.compose([Validators.required, Validators.minLength(6)])],
+      repeatPassword: ["", Validators.compose([Validators.required])],
+    });
+  }
 
   registerUser() {
     if (!this.registerForm.dirty || this.registerForm.invalid) return;
 
     this._registerData = { ...this._registerData, ...this.registerForm.value };
 
-    this._authService.registerUser(this._registerData).subscribe({
+    this._authenticationService.registerUser(this._registerData).subscribe({
       next: (userData) => {
         this._accountService.setCurrentUser(userData);
         this._router.navigate(["/home"]);
@@ -40,7 +49,7 @@ export class RegisterComponent implements OnInit {
         GlobalEventsService.userLoggedIn.emit();
       },
       error: (response) => {
-        const errors = this._authService.extractErrors(response);
+        const errors = this._authenticationService.extractErrors(response);
 
         errors.errors.Mensagens.forEach((er) => {
           this._toastrService.error(er, undefined, {
@@ -72,14 +81,5 @@ export class RegisterComponent implements OnInit {
     }
 
     return repeatPasswordControl.setErrors({ passwordMismatched: true });
-  }
-
-  ngOnInit(): void {
-    this.registerForm = this._formBuilder.group({
-      name: ["", Validators.compose([Validators.required, Validators.minLength(3)])],
-      email: ["", Validators.compose([Validators.required, Validators.email])],
-      password: ["", Validators.compose([Validators.required, Validators.minLength(6)])],
-      repeatPassword: ["", Validators.compose([Validators.required])],
-    });
   }
 }

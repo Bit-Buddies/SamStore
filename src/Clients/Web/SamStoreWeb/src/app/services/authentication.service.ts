@@ -1,5 +1,5 @@
-import { UserData } from "./../models/user-data";
-import { LoginData } from "./../models/login-data";
+import { UserData } from "../models/user-data";
+import { LoginData } from "../models/login-data";
 import { RegisterUserData } from "../models/register-user-data";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
@@ -9,7 +9,7 @@ import { BaseApiService } from "./abstractions/base.service";
 @Injectable({
   providedIn: "root",
 })
-export class AuthService extends BaseApiService {
+export class AuthenticationService extends BaseApiService {
   constructor(private _httpClient: HttpClient) {
     super("auth");
   }
