@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SamStore.Catalogo.API.Domain.Interfaces;
 using SamStore.Catalogo.API.Domain.Products;
 using SamStore.WebAPI.Core.API.Controllers;
+using SamStore.WebAPI.Core.Identity.Claims;
 
 namespace SamStore.Catalogo.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/catalog")]
     public class CatalogController : MainController
     {
@@ -16,6 +19,7 @@ namespace SamStore.Catalogo.API.Controllers
             _productRepository = productRepository;
         }
 
+        [AllowAnonymous]
         [HttpGet("products")]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
@@ -24,6 +28,7 @@ namespace SamStore.Catalogo.API.Controllers
             return CustomResponse(products);
         }
 
+        [ClaimsAuthorize("Catalog", "Read")]
         [HttpGet("products/{id}")]
         public async Task<ActionResult<Product>> GetProductById(int id)
         {
