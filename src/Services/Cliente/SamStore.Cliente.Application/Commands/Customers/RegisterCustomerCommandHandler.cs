@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation.Results;
+using SamStore.Core.CQRS.Commands;
 
 namespace SamStore.Cliente.Application.Commands.Customers
 {
-    public class RegisterCustomerCommandHandler
+    public class RegisterCustomerCommandHandler : CommandHandler<RegisterCustomerCommand>
     {
+        public override async Task<ValidationResult> Handle(RegisterCustomerCommand request, CancellationToken cancellationToken)
+        {
+            if (!request.IsValid())
+                return request.ValidationResult;
+
+            return ValidationResult;
+        }
     }
 }

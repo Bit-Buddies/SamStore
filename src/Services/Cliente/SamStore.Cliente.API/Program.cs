@@ -1,5 +1,6 @@
 using SamStore.Cliente.API.Configurations;
 using SamStore.WebAPI.Core.API.Configurations;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

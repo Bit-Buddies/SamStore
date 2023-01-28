@@ -14,9 +14,6 @@ namespace SamStore.Core.CQRS.Commands
             Timestamp = DateTime.Now;
         }
 
-        public virtual bool IsValid()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool IsValid();
     }
 }

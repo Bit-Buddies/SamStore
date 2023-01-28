@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using SamStore.Core.CQRS.Commands;
+using SamStore.Core.CQRS.Events;
 
 namespace SamStore.Core.CQRS.MediatR
 {

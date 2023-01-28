@@ -1,5 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using SamStore.Cliente.Infrastructure.Contexts;
+using SamStore.Core.CQRS.MediatR;
+using System.Reflection;
 
 namespace SamStore.Cliente.API.Configurations       
 {
@@ -14,6 +18,9 @@ namespace SamStore.Cliente.API.Configurations
 
             services.AddDbContext<ConsumerDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
+            services.AddMediatR(AppDomain.CurrentDomain.Load("SamStore.Cliente.Application"));
         }
     }
 }

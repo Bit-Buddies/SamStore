@@ -2,7 +2,7 @@
 
 namespace SamStore.Cliente.Application.Commands.Customers
 {
-    public class RegisterCustomerCommand : Command<bool>
+    public class RegisterCustomerCommand : Command
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }
@@ -16,6 +16,11 @@ namespace SamStore.Cliente.Application.Commands.Customers
             Name = name;
             Email = email;
             CPF = cPF;
+        }
+
+        public override bool IsValid()
+        {
+            throw new NotImplementedException();
         }
     }
 }

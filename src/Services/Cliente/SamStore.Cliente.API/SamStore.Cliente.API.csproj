@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.13">
       <PrivateAssets>all</PrivateAssets>
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
+    <ProjectReference Include="..\SamStore.Cliente.Application\SamStore.Cliente.Application.csproj" />
     <ProjectReference Include="..\SamStore.Cliente.Infrastructure\SamStore.Cliente.Infrastructure.csproj" />
   </ItemGroup>
 
