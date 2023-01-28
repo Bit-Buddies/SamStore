@@ -3,12 +3,12 @@
 .home-ad-background {
   background-color: primary(900);
   color: primaryContrast(900);
-  height: 256px;
+  padding-block: 88px;
 }
 
 .home-ad {
+  padding-inline: 64px;
   height: 100%;
-  padding-inline: 8px;
 }
 
 .home-ad-description {
@@ -22,7 +22,6 @@
   }
 
   .consumer-depoyiment-container {
-    margin-bottom: 24px;
     margin-top: 0;
 
     h1 {
