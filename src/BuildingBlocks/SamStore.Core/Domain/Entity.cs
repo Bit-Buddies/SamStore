@@ -1,4 +1,5 @@
 ﻿using SamStore.Core.CQRS.Events;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SamStore.Core.Domain
 {
@@ -9,8 +10,10 @@ namespace SamStore.Core.Domain
         public DateTime AlteredAt { get; set; } = DateTime.MinValue;
         public bool Removed { get; set; } = false;
 
-        private List<NotificationEvent> _notifications;
+        [NotMapped]
         public IReadOnlyCollection<NotificationEvent> Notifications => _notifications?.AsReadOnly();
+        
+        private List<NotificationEvent> _notifications;
 
         public void AddNotificationEvent(NotificationEvent notification)
         {
