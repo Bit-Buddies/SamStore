@@ -11,7 +11,7 @@ using SamStore.Cliente.Infrastructure.Contexts;
 namespace SamStore.Cliente.Infrastructure.Migrations
 {
     [DbContext(typeof(ConsumerDbContext))]
-    [Migration("20230128195216_Consumer_Version_1.0")]
+    [Migration("20230128195612_Consumer_Version_1.0")]
     partial class Consumer_Version_10
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,6 +74,11 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                     b.Property<Guid>("ConsumerId")
                         .HasColumnType("char(36)")
                         .HasColumnName("consumer_id");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(100)")
+                        .HasColumnName("country");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("DATETIME")

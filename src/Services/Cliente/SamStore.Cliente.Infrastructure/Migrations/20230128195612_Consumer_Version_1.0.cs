@@ -56,6 +56,8 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     state = table.Column<string>(type: "VARCHAR(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    country = table.Column<string>(type: "VARCHAR(100)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     consumer_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     created_at = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     altered_at = table.Column<DateTime>(type: "DATETIME", nullable: false),

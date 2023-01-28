@@ -73,6 +73,11 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("consumer_id");
 
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(100)")
+                        .HasColumnName("country");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("DATETIME")
                         .HasColumnName("created_at");
