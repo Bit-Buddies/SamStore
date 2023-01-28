@@ -1,0 +1,76 @@
+
+$my-primary-palette: (
+  50: #f8f8f8,
+  100: #f3f3f3,
+  200: #eeeeee,
+ 300: #cfcfcf,
+ 400: #b2b2b2,
+ 500: #878787,
+ 600: #727272,
+ 700: #525252,
+ 800: #303030,
+ 900: #121212,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: rgba(black, 0.87),
+   400: rgba(black, 0.87),
+   500: rgba(black, 0.87),
+   600: white,
+   700: white,
+   800: white,
+   900: white
+ )
+);
+
+$my-secondary-palette: (
+  50: #f5e6ff,
+ 100: #e5c0fe,
+ 200: #d495ff,
+ 300: #c267ff,
+ 400: #b240fe,
+ 500: #a303fc,
+ 600: #8f0df6,
+ 700: #7111ef,
+ 800: #5213ea,
+ 900: #0016e5,
+ contrast: (
+   50: #242424,
+   100: #242424,
+   200: white,
+   300: white,
+   400: white,
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white
+   )
+   );
+
+@function primary($level){
+  $color: map-get($my-primary-palette, $level);
+  @return $color;
+}
+
+@function primaryContrast($level){
+  $contrast: map-get($my-primary-palette, contrast);
+
+  $color: map-get($contrast, $level);
+
+  @return $color;
+}
+
+@function secondary($level){
+  $color: map-get($my-secondary-palette, $level);
+  @return $color;
+}
+
+@function secondaryContrast($level){
+  $contrast: map-get($my-secondary-palette, contrast);
+
+  $color: map-get($contrast, $level);
+
+  @return $color;
+}

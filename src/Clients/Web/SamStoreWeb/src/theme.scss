@@ -1,0 +1,34 @@
+@use "@angular/material" as material;
+
+@include material.core();
+
+@import "./palettes";
+
+$app-primary: material.define-palette($my-primary-palette, 900);
+$app-accent: material.define-palette($my-secondary-palette, 500, 300, 700);
+$app-warn: material.define-palette(material.$red-palette);
+
+$custom-success: material.define-palette(material.$green-palette);
+$custom-danger: material.define-palette(material.$orange-palette);
+
+$custom-theme: material.define-light-theme(
+  (
+    color: (
+      primary: $app-primary,
+      accent: $app-accent,
+      warn: $app-warn,
+    ),
+  )
+);
+
+@include material.all-component-themes($custom-theme);
+
+.mat-success {
+  background-color: material.get-color-from-palette($custom-success, 500);
+  color: material.get-color-from-palette($custom-success, 500-contrast);
+}
+
+.mat-danger {
+  background-color: material.get-color-from-palette($custom-danger, 500);
+  color: material.get-color-from-palette($custom-danger, 500-contrast);
+}
