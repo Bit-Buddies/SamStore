@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SamStore.Cliente.Domain.Consumers;
+using SamStore.Cliente.Domain.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SamStore.Cliente.Infrastructure.Contexts.Mappings
 {
-    public class ConsumerMapping : IEntityTypeConfiguration<Consumer>
+    public class CustomerMapping : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Consumer> builder)
+        public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.ToTable("consumer");
+            builder.ToTable("customer");
 
             builder.Property(x => x.Name).IsRequired();
 
@@ -45,9 +45,9 @@ namespace SamStore.Cliente.Infrastructure.Contexts.Mappings
                     .HasColumnType("VARCHAR(100)");
             });
 
-            builder.HasOne(x => x.ConsumerAddress)
-                .WithOne(x => x.Consumer)
-                .HasForeignKey<ConsumerAddress>(x => x.ConsumerId);
+            builder.HasOne(x => x.CustomerAddress)
+                .WithOne(x => x.Customer)
+                .HasForeignKey<CustomerAddress>(x => x.CustomerId);
         }
     }
 }

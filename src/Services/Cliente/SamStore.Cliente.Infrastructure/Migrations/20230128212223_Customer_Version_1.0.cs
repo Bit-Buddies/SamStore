@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SamStore.Cliente.Infrastructure.Migrations
 {
-    public partial class Consumer_Version_10 : Migration
+    public partial class Customer_Version_10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "consumer",
+                name: "customer",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -34,12 +34,12 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_consumer", x => x.id);
+                    table.PrimaryKey("pk_customer", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "consumer_address",
+                name: "customer_address",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -58,36 +58,36 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     country = table.Column<string>(type: "VARCHAR(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    consumer_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    customer_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     created_at = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     altered_at = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     removed = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_consumer_address", x => x.id);
+                    table.PrimaryKey("pk_customer_address", x => x.id);
                     table.ForeignKey(
-                        name: "fk_consumer_address_products_consumer_id",
-                        column: x => x.consumer_id,
-                        principalTable: "consumer",
+                        name: "fk_customer_address_customers_customer_id",
+                        column: x => x.customer_id,
+                        principalTable: "customer",
                         principalColumn: "id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "ix_consumer_address_consumer_id",
-                table: "consumer_address",
-                column: "consumer_id",
+                name: "ix_customer_address_customer_id",
+                table: "customer_address",
+                column: "customer_id",
                 unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "consumer_address");
+                name: "customer_address");
 
             migrationBuilder.DropTable(
-                name: "consumer");
+                name: "customer");
         }
     }
 }

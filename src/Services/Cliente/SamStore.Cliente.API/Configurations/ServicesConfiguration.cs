@@ -16,7 +16,7 @@ namespace SamStore.Cliente.API.Configurations
             if (string.IsNullOrWhiteSpace(connectionString))
                 throw new ArgumentNullException(nameof(connectionString));
 
-            services.AddDbContext<ConsumerDbContext>(options =>
+            services.AddDbContext<CustomerDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             services.AddScoped<IMediatorHandler, MediatorHandler>();

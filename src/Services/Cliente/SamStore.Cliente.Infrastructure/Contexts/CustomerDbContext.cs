@@ -1,24 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using SamStore.Cliente.Domain.Consumers;
+using SamStore.Cliente.Domain.Customers;
 using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
 using SamStore.Core.Infrastructure.Data.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SamStore.Cliente.Infrastructure.Contexts
 {
-    public class ConsumerDbContext : DbContext, IUnitOfWork
+    public class CustomerDbContext : DbContext, IUnitOfWork
     {
-        public DbSet<Consumer> Products { get; set; }
-        public DbSet<ConsumerAddress> Addresses { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerAddress> CustomerAddresses { get; set; }
 
-        public ConsumerDbContext(DbContextOptions<ConsumerDbContext> options) : base(options) { }
+        public CustomerDbContext(DbContextOptions<CustomerDbContext> options) : base(options) { }
 
         public async Task<bool> Commit()
         {
@@ -59,7 +54,7 @@ namespace SamStore.Cliente.Infrastructure.Contexts
             }
 
             modelBuilder.UseDefaultTableConfiguration();
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ConsumerDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerDbContext).Assembly);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

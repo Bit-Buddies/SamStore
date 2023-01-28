@@ -10,9 +10,9 @@ using SamStore.Cliente.Infrastructure.Contexts;
 
 namespace SamStore.Cliente.Infrastructure.Migrations
 {
-    [DbContext(typeof(ConsumerDbContext))]
-    [Migration("20230128195612_Consumer_Version_1.0")]
-    partial class Consumer_Version_10
+    [DbContext(typeof(CustomerDbContext))]
+    [Migration("20230128212223_Customer_Version_1.0")]
+    partial class Customer_Version_10
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("SamStore.Cliente.Domain.Consumers.Consumer", b =>
+            modelBuilder.Entity("SamStore.Cliente.Domain.Customers.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,12 +50,12 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                         .HasColumnName("removed");
 
                     b.HasKey("Id")
-                        .HasName("pk_consumer");
+                        .HasName("pk_customer");
 
-                    b.ToTable("consumer", (string)null);
+                    b.ToTable("customer", (string)null);
                 });
 
-            modelBuilder.Entity("SamStore.Cliente.Domain.Consumers.ConsumerAddress", b =>
+            modelBuilder.Entity("SamStore.Cliente.Domain.Customers.CustomerAddress", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,10 +71,6 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                         .HasColumnType("VARCHAR(100)")
                         .HasColumnName("city");
 
-                    b.Property<Guid>("ConsumerId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("consumer_id");
-
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)")
@@ -83,6 +79,10 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("DATETIME")
                         .HasColumnName("created_at");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("customer_id");
 
                     b.Property<string>("District")
                         .IsRequired()
@@ -118,20 +118,20 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                         .HasColumnName("zip_code");
 
                     b.HasKey("Id")
-                        .HasName("pk_consumer_address");
+                        .HasName("pk_customer_address");
 
-                    b.HasIndex("ConsumerId")
+                    b.HasIndex("CustomerId")
                         .IsUnique()
-                        .HasDatabaseName("ix_consumer_address_consumer_id");
+                        .HasDatabaseName("ix_customer_address_customer_id");
 
-                    b.ToTable("consumer_address", (string)null);
+                    b.ToTable("customer_address", (string)null);
                 });
 
-            modelBuilder.Entity("SamStore.Cliente.Domain.Consumers.Consumer", b =>
+            modelBuilder.Entity("SamStore.Cliente.Domain.Customers.Customer", b =>
                 {
                     b.OwnsOne("SamStore.Core.Domain.ValueObjects.CPF", "CPF", b1 =>
                         {
-                            b1.Property<Guid>("ConsumerId")
+                            b1.Property<Guid>("CustomerId")
                                 .HasColumnType("char(36)")
                                 .HasColumnName("id");
 
@@ -140,18 +140,18 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                                 .HasColumnType("VARCHAR(11)")
                                 .HasColumnName("cpf");
 
-                            b1.HasKey("ConsumerId");
+                            b1.HasKey("CustomerId");
 
-                            b1.ToTable("consumer");
+                            b1.ToTable("customer");
 
                             b1.WithOwner()
-                                .HasForeignKey("ConsumerId")
-                                .HasConstraintName("fk_consumer_consumer_id");
+                                .HasForeignKey("CustomerId")
+                                .HasConstraintName("fk_customer_customer_id");
                         });
 
                     b.OwnsOne("SamStore.Core.Domain.ValueObjects.Email", "Email", b1 =>
                         {
-                            b1.Property<Guid>("ConsumerId")
+                            b1.Property<Guid>("CustomerId")
                                 .HasColumnType("char(36)")
                                 .HasColumnName("id");
 
@@ -160,18 +160,18 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                                 .HasColumnType("VARCHAR(100)")
                                 .HasColumnName("email");
 
-                            b1.HasKey("ConsumerId");
+                            b1.HasKey("CustomerId");
 
-                            b1.ToTable("consumer");
+                            b1.ToTable("customer");
 
                             b1.WithOwner()
-                                .HasForeignKey("ConsumerId")
-                                .HasConstraintName("fk_consumer_consumer_id");
+                                .HasForeignKey("CustomerId")
+                                .HasConstraintName("fk_customer_customer_id");
                         });
 
                     b.OwnsOne("SamStore.Core.Domain.ValueObjects.Phone", "Phone", b1 =>
                         {
-                            b1.Property<Guid>("ConsumerId")
+                            b1.Property<Guid>("CustomerId")
                                 .HasColumnType("char(36)")
                                 .HasColumnName("id");
 
@@ -185,13 +185,13 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                                 .HasColumnType("VARCHAR(20)")
                                 .HasColumnName("phone2");
 
-                            b1.HasKey("ConsumerId");
+                            b1.HasKey("CustomerId");
 
-                            b1.ToTable("consumer");
+                            b1.ToTable("customer");
 
                             b1.WithOwner()
-                                .HasForeignKey("ConsumerId")
-                                .HasConstraintName("fk_consumer_consumer_id");
+                                .HasForeignKey("CustomerId")
+                                .HasConstraintName("fk_customer_customer_id");
                         });
 
                     b.Navigation("CPF")
@@ -204,20 +204,20 @@ namespace SamStore.Cliente.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SamStore.Cliente.Domain.Consumers.ConsumerAddress", b =>
+            modelBuilder.Entity("SamStore.Cliente.Domain.Customers.CustomerAddress", b =>
                 {
-                    b.HasOne("SamStore.Cliente.Domain.Consumers.Consumer", "Consumer")
-                        .WithOne("ConsumerAddress")
-                        .HasForeignKey("SamStore.Cliente.Domain.Consumers.ConsumerAddress", "ConsumerId")
+                    b.HasOne("SamStore.Cliente.Domain.Customers.Customer", "Customer")
+                        .WithOne("CustomerAddress")
+                        .HasForeignKey("SamStore.Cliente.Domain.Customers.CustomerAddress", "CustomerId")
                         .IsRequired()
-                        .HasConstraintName("fk_consumer_address_products_consumer_id");
+                        .HasConstraintName("fk_customer_address_customers_customer_id");
 
-                    b.Navigation("Consumer");
+                    b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("SamStore.Cliente.Domain.Consumers.Consumer", b =>
+            modelBuilder.Entity("SamStore.Cliente.Domain.Customers.Customer", b =>
                 {
-                    b.Navigation("ConsumerAddress")
+                    b.Navigation("CustomerAddress")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

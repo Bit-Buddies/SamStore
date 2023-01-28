@@ -1,8 +1,8 @@
 ﻿using SamStore.Core.Domain;
 
-namespace SamStore.Cliente.Domain.Consumers
+namespace SamStore.Cliente.Domain.Customers
 {
-    public class ConsumerAddress : Entity
+    public class CustomerAddress : Entity
     {
         public string ZipCode { get; private set; }
         public string Line1 { get; private set; }
@@ -13,10 +13,11 @@ namespace SamStore.Cliente.Domain.Consumers
         public string State { get; private set; }
         public string Country { get; private set; }
 
-        public Guid ConsumerId { get; set; }
-        public Consumer Consumer { get; set; }
+        public Guid CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
-        public ConsumerAddress(string zipCode, string line1, string line2, int number, string district, string city, string state, string country)
+        protected CustomerAddress() { }
+        public CustomerAddress(string zipCode, string line1, string line2, int number, string district, string city, string state, string country)
         {
             ZipCode = zipCode;
             Line1 = line1;

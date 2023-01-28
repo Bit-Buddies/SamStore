@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SamStore.Cliente.Domain.Consumers;
+using SamStore.Cliente.Domain.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SamStore.Cliente.Infrastructure.Contexts.Mappings
 {
-    internal class ConsumerAddressMapping : IEntityTypeConfiguration<ConsumerAddress>
+    internal class CustomerAddressMapping : IEntityTypeConfiguration<CustomerAddress>
     {
-        public void Configure(EntityTypeBuilder<ConsumerAddress> builder)
+        public void Configure(EntityTypeBuilder<CustomerAddress> builder)
         {
-            builder.ToTable("consumer_address");
+            builder.ToTable("customer_address");
         }
     }
 }

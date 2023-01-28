@@ -25,4 +25,8 @@
     <ProjectReference Include="..\SamStore.Cliente.Domain\SamStore.Cliente.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

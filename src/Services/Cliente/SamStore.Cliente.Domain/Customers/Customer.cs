@@ -2,9 +2,9 @@
 using SamStore.Core.Domain.ValueObjects;
 using SamStore.Core.Infrastructure.Data;
 
-namespace SamStore.Cliente.Domain.Consumers
+namespace SamStore.Cliente.Domain.Customers
 {
-    public class Consumer : Entity, IAggregateRoot
+    public class Customer : Entity, IAggregateRoot
     {
         public string Name { get; private set; }
         public Email Email { get; private set; }
@@ -12,10 +12,10 @@ namespace SamStore.Cliente.Domain.Consumers
         public Phone Phone { get; private set; }
 
         public Guid AddressId { get; set; }
-        public ConsumerAddress ConsumerAddress { get; set; }
+        public CustomerAddress CustomerAddress { get; set; }
 
-        protected Consumer() { }
-        public Consumer(Guid id, string name, string email, string cpf)
+        protected Customer() { }
+        public Customer(Guid id, string name, string email, string cpf)
         {
             Id = id;
             Name = name;
@@ -28,9 +28,9 @@ namespace SamStore.Cliente.Domain.Consumers
             Email = new Email(email);
         }
 
-        public void ChangeAddress(ConsumerAddress address)
+        public void ChangeAddress(CustomerAddress address)
         {
-            ConsumerAddress = address;
+            CustomerAddress = address;
         }
     }
 }
