@@ -1,39 +1,38 @@
 @import "./../../../../palettes";
 
-.home-ad-background{
+.home-ad-background {
   background-color: primary(900);
   color: primaryContrast(900);
   height: 256px;
 }
 
-.home-ad{
+.home-ad {
   height: 100%;
   padding-inline: 8px;
 }
 
-.home-ad-description{
+.home-ad-description {
   height: 100%;
 
-  h2{
+  h2 {
     font-size: small;
-    color: #BBB;
+    color: #bbb;
     margin-bottom: 0;
     margin-left: 4px;
   }
 
-  .consumer-depoyiment-container{
-    margin-bottom: 62px;
+  .consumer-depoyiment-container {
+    margin-bottom: 24px;
     margin-top: 0;
 
-    h1{
+    h1 {
       font-size: 24px;
-      text-align: end;
       margin-bottom: 8px;
     }
 
-    p{
+    p {
       font-size: small;
-      color: #BBB;
+      color: #bbb;
       margin: 0;
       margin-right: 24px;
     }

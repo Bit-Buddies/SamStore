@@ -1,9 +1,27 @@
 <div>
   <div class="home-ad-background">
-    <div class="container" style="height:100%;">
-      <div class="home-ad" fxLayout="row" style="height:100%;">
-        <div class="home-ad-description" fxLayout="column" fxFlex="50%" fxLayoutAlign="center start">
-          <div class="consumer-depoyiment-container" fxLayout="column" fxLayoutAlign="center end">
+    <div
+      class="container"
+      style="height: 100%">
+      <div
+        class="home-ad"
+        fxLayout="row nowrap"
+        style="height: 100%">
+        <div
+          class="home-ad-description"
+          fxLayout="column nowrap"
+          fxLayoutAlign.md="center start"
+          fxLayoutAlign="center center"
+          fxFlex.xs="100"
+          fxFlex.sm="100"
+          fxFlex="50"
+          [ngStyle.xs]="{ 'text-align': 'center' }"
+          [ngStyle]="{ 'text-align': 'end' }">
+          <div
+            class="consumer-depoyiment-container"
+            fxLayout="column nowrap"
+            fxLayoutAlign.xs="center center"
+            fxLayoutAlign="center end">
             <h1>
               <i>"Social shoes that exude elegance and style"</i>
             </h1>
