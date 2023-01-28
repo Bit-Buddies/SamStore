@@ -1,5 +1,5 @@
 @import "bootstrap/dist/css/bootstrap-grid.min.css";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,900;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,700&display=swap");
 @import "ngx-toastr/toastr";
 
 html,
@@ -12,7 +12,7 @@ body {
 }
 
 * {
-  font-family: "Montserrat";
+  font-family: "Nunito";
 }
 
 mat-form-field {

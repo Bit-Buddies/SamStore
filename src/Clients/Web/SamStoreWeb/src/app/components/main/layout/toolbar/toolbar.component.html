@@ -24,7 +24,7 @@
       *ngIf="logado; else loggedOut"
       mat-icon-button
       [matTooltip]="userEmail"
-      [routerLink]="['/account/login']"
+      (click)="logout()"
       class="icon-button account-icon-button">
       <mat-icon>account_circle</mat-icon>
     </button>

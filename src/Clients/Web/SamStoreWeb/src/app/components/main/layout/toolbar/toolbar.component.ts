@@ -10,9 +10,8 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ToolbarComponent implements OnInit {
   userEmail: string = "";
-  /**
-   *
-   */
+  logado: boolean = false;
+
   constructor(private _accountService: AccountService, private _router: Router) {}
 
   ngOnInit(): void {
@@ -26,7 +25,6 @@ export class ToolbarComponent implements OnInit {
 
     if (user == null) {
       this.logado = false;
-      this._router.navigate(["/account/login"]);
       return;
     }
 
@@ -34,5 +32,8 @@ export class ToolbarComponent implements OnInit {
     this.logado = true;
   }
 
-  public logado: boolean = false;
+  logout() {
+    this._accountService.removeCurrentUser();
+    location.reload();
+  }
 }
