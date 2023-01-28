@@ -14,6 +14,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfiguration("Api de Catálogo");
 builder.Services.AddJwtConfiguration(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", config =>
+    {
+        config.WithOrigins("http://localhost", "http://localhost:4200");
+        config.AllowAnyMethod();
+        config.AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -22,12 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.UseCors(options => options
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

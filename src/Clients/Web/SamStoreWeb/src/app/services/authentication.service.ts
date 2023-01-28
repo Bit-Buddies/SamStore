@@ -11,14 +11,14 @@ import { BaseApiService } from "./abstractions/base.service";
 })
 export class AuthenticationService extends BaseApiService {
   constructor(private _httpClient: HttpClient) {
-    super("auth");
+    super("auth", "Identity");
   }
 
   registerUser(registerData: RegisterUserData): Observable<UserData> {
-    return this._httpClient.post<UserData>(this._baseUrlService + "/register", registerData);
+    return this._httpClient.post<UserData>(this._baseURL + "/register", registerData);
   }
 
   login(loginData: LoginData): Observable<UserData> {
-    return this._httpClient.post<UserData>(this._baseUrlService + "/authenticate", loginData);
+    return this._httpClient.post<UserData>(this._baseURL + "/authenticate", loginData);
   }
 }

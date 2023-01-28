@@ -4,10 +4,21 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { throwError } from "rxjs";
 
 export abstract class BaseApiService {
-  protected _baseUrlService: string = "http://localhost:5274/api";
+  private _identityBaseURL: string = "http://localhost:5274/api/";
+  private _catalogBaseURL: string = "http://localhost:5229/api/";
+  protected _baseURL: string = "";
 
-  constructor(protected controllerName: string) {
-    this._baseUrlService += `/${controllerName}`;
+  constructor(protected controllerName: string, api: "Identity" | "Catalog") {
+    switch (api) {
+      case "Identity":
+        this._baseURL = this._identityBaseURL;
+        break;
+      case "Catalog":
+        this._baseURL = this._catalogBaseURL;
+        break;
+    }
+
+    this._baseURL += controllerName;
   }
 
   protected getApplicationJsonHeader() {

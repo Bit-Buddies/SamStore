@@ -1,5 +1,5 @@
 <div>
-  <div class="home-ad-background">
+  <header class="home-ad-background">
     <div
       class="container"
       style="height: 100%">
@@ -10,17 +10,20 @@
         <div
           class="home-ad-description"
           fxLayout="column nowrap"
-          fxLayoutAlign.md="center start"
-          fxLayoutAlign="center center"
+          fxLayoutAlign.xs="center center"
+          fxLayoutAlign.sm="center center"
+          fxLayoutAlign="center start"
           fxFlex.xs="100"
           fxFlex.sm="100"
           fxFlex="50"
           [ngStyle.xs]="{ 'text-align': 'center' }"
+          [ngStyle.sm]="{ 'text-align': 'center' }"
           [ngStyle]="{ 'text-align': 'end' }">
           <div
             class="consumer-depoyiment-container"
             fxLayout="column nowrap"
             fxLayoutAlign.xs="center center"
+            fxLayoutAlign.sm="center center"
             fxLayoutAlign="center end">
             <h1>
               <i>"Elevated my lifestyle with quality and innovation"</i>
@@ -44,5 +47,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </header>
+  <main>
+    <div class="container">
+      <app-general-catalog/>
+    </div>
+  </main>
 </div>
