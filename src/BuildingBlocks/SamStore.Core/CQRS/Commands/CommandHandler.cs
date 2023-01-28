@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using MediatR;
+using SamStore.Core.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,14 @@ namespace SamStore.Core.CQRS.Commands
         { 
             ValidationResult.Errors.Add(new ValidationFailure(propertyName, errorMessage) { ErrorCode = errorCode });
             return this;
+        }
+
+        public async Task<ValidationResult> Persist(IUnitOfWork unitOfWork)
+        {
+            if (!await unitOfWork.Commit())
+                AddError("An errour as occurred while trying to save the data");
+
+            return ValidationResult;
         }
     }
 }

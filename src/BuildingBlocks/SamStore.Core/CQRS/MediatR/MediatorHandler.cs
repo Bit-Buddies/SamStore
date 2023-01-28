@@ -3,11 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using SamStore.Core.CQRS.Commands;
 using SamStore.Core.CQRS.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SamStore.Core.CQRS.MediatR
 {
@@ -24,11 +19,13 @@ namespace SamStore.Core.CQRS.MediatR
 
         public async Task<ValidationResult> SendCommand<T>(T command) where T : Command
         {
+            _logger.LogInformation($"Executando comando {command.MessageType}");
             return await _mediator.Send(command);
         }
 
         public async Task PublishEvent<T>(T eventNotification) where T : Event
         {
+            _logger.LogInformation($"Executando evento {eventNotification.MessageType}");
             await _mediator.Publish(eventNotification);
         }
     }
