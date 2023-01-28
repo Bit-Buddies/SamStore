@@ -1,3 +1,5 @@
+@import "../../../../../palettes";
+
 @media screen and (min-width: 1080px) {
   .card-product {
     .add-to-cart-button {
@@ -5,10 +7,17 @@
     }
 
     &:hover {
+      cursor: pointer;
+
       .add-to-cart-button {
         transform: translate(2px, -2px);
         box-shadow: -3px 4px 5px rgba($color: #000000, $alpha: 0.3);
         opacity: 100%;
+
+        &:hover {
+          background-color: secondary(300);
+          box-shadow: -3px 4px 5px rgba($color: #000000, $alpha: 0.2);
+        }
       }
     }
   }
@@ -19,5 +28,5 @@
   right: 8px;
   top: 8px;
   box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
-  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+  transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
