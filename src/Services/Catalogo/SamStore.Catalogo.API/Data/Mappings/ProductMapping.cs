@@ -17,6 +17,15 @@ namespace SamStore.Catalogo.API.Data.Mappings
             builder.Property(x => x.Description)
                 .IsRequired()
                 .HasColumnType("VARCHAR(500)");
+
+            builder.HasData(new[] {
+                new Product("Omêga", "Descrição", 259.99m, ""),
+                new Product("Scarlatte", "Descrição", 629.99m, ""),
+                new Product("Fiarrut", "Descrição", 349.99m, ""),
+                new Product("Gonjour Lamari", "Descrição", 559.99m, ""),
+                new Product("Vilé Toustã", "Descrição", 229.99m, ""),
+                new Product("Frankfourd Stoitelle", "Descrição", 129.99m, "")
+            });
         }
     }
 }
