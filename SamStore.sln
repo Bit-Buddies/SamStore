@@ -42,7 +42,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.WebAPI.Core", "src\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj", "{B12AD5CF-D9E3-48A8-80B9-D4214528237C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.WebAPI.Core", "src\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj", "{B12AD5CF-D9E3-48A8-80B9-D4214528237C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Cliente.Application", "src\Services\Cliente\SamStore.Cliente.Application\SamStore.Cliente.Application.csproj", "{52DD2DC7-D0F0-443B-A2DA-702EF426EF42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Cliente.Infrastructure", "src\Services\Cliente\SamStore.Cliente.Infrastructure\SamStore.Cliente.Infrastructure.csproj", "{5A786E87-8FF6-49F4-97F9-1F51E9BF983C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.Cliente.Domain", "src\Services\Cliente\SamStore.Cliente.Domain\SamStore.Cliente.Domain.csproj", "{70285548-9323-4FB6-A17A-0048F3CC203F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +88,18 @@ Global
 		{B12AD5CF-D9E3-48A8-80B9-D4214528237C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B12AD5CF-D9E3-48A8-80B9-D4214528237C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B12AD5CF-D9E3-48A8-80B9-D4214528237C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52DD2DC7-D0F0-443B-A2DA-702EF426EF42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DD2DC7-D0F0-443B-A2DA-702EF426EF42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DD2DC7-D0F0-443B-A2DA-702EF426EF42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DD2DC7-D0F0-443B-A2DA-702EF426EF42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A786E87-8FF6-49F4-97F9-1F51E9BF983C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A786E87-8FF6-49F4-97F9-1F51E9BF983C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A786E87-8FF6-49F4-97F9-1F51E9BF983C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A786E87-8FF6-49F4-97F9-1F51E9BF983C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70285548-9323-4FB6-A17A-0048F3CC203F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70285548-9323-4FB6-A17A-0048F3CC203F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70285548-9323-4FB6-A17A-0048F3CC203F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70285548-9323-4FB6-A17A-0048F3CC203F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +120,9 @@ Global
 		{A9F732ED-4D51-480B-B88F-CB8A929D6E17} = {8EEB97DF-FE70-4BD7-94E4-0284DCB2A511}
 		{1678FD7B-5F26-4914-8077-A37DE5C34CCF} = {D3934CAB-6B9C-4AF0-986F-7ABE8E61B60E}
 		{B12AD5CF-D9E3-48A8-80B9-D4214528237C} = {561F1A00-0709-4EE9-924A-58534177D72A}
+		{52DD2DC7-D0F0-443B-A2DA-702EF426EF42} = {EDCEEF4C-5F7A-42CE-9FDB-99FAF8376EEE}
+		{5A786E87-8FF6-49F4-97F9-1F51E9BF983C} = {EDCEEF4C-5F7A-42CE-9FDB-99FAF8376EEE}
+		{70285548-9323-4FB6-A17A-0048F3CC203F} = {EDCEEF4C-5F7A-42CE-9FDB-99FAF8376EEE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC44D549-4D22-4C8A-AB48-25643068B33C}
