@@ -30,7 +30,7 @@ namespace SamStore.Catalogo.API.Data.Repositories
             return await _context.Products.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Product> GetById(int id)
+        public async Task<Product> GetById(Guid id)
         {
             return await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
         }

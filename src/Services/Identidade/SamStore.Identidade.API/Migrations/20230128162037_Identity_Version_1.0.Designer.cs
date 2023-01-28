@@ -11,8 +11,8 @@ using SamStore.Identidade.API.Data;
 namespace SamStore.Identidade.API.Migrations
 {
     [DbContext(typeof(IdentidadeDbContext))]
-    [Migration("20230126021529_Identidade_Version_0.0")]
-    partial class Identidade_Version_00
+    [Migration("20230128162037_Identity_Version_1.0")]
+    partial class Identity_Version_10
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -30,7 +30,7 @@ namespace SamStore.Catalogo.API.Controllers
 
         [ClaimsAuthorize("Catalog", "Read")]
         [HttpGet("products/{id}")]
-        public async Task<ActionResult<Product>> GetProductById(int id)
+        public async Task<ActionResult<Product>> GetProductById(Guid id)
         {
             Product product = await _productRepository.GetById(id);
 

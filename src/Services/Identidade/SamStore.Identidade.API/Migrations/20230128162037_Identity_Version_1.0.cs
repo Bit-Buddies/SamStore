@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SamStore.Identidade.API.Migrations
 {
-    public partial class Identidade_Version_00 : Migration
+    public partial class Identity_Version_10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

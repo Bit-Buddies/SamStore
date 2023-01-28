@@ -8,7 +8,7 @@ namespace SamStore.Core.Domain
 {
     public abstract class Entity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime CreatedAt { get; set; } = DateTime.MinValue;
         public DateTime AlteredAt { get; set; } = DateTime.MinValue;
         public bool Removed { get; set; } = false;

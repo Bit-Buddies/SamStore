@@ -1,12 +1,11 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SamStore.Catalogo.API.Migrations
 {
-    public partial class Catalogo_Version_00 : Migration
+    public partial class Catalog_Version_10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,8 +16,7 @@ namespace SamStore.Catalogo.API.Migrations
                 name: "product",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     name = table.Column<string>(type: "VARCHAR(250)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     description = table.Column<string>(type: "VARCHAR(500)", nullable: false)

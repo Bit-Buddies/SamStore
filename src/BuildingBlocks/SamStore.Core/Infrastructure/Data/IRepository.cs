@@ -12,7 +12,7 @@ namespace SamStore.Core.Infrastructure.Data
         void Add(T entity);
         void Update(T entity);
         Task<IEnumerable<T>> GetAll();
-        Task<T> GetById(int id);
+        Task<T> GetById(Guid id);
         IUnitOfWork UnitOfWork { get; }
     }
 }

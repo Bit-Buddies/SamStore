@@ -21,9 +21,9 @@ namespace SamStore.Catalogo.API.Migrations
 
             modelBuilder.Entity("SamStore.Catalogo.API.Domain.Products.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("char(36)")
                         .HasColumnName("id");
 
                     b.Property<DateTime>("AlteredAt")
