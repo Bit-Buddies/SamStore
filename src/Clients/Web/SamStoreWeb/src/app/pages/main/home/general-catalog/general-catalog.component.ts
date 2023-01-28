@@ -1,3 +1,4 @@
+import { ToastrService } from "ngx-toastr";
 import { ProductDTO } from "./../../../../models/Products/product.DTO";
 import { CatalogService } from "./../../../../services/catalog.service";
 import { Component, OnInit } from "@angular/core";
@@ -10,7 +11,7 @@ import { Component, OnInit } from "@angular/core";
 export class GeneralCatalogComponent implements OnInit {
   products: Array<ProductDTO> = [];
 
-  constructor(private _catalogService: CatalogService) {}
+  constructor(private _catalogService: CatalogService, private _toastrService: ToastrService) {}
 
   ngOnInit(): void {
     this._catalogService.getAllProducts().subscribe({
@@ -18,7 +19,10 @@ export class GeneralCatalogComponent implements OnInit {
         this.products = products;
         console.log(this.products);
       },
-      error: (err) => console.log("ERRO"),
+      error: (err) =>
+        this._toastrService.error("An error has ocourred", undefined, {
+          timeOut: 2000,
+        }),
     });
   }
 }
