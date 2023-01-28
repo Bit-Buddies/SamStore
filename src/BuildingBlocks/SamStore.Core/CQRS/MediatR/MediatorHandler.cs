@@ -23,7 +23,7 @@ namespace SamStore.Core.CQRS.MediatR
             return await _mediator.Send(command);
         }
 
-        public async Task PublishEvent<T>(T eventNotification) where T : Event
+        public async Task PublishEvent<T>(T eventNotification) where T : NotificationEvent
         {
             _logger.LogInformation($"Executando evento {eventNotification.MessageType}");
             await _mediator.Publish(eventNotification);

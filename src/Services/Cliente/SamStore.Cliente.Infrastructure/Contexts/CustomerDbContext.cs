@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SamStore.Cliente.Domain.Customers;
+using SamStore.Core.CQRS.MediatR;
 using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
 using SamStore.Core.Infrastructure.Data.Extensions;
@@ -10,10 +11,15 @@ namespace SamStore.Cliente.Infrastructure.Contexts
 {
     public class CustomerDbContext : DbContext, IUnitOfWork
     {
+        private readonly IMediatorHandler _mediatorHandler;
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerAddress> CustomerAddresses { get; set; }
 
-        public CustomerDbContext(DbContextOptions<CustomerDbContext> options) : base(options) { }
+        public CustomerDbContext(DbContextOptions<CustomerDbContext> options, IMediatorHandler mediatorHandler) : base(options)
+        {
+            _mediatorHandler = mediatorHandler;
+        }
 
         public async Task<bool> Commit()
         {
@@ -42,7 +48,12 @@ namespace SamStore.Cliente.Infrastructure.Contexts
                 }
             }
 
-            return await SaveChangesAsync() > 0;
+            var success = await SaveChangesAsync() > 0;
+
+            if (success)
+                await _mediatorHandler.PublishEvents(this);
+
+            return success;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

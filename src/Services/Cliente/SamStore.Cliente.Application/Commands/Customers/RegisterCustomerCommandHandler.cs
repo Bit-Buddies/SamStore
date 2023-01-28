@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using SamStore.Cliente.Application.Events.Customers;
 using SamStore.Cliente.Domain.Customers;
 using SamStore.Cliente.Domain.Interfaces;
 using SamStore.Core.CQRS.Commands;
@@ -30,6 +31,8 @@ namespace SamStore.Cliente.Application.Commands.Customers
             customer = new Customer(request.Id, request.Name, request.EmailAddress, request.CPFNumber);
 
             _customerRepository.Add(customer);
+
+            customer.AddNotificationEvent(new RegisteredCustomerEvent(customer.Id, customer.Name, customer.Email.Address, customer.CPF.Number));
 
             return await Persist(_customerRepository.UnitOfWork);
         }

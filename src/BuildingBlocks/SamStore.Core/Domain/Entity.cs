@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SamStore.Core.CQRS.Events;
 
 namespace SamStore.Core.Domain
 {
@@ -13,9 +9,23 @@ namespace SamStore.Core.Domain
         public DateTime AlteredAt { get; set; } = DateTime.MinValue;
         public bool Removed { get; set; } = false;
 
-        public override string ToString()
+        private List<NotificationEvent> _notifications;
+        public IReadOnlyCollection<NotificationEvent> Notifications => _notifications?.AsReadOnly();
+
+        public void AddNotificationEvent(NotificationEvent notification)
         {
-            return $"{GetType().Name} [Id {Id}]";
+            _notifications = _notifications ?? new List<NotificationEvent>();
+            _notifications.Add(notification);
+        }
+
+        public void RemoveNotificationEvent(NotificationEvent notification) 
+        {
+            _notifications?.Remove(notification);
+        }
+
+        public void ClearNotifications()
+        {
+            _notifications?.Clear();
         }
     }
 }
