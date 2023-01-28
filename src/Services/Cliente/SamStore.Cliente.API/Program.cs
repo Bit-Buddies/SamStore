@@ -1,3 +1,6 @@
+using SamStore.Cliente.API.Configurations;
+using SamStore.WebAPI.Core.API.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddDependencyInjectionConfiguration(builder.Configuration);
+
+builder.Services.AddSwaggerConfiguration("API de Cliente");
+
+builder.Services.AddCors(setup =>
+{
+    setup.AddPolicy("CorsPolicy", options =>
+        options
+            .WithOrigins("http://localhost", "http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+    );
+});
 
 var app = builder.Build();
 
@@ -16,8 +32,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

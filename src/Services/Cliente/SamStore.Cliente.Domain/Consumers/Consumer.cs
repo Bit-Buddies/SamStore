@@ -12,8 +12,7 @@ namespace SamStore.Cliente.Domain.Consumers
         public Phone Phone { get; private set; }
 
         public Guid AddressId { get; set; }
-        public Address MainAddress { get; set; }
-        public IEnumerable<Address> Addresses { get; set; }
+        public ConsumerAddress ConsumerAddress { get; set; }
 
         protected Consumer() { }
         public Consumer(Guid id, string name, string email, string cpf)
@@ -29,14 +28,9 @@ namespace SamStore.Cliente.Domain.Consumers
             Email = new Email(email);
         }
 
-        public void ChangeAddress(Address address)
+        public void ChangeAddress(ConsumerAddress address)
         {
-            MainAddress = address;
-        }
-
-        public void AddAddress(Address address)
-        {
-            Addresses = Addresses.Append(address);
+            ConsumerAddress = address;
         }
     }
 }
