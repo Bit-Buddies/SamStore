@@ -4,7 +4,8 @@ namespace SamStore.Identidade.API.Models
 {
     public class RegisterUserDTO
     {
-        public string FullName { get; set; }
+        [Required(ErrorMessage = "{0} is required")]
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         public string CPF { get; set; }

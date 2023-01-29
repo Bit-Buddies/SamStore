@@ -1,11 +1,10 @@
 import { ToastrService } from "ngx-toastr";
 import { AccountService } from "./../../../../services/account.service";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
-import { UserData } from "./../../../../models/user-data";
 import { AuthenticationService } from "../../../../services/authentication.service";
 import { RegisterUserData } from "./../../../../models/register-user-data";
-import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 @Component({
@@ -30,6 +29,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
       name: ["", Validators.compose([Validators.required, Validators.minLength(3)])],
+      cpf: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/(?!(\d)\1{2}.\1{3}.\1{3}-\1{2})\d{3}\d{3}\d{3}\d{2}/),
+        ]),
+      ],
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password: ["", Validators.compose([Validators.required, Validators.minLength(6)])],
       repeatPassword: ["", Validators.compose([Validators.required])],

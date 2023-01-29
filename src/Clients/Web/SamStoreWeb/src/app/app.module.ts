@@ -16,6 +16,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { HomeComponent } from "./pages/main/home/home.component";
 import { NotfoundComponent } from "./pages/main/notfound/notfound.component";
 import { ToastrModule } from "ngx-toastr";
+import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
 
 @NgModule({
   declarations: [AppComponent, ToolbarComponent, HomeComponent, NotfoundComponent, GeneralCatalogComponent],
@@ -26,6 +27,8 @@ import { ToastrModule } from "ngx-toastr";
     FlexLayoutModule,
     MaterialModule,
     HttpClientModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
     ToastrModule.forRoot(),
   ],
   providers: [AccountService, CatalogService],

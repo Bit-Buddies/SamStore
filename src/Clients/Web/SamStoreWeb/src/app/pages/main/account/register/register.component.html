@@ -11,13 +11,26 @@
       <mat-card-content>
         <div fxLayout="column">
           <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
+            <mat-label>Full Name</mat-label>
             <input
               matInput
               placeholder="Your name"
               formControlName="name" />
             <mat-error *ngIf="getControlError('name', 'required')">Required field </mat-error>
             <mat-error *ngIf="getControlError('name', 'minlength')">Minimum length is 3 </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>CPF</mat-label>
+            <input
+              matInput
+              placeholder="Your CPF"
+              formControlName="cpf"
+              mask="000.000.000-99" />
+            <mat-error *ngIf="getControlError('cpf', 'required')">Required field </mat-error>
+            <mat-error *ngIf="getControlError('cpf', 'pattern')">Invalid CPF</mat-error>
           </mat-form-field>
         </div>
 

@@ -1,3 +1,4 @@
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
 import { AccountService } from "./../../../services/account.service";
 import { MaterialModule } from "./../../../material.module";
 import { HttpClientModule } from "@angular/common/http";
@@ -22,8 +23,10 @@ import { AccountComponent } from "./account/account.component";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
     MaterialModule,
   ],
-  providers: [AuthenticationService, AccountService],
+  providers: [AuthenticationService, AccountService, provideNgxMask()],
 })
 export class AccountModule {}
