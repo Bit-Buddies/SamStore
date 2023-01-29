@@ -4,8 +4,10 @@ import { GlobalEventsService } from "./../../../../services/events/global-events
 import { AuthenticationService } from "../../../../services/authentication.service";
 import { RegisterUserData } from "./../../../../models/register-user-data";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import validator, { cpf } from "cpf-cnpj-validator";
+import { ValidateCPF } from "src/app/utils/custom-validators";
 
 @Component({
   selector: "app-register",
@@ -28,16 +30,25 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
-      name: ["", Validators.compose([Validators.required, Validators.minLength(3)])],
-      cpf: [
+      name: [
         "",
         Validators.compose([
           Validators.required,
-          Validators.pattern(/(?!(\d)\1{2}.\1{3}.\1{3}-\1{2})\d{3}\d{3}\d{3}\d{2}/),
+          Validators.minLength(3),
+          Validators.maxLength(50),
+          Validators.pattern(/^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,4}$/),
         ]),
       ],
+      cpf: ["", Validators.compose([Validators.required, ValidateCPF()])],
       email: ["", Validators.compose([Validators.required, Validators.email])],
-      password: ["", Validators.compose([Validators.required, Validators.minLength(6)])],
+      password: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$/),
+        ]),
+      ],
       repeatPassword: ["", Validators.compose([Validators.required])],
     });
   }
