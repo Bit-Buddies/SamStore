@@ -7,7 +7,6 @@ using SamStore.WebAPI.Core.Identity.Claims;
 
 namespace SamStore.Catalogo.API.Controllers
 {
-    [ApiController]
     [Authorize]
     [Route("api/catalog")]
     public class CatalogController : MainController
@@ -19,6 +18,10 @@ namespace SamStore.Catalogo.API.Controllers
             _productRepository = productRepository;
         }
 
+        /// <summary>
+        /// Get all products for Catalog
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("products")]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
@@ -28,6 +31,12 @@ namespace SamStore.Catalogo.API.Controllers
             return CustomResponse(products);
         }
 
+
+        /// <summary>
+        /// Get a specific product passing id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ClaimsAuthorize("Catalog", "Read")]
         [HttpGet("products/{id}")]
         public async Task<ActionResult<Product>> GetProductById(Guid id)

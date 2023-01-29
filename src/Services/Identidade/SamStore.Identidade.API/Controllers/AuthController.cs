@@ -13,7 +13,6 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace SamStore.Identidade.API.Controllers
 {
-    [ApiController]
     [Route("api/auth")]
     public class AuthController : MainController
     {
@@ -35,7 +34,7 @@ namespace SamStore.Identidade.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterViewModel registerData)
+        public async Task<IActionResult> Register(RegisterUserDTO registerData)
         {
             if(!ModelState.IsValid) return CustomResponse(ModelState);
 
@@ -68,7 +67,7 @@ namespace SamStore.Identidade.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Login(LoginViewModel loginData)
+        public async Task<IActionResult> Login(LoginDTO loginData)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
@@ -95,7 +94,7 @@ namespace SamStore.Identidade.API.Controllers
             return CustomResponse();
         }
 
-        private async Task<UserData> GenerateJwt(string email)
+        private async Task<UserDataDTO> GenerateJwt(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             var roles = await _userManager.GetRolesAsync(user);
@@ -103,7 +102,7 @@ namespace SamStore.Identidade.API.Controllers
             ClaimsIdentity identityClaims = await GetCLaims(user, roles);
             string encodedToken = EncodeToken(identityClaims);
 
-            UserData userData = new UserData()
+            UserDataDTO userData = new UserDataDTO()
             {
                 AccessToken = encodedToken,
                 HoursToExpire = TimeSpan.FromHours(_identitySettings.HoursToExpire).TotalSeconds,

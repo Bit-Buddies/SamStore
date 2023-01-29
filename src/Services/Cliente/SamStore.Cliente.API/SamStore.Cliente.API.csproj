@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
     <ProjectReference Include="..\SamStore.Cliente.Application\SamStore.Cliente.Application.csproj" />

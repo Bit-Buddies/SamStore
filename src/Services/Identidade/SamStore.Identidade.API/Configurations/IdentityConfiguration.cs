@@ -11,7 +11,13 @@ namespace SamStore.Identidade.API.Configurations
     {
         public static void AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<IdentidadeDbContext>()
                 .AddDefaultTokenProviders();
 

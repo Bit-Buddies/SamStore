@@ -1,6 +1,6 @@
 ﻿namespace SamStore.Identidade.API.Models
 {
-    public class UserData
+    public class UserDataDTO
     {
         public string AccessToken { get; set; }
         public double HoursToExpire { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace SamStore.WebAPI.Core.API.Controllers
@@ -31,13 +32,20 @@ namespace SamStore.WebAPI.Core.API.Controllers
             return CustomResponse();
         }
 
-        protected bool OperationIsValid() =>
-            !Errors.Any();
+        protected ActionResult CustomResponse(ValidationResult validationResult)
+        {
+            var errors = validationResult.Errors;
 
-        protected void AddError(string error) =>
-            Errors.Add(error);
+            foreach (var error in errors)
+            {
+                AddError(error.ErrorMessage);
+            }
 
-        protected void ClearErrors() =>
-            Errors.Clear();
+            return CustomResponse();
+        }
+
+        protected bool OperationIsValid() => !Errors.Any();
+        protected void AddError(string error) => Errors.Add(error);
+        protected void ClearErrors() => Errors.Clear();
     }
 }
