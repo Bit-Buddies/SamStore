@@ -7,8 +7,5 @@ using System.Threading.Tasks;
 
 namespace SamStore.Core.CQRS.Integrations.Abstractions
 {
-    public abstract class IntegrationEvent : NotificationEvent
-    {
-
-    }
+    public abstract class IntegrationEvent : NotificationEvent { }
 }
