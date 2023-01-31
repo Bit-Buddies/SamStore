@@ -1,4 +1,5 @@
 using SamStore.Authentication.API.Configurations;
+using SamStore.Costumer.API.Configurations;
 using SamStore.WebAPI.Core.API.Configurations;
 using SamStore.WebAPI.Core.API.Middlewares;
 
@@ -15,7 +16,10 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddIdentityConfiguration(builder.Configuration);
+
 builder.Services.AddServicesConfiguration(builder.Configuration);
+
+builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
 builder.Services.AddSwaggerConfiguration("Api de Identidade");
 
