@@ -1,4 +1,4 @@
-﻿using EasyNetQ;
+﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +9,14 @@ using SamStore.Authentication.API.Data;
 using SamStore.Authentication.API.Models;
 using SamStore.Core.CQRS.Integrations;
 using SamStore.Core.CQRS.Integrations.Abstractions;
+using SamStore.MessageBus;
 using SamStore.WebAPI.Core.API.Controllers;
 using SamStore.WebAPI.Core.Identity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using ValidationFailure = FluentValidation.Results.ValidationFailure;
 
 namespace SamStore.Authentication.API.Controllers
 {
@@ -25,13 +27,14 @@ namespace SamStore.Authentication.API.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IdentitySettings _identitySettings;
         private readonly IdentidadeDbContext _context;
-        private IBus _bus;
+        private readonly IMessageBus _messageBus;
 
-        public AuthenticationController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IOptions<IdentitySettings> identitySettings, IdentidadeDbContext context)
+        public AuthenticationController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IOptions<IdentitySettings> identitySettings, IMessageBus messageBus, IdentidadeDbContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _identitySettings = identitySettings.Value;
+            _messageBus = messageBus;
             _context = context;
         }
 
@@ -95,16 +98,14 @@ namespace SamStore.Authentication.API.Controllers
             {
                 ResponseMessage customerResult = await RegisterCostumer(registerData);
 
-                if(customerResult.ValidationResult.IsValid)
-                {
-                    await transaction.CommitAsync();
-                    return CustomResponse(await GenerateJwt(user.Email));
-                }
-                else
+                if (!customerResult.ValidationResult.IsValid)
                 {
                     await transaction.RollbackAsync();
                     return CustomResponse(customerResult);
                 }
+
+                await transaction.CommitAsync();
+                return CustomResponse(await GenerateJwt(user.Email));
             }
 
             foreach (IdentityError error in result.Errors)
@@ -113,20 +114,6 @@ namespace SamStore.Authentication.API.Controllers
             }
 
             return CustomResponse();
-        }
-
-        private async Task<ResponseMessage> RegisterCostumer(RegisterUserDTO registerData)
-        {
-            IdentityUser user = await _userManager.FindByEmailAsync(registerData.Email);
-
-            RegisteredUserIntegrationEvent registeredEvent = 
-                new RegisteredUserIntegrationEvent(Guid.Parse(user.Id), registerData.Name, registerData.CPF, registerData.Email);
-
-            _bus = RabbitHutch.CreateBus("host=localhost:5672");
-
-            ResponseMessage result = await _bus.Rpc.RequestAsync<RegisteredUserIntegrationEvent, ResponseMessage>(registeredEvent);
-
-            return result;
         }
 
         private async Task<UserDataDTO> GenerateJwt(string email)
@@ -191,5 +178,24 @@ namespace SamStore.Authentication.API.Controllers
 
         private static long ToUnixEpochDate(DateTime date) =>
             (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+
+        private async Task<ResponseMessage> RegisterCostumer(RegisterUserDTO registerData)
+        {
+            var user = await _userManager.FindByEmailAsync(registerData.Email);
+
+            var registeredEvent =
+                new RegisteredUserIntegrationEvent(Guid.Parse(user.Id), registerData.Name, registerData.CPF, registerData.Email);
+
+            try
+            {
+                ResponseMessage result = await _messageBus.RequestAsync<RegisteredUserIntegrationEvent, ResponseMessage>(registeredEvent);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                var result = new ValidationResult(new[] { new ValidationFailure { ErrorMessage = ex.Message } });
+                return new ResponseMessage(result);
+            }
+        }
     }
 }

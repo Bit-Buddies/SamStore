@@ -5,31 +5,32 @@ using SamStore.Core.CQRS.Integrations;
 using SamStore.Core.CQRS.Integrations.Abstractions;
 using SamStore.Core.CQRS.MediatR;
 using SamStore.Costumer.Application.Commands.Customers;
+using SamStore.MessageBus;
 
 namespace SamStore.Costumer.API.Services
 {
     public class RegisteredUserIntegrationEventHandler : BackgroundService
     {
-        private IBus _bus;
+        private readonly IMessageBus _messageBus; 
         private readonly IServiceProvider _serviceProvider;
 
-        public RegisteredUserIntegrationEventHandler(IServiceProvider serviceProvider)
+        public RegisteredUserIntegrationEventHandler(IServiceProvider serviceProvider, IMessageBus messageBus)
         {
             _serviceProvider = serviceProvider;
+            _messageBus = messageBus;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _bus = RabbitHutch.CreateBus("host=localhost:5672");
-
-            _bus.Rpc.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(async request => {
-                return new ResponseMessage(await RegisterCostumer(request));
+            _messageBus.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(async request =>
+            {
+                return await RegisterCostumer(request);
             });
 
             return Task.CompletedTask;
         }
 
-        private async Task<ValidationResult> RegisterCostumer(RegisteredUserIntegrationEvent request)
+        private async Task<ResponseMessage> RegisterCostumer(RegisteredUserIntegrationEvent request)
         {
             ValidationResult result = new ValidationResult();
 
@@ -41,12 +42,12 @@ namespace SamStore.Costumer.API.Services
 
                 result = await mediatorHandler.SendCommand(new RegisterCustomerCommand(request.Id, request.Name, request.Email, request.CPF));
 
-                return result;
+                return new ResponseMessage(result);
             }
             catch (Exception ex)
             {
                 result.Errors.Add(new ValidationFailure("", $"{ex.Message} - {ex.InnerException}"));
-                return result;
+                return  new ResponseMessage(result);
             }
         }
     }

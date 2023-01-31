@@ -2,7 +2,7 @@
 
 namespace SamStore.MessageBus
 {
-    interface IMessageBus : IDisposable
+    public interface IMessageBus : IDisposable
     {
         void Publish<T>(T message) where T : IntegrationEvent;
         Task PublishAsync<T>(T message) where T : IntegrationEvent;
@@ -21,7 +21,7 @@ namespace SamStore.MessageBus
             where TRequest : IntegrationEvent 
             where TResponse : ResponseMessage;
 
-        Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, TResponse> response) 
+        Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> response) 
             where TRequest : IntegrationEvent 
             where TResponse : ResponseMessage;
     }

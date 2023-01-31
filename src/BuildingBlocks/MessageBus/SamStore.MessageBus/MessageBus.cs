@@ -72,7 +72,7 @@ namespace SamStore.MessageBus
             return _bus.Rpc.Respond(response);
         }
 
-        public async Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, TResponse> response)
+        public async Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> response)
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage
         {

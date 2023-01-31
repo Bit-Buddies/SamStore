@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using SamStore.Authentication.API.Data;
+using SamStore.Core.Infrastructure.Data;
 
 namespace SamStore.Authentication.API.Configurations
 {
