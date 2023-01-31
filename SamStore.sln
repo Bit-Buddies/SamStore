@@ -50,6 +50,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{F2E3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Payment.API", "src\Services\Payment\SamStore.Payment.API\SamStore.Payment.API.csproj", "{8F55114B-9EFD-462C-B8B0-4D4CA313C1BC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBus", "MessageBus", "{FC49BBD7-69CC-4C59-882D-9C56980E219C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.MessageBus", "src\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj", "{58C8B458-D929-4835-8BE4-B55CDB3FD87F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +104,10 @@ Global
 		{8F55114B-9EFD-462C-B8B0-4D4CA313C1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F55114B-9EFD-462C-B8B0-4D4CA313C1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F55114B-9EFD-462C-B8B0-4D4CA313C1BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C8B458-D929-4835-8BE4-B55CDB3FD87F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C8B458-D929-4835-8BE4-B55CDB3FD87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C8B458-D929-4835-8BE4-B55CDB3FD87F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C8B458-D929-4835-8BE4-B55CDB3FD87F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +131,8 @@ Global
 		{0DD3A569-8E1C-4E89-B6D5-D5608185579C} = {03350A4E-FEAF-4C2F-BF63-2917F019E535}
 		{F2E348D3-50CD-45F3-84EB-DE6321EFAA47} = {0CFD4CD2-1586-4E32-93ED-C1D356A4E38C}
 		{8F55114B-9EFD-462C-B8B0-4D4CA313C1BC} = {F2E348D3-50CD-45F3-84EB-DE6321EFAA47}
+		{FC49BBD7-69CC-4C59-882D-9C56980E219C} = {561F1A00-0709-4EE9-924A-58534177D72A}
+		{58C8B458-D929-4835-8BE4-B55CDB3FD87F} = {FC49BBD7-69CC-4C59-882D-9C56980E219C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC44D549-4D22-4C8A-AB48-25643068B33C}

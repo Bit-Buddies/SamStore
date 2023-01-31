@@ -21,6 +21,7 @@ namespace SamStore.Costumer.Domain.Customers
             Name = name;
             Email = new Email(email);
             CPF = new CPF(cpf);
+            Phone = new Phone();
         }
 
         public void ChangeEmail(string email)
