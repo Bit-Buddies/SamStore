@@ -17,7 +17,6 @@ export class GeneralCatalogComponent implements OnInit {
     this._catalogService.getAllProducts().subscribe({
       next: (products) => {
         this.products = products;
-        console.log(this.products);
       },
       error: (err) =>
         this._toastrService.error("An error has ocourred", undefined, {

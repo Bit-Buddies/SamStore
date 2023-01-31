@@ -101,7 +101,7 @@ namespace SamStore.Authentication.API.Controllers
                 if (!customerResult.ValidationResult.IsValid)
                 {
                     await transaction.RollbackAsync();
-                    return CustomResponse(customerResult);
+                    return CustomResponse(customerResult.ValidationResult);
                 }
 
                 await transaction.CommitAsync();

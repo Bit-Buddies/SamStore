@@ -17,7 +17,9 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
     this.validateUserIsLogged();
 
-    GlobalEventsService.userLoggedIn.subscribe(() => this.validateUserIsLogged());
+    GlobalEventsService.userLoggedIn.subscribe(() => {
+      this.validateUserIsLogged()
+    });
   }
 
   validateUserIsLogged() {
