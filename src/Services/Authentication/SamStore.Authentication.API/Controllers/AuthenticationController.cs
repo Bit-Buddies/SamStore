@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EasyNetQ;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SamStore.Authentication.API.Data;
 using SamStore.Authentication.API.Models;
+using SamStore.Core.CQRS.Integrations;
+using SamStore.Core.CQRS.Integrations.Abstractions;
 using SamStore.WebAPI.Core.API.Controllers;
 using SamStore.WebAPI.Core.Identity;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,45 +24,15 @@ namespace SamStore.Authentication.API.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IdentitySettings _identitySettings;
+        private readonly IdentidadeDbContext _context;
+        private IBus _bus;
 
-        public AuthenticationController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IOptions<IdentitySettings> identitySettings)
+        public AuthenticationController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IOptions<IdentitySettings> identitySettings, IdentidadeDbContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _identitySettings = identitySettings.Value;
-        }
-
-        /// <summary>
-        /// Registrar um novo usuário
-        /// </summary>
-        /// <param name="registerData"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterUserDTO registerData)
-        {
-            if(!ModelState.IsValid) return CustomResponse(ModelState);
-
-            IdentityUser user = new IdentityUser()
-            {
-                UserName = registerData.Email,
-                Email = registerData.Email,
-                EmailConfirmed = true
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(user, registerData.Password);
-
-            if (result.Succeeded)
-            {
-                return CustomResponse(await GenerateJwt(user.Email));
-            }
-
-            foreach (IdentityError error in result.Errors)
-            {
-                AddError(error.Description);
-            }
-
-            return CustomResponse();
+            _context = context;
         }
 
         /// <summary>
@@ -92,6 +67,66 @@ namespace SamStore.Authentication.API.Controllers
 
             AddError("Invalid email or password");
             return CustomResponse();
+        }
+
+        /// <summary>
+        /// Registrar um novo usuário
+        /// </summary>
+        /// <param name="registerData"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterUserDTO registerData)
+        {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            IdentityUser user = new IdentityUser()
+            {
+                UserName = registerData.Email,
+                Email = registerData.Email,
+                EmailConfirmed = true
+            };
+
+            using IDbContextTransaction transaction = _context.Database.BeginTransaction();
+
+            IdentityResult result = await _userManager.CreateAsync(user, registerData.Password);
+
+            if (result.Succeeded)
+            {
+                ResponseMessage customerResult = await RegisterCostumer(registerData);
+
+                if(customerResult.ValidationResult.IsValid)
+                {
+                    await transaction.CommitAsync();
+                    return CustomResponse(await GenerateJwt(user.Email));
+                }
+                else
+                {
+                    await transaction.RollbackAsync();
+                    return CustomResponse(customerResult);
+                }
+            }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                AddError(error.Description);
+            }
+
+            return CustomResponse();
+        }
+
+        private async Task<ResponseMessage> RegisterCostumer(RegisterUserDTO registerData)
+        {
+            IdentityUser user = await _userManager.FindByEmailAsync(registerData.Email);
+
+            RegisteredUserIntegrationEvent registeredEvent = 
+                new RegisteredUserIntegrationEvent(Guid.Parse(user.Id), registerData.Name, registerData.CPF, registerData.Email);
+
+            _bus = RabbitHutch.CreateBus("host=localhost:5672");
+
+            ResponseMessage result = await _bus.Rpc.RequestAsync<RegisteredUserIntegrationEvent, ResponseMessage>(registeredEvent);
+
+            return result;
         }
 
         private async Task<UserDataDTO> GenerateJwt(string email)

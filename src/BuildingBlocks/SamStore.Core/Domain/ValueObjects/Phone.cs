@@ -9,9 +9,10 @@ namespace SamStore.Core.Domain.ValueObjects
 {
     public class Phone
     {
-        public string PrincipalPhone { get; private set; }
-        public string SecundaryPhone { get; private set; }
+        public string PrincipalPhone { get; private set; } = "";
+        public string SecundaryPhone { get; private set; } = "";
 
+        protected Phone() { }
         public Phone(string principalPhone, string secundaryPhone)
         {
             if (string.IsNullOrWhiteSpace(principalPhone))

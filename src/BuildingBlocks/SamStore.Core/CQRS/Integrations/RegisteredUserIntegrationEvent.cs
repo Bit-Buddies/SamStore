@@ -13,5 +13,13 @@ namespace SamStore.Core.CQRS.Integrations
         public string Name { get; private set; }
         public string CPF { get; private set; }
         public string Email { get; private set; }
+
+        public RegisteredUserIntegrationEvent(Guid id, string name, string cPF, string email)
+        {
+            Id = id;
+            Name = name;
+            CPF = cPF;
+            Email = email;
+        }
     }
 }

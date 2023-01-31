@@ -6,6 +6,7 @@ using SamStore.Costumer.Infrastructure.Contexts;
 using SamStore.Costumer.Infrastructure.Repositories;
 using SamStore.Core.CQRS.MediatR;
 using System.Reflection;
+using SamStore.Costumer.API.Services;
 
 namespace SamStore.Costumer.API.Configurations       
 {
@@ -22,9 +23,11 @@ namespace SamStore.Costumer.API.Configurations
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+
             services.AddMediatR(AppDomain.CurrentDomain.Load("SamStore.Costumer.Application"));
+
+            services.AddHostedService<RegisteredUserIntegrationEventHandler>();
         }
     }
 }
