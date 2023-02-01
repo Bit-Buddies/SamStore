@@ -34,21 +34,13 @@ namespace SamStore.Costumer.API.Services
         {
             ValidationResult result = new ValidationResult();
 
-            try
-            {
-                using IServiceScope scope = _serviceProvider.CreateScope();
+            using IServiceScope scope = _serviceProvider.CreateScope();
 
-                IMediatorHandler mediatorHandler = scope.ServiceProvider.GetRequiredService<IMediatorHandler>();
+            IMediatorHandler mediatorHandler = scope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
-                result = await mediatorHandler.SendCommand(new RegisterCustomerCommand(request.Id, request.Name, request.Email, request.CPF));
+            result = await mediatorHandler.SendCommand(new RegisterCustomerCommand(request.Id, request.Name, request.Email, request.CPF));
 
-                return new ResponseMessage(result);
-            }
-            catch (Exception ex)
-            {
-                result.Errors.Add(new ValidationFailure("", $"{ex.Message} - {ex.InnerException}"));
-                return  new ResponseMessage(result);
-            }
+            return new ResponseMessage(result);
         }
     }
 }
