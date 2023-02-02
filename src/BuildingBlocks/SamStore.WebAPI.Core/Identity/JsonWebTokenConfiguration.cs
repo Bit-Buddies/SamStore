@@ -17,12 +17,13 @@ namespace SamStore.WebAPI.Core.Identity
         {
             var identitySettingsSection = configuration.GetSection("IdentitySettings");
 
-            if (identitySettingsSection?.Value == null)
-                throw new NullReferenceException("IdentitySettings cannot be empty");
-
             services.Configure<IdentitySettings>(identitySettingsSection);
 
             IdentitySettings identitySettings = identitySettingsSection.Get<IdentitySettings>();
+
+            if (identitySettings == null)
+                throw new NullReferenceException("IdentitySettings cannot be empty");
+
             var key = Encoding.ASCII.GetBytes(identitySettings.Secret);
 
             services.AddAuthentication(options =>

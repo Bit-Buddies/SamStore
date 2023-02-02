@@ -17,7 +17,7 @@ namespace SamStore.ShoppingCart.API.Configurations
 
             services.AddDbContext<ShoppingCartDbContext>(options =>
             {
-                options.UseMySql("", ServerVersion.AutoDetect(""));
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });   
         }
 
