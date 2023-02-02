@@ -16,6 +16,10 @@ namespace SamStore.WebAPI.Core.Identity
         public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             var identitySettingsSection = configuration.GetSection("IdentitySettings");
+
+            if (identitySettingsSection?.Value == null)
+                throw new NullReferenceException("IdentitySettings cannot be empty");
+
             services.Configure<IdentitySettings>(identitySettingsSection);
 
             IdentitySettings identitySettings = identitySettingsSection.Get<IdentitySettings>();

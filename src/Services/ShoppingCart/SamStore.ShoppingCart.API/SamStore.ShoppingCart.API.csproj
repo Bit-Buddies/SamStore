@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
+    <ProjectReference Include="..\SamStore.ShoppingCart.Infrastructure\SamStore.ShoppingCart.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
