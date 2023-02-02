@@ -21,7 +21,7 @@ builder.Services.AddServicesConfiguration(builder.Configuration);
 
 builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
-builder.Services.AddSwaggerConfiguration("Api de Identidade");
+builder.Services.AddSwaggerConfiguration("Api Identity");
 
 builder.Services.AddControllers();
 

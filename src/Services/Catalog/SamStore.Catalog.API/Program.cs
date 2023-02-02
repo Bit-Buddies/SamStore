@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDependencyInjectionConfiguration(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerConfiguration("Api de Catálogo");
+builder.Services.AddSwaggerConfiguration("Api Catalog");
 builder.Services.AddJwtConfiguration(builder.Configuration);
 
 builder.Services.AddCors(options =>

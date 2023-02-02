@@ -52,7 +52,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.Payment.API", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBus", "MessageBus", "{FC49BBD7-69CC-4C59-882D-9C56980E219C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.MessageBus", "src\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj", "{58C8B458-D929-4835-8BE4-B55CDB3FD87F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamStore.MessageBus", "src\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj", "{58C8B458-D929-4835-8BE4-B55CDB3FD87F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.ShoppingCart.Domain", "src\Services\ShoppingCart\SamStore.ShoppingCart.Domain\SamStore.ShoppingCart.Domain.csproj", "{9547678E-BC7F-4835-A275-377BFDC590A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.ShoppingCart.Application", "src\Services\ShoppingCart\SamStore.ShoppingCart.Application\SamStore.ShoppingCart.Application.csproj", "{85888E5C-3086-4D9A-B3AE-1DE0722803F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamStore.ShoppingCart.Infrastructure", "src\Services\ShoppingCart\SamStore.ShoppingCart.Infrastructure\SamStore.ShoppingCart.Infrastructure.csproj", "{80A331B8-C2D5-470B-AD90-5BB9D25CC923}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,6 +114,18 @@ Global
 		{58C8B458-D929-4835-8BE4-B55CDB3FD87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58C8B458-D929-4835-8BE4-B55CDB3FD87F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58C8B458-D929-4835-8BE4-B55CDB3FD87F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9547678E-BC7F-4835-A275-377BFDC590A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9547678E-BC7F-4835-A275-377BFDC590A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9547678E-BC7F-4835-A275-377BFDC590A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9547678E-BC7F-4835-A275-377BFDC590A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85888E5C-3086-4D9A-B3AE-1DE0722803F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85888E5C-3086-4D9A-B3AE-1DE0722803F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85888E5C-3086-4D9A-B3AE-1DE0722803F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85888E5C-3086-4D9A-B3AE-1DE0722803F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A331B8-C2D5-470B-AD90-5BB9D25CC923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A331B8-C2D5-470B-AD90-5BB9D25CC923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A331B8-C2D5-470B-AD90-5BB9D25CC923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A331B8-C2D5-470B-AD90-5BB9D25CC923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +151,9 @@ Global
 		{8F55114B-9EFD-462C-B8B0-4D4CA313C1BC} = {F2E348D3-50CD-45F3-84EB-DE6321EFAA47}
 		{FC49BBD7-69CC-4C59-882D-9C56980E219C} = {561F1A00-0709-4EE9-924A-58534177D72A}
 		{58C8B458-D929-4835-8BE4-B55CDB3FD87F} = {FC49BBD7-69CC-4C59-882D-9C56980E219C}
+		{9547678E-BC7F-4835-A275-377BFDC590A8} = {D6D055B8-5716-4DFE-8DB7-FCC5F519D060}
+		{85888E5C-3086-4D9A-B3AE-1DE0722803F2} = {D6D055B8-5716-4DFE-8DB7-FCC5F519D060}
+		{80A331B8-C2D5-470B-AD90-5BB9D25CC923} = {D6D055B8-5716-4DFE-8DB7-FCC5F519D060}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC44D549-4D22-4C8A-AB48-25643068B33C}

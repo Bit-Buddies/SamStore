@@ -27,11 +27,9 @@ builder.Services.AddDIConfiguration(builder.Configuration);
 
 builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("SamStore.Costumer.Application"));
 
-builder.Services.AddHostedService<RegisteredUserIntegrationEventHandler>();
-
 builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
-builder.Services.AddSwaggerConfiguration("API de Cliente");
+builder.Services.AddSwaggerConfiguration("Api Customer");
 
 builder.Services.AddCors(setup =>
 {

@@ -17,6 +17,8 @@ namespace SamStore.Costumer.API.Configurations
         {
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+
+            services.AddHostedService<RegisteredUserIntegrationEventHandler>();
         }
     }
 }
