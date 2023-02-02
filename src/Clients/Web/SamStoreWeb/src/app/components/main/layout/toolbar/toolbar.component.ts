@@ -11,6 +11,7 @@ import { Component, OnInit } from "@angular/core";
 export class ToolbarComponent implements OnInit {
   userEmail: string = "";
   logado: boolean = false;
+  itensCarrinho: number = 0;
 
   constructor(private _accountService: AccountService, private _router: Router) {}
 
@@ -18,7 +19,7 @@ export class ToolbarComponent implements OnInit {
     this.validateUserIsLogged();
 
     GlobalEventsService.userLoggedIn.subscribe(() => {
-      this.validateUserIsLogged()
+      this.validateUserIsLogged();
     });
   }
 

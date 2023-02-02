@@ -20,14 +20,28 @@ namespace SamStore.Costumer.API.Services
             _messageBus = messageBus;
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        private void SetResponder()
         {
             _messageBus.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(async request =>
             {
                 return await RegisterCostumer(request);
             });
 
+            _messageBus.AdvancedBus.Connected += OnConnect; ;
+        }
+
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            SetResponder();
             return Task.CompletedTask;
+        }
+
+        private void OnConnect(object? sender, ConnectedEventArgs e)
+        {
+            _messageBus.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(async request =>
+            {
+                return await RegisterCostumer(request);
+            });
         }
 
         private async Task<ResponseMessage> RegisterCostumer(RegisteredUserIntegrationEvent request)

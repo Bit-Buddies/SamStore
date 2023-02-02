@@ -10,10 +10,13 @@ namespace SamStore.MessageBus
 {
     public class MessageBus : IMessageBus
     {
-        public bool IsConnected => _bus?.Advanced.IsConnected ?? false;
 
-        private IBus _bus;
         private readonly string _connectionString;
+        private IBus _bus;
+        private IAdvancedBus _advancedBus;
+
+        public bool IsConnected => _bus?.Advanced.IsConnected ?? false;
+        public IAdvancedBus AdvancedBus => _bus?.Advanced;
 
         public MessageBus(string connectionString)
         {
@@ -97,7 +100,19 @@ namespace SamStore.MessageBus
             policy.Execute(() => 
             {
                 _bus = RabbitHutch.CreateBus(_connectionString);
+
+                _advancedBus = _bus.Advanced;
+                _advancedBus.Disconnected += OnDisconnectedBus;
             });
+        }
+
+        private void OnDisconnectedBus(object? sender, DisconnectedEventArgs e)
+        {
+            var policy = Policy.Handle<EasyNetQException>()
+                .Or<BrokerUnreachableException>()
+                .RetryForever();
+
+            policy.Execute(TryConnect);
         }
     }
 }
