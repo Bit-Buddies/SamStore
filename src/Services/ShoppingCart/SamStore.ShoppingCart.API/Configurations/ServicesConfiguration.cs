@@ -10,7 +10,7 @@ namespace SamStore.ShoppingCart.API.Configurations
     {
         public static void AddDIConfigurations(this IServiceCollection services, IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
             if (connectionString.IsNullOrWhiteSpace())
                 throw new NullReferenceException("DefaultConnection cannot be empty");
