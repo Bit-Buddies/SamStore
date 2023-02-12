@@ -13,7 +13,7 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "shopping_cart_costumer",
+                name: "cart",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -25,17 +25,17 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_shopping_cart_costumer", x => x.id);
+                    table.PrimaryKey("pk_cart", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "shopping_cart_items",
+                name: "cart_item",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     product_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    shopping_cart_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    cart_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     name = table.Column<string>(type: "VARCHAR(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     quantity = table.Column<int>(type: "int", nullable: false),
@@ -48,11 +48,11 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_shopping_cart_items", x => x.id);
+                    table.PrimaryKey("pk_cart_item", x => x.id);
                     table.ForeignKey(
-                        name: "fk_shopping_cart_items_shopping_cart_costumers_shopping_cart_id",
-                        column: x => x.shopping_cart_id,
-                        principalTable: "shopping_cart_costumer",
+                        name: "fk_cart_item_carts_cart_id",
+                        column: x => x.cart_id,
+                        principalTable: "cart",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -60,22 +60,22 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IDX_Costumer",
-                table: "shopping_cart_costumer",
+                table: "cart",
                 column: "costumer_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_shopping_cart_items_shopping_cart_id",
-                table: "shopping_cart_items",
-                column: "shopping_cart_id");
+                name: "ix_cart_item_cart_id",
+                table: "cart_item",
+                column: "cart_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "shopping_cart_items");
+                name: "cart_item");
 
             migrationBuilder.DropTable(
-                name: "shopping_cart_costumer");
+                name: "cart");
         }
     }
 }

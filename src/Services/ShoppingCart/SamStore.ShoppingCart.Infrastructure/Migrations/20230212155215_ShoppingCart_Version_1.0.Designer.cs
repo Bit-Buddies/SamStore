@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 
@@ -9,17 +10,18 @@ using SamStore.ShoppingCart.Infrastructure.Contexts;
 
 namespace SamStore.ShoppingCart.Infrastructure.Migrations
 {
-    [DbContext(typeof(ShoppingCartDbContext))]
-    partial class ShoppingCartDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ShoppingCartContext))]
+    [Migration("20230212155215_ShoppingCart_Version_1.0")]
+    partial class ShoppingCart_Version_10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.ShoppingCartCostumer", b =>
+            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.Cart", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,15 +49,15 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
                         .HasColumnName("total");
 
                     b.HasKey("Id")
-                        .HasName("pk_shopping_cart_costumer");
+                        .HasName("pk_cart");
 
                     b.HasIndex("CostumerId")
                         .HasDatabaseName("IDX_Costumer");
 
-                    b.ToTable("shopping_cart_costumer", (string)null);
+                    b.ToTable("cart", (string)null);
                 });
 
-            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.ShoppingCartItem", b =>
+            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.CartItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,6 +67,10 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
                     b.Property<DateTime>("AlteredAt")
                         .HasColumnType("DATETIME")
                         .HasColumnName("altered_at");
+
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("cart_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("DATETIME")
@@ -96,32 +102,28 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("removed");
 
-                    b.Property<Guid>("ShoppingCartId")
-                        .HasColumnType("char(36)")
-                        .HasColumnName("shopping_cart_id");
-
                     b.HasKey("Id")
-                        .HasName("pk_shopping_cart_items");
+                        .HasName("pk_cart_item");
 
-                    b.HasIndex("ShoppingCartId")
-                        .HasDatabaseName("ix_shopping_cart_items_shopping_cart_id");
+                    b.HasIndex("CartId")
+                        .HasDatabaseName("ix_cart_item_cart_id");
 
-                    b.ToTable("shopping_cart_items", (string)null);
+                    b.ToTable("cart_item", (string)null);
                 });
 
-            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.ShoppingCartItem", b =>
+            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.CartItem", b =>
                 {
-                    b.HasOne("SamStore.ShoppingCart.Domain.ShoppingCarts.ShoppingCartCostumer", "ShoppingCart")
+                    b.HasOne("SamStore.ShoppingCart.Domain.ShoppingCarts.Cart", "Cart")
                         .WithMany("Items")
-                        .HasForeignKey("ShoppingCartId")
+                        .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_shopping_cart_items_shopping_cart_costumers_shopping_cart_id");
+                        .HasConstraintName("fk_cart_item_carts_cart_id");
 
-                    b.Navigation("ShoppingCart");
+                    b.Navigation("Cart");
                 });
 
-            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.ShoppingCartCostumer", b =>
+            modelBuilder.Entity("SamStore.ShoppingCart.Domain.ShoppingCarts.Cart", b =>
                 {
                     b.Navigation("Items");
                 });

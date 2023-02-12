@@ -15,13 +15,13 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
         public int Quantity { get; private set; }
         public decimal Price { get; private set; }
         public string Image { get; private set; }
-
         public virtual Cart Cart { get; set; }
 
-        public CartItem(Guid productId, Guid shoppingCartId, string name, int quantity, decimal price, string image)
+        protected CartItem() { }
+        public CartItem(Guid productId, Guid cartId, string name, int quantity, decimal price, string image)
         {
             ProductId = productId;
-            CartId = shoppingCartId;
+            CartId = cartId;
             Name = name;
             Quantity = quantity;
             Price = price;
