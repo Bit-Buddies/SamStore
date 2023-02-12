@@ -8,16 +8,23 @@ using System.Threading.Tasks;
 
 namespace SamStore.ShoppingCart.Domain.ShoppingCarts
 {
-    public class ShoppingCartCostumer : Entity, IAggregateRoot
+    public class Cart : Entity, IAggregateRoot
     {
         public Guid CostumerId { get; private set; }
         public decimal Total { get; private set; }
-        public ICollection<ShoppingCartItem> Items { get; private set; } = new List<ShoppingCartItem>();
+        public ICollection<CartItem> Items { get; private set; } = new List<CartItem>();
 
-        protected ShoppingCartCostumer() { }
-        public ShoppingCartCostumer(Guid costumerId)
+        public Cart() { }
+        public Cart(Guid costumerId)
         {
             CostumerId = costumerId;
+        }
+
+        internal void AddItem(CartItem item)
+        {
+            //validate
+
+
         }
     }
 }

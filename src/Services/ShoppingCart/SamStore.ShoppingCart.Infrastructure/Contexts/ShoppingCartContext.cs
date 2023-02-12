@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace SamStore.ShoppingCart.Infrastructure.Contexts
 {
-    public class ShoppingCartDbContext : DbContext
+    public class ShoppingCartContext : DbContext
     {
-        public DbSet<ShoppingCartCostumer> ShoppingCartCostumers { get; }
-        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public DbSet<Cart> Carts { get; }
+        public DbSet<CartItem> CartItems { get; }
 
-        public ShoppingCartDbContext(DbContextOptions<ShoppingCartDbContext> options) : base(options) 
+        public ShoppingCartContext(DbContextOptions<ShoppingCartContext> options) : base(options) 
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
@@ -23,7 +23,7 @@ namespace SamStore.ShoppingCart.Infrastructure.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.UseDefaultTableConfiguration();
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShoppingCartDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShoppingCartContext).Assembly);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

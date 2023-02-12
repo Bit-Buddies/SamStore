@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace SamStore.ShoppingCart.Infrastructure.Contexts.Mappings
 {
-    public class ShoppingCartCostumerMapping : IEntityTypeConfiguration<ShoppingCartCostumer>
+    public class CartMapping : IEntityTypeConfiguration<Cart>
     {
-        public void Configure(EntityTypeBuilder<ShoppingCartCostumer> builder)
+        public void Configure(EntityTypeBuilder<Cart> builder)
         {
-            builder.ToTable("shopping_cart_costumer");
+            builder.ToTable("cart");
 
             builder.HasMany(x => x.Items)
-                .WithOne(x => x.ShoppingCart)
-                .HasForeignKey(x => x.ShoppingCartId)
+                .WithOne(x => x.Cart)
+                .HasForeignKey(x => x.CartId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasIndex(c => c.CostumerId)
