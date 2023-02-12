@@ -20,11 +20,35 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             CostumerId = costumerId;
         }
 
-        internal void AddItem(CartItem item)
+        public bool ItemAlreadyExists(CartItem item)
         {
-            //validate
+            return Items.Any(i => i.ProductId == item.ProductId);
+        }
 
+        public CartItem GetItemByProductId(Guid productId)
+        {
+            return Items.FirstOrDefault(i => i.ProductId == productId);
+        }
 
+        public void AddItem(CartItem item)
+        {
+            if (!item.IsValid())
+                return;
+
+            item.LinkCart(Id);
+         
+            if(ItemAlreadyExists(item)) 
+            {
+                CartItem oldItem = GetItemByProductId(item.ProductId);
+                oldItem.AddQuantity(item.Quantity);
+
+                item = oldItem;
+                Items.Remove(oldItem);
+            }
+
+            Items.Add(item);
+
+            Total = Items.Sum(i => i.CalcPrice());
         }
     }
 }

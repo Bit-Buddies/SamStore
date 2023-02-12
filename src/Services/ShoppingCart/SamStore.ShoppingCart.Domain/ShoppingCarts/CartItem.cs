@@ -1,4 +1,5 @@
-﻿using SamStore.Core.Domain;
+﻿using FluentValidation;
+using SamStore.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,48 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             Quantity = quantity;
             Price = price;
             Image = image;
+        }
+
+        public void LinkCart(Guid cartId)
+        {
+            CartId = cartId;
+        }
+
+        public decimal CalcPrice()
+        {
+            return Price * Quantity;
+        }
+
+        public void AddQuantity(int quantity)
+        {
+            Quantity += quantity;
+        }
+
+        public bool IsValid()
+        {
+            return new CartItemValidator().Validate().IsValid;
+        }
+
+        private class CartItemValidator : AbstractValidator<CartItem>
+        {
+            public CartItemValidator()
+            {
+                RuleFor(c => c.ProductId)
+                    .NotEqual(Guid.Empty)
+                    .WithMessage("Invalid productId");
+
+                RuleFor(c => c.Name)
+                    .NotEmpty()
+                    .WithMessage("Invalid product name");
+
+                RuleFor(c => c.Quantity)
+                    .GreaterThan(0)
+                    .WithMessage("Quantity most be greater than 0");
+
+                RuleFor(c => c.Price)
+                    .GreaterThan(0)
+                    .WithMessage("Price most be greater than 0");
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SamStore.ShoppingCart.API.Configurations
             if (connectionString.IsNullOrWhiteSpace())
                 throw new NullReferenceException("DefaultConnection cannot be empty");
 
-            services.AddDbContext<ShoppingCartDbContext>(options =>
+            services.AddDbContext<ShoppingCartContext>(options =>
             {
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
