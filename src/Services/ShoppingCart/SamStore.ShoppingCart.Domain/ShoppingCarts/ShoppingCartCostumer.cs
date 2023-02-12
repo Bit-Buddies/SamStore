@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SamStore.ShoppingCart.Domain.ShoppingCarts
 {
-    public class ShoppingCart : Entity, IAggregateRoot
+    public class ShoppingCartCostumer : Entity, IAggregateRoot
     {
         public Guid CostumerId { get; private set; }
         public decimal Total { get; private set; }
         public ICollection<ShoppingCartItem> Items { get; private set; } = new List<ShoppingCartItem>();
 
-        protected ShoppingCart() { }
-        public ShoppingCart(Guid costumerId)
+        protected ShoppingCartCostumer() { }
+        public ShoppingCartCostumer(Guid costumerId)
         {
             CostumerId = costumerId;
         }
