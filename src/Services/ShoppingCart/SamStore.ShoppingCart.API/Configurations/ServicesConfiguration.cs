@@ -3,12 +3,13 @@ using SamStore.Core.Domain.Utils;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Configurations;
 using SamStore.WebAPI.Core.Identity;
+using SamStore.WebAPI.Core.User;
 
 namespace SamStore.ShoppingCart.API.Configurations
 {
     public static class ServicesConfiguration
     {
-        public static void AddDIConfigurations(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
@@ -18,7 +19,10 @@ namespace SamStore.ShoppingCart.API.Configurations
             services.AddDbContext<ShoppingCartDbContext>(options =>
             {
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            });   
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IContextUser, ContextUser>();
         }
 
         public static void AddServiceConfiguration(this IServiceCollection services, IConfiguration configuration)
@@ -27,7 +31,7 @@ namespace SamStore.ShoppingCart.API.Configurations
             
             services.AddEndpointsApiExplorer();
 
-            services.AddDIConfigurations(configuration);
+            services.RegisterServices(configuration);
 
             services.AddSwaggerConfiguration("Api ShoppingCart");
 
