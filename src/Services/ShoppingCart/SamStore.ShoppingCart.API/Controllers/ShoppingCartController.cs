@@ -19,12 +19,21 @@ namespace SamStore.ShoppingCart.API.Controllers
             _shoppingCartService = shoppingCartService;
         }
 
+        /// <summary>
+        /// Get customer cart by context user identity
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<Cart>> GetCart()
         {
             return CustomResponse(await _shoppingCartService.GetCustomerCart());
         }
 
+        /// <summary>
+        /// Add a cart item into the customer context cart
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddCartItem(CartItem item)
         {
@@ -32,6 +41,11 @@ namespace SamStore.ShoppingCart.API.Controllers
             return CustomResponse();
         }
 
+        /// <summary>
+        /// Remove cart item from customer context cart 
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<IActionResult> RemoveCartItem(Guid productId)
         {
@@ -39,6 +53,10 @@ namespace SamStore.ShoppingCart.API.Controllers
             return CustomResponse();
         }
 
+        /// <summary>
+        /// Clear customer context cart
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete("clear")]
         public async Task<IActionResult> ClearCart()
         {

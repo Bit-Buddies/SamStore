@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore.Storage;
 using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
 using System;
@@ -63,12 +65,6 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             Items.Add(item);
         }
 
-        private void UpdateItemsUnits(CartItem item, int quantity)
-        {
-            item.UpdateQuantity(quantity);
-            UpdateItem(item);
-        }
-
         public void RemoveItem(Guid productId)
         {
             var itemToRemove= Items
@@ -86,6 +82,31 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
                 return;
 
             Items.Clear();
+        }
+
+        public override bool IsValid()
+        {
+            List<ValidationFailure> errors = Items
+                .SelectMany(i => new CartItem.CartItemValidator().Validate(i).Errors).ToList();
+            
+            errors.AddRange(new CartValidator()
+                .Validate(this).Errors);
+
+            ValidationResult validationResult = new ValidationResult(errors);
+
+            return validationResult.IsValid;
+        }
+
+        public class CartValidator: AbstractValidator<Cart>
+        {
+            public CartValidator()
+            {
+                RuleFor(c => c.CostumerId)
+                    .NotEqual(Guid.Empty);
+
+                RuleFor(c => c.Total)
+                    .GreaterThanOrEqualTo(0);
+            }
         }
     }
 }

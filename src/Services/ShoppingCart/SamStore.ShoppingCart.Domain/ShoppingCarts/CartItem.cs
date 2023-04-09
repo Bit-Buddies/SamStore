@@ -49,12 +49,12 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             Quantity = quantity;
         }
 
-        public bool IsValid()
+        public override bool IsValid()
         {
             return new CartItemValidator().Validate(this).IsValid;
         }
 
-        private class CartItemValidator : AbstractValidator<CartItem>
+        public class CartItemValidator : AbstractValidator<CartItem>
         {
             public CartItemValidator()
             {

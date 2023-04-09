@@ -31,5 +31,10 @@ namespace SamStore.Core.Domain
         {
             _notifications?.Clear();
         }
+
+        public virtual bool IsValid()
+        {
+            return true;
+        }
     }
 }
