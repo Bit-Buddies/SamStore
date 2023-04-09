@@ -28,6 +28,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTreeModule } from "@angular/material/tree";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const materialModules = [
   MatBadgeModule,
@@ -59,6 +60,7 @@ const materialModules = [
   OverlayModule,
   PortalModule,
   MatTooltipModule,
+  MatDialogModule
 ];
 
 @NgModule({
