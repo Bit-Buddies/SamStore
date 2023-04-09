@@ -68,5 +68,24 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             item.UpdateQuantity(quantity);
             UpdateItem(item);
         }
+
+        public void RemoveItem(Guid productId)
+        {
+            var itemToRemove= Items
+                .FirstOrDefault(i => i.ProductId == productId);
+
+            if (itemToRemove == null)
+                return;
+
+            Items.Remove(itemToRemove);
+        }
+
+        public void Clear()
+        {
+            if (!Items.Any())
+                return;
+
+            Items.Clear();
+        }
     }
 }
