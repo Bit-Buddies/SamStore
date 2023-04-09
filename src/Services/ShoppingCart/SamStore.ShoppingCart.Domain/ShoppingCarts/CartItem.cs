@@ -44,9 +44,14 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             Quantity += quantity;
         }
 
+        public void UpdateQuantity(int quantity)
+        {
+            Quantity = quantity;
+        }
+
         public bool IsValid()
         {
-            return new CartItemValidator().Validate().IsValid;
+            return new CartItemValidator().Validate(this).IsValid;
         }
 
         private class CartItemValidator : AbstractValidator<CartItem>

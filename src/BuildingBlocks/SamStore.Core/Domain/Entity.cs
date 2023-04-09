@@ -1,4 +1,5 @@
-﻿using SamStore.Core.CQRS.Events;
+﻿using FluentValidation;
+using SamStore.Core.CQRS.Events;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SamStore.Core.Domain

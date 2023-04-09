@@ -1,4 +1,5 @@
-﻿using SamStore.Core.Domain;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
     public class Cart : Entity, IAggregateRoot
     {
         public Guid CostumerId { get; private set; }
-        public decimal Total { get; private set; }
         public ICollection<CartItem> Items { get; private set; } = new List<CartItem>();
+        public decimal Total => !Items.Any() ? 0 : Items.Sum(i => i.CalcPrice());
 
         public Cart() { }
         public Cart(Guid costumerId)
@@ -47,8 +48,25 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             }
 
             Items.Add(item);
+        }
 
-            Total = Items.Sum(i => i.CalcPrice());
+        public void UpdateItem(CartItem item)
+        {
+            if (!item.IsValid())
+                return;
+
+            item.LinkCart(Id);
+
+            var oldItem = GetItemByProductId(item.ProductId);
+
+            Items.Remove(oldItem);
+            Items.Add(item);
+        }
+
+        private void UpdateItemsUnits(CartItem item, int quantity)
+        {
+            item.UpdateQuantity(quantity);
+            UpdateItem(item);
         }
     }
 }
