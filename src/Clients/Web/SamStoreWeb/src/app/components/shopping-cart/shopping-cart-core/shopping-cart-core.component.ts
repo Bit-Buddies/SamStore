@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./shopping-cart-core.component.scss']
 })
 export class ShoppingCartCoreComponent {
-
+  public items: any[] = [];
 }

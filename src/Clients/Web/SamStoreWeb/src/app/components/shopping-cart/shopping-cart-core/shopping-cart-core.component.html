@@ -1,1 +1,15 @@
-<app-modal-header title="Shopping Cart"></app-modal-header>
+<div class="modal-container">
+  <app-modal-header title="Shopping Cart"></app-modal-header>
+
+  <section>
+    <div *ngIf="this.items.length > 0; else NoContent"></div>
+  </section>
+
+  <ng-template #NoContent>
+    <div fxLayout="column nowrap" fxLayoutAlign="center center" class="no-content-container">
+      <mat-icon class="mat-18 no-content-icon">production_quantity_limits</mat-icon>
+      <h2>Your shopping cart is empty</h2>
+      <p>Finalize your choices and come back here to proceed with the purchase</p>
+    </div>
+  </ng-template>
+</div>
