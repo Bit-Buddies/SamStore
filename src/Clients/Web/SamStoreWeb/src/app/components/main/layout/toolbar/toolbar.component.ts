@@ -5,6 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { DialogService } from "src/app/utils/dialog-service";
 import { HomeComponent } from "src/app/pages/main/home/home.component";
 import { GeneralCatalogComponent } from "src/app/pages/main/home/general-catalog/general-catalog.component";
+import { ShoppingCartCoreComponent } from "src/app/components/shopping-cart/shopping-cart-core/shopping-cart-core.component";
 
 @Component({
   selector: "app-toolbar",
@@ -47,6 +48,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   public openShoppingCartModal() {
-    this._dialogService.genericDialog(ToolbarComponent, {width: "50%"});
+    this._dialogService.genericDialog(ShoppingCartCoreComponent, {width: "50%"});
   }
 }

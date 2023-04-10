@@ -18,9 +18,10 @@ import { NotfoundComponent } from "./pages/main/notfound/notfound.component";
 import { ToastrModule } from "ngx-toastr";
 import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
 import { DialogService } from "./utils/dialog-service";
+import { ComponentsModule } from "./components/components.module";
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, HomeComponent, NotfoundComponent, GeneralCatalogComponent],
+  declarations: [AppComponent,  HomeComponent, NotfoundComponent, GeneralCatalogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,6 +31,7 @@ import { DialogService } from "./utils/dialog-service";
     HttpClientModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    ComponentsModule,
     ToastrModule.forRoot(),
   ],
   providers: [AccountService, CatalogService, DialogService],

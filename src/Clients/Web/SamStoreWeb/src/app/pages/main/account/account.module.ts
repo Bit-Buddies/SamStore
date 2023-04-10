@@ -4,7 +4,6 @@ import { MaterialModule } from "./../../../material.module";
 import { HttpClientModule } from "@angular/common/http";
 import { AuthenticationService } from "../../../services/authentication.service";
 import { AccountRoutingModule } from "./account-routing.module";
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { RegisterComponent } from "./register/register.component";
 import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -17,7 +16,6 @@ import { AccountComponent } from "./account/account.component";
   declarations: [LoginComponent, RegisterComponent, AccountComponent],
   imports: [
     CommonModule,
-    FlexLayoutModule,
     AccountRoutingModule,
     RouterModule,
     FormsModule,
