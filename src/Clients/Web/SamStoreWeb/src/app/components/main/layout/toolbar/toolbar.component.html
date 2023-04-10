@@ -11,13 +11,13 @@
     <span class="spacer"></span>
     <button
       mat-icon-button
-      [matTooltip]="!itensCarrinho ? 'empty' : itensCarrinho.toString()"
-      class="icon-button notifications-icon-button">
+      [matTooltip]="!cartItemsQuantity ? 'empty' : cartItemsQuantity.toString()"
+      class="icon-button notifications-icon-button"
+      (click)="this.openShoppingCartModal()">
       <mat-icon
-        matBadge="{{ itensCarrinho }}"
+        matBadge="{{ cartItemsQuantity }}"
         matBadgeSize="small"
-        matBadgeColor="accent"
-        >shopping_cart</mat-icon
+        matBadgeColor="accent">shopping_cart</mat-icon
       >
     </button>
     <button

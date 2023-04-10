@@ -2,6 +2,9 @@ import { Router } from "@angular/router";
 import { AccountService } from "./../../../../services/account.service";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
 import { Component, OnInit } from "@angular/core";
+import { DialogService } from "src/app/utils/dialog-service";
+import { HomeComponent } from "src/app/pages/main/home/home.component";
+import { GeneralCatalogComponent } from "src/app/pages/main/home/general-catalog/general-catalog.component";
 
 @Component({
   selector: "app-toolbar",
@@ -11,11 +14,14 @@ import { Component, OnInit } from "@angular/core";
 export class ToolbarComponent implements OnInit {
   userEmail: string = "";
   logado: boolean = false;
-  itensCarrinho: number = 0;
+  cartItemsQuantity: number = 0;
 
-  constructor(private _accountService: AccountService, private _router: Router) {}
+  constructor(
+    private _accountService: AccountService,
+    private _router: Router,
+    private _dialogService: DialogService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.validateUserIsLogged();
 
     GlobalEventsService.userLoggedIn.subscribe(() => {
@@ -23,7 +29,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  validateUserIsLogged() {
+  private validateUserIsLogged() {
     const user = this._accountService.getCurrentUser();
 
     if (user == null) {
@@ -35,8 +41,12 @@ export class ToolbarComponent implements OnInit {
     this.logado = true;
   }
 
-  logout() {
+  public logout() {
     this._accountService.removeCurrentUser();
     location.reload();
+  }
+
+  public openShoppingCartModal() {
+    this._dialogService.genericDialog(ToolbarComponent, {width: "50%"});
   }
 }

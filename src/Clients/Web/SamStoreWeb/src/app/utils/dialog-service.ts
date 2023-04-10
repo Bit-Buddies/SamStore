@@ -12,8 +12,6 @@ export class DialogService {
     config: MatDialogConfig<TConfig>
   ): Observable<TResult> {
       config.restoreFocus = false;
-      config.disableClose = config?.disableClose || true;
-
       return this.dialogService.open(componentRef, config).afterClosed();
   }
 }
