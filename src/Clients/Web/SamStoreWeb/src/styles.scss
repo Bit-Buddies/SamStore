@@ -56,6 +56,19 @@ table {
     border-spacing: 0;
 }
 
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: black;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: primary(700);
+  border-radius: 2px;
+}
+
 * {
   font-family: "Nunito";
 }
