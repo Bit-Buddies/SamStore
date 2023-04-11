@@ -1,6 +1,6 @@
 <div class="modal-header-container" fxLayout="row nowrap" fxLayoutAlign="space-between center">
   <h2>{{this.title}}</h2>
-  <button *ngIf="this.useExitButton" mat-icon-button (click)="this.onExitbuttonPressed.emit()">
+  <button *ngIf="this.useExitButton" mat-icon-button (click)="this.onExitButtonPressed()">
       <mat-icon class="mat-18">close</mat-icon>
   </button>
 </div>

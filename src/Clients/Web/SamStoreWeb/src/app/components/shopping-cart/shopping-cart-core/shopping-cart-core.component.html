@@ -1,5 +1,5 @@
 <div class="modal-container">
-  <app-modal-header title="Shopping Cart"></app-modal-header>
+  <app-modal-header [matDialogRef]="this.dialogRef" title="Shopping Cart"></app-modal-header>
 
   <section>
     <div *ngIf="this.items.length > 0; else NoContent"></div>

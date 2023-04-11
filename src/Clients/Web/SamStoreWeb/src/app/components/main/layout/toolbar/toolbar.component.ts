@@ -48,6 +48,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   public openShoppingCartModal() {
-    this._dialogService.genericDialog(ShoppingCartCoreComponent, {width: "50%"});
+    this._dialogService.genericDialog(ShoppingCartCoreComponent, {width: "70%", autoFocus: false });
   }
 }
