@@ -12,6 +12,18 @@
   }
 }
 
+.card-product-price-discount {
+  font-size: smaller;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.card-product-price-actual {
+  font-size: large;
+  font-weight: bold;
+}
+
 @media screen and (min-width: 1080px) {
   .card-product {
     .add-to-cart-button {

@@ -7,8 +7,7 @@
     fxLayout.xs="column"
     fxLayoutGap="16px grid">
     <div
-      fxFlex.xs="100"
-      fxFlex.sm="50"
+      fxFlex.lt-md="50"
       fxFlex.md="33"
       fxFlex="25"
       *ngFor="let product of products">
@@ -36,7 +35,7 @@
                 <p>12</p>
               </span>
             </span>
-            <p class="card-product-price-discount">{{ product.value | currency : "BRL" }}</p>
+            <p class="card-product-price-discount"><s>{{ product.value | currency : "BRL" }}</s></p>
             <p class="card-product-price-actual">{{ product.value | currency : "BRL" }}</p>
           </div>
         </mat-card-content>
