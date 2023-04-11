@@ -19,9 +19,7 @@ export class GeneralCatalogComponent implements OnInit {
         this.products = products;
       },
       error: (err) =>
-        this._toastrService.error("An error has ocourred", undefined, {
-          timeOut: 2000,
-        }),
+        this._toastrService.error("An error has ocourred", undefined),
     });
   }
 
