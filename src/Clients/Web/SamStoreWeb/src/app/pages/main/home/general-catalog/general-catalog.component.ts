@@ -24,4 +24,8 @@ export class GeneralCatalogComponent implements OnInit {
         }),
     });
   }
+
+  public onMoreButtonPressed(){
+    console.log("OPA TESTE");
+  }
 }

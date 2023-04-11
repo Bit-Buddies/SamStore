@@ -1,0 +1,7 @@
+<span fxLayout="row nowrap" fxLayoutAlign="start baseline" class="title-container">
+  <h2>{{this.title}}</h2>
+
+  <span *ngIf="this.moreButtonDescription" class="see-more-container">
+    <a (click)="this.moreButtonActionCallback()">{{this.moreButtonDescription}}</a>
+  </span>
+</span>
