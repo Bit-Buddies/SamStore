@@ -8,6 +8,8 @@
   }
 
   .see-more-container {
+    user-select: none;
+
     a {
       font-weight: bold;
       margin-left: 12px;
