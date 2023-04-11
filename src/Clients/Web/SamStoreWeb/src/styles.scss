@@ -1,6 +1,7 @@
 @import "bootstrap/dist/css/bootstrap-grid.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,700&display=swap");
 @import "ngx-toastr/toastr";
+@import "./palettes";
 
 :root{
   --card-shadow: rgba(123, 163, 199, 0.3) 5px 7px 10px;
@@ -73,6 +74,26 @@ mat-card-header {
 
 mat-card {
   padding: 16px;
+}
+
+.toast-container .ngx-toastr {
+  box-shadow: none !important;
+}
+
+.toast-error {
+  background-color: #ff0058 !important;
+}
+
+.toast-success {
+  background-color: #43c56e !important;
+}
+
+.toast-info {
+  background-color: #6a6a6a !important;
+}
+
+.toast-warning {
+  background-color: #ff933d !important;
 }
 
 .form-container {
