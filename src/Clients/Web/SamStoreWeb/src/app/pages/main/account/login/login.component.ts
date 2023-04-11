@@ -25,7 +25,8 @@ export class LoginComponent {
     private _router: Router,
     private _authenticationService: AuthenticationService,
     private _accountService: AccountService,
-    private _toastrService: ToastrService
+    private _toastrService: ToastrService,
+    private _globalEventService: GlobalEventsService
   ) {
     this.loginForm = _formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
@@ -45,7 +46,7 @@ export class LoginComponent {
         this._accountService.setCurrentUser(userData);
         this._router.navigate(["/home"]);
 
-        GlobalEventsService.userLoggedIn.emit();
+        this._globalEventService.userLoggedIn.next();
       },
       error: (response) => {
         const errors = this._authenticationService.extractErrors(response);

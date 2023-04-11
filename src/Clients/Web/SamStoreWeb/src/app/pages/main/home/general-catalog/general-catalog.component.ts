@@ -18,12 +18,9 @@ export class GeneralCatalogComponent implements OnInit {
       next: (products) => {
         this.products = products;
       },
-      error: (err) =>
-        this._toastrService.error("An error has ocourred", undefined),
+      error: (err) => this._toastrService.error("An error has ocourred", undefined),
     });
   }
 
-  public onMoreButtonPressed(){
-
-  }
+  public onMoreButtonPressed() {}
 }

@@ -20,12 +20,13 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private _accountService: AccountService,
     private _router: Router,
-    private _dialogService: DialogService) {}
+    private _dialogService: DialogService,
+    private _globalEventService: GlobalEventsService) {}
 
   public ngOnInit(): void {
     this.validateUserIsLogged();
 
-    GlobalEventsService.userLoggedIn.subscribe(() => {
+    this._globalEventService.userLoggedIn.subscribe(() => {
       this.validateUserIsLogged();
     });
   }

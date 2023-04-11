@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
     private _authenticationService: AuthenticationService,
     private _accountService: AccountService,
     private _toastrService: ToastrService,
+    private _globalEventService: GlobalEventsService,
     private _router: Router
   ) {}
 
@@ -63,7 +64,7 @@ export class RegisterComponent implements OnInit {
         this._accountService.setCurrentUser(userData);
         this._router.navigate(["/home"]);
 
-        GlobalEventsService.userLoggedIn.emit();
+        this._globalEventService.userLoggedIn.next();
       },
       error: (response) => {
         const errors = this._authenticationService.extractErrors(response);

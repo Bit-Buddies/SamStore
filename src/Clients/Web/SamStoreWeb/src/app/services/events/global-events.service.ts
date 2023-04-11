@@ -1,6 +1,7 @@
-import { EventEmitter, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class GlobalEventsService {
-  static userLoggedIn = new EventEmitter();
+  public userLoggedIn: Subject<void> = new Subject<void>();
 }
