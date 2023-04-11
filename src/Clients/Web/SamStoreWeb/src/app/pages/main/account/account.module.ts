@@ -2,7 +2,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
 import { AccountService } from "./../../../services/account.service";
 import { MaterialModule } from "./../../../material.module";
 import { HttpClientModule } from "@angular/common/http";
-import { AuthenticationService } from "../../../services/authentication.service";
+import { AuthenticationService } from "../../../services/controllers/authentication.service";
 import { AccountRoutingModule } from "./account-routing.module";
 import { RegisterComponent } from "./register/register.component";
 import { RouterModule } from "@angular/router";

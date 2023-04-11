@@ -2,7 +2,7 @@ import { Router } from "@angular/router";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
 import { LoginData } from "./../../../../models/login-data";
 import { AccountService } from "./../../../../services/account.service";
-import { AuthenticationService } from "../../../../services/authentication.service";
+import { AuthenticationService } from "../../../../services/controllers/authentication.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component } from "@angular/core";
 import { ToastrService } from "ngx-toastr";

@@ -1,6 +1,6 @@
 import { ToastrService } from "ngx-toastr";
 import { ProductDTO } from "./../../../../models/Products/product.DTO";
-import { CatalogService } from "./../../../../services/catalog.service";
+import { CatalogService } from "./../../../../services/controllers/catalog.service";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
