@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { ProductDTO } from "./../../models/Products/product.DTO";
+import { ProductDTO } from "../../models/Products/product.DTO";
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { BaseApiService } from "../abstractions/base.service";
@@ -7,7 +7,7 @@ import { BaseApiService } from "../abstractions/base.service";
 @Injectable({
   providedIn: "root",
 })
-export class CatalogService extends BaseApiService {
+export class CatalogControllerService extends BaseApiService {
   constructor(private _httpClient: HttpClient) {
     super("catalog", "Catalog");
   }

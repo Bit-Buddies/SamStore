@@ -1,5 +1,5 @@
 import { HttpClientModule } from "@angular/common/http";
-import { CatalogService } from "./services/controllers/catalog.service";
+import { CatalogControllerService } from "./services/controllers/catalog.controller.service";
 import { GeneralCatalogComponent } from "./pages/main/home/general-catalog/general-catalog.component";
 import { AccountService } from "./services/account.service";
 import { MaterialModule } from "./material.module";
@@ -34,7 +34,7 @@ import { ComponentsModule } from "./components/components.module";
     ComponentsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [AccountService, CatalogService, DialogService],
+  providers: [AccountService, CatalogControllerService, DialogService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

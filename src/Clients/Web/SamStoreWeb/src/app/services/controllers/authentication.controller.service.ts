@@ -9,7 +9,7 @@ import { BaseApiService } from "../abstractions/base.service";
 @Injectable({
   providedIn: "root",
 })
-export class AuthenticationService extends BaseApiService {
+export class AuthenticationControllerService extends BaseApiService {
   constructor(private _httpClient: HttpClient) {
     super("auth", "Identity");
   }

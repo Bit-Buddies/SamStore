@@ -1,7 +1,7 @@
 import { ToastrService } from "ngx-toastr";
 import { AccountService } from "./../../../../services/account.service";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
-import { AuthenticationService } from "../../../../services/controllers/authentication.service";
+import { AuthenticationControllerService } from "../../../../services/controllers/authentication.controller.service";
 import { RegisterUserData } from "./../../../../models/register-user-data";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _authenticationService: AuthenticationService,
+    private _authenticationService: AuthenticationControllerService,
     private _accountService: AccountService,
     private _toastrService: ToastrService,
     private _globalEventService: GlobalEventsService,
