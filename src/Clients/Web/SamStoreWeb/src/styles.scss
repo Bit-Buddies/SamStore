@@ -121,3 +121,13 @@ mat-card-actions {
 .modal-container{
   padding: 16px 24px;
 }
+
+.star-rating-container {
+  color: secondary(500);
+  margin-bottom: 16px;
+
+  p {
+    font-size: smaller;
+    font-weight: bold;
+  }
+}
