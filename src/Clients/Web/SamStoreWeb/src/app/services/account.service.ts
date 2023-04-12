@@ -1,37 +1,40 @@
 import { UserData } from "./../models/user-data";
 import { Injectable } from "@angular/core";
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
-  providedIn: "root",
+    providedIn: "root",
 })
 export class AccountService {
-  private _currentUserName = "current-user";
+    private _userCookieToken = "CURRENT_USER";
 
-  public getCurrentUser(): UserData | null {
-    const userJson = localStorage.getItem(this._currentUserName);
+    constructor(private _cookieService: CookieService) {}
 
-    if (userJson == null) return null;
+    public getCurrentUser(): UserData | null {
+        const userJson = this._cookieService.get(this._userCookieToken);
 
-    return JSON.parse(userJson) as UserData;
-  }
+        if (userJson == null || userJson == "") return null;
 
-  public setCurrentUser(userData: UserData) {
-    let user = this.getCurrentUser();
-
-    if (user != null) {
-      this.removeCurrentUser();
+        return JSON.parse(userJson) as UserData;
     }
 
-    const userJson = JSON.stringify(userData);
+    public setCurrentUser(userData: UserData) {
+        let user = this.getCurrentUser();
 
-    localStorage.setItem(this._currentUserName, userJson);
-  }
+        if (user != null) {
+            this.removeCurrentUser();
+        }
 
-  public removeCurrentUser() {
-    localStorage.removeItem(this._currentUserName);
-  }
+        const userJson = JSON.stringify(userData);
 
-  public isLogged(): boolean {
-    return this.getCurrentUser() != null;
-  }
+        this._cookieService.set(this._userCookieToken, userJson);
+    }
+
+    public removeCurrentUser() {
+        this._cookieService.delete(this._userCookieToken);
+    }
+
+    public isLogged(): boolean {
+        return this.getCurrentUser() != null;
+    }
 }
