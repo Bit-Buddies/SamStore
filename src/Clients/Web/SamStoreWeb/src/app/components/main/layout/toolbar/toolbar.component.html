@@ -1,32 +1,31 @@
-<mat-toolbar
-  class="toolbar"
-  color="primary">
+<mat-toolbar class="toolbar" color="primary">
   <mat-toolbar-row class="container">
-    <span
-      id="logo-name"
-      [routerLink]="['/']">
+    <span id="logo-name" [routerLink]="['/']">
       SamStore
     </span>
 
     <span class="spacer"></span>
-    <button
-      mat-icon-button
-      class="icon-button notifications-icon-button"
-      (click)="this.openShoppingCartModal()">
-      <mat-icon
-        matBadge="{{ this.shoppingCartService.shoppingCart?.items?.length ?? 0 }}"
-        matBadgeSize="small"
-        matBadgeColor="accent">shopping_cart</mat-icon
-      >
+    <button mat-icon-button class="icon-button notifications-icon-button" (click)="this.openShoppingCartModal()">
+      <mat-icon matBadge="{{ this.shoppingCartService.shoppingCart?.items?.length ?? 0 }}" matBadgeSize="small"
+        matBadgeColor="accent">shopping_cart</mat-icon>
     </button>
-    <button
-      *ngIf="logado; else loggedOut"
-      mat-icon-button
-      [matTooltip]="userEmail"
-      (click)="logout()"
+    <button *ngIf="logado; else loggedOut" mat-icon-button [matMenuTriggerFor]="menuRef"
       class="icon-button account-icon-button">
       <mat-icon>account_circle</mat-icon>
     </button>
+    <mat-menu #menuRef="matMenu" xPosition="before" open>
+      <button mat-menu-item>
+        <span>Account</span>
+      </button>
+      <button mat-menu-item>
+        <span>Orders</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button class="logout-button" mat-menu-item (click)="this.logout()">
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+
   </mat-toolbar-row>
 </mat-toolbar>
 

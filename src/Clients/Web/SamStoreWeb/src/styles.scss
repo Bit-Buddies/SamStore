@@ -131,6 +131,19 @@ mat-card-actions {
   border-radius: 8px !important;
 }
 
+.mat-mdc-menu-content {
+  padding: 0 !important;
+}
+
+.mat-mdc-menu-item {
+  min-height: 42px !important;
+  justify-content: center !important;
+
+  span {
+    font-size: small !important;
+  }
+}
+
 .modal-container{
   padding: 16px 24px;
 }
