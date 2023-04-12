@@ -7,7 +7,7 @@
     <div fxLayout="column nowrap" fxLayoutAlign="space-between">
       <span>
         <p class="m-0">{{ this.product?.name }}</p>
-        <app-shopping-product-rating></app-shopping-product-rating>
+        <app-shopping-product-rating [setProductRating]="this.product?.productRating"></app-shopping-product-rating>
       </span>
       <p class="card-product-price-discount"><s>{{ this.product?.value | currency : "BRL" }}</s></p>
       <p class="card-product-price-actual">{{ this.product?.value | currency : "BRL" }}</p>

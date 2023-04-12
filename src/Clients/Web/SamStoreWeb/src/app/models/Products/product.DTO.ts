@@ -1,3 +1,5 @@
+import { ProductRatingDTO } from "./product-rating.DTO";
+
 export interface ProductDTO {
   id: string;
   name: string;
@@ -5,4 +7,5 @@ export interface ProductDTO {
   value: number;
   image: string;
   quantity: number;
+  productRating: ProductRatingDTO;
 }
