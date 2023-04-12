@@ -35,6 +35,6 @@ export class AccountService {
     }
 
     public isLogged(): boolean {
-        return this.getCurrentUser() != null;
+        return !!this.getCurrentUser();
     }
 }
