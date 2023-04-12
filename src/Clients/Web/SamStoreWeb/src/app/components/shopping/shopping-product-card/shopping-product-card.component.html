@@ -1,0 +1,19 @@
+<mat-card fxFlex class="card-product">
+  <mat-card-header fxLayoutAlign="center">
+    <img height="150px" src="https://www.pngall.com/wp-content/uploads/5/Wedding-Men-Shoes-PNG.png"
+      alt="{{ this.product?.name }}" />
+  </mat-card-header>
+  <mat-card-content class="card-product-body">
+    <div fxLayout="column nowrap" fxLayoutAlign="space-between">
+      <span>
+        <p class="m-0">{{ this.product?.name }}</p>
+        <app-shopping-product-rating></app-shopping-product-rating>
+      </span>
+      <p class="card-product-price-discount"><s>{{ this.product?.value | currency : "BRL" }}</s></p>
+      <p class="card-product-price-actual">{{ this.product?.value | currency : "BRL" }}</p>
+    </div>
+  </mat-card-content>
+  <button mat-icon-button class="favorite-button">
+    <mat-icon>favorite_border</mat-icon>
+  </button>
+</mat-card>

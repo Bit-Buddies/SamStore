@@ -1,0 +1,38 @@
+@import "../../../../palettes";
+
+.favorite-button {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translate(-4px,6px);
+  opacity: 0;
+}
+
+.card-product-price-discount {
+  font-size: smaller;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.card-product-price-actual {
+  font-size: large;
+  font-weight: bold;
+}
+
+
+.card-product {
+  &:hover {
+    .favorite-button {
+      transform: translate(0px,0px);
+      opacity: 100%;
+
+      &:hover {
+        color: secondary(500);
+      }
+    }
+  }
+}
