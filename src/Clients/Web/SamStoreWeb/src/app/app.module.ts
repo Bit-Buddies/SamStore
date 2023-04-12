@@ -19,6 +19,7 @@ import { ToastrModule } from "ngx-toastr";
 import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
 import { DialogService } from "./utils/dialog-service";
 import { ComponentsModule } from "./components/components.module";
+import { ShoppingCartService } from "./services/shopping-cart.service";
 
 @NgModule({
   declarations: [AppComponent,  HomeComponent, NotfoundComponent, GeneralCatalogComponent],
@@ -34,7 +35,7 @@ import { ComponentsModule } from "./components/components.module";
     ComponentsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [AccountService, CatalogControllerService, DialogService],
+  providers: [AccountService, CatalogControllerService, DialogService, ShoppingCartService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -6,6 +6,7 @@ import { DialogService } from "src/app/utils/dialog-service";
 import { HomeComponent } from "src/app/pages/main/home/home.component";
 import { GeneralCatalogComponent } from "src/app/pages/main/home/general-catalog/general-catalog.component";
 import { ShoppingCartCoreComponent } from "src/app/components/shopping-cart/shopping-cart-core/shopping-cart-core.component";
+import { ShoppingCartService } from "src/app/services/shopping-cart.service";
 
 @Component({
   selector: "app-toolbar",
@@ -15,20 +16,24 @@ import { ShoppingCartCoreComponent } from "src/app/components/shopping-cart/shop
 export class ToolbarComponent implements OnInit {
   userEmail: string = "";
   logado: boolean = false;
-  cartItemsQuantity: number = 0;
 
   constructor(
-    private _accountService: AccountService,
     private _router: Router,
+    private _globalEventService: GlobalEventsService,
+    private _accountService: AccountService,
     private _dialogService: DialogService,
-    private _globalEventService: GlobalEventsService) {}
+    public shoppingCartService: ShoppingCartService
+    ) {}
 
   public ngOnInit(): void {
     this.validateUserIsLogged();
 
     this._globalEventService.userLoggedIn.subscribe(() => {
       this.validateUserIsLogged();
+      this.shoppingCartService.init();
     });
+
+    this.shoppingCartService.init();
   }
 
   private validateUserIsLogged() {

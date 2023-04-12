@@ -11,11 +11,10 @@
     <span class="spacer"></span>
     <button
       mat-icon-button
-      [matTooltip]="!cartItemsQuantity ? 'empty' : cartItemsQuantity.toString()"
       class="icon-button notifications-icon-button"
       (click)="this.openShoppingCartModal()">
       <mat-icon
-        matBadge="{{ cartItemsQuantity }}"
+        matBadge="{{ this.shoppingCartService.shoppingCart?.items?.length ?? 0 }}"
         matBadgeSize="small"
         matBadgeColor="accent">shopping_cart</mat-icon
       >
