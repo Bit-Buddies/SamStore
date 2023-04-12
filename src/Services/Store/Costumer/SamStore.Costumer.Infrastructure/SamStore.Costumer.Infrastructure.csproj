@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
     <ProjectReference Include="..\SamStore.Costumer.Domain\SamStore.Costumer.Domain.csproj" />
   </ItemGroup>
 

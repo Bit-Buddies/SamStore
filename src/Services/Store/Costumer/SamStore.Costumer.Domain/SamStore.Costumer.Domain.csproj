@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
   </ItemGroup>
 
 </Project>

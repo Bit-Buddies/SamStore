@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
     <ProjectReference Include="..\SamStore.ShoppingCart.Infrastructure\SamStore.ShoppingCart.Infrastructure.csproj" />
   </ItemGroup>
 

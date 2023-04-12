@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
     <ProjectReference Include="..\SamStore.Costumer.Application\SamStore.Costumer.Application.csproj" />
     <ProjectReference Include="..\SamStore.Costumer.Infrastructure\SamStore.Costumer.Infrastructure.csproj" />
   </ItemGroup>
