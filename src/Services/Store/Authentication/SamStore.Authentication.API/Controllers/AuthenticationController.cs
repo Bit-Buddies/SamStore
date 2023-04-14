@@ -49,7 +49,7 @@ namespace SamStore.Authentication.API.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            SignInResult result = await _signInManager.PasswordSignInAsync(loginData.Email, loginData.Password, false, true);
+            SignInResult result = await _signInManager.PasswordSignInAsync(loginData.Email, loginData.Password, false, false);
 
             if (result.Succeeded)
             {
