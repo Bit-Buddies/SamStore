@@ -11,6 +11,7 @@ import { CommonModule } from "@angular/common";
 import { LoginComponent } from "./login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AccountComponent } from "./account/account.component";
+import { ComponentsModule } from "src/app/components/components.module";
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, AccountComponent],
@@ -24,6 +25,7 @@ import { AccountComponent } from "./account/account.component";
     NgxMaskDirective,
     NgxMaskPipe,
     MaterialModule,
+    ComponentsModule
   ],
   providers: [AuthenticationControllerService, AccountService, provideNgxMask()],
 })

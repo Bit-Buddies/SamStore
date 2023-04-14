@@ -6,14 +6,26 @@ import { ShoppingCartCoreComponent } from "./shopping/shopping-cart-core/shoppin
 import { ToolbarComponent } from "./main/layout/toolbar/toolbar.component";
 import { RouterModule } from "@angular/router";
 import { PageTitleMoreComponent } from "./main/layout/page-title-more/page-title-more.component";
-import { ShoppingProductCardComponent } from './shopping/shopping-product-card/shopping-product-card.component';
-import { ShoppingProductRatingComponent } from './shopping/shopping-product-rating/shopping-product-rating.component';
+import { ShoppingProductCardComponent } from "./shopping/shopping-product-card/shopping-product-card.component";
+import { ShoppingProductRatingComponent } from "./shopping/shopping-product-rating/shopping-product-rating.component";
+import { LoginCoreComponent } from "./authentication/login-core/login-core.component";
+import { RegisterCoreComponent } from "./authentication/register-core/register-core.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-const componentsModules = [ModalHeaderComponent, ShoppingCartCoreComponent, ToolbarComponent, PageTitleMoreComponent, ShoppingProductCardComponent, ShoppingProductRatingComponent];
+const componentsModules = [
+    ModalHeaderComponent,
+    ShoppingCartCoreComponent,
+    ToolbarComponent,
+    PageTitleMoreComponent,
+    ShoppingProductCardComponent,
+    ShoppingProductRatingComponent,
+    LoginCoreComponent,
+    RegisterCoreComponent,
+];
 
 @NgModule({
-  declarations: [...componentsModules],
-  exports: [...componentsModules],
-  imports: [CommonModule, RouterModule, MaterialModule],
+    declarations: [...componentsModules],
+    exports: [...componentsModules],
+    imports: [CommonModule, RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
 })
 export class ComponentsModule {}
