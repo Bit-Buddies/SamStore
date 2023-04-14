@@ -21,6 +21,7 @@ import { DialogService } from "./utils/dialog-service";
 import { ComponentsModule } from "./components/components.module";
 import { ShoppingCartService } from "./services/shopping-cart.service";
 import { LoadingInterceptor } from "./services/interceptors/loading.interceptor";
+import { ProductDetailsComponent } from "./pages/main/product/product-details/product-details.component";
 
 @NgModule({
     declarations: [AppComponent, HomeComponent, NotfoundComponent, GeneralCatalogComponent],
