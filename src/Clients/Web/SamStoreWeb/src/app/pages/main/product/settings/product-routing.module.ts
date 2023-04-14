@@ -8,7 +8,7 @@ import { NotfoundComponent } from "src/app/pages/notfound/notfound.component";
 const routes: Routes = [
     {
         path: "",
-        component: NotfoundComponent,
+        component: ProductComponent,
         children: [
             {
                 path: "details/:productId",

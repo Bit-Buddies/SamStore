@@ -1,5 +1,5 @@
 <mat-card fxFlex class="card-product">
-  <mat-card-header fxLayoutAlign="center">
+  <mat-card-header class="card-product-header" (click)="this.openProductDetails()" fxLayoutAlign="center">
     <img height="150px" src="https://www.pngall.com/wp-content/uploads/5/Wedding-Men-Shoes-PNG.png"
       alt="{{ this.product?.name }}" />
   </mat-card-header>
@@ -13,7 +13,8 @@
       <p class="card-product-price-actual">{{ this.product?.value | currency : "BRL" }}</p>
     </div>
   </mat-card-content>
-  <button mat-icon-button class="favorite-button" [ngClass]="{'isfavorite': this.isFavorite}" (click)="this.favoriteProduct()">
+  <button mat-icon-button class="favorite-button" [ngClass]="{'isfavorite': this.isFavorite}"
+    (click)="this.favoriteProduct()">
     <mat-icon>{{this.isFavorite ? "favorite" : "favorite_border"}}</mat-icon>
   </button>
 </mat-card>

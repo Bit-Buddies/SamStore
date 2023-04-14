@@ -1,7 +1,6 @@
 @import "../../../../palettes";
 
 .favorite-button {
-  cursor: pointer;
   position: absolute;
   right: 8px;
   top: 8px;
@@ -29,7 +28,6 @@
   font-weight: bold;
 }
 
-
 .card-product {
   &:hover {
     .favorite-button {
@@ -40,5 +38,11 @@
         color: secondary(500);
       }
     }
+  }
+}
+
+.card-product-header{
+  &:hover {
+    cursor: pointer;
   }
 }
