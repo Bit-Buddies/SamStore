@@ -4,5 +4,5 @@
   <mat-icon class="mat-18">{{this.star3}}</mat-icon>
   <mat-icon class="mat-18">{{this.star4}}</mat-icon>
   <mat-icon class="mat-18">{{this.star5}}</mat-icon>
-  <p>{{this.totalVotes}}</p>
+  <p *ngIf="this.totalVotes > 0">{{this.totalVotes}}</p>
 </span>

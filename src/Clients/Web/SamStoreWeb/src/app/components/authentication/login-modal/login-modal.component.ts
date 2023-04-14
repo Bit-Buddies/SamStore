@@ -21,7 +21,6 @@ export class LoginModalComponent implements OnInit {
 
     public onLoginCompleted(success: boolean) {
         if (!success) return;
-
         this._dialogRef.close(true);
     }
 }
