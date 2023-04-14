@@ -11,6 +11,7 @@ import { ShoppingProductRatingComponent } from "./shopping/shopping-product-rati
 import { LoginCoreComponent } from "./authentication/login-core/login-core.component";
 import { RegisterCoreComponent } from "./authentication/register-core/register-core.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LoginModalComponent } from './authentication/login-modal/login-modal.component';
 
 const componentsModules = [
     ModalHeaderComponent,
@@ -24,7 +25,7 @@ const componentsModules = [
 ];
 
 @NgModule({
-    declarations: [...componentsModules],
+    declarations: [...componentsModules, LoginModalComponent],
     exports: [...componentsModules],
     imports: [CommonModule, RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
 })

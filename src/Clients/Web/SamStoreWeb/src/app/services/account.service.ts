@@ -1,6 +1,8 @@
 import { UserData } from "./../models/user-data";
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
+import { DialogService } from "../utils/dialog-service";
+import { LoginModalComponent } from "../components/authentication/login-modal/login-modal.component";
 
 @Injectable({
     providedIn: "root",
@@ -8,7 +10,7 @@ import { CookieService } from "ngx-cookie-service";
 export class AccountService {
     private _userCookieToken = "CURRENT_USER";
 
-    constructor(private _cookieService: CookieService) {}
+    constructor(private _cookieService: CookieService, private _dialogService: DialogService) {}
 
     public getCurrentUser(): UserData | null {
         const userJson = this._cookieService.get(this._userCookieToken);
@@ -36,5 +38,9 @@ export class AccountService {
 
     public isLogged(): boolean {
         return !!this.getCurrentUser();
+    }
+
+    public callLoginModal() {
+      this._dialogService.genericDialog(LoginModalComponent, { width: "340px", height: "350px" });
     }
 }
