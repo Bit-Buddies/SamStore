@@ -19,8 +19,6 @@ export class LoginComponent {
     if(!success)
       return;
 
-    console.log("Passou aqui")
-
     this._router.navigate(["/home"]);
   }
 }

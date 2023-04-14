@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms"
 import { Router } from "@angular/router";
 import validator, { cpf } from "cpf-cnpj-validator";
 import { ValidateCPF } from "src/app/utils/custom-validators";
+import { LoadingService } from "src/app/services/loading.service";
 
 @Component({
   selector: "app-register",
@@ -26,10 +27,21 @@ export class RegisterComponent implements OnInit {
     private _accountService: AccountService,
     private _toastrService: ToastrService,
     private _globalEventService: GlobalEventsService,
+    public loadingService: LoadingService,
     private _router: Router
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.onLoadingChange.subscribe({
+      next: (isLoading) => {
+        if(isLoading)
+          this.registerForm.disable();
+        else
+          this.registerForm.enable();
+      }
+    })
+
+
     this.registerForm = this._formBuilder.group({
       name: [
         "",

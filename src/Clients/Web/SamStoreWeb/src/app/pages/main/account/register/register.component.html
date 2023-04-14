@@ -102,8 +102,11 @@
         <button
           mat-flat-button
           type="submit"
+          [disabled]="this.loadingService.getLoading()"
+          [ngSwitch]="this.loadingService.getLoading()"
           color="primary">
-          REGISTER
+            <mat-spinner *ngSwitchCase="true" color="primary" diameter="28"></mat-spinner>
+            <ng-container *ngSwitchDefault>LOGIN</ng-container>
         </button>
       </mat-card-actions>
       <mat-card-footer

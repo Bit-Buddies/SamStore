@@ -25,8 +25,9 @@
     </div>
   </mat-card-content>
   <mat-card-actions fxLayoutAlign="center">
-    <button mat-flat-button color="primary">
-      LOGIN
+    <button mat-flat-button color="primary" [disabled]="this.loadingService.getLoading()" [ngSwitch]="this.loadingService.getLoading()">
+      <mat-spinner *ngSwitchCase="true" color="primary" diameter="28"></mat-spinner>
+      <ng-container *ngSwitchDefault>LOGIN</ng-container>
     </button>
   </mat-card-actions>
   <mat-card-footer class="pt-2" fxLayout="row nowrap" fxLayoutAlign="center flex-end">

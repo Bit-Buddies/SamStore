@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { CatalogControllerService } from "./services/controllers/catalog-controller.service";
 import { GeneralCatalogComponent } from "./pages/main/home/general-catalog/general-catalog.component";
 import { AccountService } from "./services/account.service";
@@ -20,22 +20,29 @@ import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
 import { DialogService } from "./utils/dialog-service";
 import { ComponentsModule } from "./components/components.module";
 import { ShoppingCartService } from "./services/shopping-cart.service";
+import { LoadingInterceptor } from "./services/interceptors/loading.interceptor";
 
 @NgModule({
-  declarations: [AppComponent,  HomeComponent, NotfoundComponent, GeneralCatalogComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    FlexLayoutModule,
-    MaterialModule,
-    HttpClientModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
-    ComponentsModule,
-    ToastrModule.forRoot(),
-  ],
-  providers: [AccountService, CatalogControllerService, DialogService, ShoppingCartService],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, HomeComponent, NotfoundComponent, GeneralCatalogComponent],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FlexLayoutModule,
+        MaterialModule,
+        HttpClientModule,
+        NgxMaskDirective,
+        NgxMaskPipe,
+        ComponentsModule,
+        ToastrModule.forRoot(),
+    ],
+    providers: [
+        AccountService,
+        CatalogControllerService,
+        DialogService,
+        ShoppingCartService,
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

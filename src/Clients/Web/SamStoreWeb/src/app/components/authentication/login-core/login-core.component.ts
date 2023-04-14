@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,13 +7,14 @@ import { LoginData } from 'src/app/models/login-data';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthenticationControllerService } from 'src/app/services/controllers/authentication-controller.service';
 import { GlobalEventsService } from 'src/app/services/events/global-events.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-login-core',
   templateUrl: './login-core.component.html',
   styleUrls: ['./login-core.component.scss']
 })
-export class LoginCoreComponent {
+export class LoginCoreComponent implements OnInit {
   @Output() public onLoginCompletedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   loginForm!: FormGroup;
@@ -25,12 +27,24 @@ export class LoginCoreComponent {
     private _authenticationService: AuthenticationControllerService,
     private _accountService: AccountService,
     private _toastrService: ToastrService,
-    private _globalEventService: GlobalEventsService
+    private _globalEventService: GlobalEventsService,
+    public loadingService: LoadingService
   ) {
     this.loginForm = _formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password: ["", Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    this.loadingService.onLoadingChange.subscribe({
+      next: (isLoading) => {
+        if(isLoading)
+          this.loginForm.disable();
+        else
+          this.loginForm.enable();
+      }
+    })
   }
 
   login() {
