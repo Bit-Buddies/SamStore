@@ -14,7 +14,7 @@ import { ToolbarComponent } from "./components/main/layout/toolbar/toolbar.compo
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HomeComponent } from "./pages/main/home/home.component";
-import { NotfoundComponent } from "./pages/main/notfound/notfound.component";
+import { NotfoundComponent } from "./pages/notfound/notfound.component";
 import { ToastrModule } from "ngx-toastr";
 import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
 import { DialogService } from "./utils/dialog-service";

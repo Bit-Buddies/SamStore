@@ -1,4 +1,4 @@
-import { NotfoundComponent } from './pages/main/notfound/notfound.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { HomeComponent } from './pages/main/home/home.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';

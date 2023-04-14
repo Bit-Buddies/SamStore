@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notfound',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./notfound.component.scss']
 })
 export class NotfoundComponent {
-
+  constructor(private _router: Router) { }
+  public onButtonHomePressed(){
+    this._router.navigate(["/home"])
+  }
 }
