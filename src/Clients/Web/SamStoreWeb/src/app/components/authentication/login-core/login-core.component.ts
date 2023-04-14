@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginData } from 'src/app/models/login-data';
+import { ResponseApiError } from 'src/app/models/response-api-error';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthenticationControllerService } from 'src/app/services/controllers/authentication-controller.service';
 import { GlobalEventsService } from 'src/app/services/events/global-events.service';
@@ -64,11 +65,16 @@ export class LoginCoreComponent implements OnInit {
       error: (response) => {
         const errors = this._authenticationService.extractErrors(response);
 
-        errors.errors.Mensagens.forEach((er) => {
-          this._toastrService.error(er, undefined, {
+        if(!!errors.errors)
+          errors.errors.Mensagens.forEach((er) => {
+            this._toastrService.error(er, undefined, {
+              positionClass: "toast-bottom-right",
+            });
+          });
+        else
+          this._toastrService.error("An error was ocourred", undefined, {
             positionClass: "toast-bottom-right",
           });
-        });
 
         this.onLoginCompletedEvent.emit(false);
       },
