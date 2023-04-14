@@ -81,11 +81,16 @@ export class RegisterComponent implements OnInit {
       error: (response) => {
         const errors = this._authenticationService.extractErrors(response);
 
-        errors?.errors?.Mensagens?.forEach((er) => {
-          this._toastrService.error(er, undefined, {
+        if(!!errors.errors)
+          errors?.errors.Mensagens.forEach((er) => {
+            this._toastrService.error(er, undefined, {
+              positionClass: "toast-bottom-right",
+            });
+          });
+        else
+          this._toastrService.error("An error has ocourred", undefined, {
             positionClass: "toast-bottom-right",
           });
-        });
       },
     });
   }

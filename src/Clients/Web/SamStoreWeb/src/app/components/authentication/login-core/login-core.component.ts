@@ -72,7 +72,7 @@ export class LoginCoreComponent implements OnInit {
             });
           });
         else
-          this._toastrService.error("An error was ocourred", undefined, {
+          this._toastrService.error("An error has ocourred", undefined, {
             positionClass: "toast-bottom-right",
           });
 
