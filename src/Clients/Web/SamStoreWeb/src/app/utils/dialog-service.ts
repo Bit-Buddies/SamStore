@@ -11,6 +11,12 @@ export class DialogService {
     componentRef: ComponentType<TComponent> | TemplateRef<TComponent>,
     config: MatDialogConfig<TConfig>
   ): Observable<TResult> {
+    config = {
+      ...config,
+      enterAnimationDuration: 50,
+      exitAnimationDuration: 50
+    }
+
       config.restoreFocus = false;
       return this.dialogService.open(componentRef, config).afterClosed();
   }

@@ -1,7 +1,7 @@
 import { ToastrService } from "ngx-toastr";
 import { AccountService } from "./../../../../services/account.service";
 import { GlobalEventsService } from "./../../../../services/events/global-events.service";
-import { AuthenticationControllerService } from "../../../../services/controllers/authentication.controller.service";
+import { AuthenticationControllerService } from "../../../../services/controllers/authentication-controller.service";
 import { RegisterUserData } from "./../../../../models/register-user-data";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";

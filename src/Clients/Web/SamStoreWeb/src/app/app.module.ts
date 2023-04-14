@@ -1,5 +1,5 @@
 import { HttpClientModule } from "@angular/common/http";
-import { CatalogControllerService } from "./services/controllers/catalog.controller.service";
+import { CatalogControllerService } from "./services/controllers/catalog-controller.service";
 import { GeneralCatalogComponent } from "./pages/main/home/general-catalog/general-catalog.component";
 import { AccountService } from "./services/account.service";
 import { MaterialModule } from "./material.module";

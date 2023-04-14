@@ -1,21 +1,29 @@
 import { ResponseApiError } from "./../../models/response-api-error";
-import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { ErrorStateMatcher } from "@angular/material/core";
-import { throwError } from "rxjs";
+import { HttpHeaders } from "@angular/common/http";
+
+export enum ApiServiceEnum {
+  Identity,
+  Catalog,
+  ShoppingCart,
+}
 
 export abstract class BaseApiService {
   private _identityBaseURL: string = "http://localhost:5274/api/";
   private _catalogBaseURL: string = "http://localhost:5229/api/";
+  private _shoppingCartBaseURL: string = "http://localhost:5137/api/";
+
   protected _baseURL: string = "";
 
-  constructor(protected controllerName: string, api: "Identity" | "Catalog") {
+  constructor(protected controllerName: string, api: ApiServiceEnum) {
     switch (api) {
-      case "Identity":
+      case ApiServiceEnum.Identity:
         this._baseURL = this._identityBaseURL;
         break;
-      case "Catalog":
+      case ApiServiceEnum.Catalog:
         this._baseURL = this._catalogBaseURL;
         break;
+      case ApiServiceEnum.ShoppingCart:
+        this._baseURL = this._shoppingCartBaseURL;
     }
 
     this._baseURL += controllerName;
