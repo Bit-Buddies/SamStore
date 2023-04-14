@@ -9,7 +9,7 @@ using SamStore.WebAPI.Core.User;
 
 namespace SamStore.ShoppingCart.API.Controllers
 {
-    [Route("api/cart")]
+    [Route("api/[controller]")]
     public class ShoppingCartController : MainController
     {
         private readonly IShoppingCartService _shoppingCartService;

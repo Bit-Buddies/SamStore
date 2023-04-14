@@ -8,7 +8,7 @@ using SamStore.WebAPI.Core.Identity.Claims;
 namespace SamStore.Catalog.API.Controllers
 {
     [Authorize]
-    [Route("api/catalog")]
+    [Route("api/[controller]")]
     public class CatalogController : MainController
     {
         private readonly IProductRepository _productRepository;
