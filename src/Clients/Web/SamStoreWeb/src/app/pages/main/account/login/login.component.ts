@@ -12,4 +12,15 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
 })
-export class LoginComponent { }
+export class LoginComponent {
+  constructor(private _router: Router) { }
+
+  public onLoginCompleted(success: boolean) {
+    if(!success)
+      return;
+
+    console.log("Passou aqui")
+
+    this._router.navigate(["/home"]);
+  }
+}

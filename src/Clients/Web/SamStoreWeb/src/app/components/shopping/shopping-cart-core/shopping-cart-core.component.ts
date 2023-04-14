@@ -17,8 +17,4 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
   constructor(public dialogRef: MatDialogRef<ShoppingCartCoreComponent>, private _accountService: AccountService) {
     super();
   }
-
-  public chamarModal(){
-    this._accountService.callLoginModal();
-  }
 }

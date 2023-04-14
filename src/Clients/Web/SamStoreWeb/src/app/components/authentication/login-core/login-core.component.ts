@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,8 @@ import { GlobalEventsService } from 'src/app/services/events/global-events.servi
   styleUrls: ['./login-core.component.scss']
 })
 export class LoginCoreComponent {
+  @Output() public onLoginCompletedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   loginForm!: FormGroup;
   loginData!: LoginData;
   hidePassword: boolean = true;
@@ -41,9 +43,9 @@ export class LoginCoreComponent {
     this._authenticationService.login(this.loginData).subscribe({
       next: (userData) => {
         this._accountService.setCurrentUser(userData);
-        this._router.navigate(["/home"]);
-
         this._globalEventService.userLoggedIn.next();
+
+        this.onLoginCompletedEvent.emit(true);
       },
       error: (response) => {
         const errors = this._authenticationService.extractErrors(response);
@@ -53,6 +55,8 @@ export class LoginCoreComponent {
             positionClass: "toast-bottom-right",
           });
         });
+
+        this.onLoginCompletedEvent.emit(false);
       },
     });
   }
