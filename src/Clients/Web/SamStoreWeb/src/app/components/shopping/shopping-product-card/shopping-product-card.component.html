@@ -13,7 +13,7 @@
       <p class="card-product-price-actual">{{ this.product?.value | currency : "BRL" }}</p>
     </div>
   </mat-card-content>
-  <button mat-icon-button class="favorite-button">
-    <mat-icon>favorite_border</mat-icon>
+  <button mat-icon-button class="favorite-button" [ngClass]="{'isfavorite': this.isFavorite}" (click)="this.favoriteProduct()">
+    <mat-icon>{{this.isFavorite ? "favorite" : "favorite_border"}}</mat-icon>
   </button>
 </mat-card>

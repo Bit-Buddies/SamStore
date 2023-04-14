@@ -11,6 +11,12 @@
   opacity: 0;
 }
 
+.favorite-button.isfavorite {
+  opacity: 100%;
+  transform: translate(0, 0);
+  color: secondary(500);
+}
+
 .card-product-price-discount {
   font-size: smaller;
   font-weight: normal;

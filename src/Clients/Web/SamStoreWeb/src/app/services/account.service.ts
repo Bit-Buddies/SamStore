@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { UserData } from "./../models/user-data";
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
@@ -40,7 +41,7 @@ export class AccountService {
         return !!this.getCurrentUser();
     }
 
-    public callLoginModal() {
-      this._dialogService.genericDialog(LoginModalComponent, { width: "340px", height: "350px" });
+    public callLoginModal() : Observable<boolean>{
+      return this._dialogService.genericDialog<LoginModalComponent, any, boolean> (LoginModalComponent, { width: "340px", height: "350px" });
     }
 }
