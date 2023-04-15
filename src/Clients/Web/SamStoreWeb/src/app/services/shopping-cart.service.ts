@@ -106,4 +106,10 @@ export class ShoppingCartService {
 			panelClass: "shopping-cart-container",
 		});
 	}
+
+	public getTotalQuantity() {
+		if (!this.shoppingCart?.items.length) return 0;
+
+		return this.shoppingCart.items.reduce((total, item) => (total += item.quantity), 0);
+	}
 }

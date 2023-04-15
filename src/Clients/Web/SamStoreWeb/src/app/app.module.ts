@@ -4,7 +4,7 @@ import { GeneralCatalogComponent } from "./pages/main/home/general-catalog/gener
 import { AccountService } from "./services/account.service";
 import { MaterialModule } from "./material.module";
 import { AppRoutingModule } from "./app-routing.module";
-import { NgModule } from "@angular/core";
+import { NgModule, LOCALE_ID } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
@@ -22,28 +22,33 @@ import { ComponentsModule } from "./components/components.module";
 import { ShoppingCartService } from "./services/shopping-cart.service";
 import { LoadingInterceptor } from "./services/interceptors/loading.interceptor";
 import { ProductDetailsComponent } from "./pages/main/product/product-details/product-details.component";
+import ptBr from "@angular/common/locales/pt";
+import { registerLocaleData } from "@angular/common";
+
+registerLocaleData(ptBr);
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, NotfoundComponent, GeneralCatalogComponent],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        FlexLayoutModule,
-        MaterialModule,
-        HttpClientModule,
-        NgxMaskDirective,
-        NgxMaskPipe,
-        ComponentsModule,
-        ToastrModule.forRoot(),
-    ],
-    providers: [
-        AccountService,
-        CatalogControllerService,
-        DialogService,
-        ShoppingCartService,
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-    ],
-    bootstrap: [AppComponent],
+	declarations: [AppComponent, HomeComponent, NotfoundComponent, GeneralCatalogComponent],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		AppRoutingModule,
+		FlexLayoutModule,
+		MaterialModule,
+		HttpClientModule,
+		NgxMaskDirective,
+		NgxMaskPipe,
+		ComponentsModule,
+		ToastrModule.forRoot(),
+	],
+	providers: [
+		AccountService,
+		CatalogControllerService,
+		DialogService,
+		ShoppingCartService,
+		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: LOCALE_ID, useValue: "pt" },
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

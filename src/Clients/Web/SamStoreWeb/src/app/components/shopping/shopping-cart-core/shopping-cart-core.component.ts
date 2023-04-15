@@ -14,6 +14,8 @@ import { ModalDialogComponent } from "src/app/utils/modal-dialog";
 	styleUrls: ["./shopping-cart-core.component.scss"],
 })
 export class ShoppingCartCoreComponent extends ModalDialogComponent {
+	public displayedColumns = ["image", "details", "total", "actions"];
+
 	constructor(
 		private _accountService: AccountService,
 		private _toastrService: ToastrService,
@@ -44,5 +46,27 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 				this.dialogRef.close();
 			},
 		});
+	}
+
+	public onClickRemoveItem(item: ShoppingCartItemDTO) {
+		this.shoppingCartService.removeItem(item.productId);
+	}
+
+	public checkout() {
+		if (!this._accountService.isLogged())
+			this._accountService.callLogin().subscribe({
+				next: (success: boolean) => {
+					if (success) {
+						//TODO REDIRECT TO PURCHASE PAGE
+						this._toastrService.success("Sucesso ao logar");
+					} else {
+						this._toastrService.warning("To proceed with your purchase you need to login");
+					}
+				},
+			});
+	}
+
+	public getTotalPrice() {
+		return 2000;
 	}
 }

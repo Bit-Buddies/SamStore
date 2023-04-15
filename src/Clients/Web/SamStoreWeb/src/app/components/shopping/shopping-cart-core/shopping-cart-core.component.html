@@ -1,17 +1,134 @@
 <section class="modal-container">
 	<app-modal-header
 		[matDialogRef]="this.dialogRef"
-		title="Shopping Cart"></app-modal-header>
+		title="Shopping Cart"
+		[useExitButton]="true">
+	</app-modal-header>
 
 	<section>
 		<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0; else NoContent">
-			<div class="shopping-cart-items-container">
-				<mat-list dense>
-					<mat-list-item *ngFor="let item of shoppingCartService.shoppingCart!.items">
-						{{ item.name }}
-					</mat-list-item>
-				</mat-list>
+			<div
+				class="items-container default-scroll"
+				style="max-height: 384px; overflow-y: overlay; box-sizing: border-box">
+				<table
+					style="border-bottom: 1px solid #ddd"
+					mat-table
+					[dataSource]="this.shoppingCartService.shoppingCart!.items">
+					<!-- Image column -->
+					<ng-container matColumnDef="image">
+						<th
+							fxHide.xs
+							mat-header-cell
+							*matHeaderCellDef>
+							<h3>Details</h3>
+						</th>
+						<td
+							class="image-row"
+							fxHide.xs
+							mat-cell
+							*matCellDef="let product">
+							<img
+								src="https://assets.adidas.com/images/w_600,f_auto,q_auto/84665150f3ce454084dbacd300f426c0_9366/Tenis_Forum_Bold_Branco_FY9042_01_standard.jpg" />
+						</td>
+						<td
+							fxHide.xs
+							mat-footer-cell
+							*matFooterCellDef></td>
+					</ng-container>
+
+					<!-- Details column -->
+					<ng-container matColumnDef="details">
+						<th
+							mat-header-cell
+							*matHeaderCellDef></th>
+						<td
+							mat-cell
+							*matCellDef="let product">
+							<div
+								class="product-details-row-container"
+								fxLayout="column nowrap"
+								fxLayoutAlign="space-between">
+								<span>
+									<h3>{{ product.name }}</h3>
+									<p>Quantity: {{ product.quantity }}</p>
+								</span>
+								<app-shopping-product-rating></app-shopping-product-rating>
+							</div>
+						</td>
+						<td
+							mat-footer-cell
+							*matFooterCellDef></td>
+					</ng-container>
+
+					<!-- Total column -->
+					<ng-container matColumnDef="total">
+						<th
+							mat-header-cell
+							*matHeaderCellDef>
+							<h3>Price</h3>
+						</th>
+						<td
+							mat-cell
+							class="cell-row-text"
+							*matCellDef="let product">
+							<h3>{{ product.price | currency : "BRL" }}</h3>
+						</td>
+						<td
+							mat-footer-cell
+							*matFooterCellDef></td>
+						<td
+							mat-footer-cell
+							*matFooterCellDef></td>
+					</ng-container>
+
+					<!-- Action column -->
+					<ng-container matColumnDef="actions">
+						<th
+							mat-header-cell
+							*matHeaderCellDef></th>
+						<td
+							mat-cell
+							class="cell-row-text"
+							*matCellDef="let product">
+							<div
+								style="padding-right: 12px"
+								fxLayout="row nowrap"
+								fxLayoutAlign="end">
+								<button
+									mat-mini-fab
+									(click)="this.onClickRemoveItem(product)"
+									color="primary">
+									<mat-icon>delete</mat-icon>
+								</button>
+							</div>
+						</td>
+						<td
+							mat-footer-cell
+							*matFooterCellDef></td>
+					</ng-container>
+
+					<tr
+						mat-header-row
+						*matHeaderRowDef="displayedColumns; sticky: true"></tr>
+					<tr
+						mat-row
+						*matRowDef="let row; columns: displayedColumns"></tr>
+				</table>
 			</div>
+
+			<div
+				fxLayout="row nowrap"
+				fxLayoutAlign="end"
+				style="margin-block: 24px">
+				<h3>
+					Subtotal ({{ this.shoppingCartService.getTotalQuantity() }}
+					{{ this.shoppingCartService.getTotalQuantity() > 1 ? "items" : "item" }}):
+					<strong>
+						{{ this.shoppingCartService.shoppingCart?.total | currency : "BRL" }}
+					</strong>
+				</h3>
+			</div>
+
 			<div
 				class="shopping-cart-footer"
 				fxLayout="row wrap"
@@ -26,7 +143,8 @@
 				<button
 					mat-raised-button
 					color="primary"
-					style="max-width: 128px; margin-left: 8px">
+					style="max-width: 128px; margin-left: 8px"
+          (click)="this.checkout()">
 					Checkout
 				</button>
 			</div>

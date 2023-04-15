@@ -41,7 +41,7 @@ export class AccountService {
 		return !!this.getCurrentUser();
 	}
 
-	public callLoginModal(): Observable<boolean> {
+	public callLogin(): Observable<boolean> {
 		return this._dialogService.genericDialog<LoginModalComponent, any, boolean>(LoginModalComponent, {
 			panelClass: "xs-dialog",
 		});

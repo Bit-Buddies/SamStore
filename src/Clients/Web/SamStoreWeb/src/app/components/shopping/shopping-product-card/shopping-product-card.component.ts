@@ -25,7 +25,7 @@ export class ShoppingProductCardComponent {
 
 	public favoriteProduct() {
 		if (!this._accountService.isLogged()) {
-			this._accountService.callLoginModal().subscribe({
+			this._accountService.callLogin().subscribe({
 				next: (success) => {
 					if (success) {
 						this.isFavorite = !this.isFavorite;
