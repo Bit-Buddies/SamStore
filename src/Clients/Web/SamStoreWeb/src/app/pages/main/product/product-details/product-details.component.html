@@ -44,6 +44,7 @@
 				fxLayout="column nowrap"
 				style="margin-bottom: 14px">
 				<h1 style="font-size: 24px; font-weight: bold; margin: 0">{{ this.product?.name }}</h1>
+				<app-shopping-product-rating></app-shopping-product-rating>
 				<h2 style="font-size: 10px; color: grey !important; font-weight: bold">REF: {{ this.product?.ref }}</h2>
 			</article>
 			<article
@@ -85,6 +86,7 @@
 									<mat-label>Type your postal code</mat-label>
 									<input
 										matInput
+										maxlength="8"
 										placeholder="Ex. 39900000..." />
 								</mat-form-field>
 								<button

@@ -45,4 +45,8 @@ export class ProductDetailsComponent implements OnInit {
 				this._router.navigate(["/home"]);
 			});
 	}
+
+  public addToCart(){
+    
+  }
 }
