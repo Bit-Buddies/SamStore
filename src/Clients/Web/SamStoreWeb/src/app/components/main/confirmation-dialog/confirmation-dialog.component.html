@@ -1,0 +1,23 @@
+<section
+	class="modal-container"
+	fxLayout="column nowrap">
+	<app-modal-header
+		title="{{ this.data.title }}"
+		[useExitButton]="false"></app-modal-header>
+
+	<h3>{{ this.data.description }}</h3>
+	<span fxLayout="row nowrap">
+		<button
+			mat-button
+			(click)="this.onOptionClicked(this.data.negativeFunction)">
+			{{ this.data.negativeButtonDescription }}
+		</button>
+		<div style="width: 12px"></div>
+		<button
+			mat-flat-button
+			(click)="this.onOptionClicked(this.data.positiveFunction)"
+			color="primary">
+			{{ this.data.positiveButtonDescription }}
+		</button>
+	</span>
+</section>

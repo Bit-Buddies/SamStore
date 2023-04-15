@@ -251,7 +251,7 @@ mat-card-actions {
 }
 
 .modal-container {
-	padding: 16px 24px;
+	padding: 16px 24px 24px 24px;
 }
 
 .star-rating-container {
@@ -268,9 +268,17 @@ mat-card-actions {
 	height: auto;
 }
 
+.xs-dialog {
+	height: auto;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {
 	.shopping-cart-container {
+		width: 100%;
+	}
+
+	.xs-dialog {
 		width: 100%;
 	}
 }
@@ -278,6 +286,10 @@ mat-card-actions {
 @media screen and (min-width: 600px) {
 	.shopping-cart-container {
 		width: 992px;
+	}
+
+	.xs-dialog {
+		width: 420px;
 	}
 }
 /* Medium devices (landscape tablets, 768px and up) */
