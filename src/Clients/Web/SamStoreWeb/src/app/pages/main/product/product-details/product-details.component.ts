@@ -4,6 +4,7 @@ import { ToastrService } from "ngx-toastr";
 import { lastValueFrom } from "rxjs";
 import { ProductDTO } from "src/app/models/Products/product.DTO";
 import { CatalogControllerService } from "src/app/services/controllers/catalog-controller.service";
+import { ShoppingCartService } from "src/app/services/shopping-cart.service";
 
 @Component({
 	selector: "app-product-details",
@@ -17,6 +18,7 @@ export class ProductDetailsComponent implements OnInit {
 		private _catalogService: CatalogControllerService,
 		private _activatedRoute: ActivatedRoute,
 		private _toastrService: ToastrService,
+		private _shoppingCartService: ShoppingCartService,
 		private _router: Router
 	) {}
 
@@ -46,7 +48,7 @@ export class ProductDetailsComponent implements OnInit {
 			});
 	}
 
-  public addToCart(){
-    
-  }
+	public addToCart() {
+		this._shoppingCartService.addOrUpdateItem(this.product!, 1);
+	}
 }

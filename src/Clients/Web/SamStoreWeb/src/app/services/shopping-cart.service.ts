@@ -22,8 +22,8 @@ export class ShoppingCartService {
 		}
 	}
 
-	public addItem(product: ProductDTO, quantity: number) {
-		if (this.shoppingCart != null)
+	private addItem(product: ProductDTO, quantity: number) {
+		if (this.shoppingCart != null) {
 			this.shoppingCart.items.push({
 				productId: product.id,
 				imagePath: product.image,
@@ -31,9 +31,12 @@ export class ShoppingCartService {
 				quantity: quantity,
 				price: product.value,
 			});
+
+			this.updateShoppingCartIntoCookies();
+		}
 	}
 
-	public updateItem(product: ProductDTO, quantity: number) {
+	public addOrUpdateItem(product: ProductDTO, quantity: number) {
 		if (this.shoppingCart != null) {
 			const oldProduct = this.shoppingCart.items.find((i) => i.productId == product.id);
 
@@ -43,18 +46,25 @@ export class ShoppingCartService {
 			}
 
 			const oldProductIndex = this.shoppingCart.items.indexOf(oldProduct);
-			this.shoppingCart.items[oldProductIndex].quantity = quantity;
+			this.shoppingCart.items[oldProductIndex].quantity += quantity;
+
+			this.updateShoppingCartIntoCookies();
 		}
 	}
 
 	public removeItem(productId: string) {
-		if (this.shoppingCart != null)
+		if (this.shoppingCart != null) {
 			this.shoppingCart.items = this.shoppingCart.items.filter((item) => item.productId != productId);
+
+			this.updateShoppingCartIntoCookies();
+		}
 	}
 
 	public clearShoppingCart() {
 		if (this.shoppingCart != null) {
 			this.shoppingCart.items = [];
+
+			this.updateShoppingCartIntoCookies();
 		}
 	}
 
@@ -69,5 +79,18 @@ export class ShoppingCartService {
 		const oldShoppingCart = JSON.parse(cookieShoppingCart) as ShoppingCartDTO;
 
 		this.shoppingCart = oldShoppingCart == null ? new ShoppingCartDTO() : oldShoppingCart;
+	}
+
+	private updateShoppingCartIntoCookies() {
+		this._cookieService.deleteAll(this.shoppingCartCookieToken);
+
+		let totalValue = 0;
+
+		if (this.shoppingCart!.items.length > 0)
+			totalValue = this.shoppingCart!.items.reduce((total, item) => (total += item.price * item.quantity), 0);
+
+		this.shoppingCart!.total = totalValue;
+
+		this._cookieService.set(this.shoppingCartCookieToken, JSON.stringify(this.shoppingCart));
 	}
 }

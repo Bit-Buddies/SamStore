@@ -13,7 +13,7 @@
 			class="icon-button notifications-icon-button"
 			(click)="this.openShoppingCartModal()">
 			<mat-icon
-				[matBadge]="this.shoppingCartService.shoppingCart?.items?.length ?? 0"
+				[matBadge]="this.calculateTotalQuantityItems()"
 				matBadgeSize="small"
 				matBadgeColor="accent"
 				>shopping_cart</mat-icon
