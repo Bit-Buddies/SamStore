@@ -22,6 +22,7 @@ export class DialogService {
 			panelClass: "xs-dialog",
 			data: data,
 			autoFocus: false,
+			disableClose: true,
 		});
 	}
 

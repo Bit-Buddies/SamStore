@@ -1,36 +1,59 @@
-<form [formGroup]="this.loginForm" (ngSubmit)="login()">
-  <mat-card-header>
-    <mat-card-title>Access your account</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div fxLayout="column">
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" placeholder="youremail@email.com" />
-        <mat-error *ngIf="getControlError('email', 'email')">Invalid email</mat-error>
-        <mat-error *ngIf="getControlError('email', 'required')">Type your email</mat-error>
-      </mat-form-field>
-    </div>
+<form
+	[formGroup]="this.loginForm"
+	(ngSubmit)="login()">
+	<mat-card-header>
+		<mat-card-title>Access your account</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div fxLayout="column">
+			<mat-form-field appearance="outline">
+				<mat-label>Email</mat-label>
+				<input
+					matInput
+					type="email"
+					formControlName="email"
+					placeholder="youremail@email.com" />
+				<mat-error *ngIf="getControlError('email', 'email')">Invalid email</mat-error>
+				<mat-error *ngIf="getControlError('email', 'required')">Type your email</mat-error>
+			</mat-form-field>
+		</div>
 
-    <div fxLayout="column">
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" type="password" />
+		<div fxLayout="column">
+			<mat-form-field appearance="outline">
+				<mat-label>Password</mat-label>
+				<input
+					matInput
+					[type]="hidePassword ? 'password' : 'text'"
+					formControlName="password"
+					type="password" />
 
-        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
-          <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
-        </button>
-        <mat-error *ngIf="getControlError('password', 'required')">Type your password</mat-error>
-      </mat-form-field>
-    </div>
-  </mat-card-content>
-  <mat-card-actions fxLayoutAlign="center">
-    <button mat-flat-button color="primary" [disabled]="this.loadingService.getLoading()" [ngSwitch]="this.loadingService.getLoading()">
-      <mat-spinner *ngSwitchCase="true" color="primary" diameter="28"></mat-spinner>
-      <ng-container *ngSwitchDefault>LOGIN</ng-container>
-    </button>
-  </mat-card-actions>
-  <mat-card-footer class="pt-2" fxLayout="row nowrap" fxLayoutAlign="center flex-end">
-    <h5>First time here? <a [routerLink]="['/account/register']">Register now</a></h5>
-  </mat-card-footer>
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hidePassword = !hidePassword">
+					<mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+				</button>
+				<mat-error *ngIf="getControlError('password', 'required')">Type your password</mat-error>
+			</mat-form-field>
+		</div>
+	</mat-card-content>
+	<mat-card-actions fxLayoutAlign="center">
+		<button
+			mat-raised-button
+			color="primary"
+			[disabled]="this.loadingService.getLoading()"
+			[ngSwitch]="this.loadingService.getLoading()">
+			<mat-spinner
+				*ngSwitchCase="true"
+				color="primary"
+				diameter="28"></mat-spinner>
+			<ng-container *ngSwitchDefault>LOGIN</ng-container>
+		</button>
+	</mat-card-actions>
+	<mat-card-footer
+		class="pt-2"
+		fxLayout="row nowrap"
+		fxLayoutAlign="center flex-end">
+		<h5>First time here? <a [routerLink]="['/account/register']">Register now</a></h5>
+	</mat-card-footer>
 </form>
