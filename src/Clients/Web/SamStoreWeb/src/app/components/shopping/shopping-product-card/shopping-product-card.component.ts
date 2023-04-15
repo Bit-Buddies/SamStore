@@ -5,48 +5,48 @@ import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 
 @Component({
-    selector: "app-shopping-product-card",
-    templateUrl: "./shopping-product-card.component.html",
-    styleUrls: ["./shopping-product-card.component.scss"],
+	selector: "app-shopping-product-card",
+	templateUrl: "./shopping-product-card.component.html",
+	styleUrls: ["./shopping-product-card.component.scss"],
 })
 export class ShoppingProductCardComponent {
-    @Input() public product?: ProductDTO;
-    public isFavorite: boolean = false;
+	@Input() public product?: ProductDTO;
+	public isFavorite: boolean = false;
 
-    constructor(
-        private _router: Router,
-        private _accountService: AccountService,
-        private _toastrService: ToastrService
-    ) {}
+	constructor(
+		private _router: Router,
+		private _accountService: AccountService,
+		private _toastrService: ToastrService
+	) {}
 
-    public openProductDetails() {
-      this._router.navigate([`/product/details/${this.product?.id}`])
-    }
+	public openProductDetails() {
+		this._router.navigate([`/product/details/${this.product?.id}`]);
+	}
 
-    public favoriteProduct() {
-        if (!this._accountService.isLogged()) {
-            this._accountService.callLoginModal().subscribe({
-                next: (success) => {
-                    if (success) {
-                        this.isFavorite = !this.isFavorite;
+	public favoriteProduct() {
+		if (!this._accountService.isLogged()) {
+			this._accountService.callLoginModal().subscribe({
+				next: (success) => {
+					if (success) {
+						this.isFavorite = !this.isFavorite;
 
-                        this.showFavoriteToastrMessage;
-                    }
-                },
-            });
+						this.showFavoriteToastrMessage;
+					}
+				},
+			});
 
-            return;
-        } else {
-            this.isFavorite = !this.isFavorite;
-        }
+			return;
+		} else {
+			this.isFavorite = !this.isFavorite;
+		}
 
-        if (this.isFavorite) this.showFavoriteToastrMessage();
-    }
+		if (this.isFavorite) this.showFavoriteToastrMessage();
+	}
 
-    private showFavoriteToastrMessage() {
-        this._toastrService.success(`product ${this.product?.name} was favorited`, undefined, {
-            positionClass: "toast-bottom-center",
-            timeOut: 2000,
-        });
-    }
+	private showFavoriteToastrMessage() {
+		this._toastrService.success(`product ${this.product?.name} was favorited`, undefined, {
+			positionClass: "toast-bottom-center",
+			timeOut: 2000,
+		});
+	}
 }

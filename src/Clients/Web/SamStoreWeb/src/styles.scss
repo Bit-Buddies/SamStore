@@ -28,8 +28,6 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -56,6 +54,10 @@ table {
     border-spacing: 0;
 }
 
+* {
+  font-family: "Nunito";
+}
+
 html::-webkit-scrollbar {
   width: 10px;
 }
@@ -69,8 +71,24 @@ html::-webkit-scrollbar-thumb {
   border-radius: 2px;
 }
 
-* {
-  font-family: "Nunito";
+.default-scroll {
+  scroll-snap-type: x mandatory;
+  scroll-snap-type: y mandatory;
+}
+
+.default-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.default-scroll::-webkit-scrollbar-track {
+  background-color: primary(200);
+  border-radius: 8px;
+}
+
+.default-scroll::-webkit-scrollbar-thumb {
+  background-color: primary(400);
+  border-radius: 8px;
 }
 
 mat-form-field {

@@ -1,0 +1,30 @@
+.details-page-container {
+	padding-block: 68px;
+}
+
+.image-selected {
+	object-fit: contain;
+}
+
+.image-list-container {
+	overflow-y: auto;
+	height: 100%;
+	max-height: 540px;
+
+	.image-option {
+		object-fit: contain;
+		opacity: 50%;
+		transition: all 0.05s;
+
+		&:hover {
+			opacity: 100%;
+			cursor: pointer;
+		}
+	}
+}
+
+.tab-content-container {
+	margin-top: 24px;
+	overflow: hidden;
+	min-height: 248px;
+}

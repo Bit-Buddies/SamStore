@@ -1,1 +1,106 @@
-<p>product-details works!</p>
+<main
+	class="container details-page-container"
+	fxLayout="row wrap">
+	<section
+		class="images-container"
+		fxLayoutGap="14"
+		fxLayout="row-reverse nowrap"
+		fxFlex="70"
+		fxFlex.md="60"
+		fxFlex.lt-md="100"
+		ngStyle.gt-xs="padding-right: 32px;"
+		ngStyle.lt-md="margin-bottom: 32px">
+		<img
+			fxFlex="70"
+			class="image-selected"
+			src="https://www.pngall.com/wp-content/uploads/5/Wedding-Men-Shoes-PNG.png" />
+		<div
+			fxLayout="column nowrap"
+			fxFlex="30"
+			fxLayoutGap="10"
+			fxLayoutAlign="space-between"
+			class="image-list-container default-scroll">
+			<img
+				fxFlex="30"
+				class="image-option"
+				src="https://www.pngall.com/wp-content/uploads/5/Wedding-Men-Shoes-PNG.png" />
+			<img
+				fxFlex="30"
+				class="image-option"
+				src="https://www.pngall.com/wp-content/uploads/5/Wedding-Men-Shoes-PNG.png" />
+			<img
+				fxFlex="30"
+				class="image-option"
+				src="https://www.pngall.com/wp-content/uploads/5/Wedding-Men-Shoes-PNG.png" />
+		</div>
+	</section>
+	<section
+		class="order-form"
+		fxFlex="30"
+		fxFlex.md="40"
+		fxFlex.lt-md="100">
+		<div fxFlex="100">
+			<article
+				fxLayout="column nowrap"
+				style="margin-bottom: 14px">
+				<h1 style="font-size: 24px; font-weight: bold; margin: 0">Vilé Tourstãn</h1>
+				<h2 style="font-size: 10px; color: grey !important; font-weight: bold">REF: 5156198437</h2>
+			</article>
+			<article
+				class="price-form"
+				fxLayout="column nowrap"
+				style="margin-bottom: 24px">
+				<s style="font-size: 12px; color: grey; font-weight: bold">R$99,99</s>
+				<h1 style="font-size: 24px; font-weight: bold">R$79,99</h1>
+			</article>
+			<div>
+				<button
+					style="max-width: 100% !important"
+					mat-flat-button
+					color="primary">
+					Add to cart
+				</button>
+			</div>
+			<div>
+				<mat-tab-group [disableRipple]="false">
+					<mat-tab>
+						<ng-template mat-tab-label>
+							<mat-icon>description</mat-icon>
+							&nbsp; Details
+						</ng-template>
+						<div class="tab-content-container">
+							<article>
+								Polo manga curta em piquet com 3 botões, gola e punho em retilínea com 2 frisos e abertura
+								lateral. Modelagem comfort. Composição mista
+							</article>
+						</div>
+					</mat-tab>
+					<mat-tab>
+						<ng-template mat-tab-label>
+							<mat-icon>local_shipping</mat-icon>
+							&nbsp; Calc delivery
+						</ng-template>
+						<div class="tab-content-container">
+							<form>
+								<mat-form-field class="example-full-width">
+									<mat-label>Type your postal code</mat-label>
+									<input
+										matInput
+										placeholder="Ex. 39900000..." />
+								</mat-form-field>
+								<button
+									style="max-width: 100% !important"
+									mat-flat-button
+									color="warn">
+									Calculate
+								</button>
+							</form>
+						</div>
+					</mat-tab>
+				</mat-tab-group>
+			</div>
+		</div>
+	</section>
+
+	<section class="product-details"></section>
+</main>

@@ -6,20 +6,20 @@ import { ProductDetailsComponent } from "../product-details/product-details.comp
 import { NotfoundComponent } from "src/app/pages/notfound/notfound.component";
 
 const routes: Routes = [
-    {
-        path: "",
-        component: ProductComponent,
-        children: [
-            {
-                path: "details/:productId",
-                component: ProductDetailsComponent,
-            },
-        ],
-    },
+	{
+		path: "",
+		component: ProductComponent,
+		children: [
+			{
+				path: "details/:productId",
+				component: ProductDetailsComponent,
+			},
+		],
+	},
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
 })
 export class ProductRoutingModule {}
