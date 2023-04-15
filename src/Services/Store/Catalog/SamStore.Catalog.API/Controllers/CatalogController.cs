@@ -37,7 +37,7 @@ namespace SamStore.Catalog.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ClaimsAuthorize("Catalog", "Read")]
+        [AllowAnonymous]
         [HttpGet("products/{id}")]
         public async Task<ActionResult<Product>> GetProductById(Guid id)
         {
