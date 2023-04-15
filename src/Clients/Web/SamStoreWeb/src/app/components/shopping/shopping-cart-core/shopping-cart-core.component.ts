@@ -17,7 +17,7 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 	constructor(
 		private _accountService: AccountService,
 		private _toastrService: ToastrService,
-    private _dialogService: DialogService,
+		private _dialogService: DialogService,
 		public dialogRef: MatDialogRef<ShoppingCartCoreComponent>,
 		public shoppingCartService: ShoppingCartService
 	) {
@@ -25,10 +25,24 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 	}
 
 	public onClickClearButton() {
-    this._dialogService
+		this._dialogService.confirmationDialog({
+			description: "Are you sure you want to clear your cart?",
+			title: "Clear",
+			positiveButtonDescription: "Yes",
+			negativeButtonDescription: "Cancel",
+			negativeFunction: () => {},
+			positiveFunction: () => {
+				this.dialogRef.afterClosed().subscribe({
+					next: () => {
+						this.shoppingCartService.clearShoppingCart();
+						this._toastrService.success("Your shopping cart was successful cleared", undefined, {
+							timeOut: 2000,
+						});
+					},
+				});
 
-		this.dialogRef.close();
-		this.shoppingCartService.clearShoppingCart();
-		this._toastrService.success("Your shopping cart was successful cleared", undefined, { timeOut: 2000 });
+				this.dialogRef.close();
+			},
+		});
 	}
 }
