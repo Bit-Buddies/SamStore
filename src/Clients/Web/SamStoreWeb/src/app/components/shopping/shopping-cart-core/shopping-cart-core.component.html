@@ -1,15 +1,46 @@
 <section class="modal-container">
-  <app-modal-header [matDialogRef]="this.dialogRef" title="Shopping Cart"></app-modal-header>
+	<app-modal-header
+		[matDialogRef]="this.dialogRef"
+		title="Shopping Cart"></app-modal-header>
 
-  <section>
-    <div *ngIf="this.items.length > 0; else NoContent"></div>
-  </section>
+	<section>
+		<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0; else NoContent">
+			<div class="shopping-cart-items-container">
+				<mat-list dense>
+					<mat-list-item *ngFor="let item of shoppingCartService.shoppingCart!.items">
+						{{ item.name }}
+					</mat-list-item>
+				</mat-list>
+			</div>
+			<div
+				class="shopping-cart-footer"
+				fxLayout="row wrap"
+				fxLayoutAlign="end"
+				fxLayoutAlign.lt-md="center">
+				<button
+					mat-raised-button
+					style="max-width: 128px"
+					(click)="this.onClickClearButton()">
+					Clear
+				</button>
+				<button
+					mat-raised-button
+					color="primary"
+					style="max-width: 128px; margin-left: 8px">
+					Checkout
+				</button>
+			</div>
+		</div>
+	</section>
 </section>
 
 <ng-template #NoContent>
-  <div fxLayout="column nowrap" fxLayoutAlign="center center" class="no-content-container">
-    <mat-icon class="mat-18 no-content-icon">production_quantity_limits</mat-icon>
-    <h2>Your shopping cart is empty</h2>
-    <p>Finalize your choices and come back here to proceed with the purchase</p>
-  </div>
+	<div
+		fxLayout="column nowrap"
+		fxLayoutAlign="center center"
+		class="no-content-container">
+		<mat-icon class="mat-18 no-content-icon">production_quantity_limits</mat-icon>
+		<h2>Your shopping cart is empty</h2>
+		<p>Finalize your choices and come back here to proceed with the purchase</p>
+	</div>
 </ng-template>

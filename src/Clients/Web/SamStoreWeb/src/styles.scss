@@ -216,9 +216,12 @@ mat-card {
 	right: 0;
 }
 
+.default-button {
+	max-width: 258px !important;
+}
+
 .mdc-button {
 	width: 100% !important;
-	max-width: 248px !important;
 }
 
 mat-card-actions {
@@ -259,4 +262,30 @@ mat-card-actions {
 		font-size: smaller;
 		font-weight: bold;
 	}
+}
+
+.shopping-cart-container {
+	height: auto;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media screen and (max-width: 600px) {
+	.shopping-cart-container {
+		width: 100%;
+	}
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media screen and (min-width: 600px) {
+	.shopping-cart-container {
+		width: 992px;
+	}
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media screen and (min-width: 992px) {
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
 }

@@ -4,6 +4,8 @@ import { CookieService } from "ngx-cookie-service";
 import { ShoppingCartDTO } from "../models/ShoppingCarts/shopping-cart.DTO";
 import { AccountService } from "./account.service";
 import { ProductDTO } from "../models/Products/product.DTO";
+import { ShoppingCartCoreComponent } from "../components/shopping/shopping-cart-core/shopping-cart-core.component";
+import { DialogService } from "../utils/dialog-service";
 
 @Injectable({
 	providedIn: "root",
@@ -12,7 +14,11 @@ export class ShoppingCartService {
 	public shoppingCart?: ShoppingCartDTO;
 	public shoppingCartCookieToken: string = "SHOPPING_CART";
 
-	constructor(private _accountService: AccountService, private _cookieService: CookieService) {}
+	constructor(
+		private _accountService: AccountService,
+		private _cookieService: CookieService,
+		private _dialogService: DialogService
+	) {}
 
 	public init(): void {
 		if (this._accountService.getCurrentUser() == null) {
@@ -92,5 +98,12 @@ export class ShoppingCartService {
 		this.shoppingCart!.total = totalValue;
 
 		this._cookieService.set(this.shoppingCartCookieToken, JSON.stringify(this.shoppingCart));
+	}
+
+	public openShoppingCartModal() {
+		this._dialogService.genericDialog(ShoppingCartCoreComponent, {
+			autoFocus: false,
+			panelClass: "shopping-cart-container",
+		});
 	}
 }

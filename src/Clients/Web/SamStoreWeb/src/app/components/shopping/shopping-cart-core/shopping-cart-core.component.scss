@@ -1,16 +1,17 @@
 .modal-container {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .no-content-icon {
-  font-size: 64px;
-  height: 64px;
-  width: 64px;
+	font-size: 64px;
+	height: 64px;
+	width: 64px;
 }
 
-.no-content-container{
-  h2 {
-    margin-block: 8px;
-  }
-}
+.no-content-container {
+	text-align: center;
 
+	h2 {
+		margin-block: 8px;
+	}
+}

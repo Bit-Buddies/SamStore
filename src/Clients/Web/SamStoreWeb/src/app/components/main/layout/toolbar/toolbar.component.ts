@@ -54,7 +54,7 @@ export class ToolbarComponent implements OnInit {
 	}
 
 	public openShoppingCartModal() {
-		this._dialogService.genericDialog(ShoppingCartCoreComponent, { width: "70%", autoFocus: false });
+		this.shoppingCartService.openShoppingCartModal();
 	}
 
 	public calculateTotalQuantityItems(): string {
