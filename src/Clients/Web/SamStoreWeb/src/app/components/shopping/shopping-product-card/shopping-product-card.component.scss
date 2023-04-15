@@ -1,48 +1,58 @@
 @import "../../../../palettes";
 
 .favorite-button {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
-  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transform: translate(-4px,6px);
-  opacity: 0;
+	position: absolute;
+	right: 8px;
+	top: 8px;
+	box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
+	transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transform: translate(-4px, 6px);
+	opacity: 0;
 }
 
 .favorite-button.isfavorite {
-  opacity: 100%;
-  transform: translate(0, 0);
-  color: secondary(500);
+	opacity: 100%;
+	transform: translate(0, 0);
+	color: secondary(500);
 }
 
 .card-product-price-discount {
-  font-size: smaller;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
+	font-size: smaller;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
 }
 
 .card-product-price-actual {
-  font-size: large;
-  font-weight: bold;
+	font-size: large;
+	font-weight: bold;
 }
 
 .card-product {
-  &:hover {
-    .favorite-button {
-      transform: translate(0px,0px);
-      opacity: 100%;
+	&:hover {
+		.favorite-button {
+			transform: translate(0px, 0px);
+			opacity: 100%;
 
-      &:hover {
-        color: secondary(500);
-      }
-    }
-  }
+			&:hover {
+				color: secondary(500);
+			}
+		}
+	}
 }
 
-.card-product-header{
-  &:hover {
-    cursor: pointer;
-  }
+.card-product-header {
+	max-width: 100%;
+	padding: 0 !important;
+	height: 228px;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
 }
