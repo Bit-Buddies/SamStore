@@ -53,17 +53,21 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 	}
 
 	public checkout() {
-		if (!this._accountService.isLogged())
+		if (!this._accountService.isLogged()) {
 			this._accountService.callLogin().subscribe({
 				next: (success: boolean) => {
 					if (success) {
 						//TODO REDIRECT TO PURCHASE PAGE
-						this._toastrService.success("Sucesso ao logar");
 					} else {
 						this._toastrService.warning("To proceed with your purchase you need to login");
 					}
 				},
 			});
+
+			return;
+		}
+
+		//TODO REDIRECT TO PURCHASE PAGE
 	}
 
 	public getTotalPrice() {
