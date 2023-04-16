@@ -6,6 +6,7 @@ using SamStore.Core.CQRS.MediatR;
 using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
 using SamStore.Core.Infrastructure.Data.Extensions;
+using SamStore.Core.Infrastructure.Data.Helpers;
 
 namespace SamStore.Costumer.Infrastructure.Contexts
 {
@@ -26,27 +27,7 @@ namespace SamStore.Costumer.Infrastructure.Contexts
             if (!ChangeTracker.HasChanges())
                 return true;
 
-            foreach (EntityEntry<Entity> entry in ChangeTracker.Entries<Entity>())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Detached: break;
-                    case EntityState.Unchanged: break;
-                    case EntityState.Deleted:
-                        entry.Entity.Removed = true;
-                        entry.Entity.AlteredAt = DateTime.Now;
-                        break;
-                    case EntityState.Modified:
-                        entry.Entity.AlteredAt = DateTime.Now;
-                        break;
-                    case EntityState.Added:
-                        entry.Entity.CreatedAt = DateTime.Now;
-                        entry.Entity.AlteredAt = DateTime.Now;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            ContextTrackerConfigurations.DetectChanges(ChangeTracker);
 
             var success = await SaveChangesAsync() > 0;
 
