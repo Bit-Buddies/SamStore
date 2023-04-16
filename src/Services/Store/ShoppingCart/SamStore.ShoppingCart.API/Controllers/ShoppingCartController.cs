@@ -42,40 +42,5 @@ namespace SamStore.ShoppingCart.API.Controllers
             await _shoppingCartService.UpdateCustomerCart(cart);
             return CustomResponse();
         }
-
-        /// <summary>
-        /// Add a cart item into the customer context cart
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> AddCartItem(ShoppingCartItemDTO item)
-        {
-            await _shoppingCartService.AddCartItem(item);
-            return CustomResponse();
-        }
-
-        /// <summary>
-        /// Remove cart item from customer context cart 
-        /// </summary>
-        /// <param name="productId"></param>
-        /// <returns></returns>
-        [HttpDelete]
-        public async Task<IActionResult> RemoveCartItem([FromQuery] Guid productId)
-        {
-            await _shoppingCartService.RemoveCartItem(productId);
-            return CustomResponse();
-        }
-
-        /// <summary>
-        /// Clear customer context cart
-        /// </summary>
-        /// <returns></returns>
-        [HttpDelete("clear")]
-        public async Task<IActionResult> ClearCart()
-        {
-            await _shoppingCartService.ClearCustomerCart();
-            return CustomResponse();
-        }
     }
 }

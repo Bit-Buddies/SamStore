@@ -7,8 +7,5 @@ namespace SamStore.ShoppingCart.API.Services
     {
         Task<ShoppingCartDTO> GetCustomerCart();
         Task UpdateCustomerCart(ShoppingCartDTO cart);
-        Task RemoveCartItem(Guid productId);
-        Task AddCartItem(ShoppingCartItemDTO item);
-        Task ClearCustomerCart();
     }
 }
