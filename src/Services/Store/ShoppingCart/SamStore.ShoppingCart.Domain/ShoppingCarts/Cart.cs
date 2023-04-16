@@ -42,13 +42,12 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             if(ItemAlreadyExists(item)) 
             {
                 CartItem oldItem = GetItemByProductId(item.ProductId);
-                oldItem.AddQuantity(item.Quantity);
-
-                item = oldItem;
-                Items.Remove(oldItem);
+                oldItem.SetQuantity(item.Quantity);
             }
-
-            Items.Add(item);
+            else
+            {
+                Items.Add(item);
+            }
         }
 
         public void UpdateItem(CartItem item)

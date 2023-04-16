@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SamStore.Core.Domain;
+using SamStore.Core.Infrastructure.Data;
 using SamStore.Core.Infrastructure.Data.Extensions;
+using SamStore.Core.Infrastructure.Data.Helpers;
 using SamStore.ShoppingCart.Domain.ShoppingCarts;
 using System;
 using System.Collections.Generic;
@@ -9,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SamStore.ShoppingCart.Infrastructure.Contexts
 {
-    public class ShoppingCartContext : DbContext
+    public class ShoppingCartContext : DbContext, IUnitOfWork
     {
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
@@ -29,6 +32,25 @@ namespace SamStore.ShoppingCart.Infrastructure.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSnakeCaseNamingConvention();
+        }
+
+        public async Task<bool> Commit()
+        {
+            if (!ChangeTracker.HasChanges())
+                return true;
+
+            ContextTrackerConfigurations.DetectChanges(ChangeTracker);
+
+            try
+            {
+                var success = await SaveChangesAsync() > 0;
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

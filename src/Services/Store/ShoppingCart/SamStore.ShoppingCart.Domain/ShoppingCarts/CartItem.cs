@@ -44,6 +44,11 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             Quantity += quantity;
         }
 
+        public void SetQuantity(int quantity)
+        {
+            Quantity = quantity;
+        }
+
         public void UpdateQuantity(int quantity)
         {
             Quantity = quantity;
