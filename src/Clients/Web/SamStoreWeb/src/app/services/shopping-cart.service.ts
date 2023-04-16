@@ -6,6 +6,7 @@ import { AccountService } from "./account.service";
 import { ProductDTO } from "../models/Products/product.DTO";
 import { ShoppingCartCoreComponent } from "../components/shopping/shopping-cart-core/shopping-cart-core.component";
 import { DialogService } from "../utils/dialog-service";
+import { ShoppingCartControllerService } from "./controllers/shopping-cart-controller.service";
 
 @Injectable({
 	providedIn: "root",
@@ -17,11 +18,12 @@ export class ShoppingCartService {
 	constructor(
 		private _accountService: AccountService,
 		private _cookieService: CookieService,
-		private _dialogService: DialogService
+		private _dialogService: DialogService,
+    private _shoppingCartControllerService: ShoppingCartControllerService
 	) {}
 
 	public init(): void {
-		if (this._accountService.getCurrentUser() == null) {
+		if (this._accountService.isLogged()) {
 			this.getShoppingCartFromCookies();
 		} else {
 			this.getShoppingCartFromCookies();

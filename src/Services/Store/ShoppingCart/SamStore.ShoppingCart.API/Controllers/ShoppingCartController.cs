@@ -26,7 +26,8 @@ namespace SamStore.ShoppingCart.API.Controllers
         [HttpGet]
         public async Task<ActionResult<Cart>> GetCart()
         {
-            return CustomResponse(await _shoppingCartService.GetCustomerCart());
+            var cart = await _shoppingCartService.GetCustomerCart();
+            return CustomResponse(cart);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace SamStore.ShoppingCart.API.Controllers
         /// <param name="productId"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<IActionResult> RemoveCartItem(Guid productId)
+        public async Task<IActionResult> RemoveCartItem([FromQuery] Guid productId)
         {
             await _shoppingCartService.RemoveCartItem(productId);
             return CustomResponse();
