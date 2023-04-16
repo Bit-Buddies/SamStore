@@ -296,11 +296,11 @@ mat-card-actions {
 	background-color: rgb(255, 215, 220);
 	border-radius: 4px;
 	border: solid 1px rgb(211, 35, 49);
-	animation: alert-box-init 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+	animation: alert-box-init 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 
 	ul {
 		list-style-type: disc;
-		animation: alert-box-ul-init 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+		animation: alert-box-ul-init 0.2s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 		li {
 			color: rgb(211, 35, 49);
 		}
