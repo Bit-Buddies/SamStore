@@ -134,19 +134,36 @@
 				fxLayout="row wrap"
 				fxLayoutAlign="end"
 				fxLayoutAlign.lt-md="center">
-				<button
-					mat-flat-button
-					style="max-width: 128px"
-					(click)="this.onClickClearButton()">
-					Clear
-				</button>
-				<button
-					mat-raised-button
-					color="primary"
-					style="max-width: 128px; margin-left: 8px"
-					(click)="this.checkout()">
-					Checkout
-				</button>
+				<div
+					fxFlex="30"
+					fxFlex.sm="60"
+					fxFlex.xs="80"
+					fxLayout="row wrap"
+					fxLayoutAlign="end">
+					<span
+						*ngIf="this.loginAlert"
+						class="alert-box"
+						style="margin-bottom: 12px"
+						fxFlex="100">
+						<ul>
+							<li>You need to login to proceed with your purchase.</li>
+						</ul>
+					</span>
+					<button
+						mat-flat-button
+						(click)="this.onClickClearButton()"
+						fxFlex="48">
+						Clear
+					</button>
+					<button
+						mat-raised-button
+						color="primary"
+						style="margin-left: 8px"
+						(click)="this.checkout()"
+						fxFlex="48">
+						Checkout
+					</button>
+				</div>
 			</div>
 		</div>
 	</section>
