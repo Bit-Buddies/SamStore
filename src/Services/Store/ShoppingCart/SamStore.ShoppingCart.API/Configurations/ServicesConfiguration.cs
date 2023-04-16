@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SamStore.Core.Domain.Utils;
+using SamStore.ShoppingCart.API.Services;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Configurations;
 using SamStore.WebAPI.Core.Identity;
@@ -20,6 +21,9 @@ namespace SamStore.ShoppingCart.API.Configurations
             {
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
+
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
+
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IContextUser, ContextUser>();

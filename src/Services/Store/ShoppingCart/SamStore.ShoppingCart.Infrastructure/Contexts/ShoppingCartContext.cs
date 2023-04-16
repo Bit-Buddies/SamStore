@@ -11,8 +11,8 @@ namespace SamStore.ShoppingCart.Infrastructure.Contexts
 {
     public class ShoppingCartContext : DbContext
     {
-        public DbSet<Cart> Carts { get; }
-        public DbSet<CartItem> CartItems { get; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         public ShoppingCartContext(DbContextOptions<ShoppingCartContext> options) : base(options) 
         {
