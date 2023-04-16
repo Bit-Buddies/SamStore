@@ -3,6 +3,7 @@ import { ProductDTO } from "./../../../models/Products/product.DTO";
 import { Component, Input } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
 	selector: "app-shopping-product-card",
@@ -16,7 +17,8 @@ export class ShoppingProductCardComponent {
 	constructor(
 		private _router: Router,
 		private _accountService: AccountService,
-		private _toastrService: ToastrService
+		private _toastrService: ToastrService,
+		private _snackBar: MatSnackBar
 	) {}
 
 	public openProductDetails() {
@@ -44,9 +46,8 @@ export class ShoppingProductCardComponent {
 	}
 
 	private showFavoriteToastrMessage() {
-		this._toastrService.success(`Product ${this.product?.name} added to your wishlist`, undefined, {
-			positionClass: "toast-bottom-center",
-			timeOut: 2000,
+		this._snackBar.open(`${this.product?.name} added to your wishlist`, undefined, {
+			duration: 1000,
 		});
 	}
 }

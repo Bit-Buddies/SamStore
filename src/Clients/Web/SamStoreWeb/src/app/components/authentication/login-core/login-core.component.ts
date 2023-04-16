@@ -68,11 +68,9 @@ export class LoginCoreComponent implements OnInit {
 			error: (response) => {
 				const errors = this._authenticationService.extractErrors(response);
 
-				if (!!errors.errors)
-					errors.errors.Mensagens.forEach((er) => {
-						this.formErrorsService.addError(er);
-					});
-				else
+				if (!!errors.errors) {
+					this.formErrorsService.errors = errors.errors.Mensagens;
+				} else
 					this._toastrService.error("An error has ocourred", undefined, {
 						positionClass: "toast-bottom-right",
 					});

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { lastValueFrom } from "rxjs";
@@ -14,12 +15,13 @@ import { ShoppingCartService } from "src/app/services/shopping-cart.service";
 })
 export class ProductDetailsComponent implements OnInit {
 	public product?: ProductDTO;
-  public productAddedToCart: boolean = false;
+	public productAddedToCart: boolean = false;
 
 	constructor(
 		private _catalogService: CatalogControllerService,
 		private _activatedRoute: ActivatedRoute,
 		private _toastrService: ToastrService,
+		private _snackbar: MatSnackBar,
 		private _shoppingCartService: ShoppingCartService,
 		private _router: Router,
 		public loadingService: LoadingService
@@ -52,8 +54,13 @@ export class ProductDetailsComponent implements OnInit {
 	}
 
 	public async addToCart() {
-		await this._shoppingCartService.addOrUpdateItem(this.product!, 1);
+		try {
+			await this._shoppingCartService.addOrUpdateItem(this.product!, 1);
 
-    this.productAddedToCart = true;
+			this.productAddedToCart = true;
+			this._snackbar.open("Item added to shopping cart", undefined, {
+				duration: 2000,
+			});
+		} catch (error) {}
 	}
 }

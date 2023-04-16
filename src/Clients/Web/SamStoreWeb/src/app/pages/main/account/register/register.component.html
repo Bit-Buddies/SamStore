@@ -9,6 +9,16 @@
 				<mat-card-title>Create new account</mat-card-title>
 			</mat-card-header>
 			<mat-card-content>
+				<div *ngIf="this.formErrorsService.errors.length">
+					<span
+						class="alert-box"
+						fxFlex="100"
+						style="margin-bottom: 24px">
+						<ul>
+							<li *ngFor="let error of this.formErrorsService.errors">{{ error }}</li>
+						</ul>
+					</span>
+				</div>
 				<div fxLayout="column">
 					<mat-form-field appearance="outline">
 						<mat-label>Full Name</mat-label>

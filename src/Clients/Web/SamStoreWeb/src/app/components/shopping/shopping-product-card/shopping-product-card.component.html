@@ -6,7 +6,7 @@
 		(click)="this.openProductDetails()"
 		fxLayoutAlign="center">
 		<img
-			src="https://assets.adidas.com/images/w_600,f_auto,q_auto/84665150f3ce454084dbacd300f426c0_9366/Tenis_Forum_Bold_Branco_FY9042_01_standard.jpg"
+			src="https://secure-static.vans.com.br/medias/sys_master/vans/vans/h0c/hd5/h00/h00/11122230460446/1002000850150U-01-BASEIMAGE-Hires.jpg"
 			alt="{{ this.product?.name }}" />
 	</mat-card-header>
 	<mat-card-content class="card-product-body">
@@ -23,8 +23,9 @@
 			<p class="card-product-price-actual">{{ this.product?.value | currency : "BRL" }}</p>
 		</div>
 	</mat-card-content>
+
 	<button
-		mat-icon-button
+		mat-mini-fab
 		class="favorite-button"
 		[ngClass]="{ isfavorite: this.isFavorite }"
 		(click)="this.favoriteProduct()">

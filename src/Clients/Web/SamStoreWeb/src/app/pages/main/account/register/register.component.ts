@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import validator, { cpf } from "cpf-cnpj-validator";
 import { ValidateCPF } from "src/app/utils/custom-validators";
 import { LoadingService } from "src/app/services/loading.service";
+import { FormErrorsService } from "src/app/services/form-errors.service";
 
 @Component({
   selector: "app-register",
@@ -16,8 +17,9 @@ import { LoadingService } from "src/app/services/loading.service";
   styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
-  registerForm!: FormGroup;
-  hidePassword = true;
+  public registerForm!: FormGroup;
+  public hidePassword = true;
+  public formErrorsService: FormErrorsService = new FormErrorsService();
 
   private _registerData!: RegisterUserData;
 
@@ -67,6 +69,8 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
+    this.formErrorsService.clearErrors();
+
     if (!this.registerForm.dirty || this.registerForm.invalid) return;
 
     this._registerData = { ...this._registerData, ...this.registerForm.value };
@@ -82,11 +86,7 @@ export class RegisterComponent implements OnInit {
         const errors = this._authenticationService.extractErrors(response);
 
         if(!!errors.errors)
-          errors?.errors.Mensagens.forEach((er) => {
-            this._toastrService.error(er, undefined, {
-              positionClass: "toast-bottom-right",
-            });
-          });
+          this.formErrorsService.errors = errors?.errors.Mensagens;
         else
           this._toastrService.error("An error has ocourred", undefined, {
             positionClass: "toast-bottom-right",

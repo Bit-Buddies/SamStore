@@ -32,8 +32,6 @@ export class DialogService {
 	): Observable<TResult> {
 		config = {
 			...config,
-			enterAnimationDuration: 50,
-			exitAnimationDuration: 50,
 		};
 
 		config.restoreFocus = false;
