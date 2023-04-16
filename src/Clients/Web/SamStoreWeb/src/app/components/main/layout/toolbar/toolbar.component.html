@@ -11,7 +11,7 @@
 		<button
 			mat-icon-button
 			class="icon-button notifications-icon-button"
-			(click)="this.openShoppingCartModal()">
+			(click)="this.shoppingCartService.openShoppingCartModal()">
 			<mat-icon
 				[matBadge]="this.calculateTotalQuantityItems()"
 				matBadgeSize="small"

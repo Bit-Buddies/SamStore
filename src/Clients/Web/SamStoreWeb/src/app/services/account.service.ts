@@ -4,17 +4,18 @@ import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { DialogService } from "../utils/dialog-service";
 import { LoginModalComponent } from "../components/authentication/login-modal/login-modal.component";
+import * as moment from "moment";
 
 @Injectable({
 	providedIn: "root",
 })
 export class AccountService {
-	private _userCookieToken = "CURRENT_USER";
+	private _userToken = "CURRENT_USER";
 
-	constructor(private _cookieService: CookieService, private _dialogService: DialogService) {}
+	constructor(private _dialogService: DialogService) {}
 
 	public getCurrentUser(): UserData | null {
-		const userJson = this._cookieService.get(this._userCookieToken);
+		const userJson = localStorage.getItem(this._userToken);
 
 		if (userJson == null || userJson == "") return null;
 
@@ -30,11 +31,11 @@ export class AccountService {
 
 		const userJson = JSON.stringify(userData);
 
-		this._cookieService.set(this._userCookieToken, userJson);
+		localStorage.setItem(this._userToken, userJson);
 	}
 
 	public removeCurrentUser() {
-		this._cookieService.delete(this._userCookieToken);
+		localStorage.removeItem(this._userToken);
 	}
 
 	public isLogged(): boolean {

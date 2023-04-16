@@ -25,7 +25,10 @@ namespace SamStore.WebAPI.Core.User
 
         public Guid GetUserId()
         {
-            return IsAuthenticated() ? Guid.Parse(_acessor.HttpContext.User.GetUserId()) : Guid.Empty;
+            var userId = _acessor.HttpContext.User.GetUserId();
+            var isAuthenticated = IsAuthenticated();
+
+            return isAuthenticated ? Guid.Parse(userId) : Guid.Empty;
         }
 
         public string GetUserEmail()

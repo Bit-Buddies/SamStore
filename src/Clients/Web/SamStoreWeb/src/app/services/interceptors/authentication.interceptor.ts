@@ -4,9 +4,6 @@ import { Injectable } from "@angular/core";
 import { AccountService } from "../account.service";
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
-	/**
-	 *
-	 */
 	constructor(private _accountService: AccountService) {}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

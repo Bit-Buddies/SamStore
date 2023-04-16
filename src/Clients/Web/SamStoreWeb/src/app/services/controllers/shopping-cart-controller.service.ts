@@ -17,6 +17,10 @@ export class ShoppingCartControllerService extends BaseApiService {
 		return this._httpClient.get<ShoppingCartDTO>(`${this._baseURL}`);
 	}
 
+	public updateCart(shoppingCart: ShoppingCartDTO) {
+		return this._httpClient.put<void>(`${this._baseURL}`, shoppingCart);
+	}
+
 	public clearCart(): Observable<void> {
 		return this._httpClient.delete<void>(`${this._baseURL}/clear`);
 	}

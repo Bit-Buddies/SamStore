@@ -28,33 +28,20 @@ export class ToolbarComponent implements OnInit {
 	public ngOnInit(): void {
 		this.validateUserIsLogged();
 
+		this.shoppingCartService.init();
+
 		this._globalEventService.userLoggedIn.subscribe(() => {
 			this.validateUserIsLogged();
-			this.shoppingCartService.init();
 		});
-
-		this.shoppingCartService.init();
 	}
 
 	private validateUserIsLogged() {
-		const user = this._accountService.getCurrentUser();
-
-		if (user == null) {
-			this.logado = false;
-			return;
-		}
-
-		this.userEmail = user.userToken.email;
-		this.logado = true;
+		this.logado = this._accountService.isLogged();
 	}
 
 	public logout() {
 		this._accountService.removeCurrentUser();
 		location.reload();
-	}
-
-	public openShoppingCartModal() {
-		this.shoppingCartService.openShoppingCartModal();
 	}
 
 	public calculateTotalQuantityItems(): string {

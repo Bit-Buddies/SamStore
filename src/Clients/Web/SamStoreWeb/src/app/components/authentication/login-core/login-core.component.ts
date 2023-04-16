@@ -58,6 +58,7 @@ export class LoginCoreComponent implements OnInit {
     this._authenticationService.login(this.loginData).subscribe({
       next: (userData) => {
         this._accountService.setCurrentUser(userData);
+
         this._globalEventService.userLoggedIn.next();
 
         this.onLoginCompletedEvent.emit(true);

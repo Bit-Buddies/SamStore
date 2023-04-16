@@ -7,10 +7,10 @@ public static class ContextUserExtensions
         if(principal == null)
             throw new ArgumentNullException(nameof(principal));
 
-        Claim? claim = principal.FindFirst(ClaimTypes.NameIdentifier);
+        Claim? claim = principal.FindFirst("sub");
 
-        if(claim == null)
-            claim = principal.FindFirst("sub");
+        if (claim == null)
+            claim = principal.FindFirst(ClaimTypes.NameIdentifier);
 
         return claim?.Value;
     }

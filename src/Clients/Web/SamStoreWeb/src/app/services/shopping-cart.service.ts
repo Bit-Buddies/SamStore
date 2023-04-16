@@ -17,30 +17,13 @@ export class ShoppingCartService {
 	public shoppingCartCookieToken: string = "SHOPPING_CART";
 
 	constructor(
-		private _accountService: AccountService,
 		private _cookieService: CookieService,
 		private _dialogService: DialogService,
 		private _shoppingCartControllerService: ShoppingCartControllerService
 	) {}
 
-	public init(): void {
-		if (!this._accountService.isLogged()) {
-			this.getShoppingCartFromCookies();
-			return;
-		}
-
-		lastValueFrom(this._shoppingCartControllerService.getCart())
-			.then((cart: ShoppingCartDTO) => {
-				if (!!cart) {
-					this.shoppingCart = cart;
-					return;
-				}
-
-				this.getShoppingCartFromCookies();
-			})
-			.catch((err) => {
-				this.getShoppingCartFromCookies();
-			});
+	public init() {
+		this.getShoppingCartFromCookies();
 	}
 
 	private addItem(product: ProductDTO, quantity: number) {
