@@ -41,8 +41,8 @@
 		<button
 			mat-raised-button
 			color="primary"
-			[disabled]="this.loadingService.getLoading()"
-			[ngSwitch]="this.loadingService.getLoading()">
+			[disabled]="this.loadingService.isLoading()"
+			[ngSwitch]="this.loadingService.isLoading()">
 			<mat-spinner
 				*ngSwitchCase="true"
 				color="primary"

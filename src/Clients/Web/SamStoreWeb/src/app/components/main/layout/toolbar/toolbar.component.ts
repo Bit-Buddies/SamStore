@@ -7,6 +7,7 @@ import { HomeComponent } from "src/app/pages/main/home/home.component";
 import { GeneralCatalogComponent } from "src/app/pages/main/home/general-catalog/general-catalog.component";
 import { ShoppingCartCoreComponent } from "src/app/components/shopping/shopping-cart-core/shopping-cart-core.component";
 import { ShoppingCartService } from "src/app/services/shopping-cart.service";
+import { LoadingService } from "src/app/services/loading.service";
 
 @Component({
 	selector: "app-toolbar",
@@ -22,6 +23,7 @@ export class ToolbarComponent implements OnInit {
 		private _globalEventService: GlobalEventsService,
 		private _accountService: AccountService,
 		private _dialogService: DialogService,
+		public loadingService: LoadingService,
 		public shoppingCartService: ShoppingCartService
 	) {}
 

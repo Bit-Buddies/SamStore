@@ -75,9 +75,7 @@ export class ShoppingCartService {
 				this.updateShoppingCartIntoCookies();
 			}
 		} finally {
-			if (this._accountService.isLogged()) {
-				this._shoppingCartControllerService.updateCart(this.shoppingCart!).subscribe();
-			}
+			this.updateUserCartService();
 		}
 	}
 
@@ -86,6 +84,8 @@ export class ShoppingCartService {
 			this.shoppingCart.items = this.shoppingCart.items.filter((item) => item.productId != productId);
 
 			this.updateShoppingCartIntoCookies();
+
+			this.updateUserCartService();
 		}
 	}
 
@@ -94,6 +94,8 @@ export class ShoppingCartService {
 			this.shoppingCart.items = [];
 
 			this.updateShoppingCartIntoCookies();
+
+			this.updateUserCartService();
 		}
 	}
 
@@ -123,16 +125,22 @@ export class ShoppingCartService {
 		this._cookieService.set(this.shoppingCartCookieToken, JSON.stringify(this.shoppingCart));
 	}
 
+	public getTotalQuantity() {
+		if (!this.shoppingCart?.items.length) return 0;
+
+		return this.shoppingCart.items.reduce((total, item) => (total += item.quantity), 0);
+	}
+
+	public updateUserCartService() {
+		if (this._accountService.isLogged()) {
+			this._shoppingCartControllerService.updateCart(this.shoppingCart!).subscribe();
+		}
+	}
+
 	public openShoppingCartModal() {
 		this._dialogService.genericDialog(ShoppingCartCoreComponent, {
 			autoFocus: false,
 			panelClass: "shopping-cart-container",
 		});
-	}
-
-	public getTotalQuantity() {
-		if (!this.shoppingCart?.items.length) return 0;
-
-		return this.shoppingCart.items.reduce((total, item) => (total += item.quantity), 0);
 	}
 }

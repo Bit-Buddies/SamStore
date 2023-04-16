@@ -16,6 +16,7 @@
 				[matBadge]="this.calculateTotalQuantityItems()"
 				matBadgeSize="small"
 				matBadgeColor="accent"
+				[matBadgeDisabled]="this.loadingService.isLoading()"
 				>shopping_cart</mat-icon
 			>
 		</button>
