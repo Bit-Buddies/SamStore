@@ -33,6 +33,7 @@ export class ShoppingCartService {
 			next: (cart) => {
 				if (!!cart) {
 					this.shoppingCart = cart;
+					this.updateShoppingCartIntoCookies();
 					return;
 				}
 

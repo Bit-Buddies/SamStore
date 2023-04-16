@@ -69,8 +69,4 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 
 		//TODO REDIRECT TO PURCHASE PAGE
 	}
-
-	public getTotalPrice() {
-		return 2000;
-	}
 }
