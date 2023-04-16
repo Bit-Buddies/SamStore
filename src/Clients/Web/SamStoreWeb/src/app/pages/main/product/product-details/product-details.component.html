@@ -57,10 +57,24 @@
 			<div>
 				<button
 					style="max-width: 100% !important"
+					[ngClass]="{ 'product-added': this.productAddedToCart }"
 					mat-raised-button
 					(click)="this.addToCart()"
-					color="primary">
-					Add to cart
+					color="primary"
+					[disabled]="this.productAddedToCart || this.loadingService.isLoading()"
+					[ngSwitch]="this.loadingService.isLoading()">
+					<mat-spinner
+						*ngSwitchCase="true"
+						color="primary"
+						diameter="28"></mat-spinner>
+					<ng-container *ngSwitchDefault>{{
+						this.productAddedToCart ? "ITEM ADDED" : "ADD TO CART"
+					}}</ng-container>
+					<mat-icon
+						*ngIf="this.productAddedToCart"
+						class="mat-18"
+						>check</mat-icon
+					>
 				</button>
 			</div>
 			<div>

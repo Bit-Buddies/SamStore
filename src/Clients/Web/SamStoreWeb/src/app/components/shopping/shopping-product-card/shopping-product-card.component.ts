@@ -44,7 +44,7 @@ export class ShoppingProductCardComponent {
 	}
 
 	private showFavoriteToastrMessage() {
-		this._toastrService.success(`product ${this.product?.name} was favorited`, undefined, {
+		this._toastrService.success(`Product ${this.product?.name} added to your wishlist`, undefined, {
 			positionClass: "toast-bottom-center",
 			timeOut: 2000,
 		});

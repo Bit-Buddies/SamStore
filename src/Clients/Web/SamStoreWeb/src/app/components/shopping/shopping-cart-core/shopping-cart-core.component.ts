@@ -15,6 +15,7 @@ import { ModalDialogComponent } from "src/app/utils/modal-dialog";
 })
 export class ShoppingCartCoreComponent extends ModalDialogComponent {
 	public displayedColumns = ["image", "details", "total", "actions"];
+	public loginAlert: boolean = false;
 
 	constructor(
 		private _accountService: AccountService,
@@ -37,9 +38,6 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 				this.dialogRef.afterClosed().subscribe({
 					next: () => {
 						this.shoppingCartService.clearShoppingCart();
-						this._toastrService.success("Your shopping cart was successful cleared", undefined, {
-							timeOut: 2000,
-						});
 					},
 				});
 
@@ -59,7 +57,7 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 					if (success) {
 						//TODO REDIRECT TO PURCHASE PAGE
 					} else {
-						this._toastrService.warning("To proceed with your purchase you need to login");
+						this.loginAlert = true;
 					}
 				},
 			});

@@ -59,7 +59,7 @@ export class ShoppingCartService {
 		}
 	}
 
-	public addOrUpdateItem(product: ProductDTO, quantity: number) {
+	public async addOrUpdateItem(product: ProductDTO, quantity: number) {
 		try {
 			if (this.shoppingCart != null) {
 				const oldProduct = this.shoppingCart.items.find((i) => i.productId == product.id);
@@ -75,7 +75,7 @@ export class ShoppingCartService {
 				this.updateShoppingCartIntoCookies();
 			}
 		} finally {
-			this.updateUserCartService();
+			await this.updateUserCart();
 		}
 	}
 
@@ -85,7 +85,7 @@ export class ShoppingCartService {
 
 			this.updateShoppingCartIntoCookies();
 
-			this.updateUserCartService();
+			this.updateUserCart();
 		}
 	}
 
@@ -95,7 +95,7 @@ export class ShoppingCartService {
 
 			this.updateShoppingCartIntoCookies();
 
-			this.updateUserCartService();
+			this.updateUserCart();
 		}
 	}
 
@@ -131,9 +131,9 @@ export class ShoppingCartService {
 		return this.shoppingCart.items.reduce((total, item) => (total += item.quantity), 0);
 	}
 
-	public updateUserCartService() {
+	public async updateUserCart() {
 		if (this._accountService.isLogged()) {
-			this._shoppingCartControllerService.updateCart(this.shoppingCart!).subscribe();
+			await lastValueFrom(this._shoppingCartControllerService.updateCart(this.shoppingCart!)).then();
 		}
 	}
 

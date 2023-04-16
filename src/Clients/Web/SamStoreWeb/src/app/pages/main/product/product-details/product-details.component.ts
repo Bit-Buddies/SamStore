@@ -4,6 +4,7 @@ import { ToastrService } from "ngx-toastr";
 import { lastValueFrom } from "rxjs";
 import { ProductDTO } from "src/app/models/Products/product.DTO";
 import { CatalogControllerService } from "src/app/services/controllers/catalog-controller.service";
+import { LoadingService } from "src/app/services/loading.service";
 import { ShoppingCartService } from "src/app/services/shopping-cart.service";
 
 @Component({
@@ -13,13 +14,15 @@ import { ShoppingCartService } from "src/app/services/shopping-cart.service";
 })
 export class ProductDetailsComponent implements OnInit {
 	public product?: ProductDTO;
+  public productAddedToCart: boolean = false;
 
 	constructor(
 		private _catalogService: CatalogControllerService,
 		private _activatedRoute: ActivatedRoute,
 		private _toastrService: ToastrService,
 		private _shoppingCartService: ShoppingCartService,
-		private _router: Router
+		private _router: Router,
+		public loadingService: LoadingService
 	) {}
 
 	ngOnInit(): void {
@@ -48,7 +51,9 @@ export class ProductDetailsComponent implements OnInit {
 			});
 	}
 
-	public addToCart() {
-		this._shoppingCartService.addOrUpdateItem(this.product!, 1);
+	public async addToCart() {
+		await this._shoppingCartService.addOrUpdateItem(this.product!, 1);
+
+    this.productAddedToCart = true;
 	}
 }
