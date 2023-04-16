@@ -17,13 +17,31 @@ export class ShoppingCartService {
 	public shoppingCartCookieToken: string = "SHOPPING_CART";
 
 	constructor(
+		private _accountService: AccountService,
 		private _cookieService: CookieService,
 		private _dialogService: DialogService,
 		private _shoppingCartControllerService: ShoppingCartControllerService
 	) {}
 
 	public init() {
-		this.getShoppingCartFromCookies();
+		if (!this._accountService.isLogged()) {
+			this.getShoppingCartFromCookies();
+			return;
+		}
+
+		this._shoppingCartControllerService.getCart().subscribe({
+			next: (cart) => {
+				if (!!cart) {
+					this.shoppingCart = cart;
+					return;
+				}
+
+				this.getShoppingCartFromCookies();
+			},
+			error: () => {
+				this.getShoppingCartFromCookies();
+			},
+		});
 	}
 
 	private addItem(product: ProductDTO, quantity: number) {
@@ -41,18 +59,24 @@ export class ShoppingCartService {
 	}
 
 	public addOrUpdateItem(product: ProductDTO, quantity: number) {
-		if (this.shoppingCart != null) {
-			const oldProduct = this.shoppingCart.items.find((i) => i.productId == product.id);
+		try {
+			if (this.shoppingCart != null) {
+				const oldProduct = this.shoppingCart.items.find((i) => i.productId == product.id);
 
-			if (oldProduct == null) {
-				this.addItem(product, quantity);
-				return;
+				if (oldProduct == null) {
+					this.addItem(product, quantity);
+					return;
+				}
+
+				const oldProductIndex = this.shoppingCart.items.indexOf(oldProduct);
+				this.shoppingCart.items[oldProductIndex].quantity += quantity;
+
+				this.updateShoppingCartIntoCookies();
 			}
-
-			const oldProductIndex = this.shoppingCart.items.indexOf(oldProduct);
-			this.shoppingCart.items[oldProductIndex].quantity += quantity;
-
-			this.updateShoppingCartIntoCookies();
+		} finally {
+			if (this._accountService.isLogged()) {
+				this._shoppingCartControllerService.updateCart(this.shoppingCart!).subscribe();
+			}
 		}
 	}
 

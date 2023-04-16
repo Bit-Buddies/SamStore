@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SamStore.ShoppingCart.Application.Extensions;
+using SamStore.ShoppingCart.Application.Models;
 using SamStore.ShoppingCart.Domain.ShoppingCarts;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.User;
@@ -16,23 +18,30 @@ namespace SamStore.ShoppingCart.API.Services
             _context = context;
         }
 
-        public async Task<Cart> GetCustomerCart()
+        public async Task<ShoppingCartDTO> GetCustomerCart()
         {
             var cart = await _context.Carts
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.CostumerId == _contextUser.GetUserId());
 
-            return cart ?? new Cart(_contextUser.GetUserId());
+            if (cart == null)
+                cart = new Cart(_contextUser.GetUserId());
+
+            return cart.ToDTO();
         }
 
-        public async Task AddCartItem(CartItem item)
+        public async Task AddCartItem(ShoppingCartItemDTO item)
         {
-            await GetCustomerCartAddingItem(item);
+            var newItem = new CartItem(item.ProductId, item.CartId, item.Name, item.Quantity, item.Price, item.ImagePath);
+
+            await GetCustomerCartAddingItem(newItem);
         }
 
         public async Task RemoveCartItem(Guid productId)
         {
-            var cart = await GetCustomerCart();
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.CostumerId == _contextUser.GetUserId());
 
             cart.RemoveItem(productId);
 
@@ -41,7 +50,10 @@ namespace SamStore.ShoppingCart.API.Services
 
         public async Task ClearCustomerCart()
         {
-            var cart = await GetCustomerCart();
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.CostumerId == _contextUser.GetUserId());
+
             cart.Clear();
 
             await CommitChanges();
@@ -49,7 +61,12 @@ namespace SamStore.ShoppingCart.API.Services
 
         private async Task<Cart> GetCustomerCartAddingItem(CartItem item)
         {
-            var cart = await GetCustomerCart();
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.CostumerId == _contextUser.GetUserId());
+
+            if (cart == null)
+                cart = new Cart(_contextUser.GetUserId());
 
             if (!_context.Carts.Any(c => c.Id == cart.Id))
             {
@@ -74,15 +91,25 @@ namespace SamStore.ShoppingCart.API.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task UpdateCustomerCart(Cart cart)
+        public async Task UpdateCustomerCart(ShoppingCartDTO cartDTO)
         {
-            if (cart.Id == Guid.Empty)
+            var cart = new Cart(_contextUser.GetUserId())
             {
-                _context.Carts.Add(cart);
+                Id = cartDTO.Id,
+            };
+
+            foreach (var item in cartDTO.Items)
+                cart.AddItem(new CartItem(item.ProductId, item.CartId, item.Name, item.Quantity, item.Price, item.ImagePath));
+
+            bool alreadyExists = await _context.Carts.AnyAsync(x => x.Id == cartDTO.Id);
+
+            if (alreadyExists)
+            {
+                _context.Carts.Update(cart); 
             }
             else
             {
-                _context.Carts.Update(cart);
+                _context.Carts.Add(cart);
             }
 
             await _context.SaveChangesAsync();

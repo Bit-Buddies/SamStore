@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SamStore.ShoppingCart.API.Services;
+using SamStore.ShoppingCart.Application.Models;
 using SamStore.ShoppingCart.Domain.ShoppingCarts;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Controllers;
@@ -24,7 +25,7 @@ namespace SamStore.ShoppingCart.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<Cart>> GetCart()
+        public async Task<ActionResult<ShoppingCartDTO>> GetCart()
         {
             var cart = await _shoppingCartService.GetCustomerCart();
             return CustomResponse(cart);
@@ -36,7 +37,7 @@ namespace SamStore.ShoppingCart.API.Controllers
         /// <param name="cart"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateCart(Cart cart)
+        public async Task<IActionResult> UpdateCart(ShoppingCartDTO cart)
         {
             await _shoppingCartService.UpdateCustomerCart(cart);
             return CustomResponse();
@@ -48,7 +49,7 @@ namespace SamStore.ShoppingCart.API.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddCartItem(CartItem item)
+        public async Task<IActionResult> AddCartItem(ShoppingCartItemDTO item)
         {
             await _shoppingCartService.AddCartItem(item);
             return CustomResponse();

@@ -15,7 +15,7 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
         public string Name { get; private set; }
         public int Quantity { get; private set; }
         public decimal Price { get; private set; }
-        public string Image { get; private set; }
+        public string? Image { get; private set; }
         public virtual Cart Cart { get; set; }
 
         protected CartItem() { }

@@ -15,7 +15,6 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
     {
         public Guid CostumerId { get; private set; }
         public ICollection<CartItem> Items { get; private set; } = new List<CartItem>();
-        public decimal Total => !Items.Any() ? 0 : Items.Sum(i => i.CalcPrice());
 
         public Cart() { }
         public Cart(Guid costumerId)
@@ -103,9 +102,6 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             {
                 RuleFor(c => c.CostumerId)
                     .NotEqual(Guid.Empty);
-
-                RuleFor(c => c.Total)
-                    .GreaterThanOrEqualTo(0);
             }
         }
     }

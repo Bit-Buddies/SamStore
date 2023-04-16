@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 
@@ -10,9 +11,10 @@ using SamStore.ShoppingCart.Infrastructure.Contexts;
 namespace SamStore.ShoppingCart.Infrastructure.Migrations
 {
     [DbContext(typeof(ShoppingCartContext))]
-    partial class ShoppingCartContextModelSnapshot : ModelSnapshot
+    [Migration("20230416042413_ShoppingCart_Version_2.0")]
+    partial class ShoppingCart_Version_20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,9 +73,8 @@ namespace SamStore.ShoppingCart.Infrastructure.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<string>("Image")
-                        .ValueGeneratedOnAdd()
+                        .IsRequired()
                         .HasColumnType("VARCHAR(100)")
-                        .HasDefaultValue("")
                         .HasColumnName("image");
 
                     b.Property<string>("Name")

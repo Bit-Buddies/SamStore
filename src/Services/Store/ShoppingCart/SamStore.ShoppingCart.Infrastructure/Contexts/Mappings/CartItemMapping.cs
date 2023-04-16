@@ -9,6 +9,9 @@ namespace SamStore.ShoppingCart.Infrastructure.Contexts.Mappings
         public void Configure(EntityTypeBuilder<CartItem> builder)
         {
             builder.ToTable("cart_item");
+
+            builder.Property(x => x.Image)
+                .HasDefaultValue("");
         }
     }
 }
