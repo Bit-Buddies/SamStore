@@ -74,5 +74,18 @@ namespace SamStore.ShoppingCart.API.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task UpdateCustomerCart(Cart cart)
+        {
+            if (cart.Id == Guid.Empty)
+            {
+                _context.Carts.Add(cart);
+            }
+            else
+            {
+                _context.Carts.Update(cart);
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

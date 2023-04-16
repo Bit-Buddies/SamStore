@@ -5,6 +5,7 @@ namespace SamStore.ShoppingCart.API.Services
     public interface IShoppingCartService
     {
         Task<Cart> GetCustomerCart();
+        Task UpdateCustomerCart(Cart cart);
         Task RemoveCartItem(Guid productId);
         Task AddCartItem(CartItem item);
         Task ClearCustomerCart();

@@ -31,6 +31,18 @@ namespace SamStore.ShoppingCart.API.Controllers
         }
 
         /// <summary>
+        /// Update customer cart
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<IActionResult> UpdateCart(Cart cart)
+        {
+            await _shoppingCartService.UpdateCustomerCart(cart);
+            return CustomResponse();
+        }
+
+        /// <summary>
         /// Add a cart item into the customer context cart
         /// </summary>
         /// <param name="item"></param>
