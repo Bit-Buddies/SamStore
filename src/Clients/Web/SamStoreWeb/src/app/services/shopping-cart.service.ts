@@ -7,6 +7,7 @@ import { ProductDTO } from "../models/Products/product.DTO";
 import { ShoppingCartCoreComponent } from "../components/shopping/shopping-cart-core/shopping-cart-core.component";
 import { DialogService } from "../utils/dialog-service";
 import { ShoppingCartControllerService } from "./controllers/shopping-cart-controller.service";
+import { lastValueFrom } from "rxjs";
 
 @Injectable({
 	providedIn: "root",
@@ -19,15 +20,27 @@ export class ShoppingCartService {
 		private _accountService: AccountService,
 		private _cookieService: CookieService,
 		private _dialogService: DialogService,
-    private _shoppingCartControllerService: ShoppingCartControllerService
+		private _shoppingCartControllerService: ShoppingCartControllerService
 	) {}
 
 	public init(): void {
-		if (this._accountService.isLogged()) {
+		if (!this._accountService.isLogged()) {
 			this.getShoppingCartFromCookies();
-		} else {
-			this.getShoppingCartFromCookies();
+			return;
 		}
+
+		lastValueFrom(this._shoppingCartControllerService.getCart())
+			.then((cart: ShoppingCartDTO) => {
+				if (!!cart) {
+					this.shoppingCart = cart;
+					return;
+				}
+
+				this.getShoppingCartFromCookies();
+			})
+			.catch((err) => {
+				this.getShoppingCartFromCookies();
+			});
 	}
 
 	private addItem(product: ProductDTO, quantity: number) {

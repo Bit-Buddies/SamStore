@@ -24,6 +24,7 @@ import { LoadingInterceptor } from "./services/interceptors/loading.interceptor"
 import { ProductDetailsComponent } from "./pages/main/product/product-details/product-details.component";
 import ptBr from "@angular/common/locales/pt";
 import { registerLocaleData } from "@angular/common";
+import { AuthenticationInterceptor } from "./services/interceptors/authentication.interceptor";
 
 registerLocaleData(ptBr);
 
@@ -47,6 +48,7 @@ registerLocaleData(ptBr);
 		DialogService,
 		ShoppingCartService,
 		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
 		{ provide: LOCALE_ID, useValue: "pt" },
 	],
 	bootstrap: [AppComponent],
