@@ -27,23 +27,8 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 		super();
 	}
 
-	public onClickClearButton() {
-		this._dialogService.confirmationDialog({
-			description: "Are you sure you want to clear your cart?",
-			title: "Clear",
-			positiveButtonDescription: "Yes",
-			negativeButtonDescription: "Cancel",
-			negativeFunction: () => {},
-			positiveFunction: () => {
-				this.dialogRef.afterClosed().subscribe({
-					next: () => {
-						this.shoppingCartService.clearShoppingCart();
-					},
-				});
-
-				this.dialogRef.close();
-			},
-		});
+	public onClickContinueButton() {
+		this.dialogRef.close();
 	}
 
 	public onClickRemoveItem(item: ShoppingCartItemDTO) {

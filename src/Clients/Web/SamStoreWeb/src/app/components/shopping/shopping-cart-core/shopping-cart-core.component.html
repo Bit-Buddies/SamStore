@@ -17,14 +17,14 @@
 					<!-- Image column -->
 					<ng-container matColumnDef="image">
 						<th
-							fxHide.xs
+							fxHide.lt-md
 							mat-header-cell
 							*matHeaderCellDef>
 							<h3>Details</h3>
 						</th>
 						<td
 							class="image-row"
-							fxHide.xs
+							fxHide.lt-md
 							mat-cell
 							*matCellDef="let product">
 							<img
@@ -135,7 +135,7 @@
 				fxLayoutAlign="end"
 				fxLayoutAlign.lt-md="center">
 				<div
-					fxFlex="30"
+					fxFlex="40"
 					fxFlex.sm="60"
 					fxFlex.xs="80"
 					fxLayout="row wrap"
@@ -151,9 +151,9 @@
 					</span>
 					<button
 						mat-flat-button
-						(click)="this.onClickClearButton()"
+						(click)="this.onClickContinueButton()"
 						fxFlex="48">
-						Clear
+						Keep buying
 					</button>
 					<button
 						mat-raised-button
