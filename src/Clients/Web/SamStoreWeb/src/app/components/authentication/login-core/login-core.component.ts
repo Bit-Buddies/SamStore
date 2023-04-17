@@ -18,6 +18,7 @@ import { LoadingService } from "src/app/services/loading.service";
 })
 export class LoginCoreComponent implements OnInit {
 	@Output() public onLoginCompletedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+	@Output() public onButtonToChangeEvent: EventEmitter<void> = new EventEmitter<void>();
 
 	public loginForm!: FormGroup;
 	public loginData!: LoginData;
@@ -26,7 +27,6 @@ export class LoginCoreComponent implements OnInit {
 
 	constructor(
 		private _formBuilder: FormBuilder,
-		private _router: Router,
 		private _authenticationService: AuthenticationControllerService,
 		private _accountService: AccountService,
 		private _toastrService: ToastrService,

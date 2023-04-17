@@ -1,24 +1,24 @@
 import { Router } from "@angular/router";
-import { GlobalEventsService } from "./../../../../services/events/global-events.service";
-import { LoginData } from "./../../../../models/login-data";
-import { AccountService } from "./../../../../services/account.service";
-import { AuthenticationControllerService } from "../../../../services/controllers/authentication-controller.service";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component } from "@angular/core";
-import { ToastrService } from "ngx-toastr";
+import { LoadingService } from "src/app/services/loading.service";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+	selector: "app-login",
+	templateUrl: "./login.component.html",
+	styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
-  constructor(private _router: Router) { }
+	constructor(private _router: Router, private _loadingService: LoadingService) {}
 
-  public onLoginCompleted(success: boolean) {
-    if(!success)
-      return;
+	public onLoginCompleted(success: boolean) {
+		if (!success) return;
 
-    this._router.navigate(["/home"]);
-  }
+		this._router.navigate(["/home"]);
+	}
+
+	public onButtonToChangeEvent() {
+		if (this._loadingService.isLoading()) return;
+
+		this._router.navigate(["/account/register"]);
+	}
 }

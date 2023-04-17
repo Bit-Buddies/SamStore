@@ -1,0 +1,12 @@
+<section class="modal-container">
+	<ng-container [ngSwitch]="this.modalToShow">
+		<app-login-core
+			*ngSwitchCase="'LOGIN'"
+			(onLoginCompletedEvent)="this.onLoginCompleted($event)"
+			(onButtonToChangeEvent)="this.onChangeModalToShow('REGISTER')"></app-login-core>
+		<app-register-core
+			*ngSwitchCase="'REGISTER'"
+			(onRegisterCompletedEvent)="this.onLoginCompleted($event)"
+			(onButtonToChangeEvent)="this.onChangeModalToShow('LOGIN')"></app-register-core>
+	</ng-container>
+</section>

@@ -3,7 +3,7 @@ import { UserData } from "./../models/user-data";
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { DialogService } from "../utils/dialog-service";
-import { LoginModalComponent } from "../components/authentication/login-modal/login-modal.component";
+import { AuthenticationModalComponent } from "../components/authentication/authentication-modal/authentication-modal.component";
 import * as moment from "moment";
 
 @Injectable({
@@ -43,8 +43,11 @@ export class AccountService {
 	}
 
 	public callLogin(): Observable<boolean> {
-		return this._dialogService.genericDialog<LoginModalComponent, any, boolean>(LoginModalComponent, {
-			panelClass: "xs-dialog",
-		});
+		return this._dialogService.genericDialog<AuthenticationModalComponent, any, boolean>(
+			AuthenticationModalComponent,
+			{
+				panelClass: "flex-dialog",
+			}
+		);
 	}
 }

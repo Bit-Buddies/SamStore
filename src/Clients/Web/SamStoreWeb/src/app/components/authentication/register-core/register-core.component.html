@@ -1,1 +1,134 @@
-<p>register-core works!</p>
+<form
+	[formGroup]="this.registerForm"
+	(ngSubmit)="registerUser()">
+	<mat-card-header>
+		<mat-card-title>Create new account</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div *ngIf="this.formErrorsService.errors.length">
+			<span
+				class="alert-box"
+				fxFlex="100"
+				style="margin-bottom: 24px">
+				<ul>
+					<li *ngFor="let error of this.formErrorsService.errors">{{ error }}</li>
+				</ul>
+			</span>
+		</div>
+		<div fxLayout="column">
+			<mat-form-field appearance="outline">
+				<mat-label>Full Name</mat-label>
+				<input
+					matInput
+					placeholder="Your name"
+					formControlName="name" />
+				<mat-error *ngIf="getControlError('name', 'required')">Required field </mat-error>
+				<mat-error *ngIf="getControlError('name', 'pattern')">Invalid name </mat-error>
+				<mat-error *ngIf="getControlError('name', 'minlength')">Minimum length is 3</mat-error>
+				<mat-error *ngIf="getControlError('name', 'maxlength') && !getControlError('name', 'pattern')"
+					>Maximum length is 50</mat-error
+				>
+			</mat-form-field>
+		</div>
+
+		<div fxLayout="column">
+			<mat-form-field appearance="outline">
+				<mat-label>CPF</mat-label>
+				<input
+					matInput
+					placeholder="Your CPF"
+					formControlName="cpf"
+					mask="000.000.000-99" />
+				<mat-error *ngIf="getControlError('cpf', 'required')">Required field </mat-error>
+				<mat-error *ngIf="getControlError('cpf', 'cpf')">Invalid CPF</mat-error>
+			</mat-form-field>
+		</div>
+
+		<div fxLayout="column">
+			<mat-form-field appearance="outline">
+				<mat-label>Email</mat-label>
+				<input
+					matInput
+					type="email"
+					placeholder="youremail@email.com"
+					formControlName="email" />
+				<mat-error *ngIf="getControlError('email', 'required')">Required field </mat-error>
+				<mat-error *ngIf="getControlError('email', 'email')">Invalid email </mat-error>
+			</mat-form-field>
+		</div>
+
+		<div
+			fxLayout="row"
+			fxLayoutAlign="space-between"
+			fxLayoutGap="16">
+			<div
+				fxLayout="column"
+				fxFlex="48%">
+				<mat-form-field appearance="outline">
+					<mat-label>Password</mat-label>
+					<input
+						matInput
+						[type]="hidePassword ? 'password' : 'text'"
+						type="password"
+						(change)="mustmatchValidator()"
+						formControlName="password" />
+
+					<button
+						mat-icon-button
+						matSuffix
+						(click)="hidePassword = !hidePassword">
+						<mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+					</button>
+					<mat-error *ngIf="getControlError('password', 'required')">Required field </mat-error>
+					<mat-error *ngIf="getControlError('password', 'minlength')">Minimum length is 8 </mat-error>
+					<mat-error *ngIf="getControlError('password', 'pattern') && !getControlError('password', 'minlength')"
+						>Required [a-z] and [0-9]
+					</mat-error>
+				</mat-form-field>
+			</div>
+			<div
+				fxLayout="column"
+				fxFlex="48%">
+				<mat-form-field appearance="outline">
+					<mat-label>Repeat password</mat-label>
+					<input
+						matInput
+						type="password"
+						(change)="mustmatchValidator()"
+						formControlName="repeatPassword" />
+					<mat-error *ngIf="getControlError('repeatPassword', 'required')">Required field </mat-error>
+					<mat-error *ngIf="getControlError('repeatPassword', 'passwordMismatched')">
+						Password mismatched</mat-error
+					>
+				</mat-form-field>
+			</div>
+		</div>
+	</mat-card-content>
+	<mat-card-actions fxLayoutAlign="center">
+		<button
+			mat-raised-button
+			type="submit"
+			[disabled]="this.loadingService.isLoading()"
+			[ngSwitch]="this.loadingService.isLoading()"
+			color="primary">
+			<mat-spinner
+				*ngSwitchCase="true"
+				color="primary"
+				diameter="28"></mat-spinner>
+			<ng-container *ngSwitchDefault>REGISTER</ng-container>
+		</button>
+	</mat-card-actions>
+	<mat-card-footer
+		class="pt-2"
+		fxLayout="row nowrap"
+		fxLayoutAlign="center flex-end">
+		<h5>
+			Already have an account?
+			<a
+				class="button-a"
+				(click)="this.onButtonToChangeEvent.emit()"
+				>Enter now</a
+			>
+		</h5>
+	</mat-card-footer>
+</form>

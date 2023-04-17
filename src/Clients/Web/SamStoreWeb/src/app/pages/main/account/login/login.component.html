@@ -1,7 +1,9 @@
 <div class="container">
-  <div fxLayoutAlign.gt-xs="center" class="form-container">
-    <mat-card fxLayout="column">
-      <app-login-core (onLoginCompletedEvent)="this.onLoginCompleted($event)"></app-login-core>
-    </mat-card>
-  </div>
+	<div
+		fxLayoutAlign.gt-xs="center"
+		class="form-container">
+		<mat-card fxLayout="column">
+			<app-login-core (onLoginCompletedEvent)="this.onLoginCompleted($event)" (onButtonToChangeEvent)="this.onButtonToChangeEvent()"></app-login-core>
+		</mat-card>
+	</div>
 </div>
