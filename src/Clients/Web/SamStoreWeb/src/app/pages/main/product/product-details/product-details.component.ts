@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, OnChanges } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -16,6 +16,7 @@ import { ShoppingCartService } from "src/app/services/shopping-cart.service";
 export class ProductDetailsComponent implements OnInit {
 	public product?: ProductDTO;
 	public productAddedToCart: boolean = false;
+	private _productId: string = "";
 
 	constructor(
 		private _catalogService: CatalogControllerService,
@@ -28,14 +29,22 @@ export class ProductDetailsComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		const productId = this._activatedRoute.snapshot.paramMap.get("productId");
+		this.getProductDetails();
 
-		if (!productId) {
+		this._activatedRoute.params.subscribe((param) => {
+			this.getProductDetails();
+		});
+	}
+
+	private async getProductDetails() {
+		this._productId = this._activatedRoute.snapshot.paramMap.get("productId")!;
+
+		if (!this._productId) {
 			this._router.navigate(["/home"]);
 			return;
 		}
 
-		lastValueFrom(this._catalogService.getById(productId))
+		await lastValueFrom(this._catalogService.getById(this._productId))
 			.then((product: ProductDTO) => (this.product = product))
 			.catch((err) => {
 				if (!!err.errors)

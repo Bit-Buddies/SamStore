@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { ProductDTO } from "src/app/models/Products/product.DTO";
 import { ShoppingCartItemDTO } from "src/app/models/ShoppingCarts/shopping-cart-item.DTO";
@@ -21,8 +22,9 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 		private _accountService: AccountService,
 		private _toastrService: ToastrService,
 		private _dialogService: DialogService,
+		public shoppingCartService: ShoppingCartService,
 		public dialogRef: MatDialogRef<ShoppingCartCoreComponent>,
-		public shoppingCartService: ShoppingCartService
+		private _router: Router
 	) {
 		super();
 	}
@@ -51,5 +53,13 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent {
 		}
 
 		//TODO REDIRECT TO PURCHASE PAGE
+	}
+
+	public redirectToProductDetails(productId: string) {
+		this.dialogRef.afterClosed().subscribe(() => {
+			this._router.navigate([`/product/details/${productId}`]);
+		});
+
+		this.dialogRef.close();
 	}
 }
