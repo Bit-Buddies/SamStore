@@ -37,6 +37,8 @@ export class ProductDetailsComponent implements OnInit {
 	}
 
 	private async getProductDetails() {
+		this.resetPage();
+
 		this._productId = this._activatedRoute.snapshot.paramMap.get("productId")!;
 
 		if (!this._productId) {
@@ -60,6 +62,12 @@ export class ProductDetailsComponent implements OnInit {
 
 				this._router.navigate(["/home"]);
 			});
+	}
+
+	private resetPage() {
+		this._productId = "";
+		this.product = undefined;
+		this.productAddedToCart = false;
 	}
 
 	public async addToCart() {

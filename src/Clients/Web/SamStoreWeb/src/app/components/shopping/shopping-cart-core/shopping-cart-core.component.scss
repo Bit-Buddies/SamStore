@@ -1,3 +1,5 @@
+@import "src/_palettes.scss";
+
 .no-content-icon {
 	font-size: 64px;
 	height: 64px;
@@ -41,7 +43,13 @@
 			max-width: 128px;
 			max-height: 128px;
 			object-fit: cover;
-			border-radius: 24px;
+			border-radius: 8px;
+			transition: box-shadow 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+			&:hover {
+				box-shadow: 0 0 0px 3px rgba($color: primary(500), $alpha: 1);
+				cursor: pointer;
+			}
 		}
 	}
 
