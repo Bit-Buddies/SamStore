@@ -75,7 +75,7 @@ export class ShoppingCartService {
 				this.updateShoppingCartIntoCookies();
 			}
 		} finally {
-			await this.updateUserCart();
+			return await this.updateUserCart();
 		}
 	}
 

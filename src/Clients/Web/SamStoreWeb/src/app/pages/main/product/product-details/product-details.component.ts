@@ -64,20 +64,19 @@ export class ProductDetailsComponent implements OnInit {
 			});
 	}
 
-	private resetPage() {
-		this._productId = "";
-		this.product = undefined;
-		this.productAddedToCart = false;
-	}
-
 	public async addToCart() {
-		try {
 			await this._shoppingCartService.addOrUpdateItem(this.product!, 1);
 
 			this.productAddedToCart = true;
+
 			this._snackbar.open("Item added to shopping cart", undefined, {
 				duration: 2000,
 			});
-		} catch (error) {}
+	}
+
+  private resetPage() {
+		this._productId = "";
+		this.product = undefined;
+		this.productAddedToCart = false;
 	}
 }
