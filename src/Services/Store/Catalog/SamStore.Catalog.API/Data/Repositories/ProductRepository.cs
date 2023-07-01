@@ -3,6 +3,7 @@ using SamStore.Catalog.API.Data.Contexts;
 using SamStore.Catalog.API.Domain.Interfaces;
 using SamStore.Catalog.API.Domain.Products;
 using SamStore.Core.Infrastructure.Data;
+using System.Linq.Expressions;
 
 namespace SamStore.Catalog.API.Data.Repositories
 {
@@ -16,23 +17,56 @@ namespace SamStore.Catalog.API.Data.Repositories
             _context = context;
         }
 
-        public void Add(Product entity)
+        public async Task<List<Product>> GetAllAsync()
+        {
+            return await _context.Products.ToListAsync();
+        }
+
+        public async Task<Product> GetByIdAsync(Guid id)
+        {
+            return await _context.Products.FindAsync(id);
+        }
+
+        public IRepository<Product> Include(params string[] includes)
+        {
+            foreach (string include in includes)
+            {
+                _context.Products.Include(include);
+            }
+
+            return this;
+        }
+
+        public void Insert(Product entity)
         {
             _context.Products.Add(entity);
         }
+
         public void Update(Product entity)
         {
             _context.Products.Update(entity);
         }
 
-        public async Task<IEnumerable<Product>> GetAll()
+        public void Delete(Product entity)
         {
-            return await _context.Products.AsNoTracking().ToListAsync();
+            _context.Products.Remove(entity);
         }
 
-        public async Task<Product> GetById(Guid id)
+        public async Task<List<Product>> FindAsync(Expression<Func<Product, bool>> predicate)
         {
-            return await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Products.Where(predicate).ToListAsync();
+        }
+
+        public async Task<Product> FirstOrDefaultAsync(Expression<Func<Product, bool>> predicate)
+        {
+            return await _context.Products.FirstOrDefaultAsync(predicate);
+        }
+
+        public void DeleteRangeAsync(Expression<Func<Product, bool>> predicate)
+        {
+            var entities = _context.Products.Where(predicate);
+
+            _context.RemoveRange(entities);
         }
 
         public void Dispose()

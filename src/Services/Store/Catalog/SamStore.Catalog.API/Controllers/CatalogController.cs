@@ -26,7 +26,7 @@ namespace SamStore.Catalog.API.Controllers
         [HttpGet("products")]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
-            IEnumerable<Product> products = await _productRepository.GetAll();
+            IEnumerable<Product> products = await _productRepository.GetAllAsync();
 
             return CustomResponse(products);
         }
@@ -41,7 +41,7 @@ namespace SamStore.Catalog.API.Controllers
         [HttpGet("products/{id}")]
         public async Task<ActionResult<Product>> GetProductById(Guid id)
         {
-            Product product = await _productRepository.GetById(id);
+            Product product = await _productRepository.GetByIdAsync(id);
 
             return CustomResponse(product);
         }
