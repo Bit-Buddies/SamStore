@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace SamStore.Costumer.Infrastructure.Repositories
 {
@@ -21,7 +22,42 @@ namespace SamStore.Costumer.Infrastructure.Repositories
             _context = context;
         }
 
-        public void Add(Customer entity)
+        public async Task<Customer> GetByCPF(string cPF)
+        {
+            return await _context.Customers.FirstOrDefaultAsync(x => x.CPF.Number == cPF); 
+        }
+
+        public async Task<Customer> GetByIdAsync(Guid id)
+        {
+            return await _context.Customers.FindAsync(id);
+        }
+
+        public async Task<List<Customer>> GetAllAsync()
+        {
+            return await _context.Customers.ToListAsync();
+        }
+
+        public async Task<List<Customer>> FindAsync(Expression<Func<Customer, bool>> predicate)
+        {
+            return await _context.Customers.Where(predicate).ToListAsync();
+        }
+
+        public async Task<Customer> FirstOrDefaultAsync(Expression<Func<Customer, bool>> predicate)
+        {
+            return await _context.Customers.FirstOrDefaultAsync(predicate);
+        }
+
+        public IRepository<Customer> Include(params string[] includes)
+        {
+            foreach (string include in includes)
+            {
+                _context.Customers.Include(include);
+            }
+
+            return this;
+        }
+
+        public void Insert(Customer entity)
         {
             _context.Customers.Add(entity);
         }
@@ -31,28 +67,24 @@ namespace SamStore.Costumer.Infrastructure.Repositories
             _context.Customers.Update(entity);
         }
 
-        public async Task<IEnumerable<Customer>> GetAll()
+        public void Delete(Customer entity)
         {
-            return await _context.Customers
-                .AsNoTracking()
-                .ToListAsync();
+            _context.Customers.Remove(entity);
         }
 
-        public async Task<Customer> GetById(Guid id)
+        public void DeleteRangeAsync(Expression<Func<Customer, bool>> predicate)
         {
-            return await _context.Customers
-                .FirstOrDefaultAsync(x => x.Id == id);
-        }
+            var entities = _context.Customers.Where(predicate);
 
+            if (!entities.Any())
+                return;
+
+            _context.Customers.RemoveRange(entities);
+        }
 
         public void Dispose()
         {
             _context.Dispose();
-        }
-
-        public async Task<Customer> GetByCPF(string cPF)
-        {
-            return await _context.Customers.FirstOrDefaultAsync(x => x.CPF.Number == cPF); 
         }
     }
 }
