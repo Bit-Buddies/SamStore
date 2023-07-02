@@ -10,8 +10,4 @@
     <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Vouchers\Enums\" />
-  </ItemGroup>
-
 </Project>

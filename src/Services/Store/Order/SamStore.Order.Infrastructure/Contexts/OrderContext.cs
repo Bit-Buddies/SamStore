@@ -16,6 +16,7 @@ namespace SamStore.Order.Infrastructure.Contexts
     public class OrderContext : DbContext, IUnitOfWork
     {
         public DbSet<Voucher> Vouchers { get; set; }
+        public DbSet<VoucherOrder> VouchersOrders { get; set; }
 
         private readonly IMediatorHandler _mediatorHandler;
 
