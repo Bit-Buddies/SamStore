@@ -20,7 +20,7 @@ namespace SamStore.Order.Infrastructure.Contexts
 
         private readonly IMediatorHandler _mediatorHandler;
 
-        public OrderContext(IMediatorHandler mediatorHandler)
+        public OrderContext(DbContextOptions options, IMediatorHandler mediatorHandler) : base(options)
         {
             _mediatorHandler = mediatorHandler;
         }
