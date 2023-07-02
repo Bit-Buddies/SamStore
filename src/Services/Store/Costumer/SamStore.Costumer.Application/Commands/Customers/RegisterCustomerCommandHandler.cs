@@ -30,7 +30,7 @@ namespace SamStore.Costumer.Application.Commands.Customers
 
             customer = new Customer(request.Id, request.Name, request.EmailAddress, request.CPFNumber);
 
-            _customerRepository.Add(customer);
+            _customerRepository.Insert(customer);
 
             customer.AddNotificationEvent(new RegisteredCustomerEvent(customer.Id, customer.Name, customer.Email.Address, customer.CPF.Number));
 
