@@ -14,5 +14,7 @@ namespace SamStore.Order.Domain.Vouchers
         public virtual Voucher Voucher { get; set; }
         public Guid OrderId { get; set; }
         public virtual Orders.Order Order { get; set; }
+
+        protected VoucherOrder() { }
     }
 }

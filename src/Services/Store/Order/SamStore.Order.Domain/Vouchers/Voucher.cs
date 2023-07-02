@@ -22,6 +22,7 @@ namespace SamStore.Order.Domain.Vouchers
 
         public virtual ICollection<VoucherOrder> VoucherOrders { get; set; }
 
+        protected Voucher() { }
         public Voucher(string key, decimal discount, VoucherDiscountTypeEnum voucherType, int quantity = 1, DateTime expireAt = default)
         {
             if (discount <= 0)

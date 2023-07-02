@@ -19,8 +19,8 @@ namespace SamStore.Order.API.Configurations
                 throw new ArgumentNullException(nameof(connectionString));
 
             services.AddDbContext<OrderContext>(options => options
-                .UseSnakeCaseNamingConvention()
-                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                .UseSnakeCaseNamingConvention());
 
             services.AddMediatR(AppDomain.CurrentDomain.Load("SamStore.Order.Application"));
             services.AddMessageBus(configuration.GetMessageQueueConnection("MessageBus"));
