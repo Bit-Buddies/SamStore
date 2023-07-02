@@ -3,6 +3,7 @@ using SamStore.MessageBus.Extensions;
 using SamStore.Core.Extensions;
 using SamStore.Order.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
+using SamStore.Core.CQRS.MediatR;
 
 namespace SamStore.Order.API.Configurations
 {
@@ -10,6 +11,8 @@ namespace SamStore.Order.API.Configurations
     {
         public static void AddDependencyInjection(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
+
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             if(string.IsNullOrEmpty(connectionString))

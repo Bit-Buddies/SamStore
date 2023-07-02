@@ -14,7 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.19">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -26,6 +26,7 @@
     <ProjectReference Include="..\..\..\..\BuildingBlocks\MessageBus\SamStore.MessageBus\SamStore.MessageBus.csproj" />
     <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.Core\SamStore.Core.csproj" />
     <ProjectReference Include="..\..\..\..\BuildingBlocks\SamStore.WebAPI.Core\SamStore.WebAPI.Core.csproj" />
+    <ProjectReference Include="..\SamStore.Order.Application\SamStore.Order.Application.csproj" />
     <ProjectReference Include="..\SamStore.Order.Infrastructure\SamStore.Order.Infrastructure.csproj" />
   </ItemGroup>
 
