@@ -1,4 +1,5 @@
 ﻿using EasyNetQ;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SamStore.ShoppingCart.API.Services;
@@ -7,10 +8,12 @@ using SamStore.ShoppingCart.Domain.ShoppingCarts;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Controllers;
 using SamStore.WebAPI.Core.User;
+using System.Net;
 
 namespace SamStore.ShoppingCart.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
+    [Authorize]
     public class ShoppingCartController : MainController
     {
         private readonly IShoppingCartService _shoppingCartService;
@@ -25,6 +28,7 @@ namespace SamStore.ShoppingCart.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(ShoppingCartDTO), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingCartDTO>> GetCart()
         {
             var cart = await _shoppingCartService.GetCustomerCart();
@@ -37,6 +41,7 @@ namespace SamStore.ShoppingCart.API.Controllers
         /// <param name="cart"></param>
         /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateCart(ShoppingCartDTO cart)
         {
             await _shoppingCartService.UpdateCustomerCart(cart);

@@ -13,6 +13,7 @@ using SamStore.MessageBus;
 using SamStore.WebAPI.Core.API.Controllers;
 using SamStore.WebAPI.Core.Identity;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -20,7 +21,7 @@ using ValidationFailure = FluentValidation.Results.ValidationFailure;
 
 namespace SamStore.Authentication.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AuthenticationController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -39,12 +40,14 @@ namespace SamStore.Authentication.API.Controllers
         }
 
         /// <summary>
-        /// Realizar o login do usuário
+        /// User login
         /// </summary>
         /// <param name="loginData"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Login(LoginDTO loginData)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
@@ -73,12 +76,14 @@ namespace SamStore.Authentication.API.Controllers
         }
 
         /// <summary>
-        /// Registrar um novo usuário
+        /// Register a new user
         /// </summary>
         /// <param name="registerData"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
+        [ProducesResponseType(typeof(UserDataDTO), (int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Register(RegisterUserDTO registerData)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);

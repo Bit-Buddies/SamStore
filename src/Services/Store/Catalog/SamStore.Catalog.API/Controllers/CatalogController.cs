@@ -4,11 +4,12 @@ using SamStore.Catalog.API.Domain.Interfaces;
 using SamStore.Catalog.API.Domain.Products;
 using SamStore.WebAPI.Core.API.Controllers;
 using SamStore.WebAPI.Core.Identity.Claims;
+using System.Net;
 
 namespace SamStore.Catalog.API.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class CatalogController : MainController
     {
         private readonly IProductRepository _productRepository;
@@ -24,6 +25,7 @@ namespace SamStore.Catalog.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("products")]
+        [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
             IEnumerable<Product> products = await _productRepository.GetAllAsync();
@@ -39,6 +41,7 @@ namespace SamStore.Catalog.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("products/{id}")]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Product>> GetProductById(Guid id)
         {
             Product product = await _productRepository.GetByIdAsync(id);
