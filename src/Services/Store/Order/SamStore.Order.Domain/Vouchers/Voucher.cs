@@ -18,7 +18,6 @@ namespace SamStore.Order.Domain.Vouchers
         public int Quantity { get; private set; }
         public int QuantityUsed { get; private set; } = 0;
         public DateTime ExpireAt { get; private set; } = DateTime.MinValue;
-        public bool IsActive { get; private set; } = true;
 
         public virtual ICollection<VoucherOrder> VoucherOrders { get; set; }
 
@@ -43,21 +42,29 @@ namespace SamStore.Order.Domain.Vouchers
 
         public void UseVoucher()
         {
-            QuantityUsed += 1;
+            QuantityUsed++;
 
+            if (!IsValid())
+                throw new Exception("Voucher is not valid to be used.");
+        }
+
+        public override bool IsValid()
+        {
             switch (VoucherType)
             {
                 case VoucherTypeEnum.Default:
                     if (QuantityUsed > Quantity)
-                        throw new Exception("Voucher reached the limit of uses.");
+                        return false;
                     break;
                 case VoucherTypeEnum.Expire:
                     if (DateTime.Now.Date > ExpireAt.Date)
-                        throw new Exception("Voucher already expired.");
+                        return false;
                     break;
                 default:
                     break;
             }
+
+            return true;
         }
     }
 }

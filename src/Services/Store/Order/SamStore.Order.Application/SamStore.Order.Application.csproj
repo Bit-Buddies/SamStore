@@ -9,7 +9,14 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Events\" />
-    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SamStore.Order.Domain\SamStore.Order.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,10 @@ using SamStore.Core.Extensions;
 using SamStore.Order.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using SamStore.Core.CQRS.MediatR;
+using SamStore.Order.Domain.Interfaces;
+using SamStore.Order.Infrastructure.Repositories;
+using SamStore.Order.Application.Interfaces;
+using SamStore.Order.Application.Queries;
 
 namespace SamStore.Order.API.Configurations
 {
@@ -12,6 +16,8 @@ namespace SamStore.Order.API.Configurations
         public static void AddDependencyInjection(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+            services.AddScoped<IVoucherRepository, VoucherRepository>();
+            services.AddScoped<IVoucherQueries, VoucherQueries>();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 

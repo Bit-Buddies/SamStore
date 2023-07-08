@@ -5,9 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddDependencyInjection(builder.Configuration);
+builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerConfiguration("Api Order");
+builder.Services.ConfigureObjectMapping(builder.Configuration);
 
 builder.Services.AddCors(setup =>
 {
