@@ -8,9 +8,9 @@ export enum ApiServiceEnum {
 }
 
 export abstract class BaseApiService {
-  private _identityBaseURL: string = "http://localhost:5274/api/";
-  private _catalogBaseURL: string = "http://localhost:5229/api/";
-  private _shoppingCartBaseURL: string = "http://localhost:5137/api/";
+  private _identityBaseURL: string = "http://localhost:5274/api/v1/";
+  private _catalogBaseURL: string = "http://localhost:5229/api/v1/";
+  private _shoppingCartBaseURL: string = "http://localhost:5137/api/v1/";
 
   protected _baseURL: string = "";
 

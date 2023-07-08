@@ -15,7 +15,7 @@ import { ModalDialogComponent } from "src/app/utils/modal-dialog";
 	styleUrls: ["./shopping-cart-core.component.scss"],
 })
 export class ShoppingCartCoreComponent extends ModalDialogComponent {
-	public displayedColumns = ["image", "details", "total", "actions"];
+	public displayedColumns = ["image", "details", "price", "total", "actions"];
 	public loginAlert: boolean = false;
 
 	constructor(
