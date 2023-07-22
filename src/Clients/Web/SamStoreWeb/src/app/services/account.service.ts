@@ -43,11 +43,11 @@ export class AccountService {
 	}
 
 	public callLogin(): Observable<boolean> {
-		return this._dialogService.genericDialog<AuthenticationModalComponent, any, boolean>(
+		return this._dialogService.genericDialog<AuthenticationModalComponent, boolean>(
 			AuthenticationModalComponent,
 			{
 				panelClass: "flex-dialog",
 			}
-		);
+		)
 	}
 }
