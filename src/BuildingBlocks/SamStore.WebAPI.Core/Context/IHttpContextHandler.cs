@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace SamStore.WebAPI.Core.User
+namespace SamStore.WebAPI.Core.Context
 {
     public interface IHttpContextHandler
     {

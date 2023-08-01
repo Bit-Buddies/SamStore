@@ -7,7 +7,7 @@ using SamStore.ShoppingCart.Application.Models;
 using SamStore.ShoppingCart.Domain.ShoppingCarts;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Controllers;
-using SamStore.WebAPI.Core.User;
+using SamStore.WebAPI.Core.Context;
 using System.Net;
 
 namespace SamStore.ShoppingCart.API.Controllers

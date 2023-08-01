@@ -3,7 +3,7 @@ using SamStore.ShoppingCart.Application.Extensions;
 using SamStore.ShoppingCart.Application.Models;
 using SamStore.ShoppingCart.Domain.ShoppingCarts;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
-using SamStore.WebAPI.Core.User;
+using SamStore.WebAPI.Core.Context;
 
 namespace SamStore.ShoppingCart.API.Services
 {

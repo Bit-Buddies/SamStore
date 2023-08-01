@@ -1,4 +1,4 @@
-﻿using SamStore.WebAPI.Core.User;
+﻿using SamStore.WebAPI.Core.Context;
 
 namespace SamStore.BFF.Orders.Configuration
 {

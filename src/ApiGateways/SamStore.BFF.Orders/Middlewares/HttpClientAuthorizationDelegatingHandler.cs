@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Primitives;
-using SamStore.WebAPI.Core.User;
+using SamStore.WebAPI.Core.Context;
 using System.Net.Http.Headers;
 
 namespace SamStore.BFF.Orders.Middlewares
