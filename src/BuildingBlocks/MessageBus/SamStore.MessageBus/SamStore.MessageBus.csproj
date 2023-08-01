@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyNetQ" Version="7.4.0" />
-    <PackageReference Include="Polly" Version="7.2.3" />
+    <PackageReference Include="EasyNetQ" Version="7.5.5" />
+    <PackageReference Include="Polly" Version="7.2.4" />
   </ItemGroup>
 
   <ItemGroup>
