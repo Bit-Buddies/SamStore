@@ -11,7 +11,7 @@ namespace SamStore.BFF.Orders.Configuration
 
             services.AddEndpointsApiExplorer();
 
-            services.Configure<AppServicesSettings>(configuration);
+            services.Configure<AppServicesSettingsDTO>(configuration);
 
             services.AddCors(options => 
                 options.AddPolicy("CorsPolicy", builder => builder

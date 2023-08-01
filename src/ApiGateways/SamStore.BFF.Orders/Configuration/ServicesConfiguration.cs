@@ -6,7 +6,7 @@ namespace SamStore.BFF.Orders.Configuration
     {
         public static void AddDiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddScoped<IHttpContextHandler, HttpContextHandler>();
         }
     }
