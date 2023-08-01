@@ -4,16 +4,10 @@ using SamStore.WebAPI.Core.API.Controllers;
 namespace SamStore.BFF.Orders.Controllers
 {
     [Route("api/[controller]")]
-    public class ShoppingCartController : MainController
+    public class ShoppingCartController : CustomController
     {
         [HttpGet]
         public async Task<IActionResult> GetCustomerCart()
-        {
-            return CustomResponse();
-        }
-
-        [HttpGet("items/quantity")]
-        public async Task<IActionResult> GetCustomerCartItemsQuantity()
         {
             return CustomResponse();
         }

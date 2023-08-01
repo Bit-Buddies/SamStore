@@ -6,9 +6,9 @@ namespace SamStore.BFF.Orders.Middlewares
 {
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
-        private readonly IContextUser _contextUser;
+        private readonly IHttpContextHandler _contextUser;
 
-        public HttpClientAuthorizationDelegatingHandler(IContextUser contextUser)
+        public HttpClientAuthorizationDelegatingHandler(IHttpContextHandler contextUser)
         {
             _contextUser = contextUser;
         }

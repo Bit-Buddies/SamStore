@@ -28,8 +28,6 @@ namespace SamStore.BFF.Orders.Configuration
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
