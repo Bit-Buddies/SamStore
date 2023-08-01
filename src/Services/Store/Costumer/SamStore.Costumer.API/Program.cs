@@ -1,11 +1,7 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using SamStore.Costumer.API.Configurations;
-using SamStore.Costumer.API.Services;
 using SamStore.Costumer.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Configurations;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +21,8 @@ builder.Services.AddDbContext<CustomerDbContext>(options =>
 
 builder.Services.AddDIConfiguration(builder.Configuration);
 
-builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("SamStore.Costumer.Application"));
+builder.Services.AddMediatR(options => 
+    options.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.Load("SamStore.Costumer.Application")));
 
 builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
