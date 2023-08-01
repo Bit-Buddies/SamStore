@@ -10,7 +10,7 @@ namespace SamStore.Catalog.API.Controllers
 {
     [Authorize]
     [Route("api/v1/[controller]")]
-    public class CatalogController : MainController
+    public class CatalogController : CustomController
     {
         private readonly IProductRepository _productRepository;
 

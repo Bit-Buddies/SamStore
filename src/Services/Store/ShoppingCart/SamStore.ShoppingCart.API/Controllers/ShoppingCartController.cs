@@ -14,7 +14,7 @@ namespace SamStore.ShoppingCart.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [Authorize]
-    public class ShoppingCartController : MainController
+    public class ShoppingCartController : CustomController
     {
         private readonly IShoppingCartService _shoppingCartService;
 

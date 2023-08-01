@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace SamStore.WebAPI.Core.API.Controllers
 {
     [ApiController]
-    public abstract class MainController : ControllerBase
+    public abstract class CustomController : ControllerBase
     {
         protected ICollection<string> Errors = new List<string>();
 

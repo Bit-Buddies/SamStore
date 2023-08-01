@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace SamStore.WebAPI.Core.User
 {
-    public class ContextUser : IContextUser
+    public class HttpContextHandler : IHttpContextHandler
     {
         private readonly IHttpContextAccessor _acessor;
         private string Name => _acessor.HttpContext.User.Identity.Name;
 
-        public ContextUser(IHttpContextAccessor acessor)
+        public HttpContextHandler(IHttpContextAccessor acessor)
         {
             _acessor = acessor;
         }

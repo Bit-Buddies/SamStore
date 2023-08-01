@@ -26,7 +26,7 @@ namespace SamStore.ShoppingCart.API.Configurations
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IContextUser, ContextUser>();
+            services.AddScoped<IHttpContextHandler, HttpContextHandler>();
         }
 
         public static void AddServiceConfiguration(this IServiceCollection services, IConfiguration configuration)

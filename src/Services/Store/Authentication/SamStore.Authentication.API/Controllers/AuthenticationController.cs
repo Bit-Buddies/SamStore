@@ -22,7 +22,7 @@ using ValidationFailure = FluentValidation.Results.ValidationFailure;
 namespace SamStore.Authentication.API.Controllers
 {
     [Route("api/v1/[controller]")]
-    public class AuthenticationController : MainController
+    public class AuthenticationController : CustomController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;

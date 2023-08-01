@@ -8,7 +8,7 @@ using System.Net;
 namespace SamStore.Order.API.Controllers
 {
     [Route("api/v1/[controller]")]
-    public class VoucherController : MainController
+    public class VoucherController : CustomController
     {
         private readonly IVoucherQueries _voucherQueries;
 

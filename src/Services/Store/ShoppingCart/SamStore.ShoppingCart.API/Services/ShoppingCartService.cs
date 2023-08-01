@@ -9,10 +9,10 @@ namespace SamStore.ShoppingCart.API.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
-        private readonly IContextUser _contextUser;
+        private readonly IHttpContextHandler _contextUser;
         private readonly ShoppingCartContext _context;
 
-        public ShoppingCartService(IContextUser contextUser, ShoppingCartContext context)
+        public ShoppingCartService(IHttpContextHandler contextUser, ShoppingCartContext context)
         {
             _contextUser = contextUser;
             _context = context;

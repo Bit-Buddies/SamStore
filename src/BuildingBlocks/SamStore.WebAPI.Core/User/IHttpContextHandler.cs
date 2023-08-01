@@ -3,7 +3,7 @@ using System.Security.Claims;
 
 namespace SamStore.WebAPI.Core.User
 {
-    public interface IContextUser
+    public interface IHttpContextHandler
     {
         Guid GetUserId();
         string GetUserEmail();
