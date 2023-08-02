@@ -27,7 +27,10 @@ namespace SamStore.BFF.Orders.Controllers
             var cart = await _shoppingCartService.GetCustomerCartAsync();
 
             if (cart == null)
-                return BadRequest("Couldn't take the shopping cart");
+            {
+                AddError("Couldn't take the shopping cart");
+                return CustomResponse();
+            }
 
             return CustomResponse(cart);
         }

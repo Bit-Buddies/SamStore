@@ -1,8 +1,11 @@
 ﻿using SamStore.BFF.Orders.Interfaces;
+using SamStore.BFF.Orders.Middlewares;
 using SamStore.BFF.Orders.Models;
 using SamStore.BFF.Orders.Services;
 using SamStore.Core.Domain.Utils;
 using SamStore.WebAPI.Core.Context;
+using Polly;
+using SamStore.Core.Extensions;
 
 namespace SamStore.BFF.Orders.Configuration
 {
@@ -14,11 +17,17 @@ namespace SamStore.BFF.Orders.Configuration
 
             services.Configure<AppServicesSettingsDTO>(configuration.GetSection("ApiBaseUrls"));
 
-            services.AddHttpClient();
             services.AddHttpContextAccessor();
             services.AddScoped<IHttpContextHandler, HttpContextHandler>();
-
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
+
+            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+
+            services.AddHttpClient<IShoppingCartService, ShoppingCartService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PolicyExtensions.WaitAndTryAgain())
+                .AddTransientHttpErrorPolicy(options => 
+                    options.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
         }
 
         private static void ValidateBaseUrls(IConfiguration configuration)

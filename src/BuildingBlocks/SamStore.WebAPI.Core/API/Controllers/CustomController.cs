@@ -16,7 +16,7 @@ namespace SamStore.WebAPI.Core.API.Controllers
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                {"Mensagens", Errors.ToArray() },
+                {"ErrorMessages", Errors.ToArray() },
             }));
         }
 
