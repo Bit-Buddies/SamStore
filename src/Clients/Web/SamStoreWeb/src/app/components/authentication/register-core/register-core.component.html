@@ -36,9 +36,9 @@
 				<mat-label>CPF</mat-label>
 				<input
 					matInput
-					placeholder="Your CPF"
+					placeholder="Ex: 123.456.789-00"
 					formControlName="cpf"
-					mask="000.000.000-99" />
+					(input)="onCPFInputChanges($event)"/>
 				<mat-error *ngIf="getControlError('cpf', 'required')">Required field </mat-error>
 				<mat-error *ngIf="getControlError('cpf', 'cpf')">Invalid CPF</mat-error>
 			</mat-form-field>

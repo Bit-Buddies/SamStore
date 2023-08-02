@@ -5,5 +5,5 @@ export interface ResponseApiError {
 }
 
 export interface Errors {
-  Mensagens: string[];
+  ErrorMessages: string[];
 }

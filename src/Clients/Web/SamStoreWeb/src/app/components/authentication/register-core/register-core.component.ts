@@ -9,11 +9,13 @@ import { Router } from "@angular/router";
 import { ValidateCPF } from "src/app/utils/custom-validators";
 import { LoadingService } from "src/app/services/loading.service";
 import { FormErrorsService } from "src/app/services/form-errors.service";
+import { NgxMaskDirective, provideEnvironmentNgxMask, provideNgxMask } from "ngx-mask";
+import { ONLY_NUMBER_REGEX } from "src/app/utils/regex-collection";
 
 @Component({
 	selector: "app-register-core",
 	templateUrl: "./register-core.component.html",
-	styleUrls: ["./register-core.component.scss"],
+	styleUrls: ["./register-core.component.scss"]
 })
 export class RegisterCoreComponent implements OnInit {
 	@Output() public onRegisterCompletedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -86,7 +88,7 @@ export class RegisterCoreComponent implements OnInit {
 			error: (response) => {
 				const errors = this._authenticationService.extractErrors(response);
 
-				if (!!errors.errors) this.formErrorsService.errors = errors?.errors.Mensagens;
+				if (!!errors.errors) this.formErrorsService.errors = errors?.errors.ErrorMessages;
 				else
 					this._toastrService.error("An error has ocourred", undefined, {
 						positionClass: "toast-bottom-right",
@@ -118,5 +120,15 @@ export class RegisterCoreComponent implements OnInit {
 		}
 
 		return repeatPasswordControl.setErrors({ passwordMismatched: true });
+	}
+
+	onCPFInputChanges(event: any){
+		const onlyNumbers = event.target.value.replace(ONLY_NUMBER_REGEX, "")
+			.replace(/(\d{3})(\d)/, "$1.$2")
+			.replace(/(\d{3})(\d)/, "$1.$2")
+			.replace(/(\d{3})(\d{1,2})/, "$1-$2")
+			.replace(/(-\d{2})\d+?$/, "$1");
+
+		this.registerForm.get('cpf')?.patchValue(onlyNumbers);
 	}
 }

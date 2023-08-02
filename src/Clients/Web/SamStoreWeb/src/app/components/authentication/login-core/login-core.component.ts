@@ -69,7 +69,7 @@ export class LoginCoreComponent implements OnInit {
 				const errors = this._authenticationService.extractErrors(response);
 
 				if (!!errors.errors) {
-					this.formErrorsService.errors = errors.errors.Mensagens;
+					this.formErrorsService.errors = errors.errors.ErrorMessages;
 				} else
 					this._toastrService.error("An error has ocourred", undefined, {
 						positionClass: "toast-bottom-right",
