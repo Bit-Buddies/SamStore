@@ -22,7 +22,7 @@ namespace SamStore.BFF.Orders.Middlewares
 
             string accessToken = authorizationHeader.ToString().Replace("Bearer ", string.Empty);
 
-            if (accessToken != null)
+            if (!string.IsNullOrWhiteSpace(accessToken))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             return base.SendAsync(request, cancellationToken);
