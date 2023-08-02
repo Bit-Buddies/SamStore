@@ -3,6 +3,7 @@ using SamStore.Costumer.Application.Events.Customers;
 using SamStore.Costumer.Domain.Customers;
 using SamStore.Costumer.Domain.Interfaces;
 using SamStore.Core.CQRS.Commands;
+using SamStore.Core.Extensions;
 
 namespace SamStore.Costumer.Application.Commands.Customers
 {
@@ -20,7 +21,9 @@ namespace SamStore.Costumer.Application.Commands.Customers
             if (!request.IsValid())
                 return request.ValidationResult;
 
-            Customer customer = await _customerRepository.GetByCPF(request.CPFNumber);
+            string cpf = request.CPFNumber.GetOnlyNumbers();
+
+            Customer customer = await _customerRepository.GetByCPF(cpf);
 
             if(customer != null)
             {
@@ -28,7 +31,7 @@ namespace SamStore.Costumer.Application.Commands.Customers
                 return ValidationResult;
             }
 
-            customer = new Customer(request.Id, request.Name, request.EmailAddress, request.CPFNumber);
+            customer = new Customer(request.Id, request.Name, request.EmailAddress, cpf);
 
             _customerRepository.Insert(customer);
 
