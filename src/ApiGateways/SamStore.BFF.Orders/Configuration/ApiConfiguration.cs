@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using SamStore.BFF.Orders.Models;
-
-namespace SamStore.BFF.Orders.Configuration
+﻿namespace SamStore.BFF.Orders.Configuration
 {
     public static class ApiConfiguration
     {
@@ -10,8 +7,6 @@ namespace SamStore.BFF.Orders.Configuration
             services.AddControllers();
 
             services.AddEndpointsApiExplorer();
-
-            services.Configure<AppServicesSettingsDTO>(configuration);
 
             services.AddCors(options => 
                 options.AddPolicy("CorsPolicy", builder => builder

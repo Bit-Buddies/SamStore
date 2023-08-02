@@ -5,14 +5,19 @@ namespace SamStore.WebAPI.Core.Http
 {
     public abstract class HttpClientService
     {
-        public HttpClient HttpClient { get; set; }
+        protected HttpClient _httpClient;
+
+        public HttpClientService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
 
         public async Task<T> GetAsync<T>(string uri)
         {
-            HttpClient.DefaultRequestHeaders.Accept
+            _httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            using (HttpResponseMessage response = await HttpClient.GetAsync(uri))
+            using (HttpResponseMessage response = await _httpClient.GetAsync(uri))
             {
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -23,12 +28,12 @@ namespace SamStore.WebAPI.Core.Http
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
         {
-            HttpClient.DefaultRequestHeaders.Accept
+            _httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(dataRequest));
 
-            using (HttpResponseMessage response = await HttpClient.PostAsync(uri, content))
+            using (HttpResponseMessage response = await _httpClient.PostAsync(uri, content))
             {
                 response.EnsureSuccessStatusCode();
 
@@ -40,12 +45,12 @@ namespace SamStore.WebAPI.Core.Http
 
         public async Task<TResponse> PutAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
         {
-            HttpClient.DefaultRequestHeaders.Accept
+            _httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(dataRequest));
 
-            using (HttpResponseMessage response = await HttpClient.PutAsync(uri, content))
+            using (HttpResponseMessage response = await _httpClient.PutAsync(uri, content))
             {
                 response.EnsureSuccessStatusCode();
 
@@ -57,12 +62,12 @@ namespace SamStore.WebAPI.Core.Http
 
         public async Task<TResponse> PatchAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
         {
-            HttpClient.DefaultRequestHeaders.Accept
+            _httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = new StringContent(JsonConvert.SerializeObject(dataRequest));
 
-            using (HttpResponseMessage response = await HttpClient.PatchAsync(uri, content))
+            using (HttpResponseMessage response = await _httpClient.PatchAsync(uri, content))
             {
                 response.EnsureSuccessStatusCode();
 
@@ -74,10 +79,10 @@ namespace SamStore.WebAPI.Core.Http
 
         public async Task<bool> DeleteAsync<TRequest>(string uri)
         {
-            HttpClient.DefaultRequestHeaders.Accept
+            _httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            using HttpResponseMessage response = await HttpClient.DeleteAsync(uri);
+            using HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
             
             return response.IsSuccessStatusCode;
         }
