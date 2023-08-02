@@ -4,20 +4,21 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ShoppingCartDTO } from "src/app/models/ShoppingCarts/shopping-cart.DTO";
 import { ShoppingCartItemDTO } from "src/app/models/ShoppingCarts/shopping-cart-item.DTO";
+import { environment } from "src/environments/environment";
 
 @Injectable({
 	providedIn: "root",
 })
-export class ShoppingCartControllerService extends BaseApiService {
+export class OrderBFFControllerService extends BaseApiService {
 	constructor(private _httpClient: HttpClient) {
-		super("ShoppingCart", ApiServiceEnum.ShoppingCart);
+		super(environment.orderBffApiBaseUrl);
 	}
 
 	public getCart(): Observable<ShoppingCartDTO> {
-		return this._httpClient.get<ShoppingCartDTO>(`${this._baseURL}`);
+		return this._httpClient.get<ShoppingCartDTO>(`${this._baseURL}shoppingcart`);
 	}
 
 	public updateCart(shoppingCart: ShoppingCartDTO) {
-		return this._httpClient.put<void>(`${this._baseURL}`, shoppingCart);
+		return this._httpClient.put<void>(`${this._baseURL}shoppingcart`, shoppingCart);
 	}
 }

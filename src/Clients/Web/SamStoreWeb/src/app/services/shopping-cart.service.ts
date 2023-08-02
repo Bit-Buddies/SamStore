@@ -6,7 +6,7 @@ import { AccountService } from "./account.service";
 import { ProductDTO } from "../models/Products/product.DTO";
 import { ShoppingCartCoreComponent } from "../components/shopping/shopping-cart-core/shopping-cart-core.component";
 import { DialogService } from "../utils/dialog-service";
-import { ShoppingCartControllerService } from "./controllers/shopping-cart-controller.service";
+import { OrderBFFControllerService } from "./controllers/order-bff-controller.service";
 import { lastValueFrom } from "rxjs";
 
 @Injectable({
@@ -20,7 +20,7 @@ export class ShoppingCartService {
 		private _accountService: AccountService,
 		private _cookieService: CookieService,
 		private _dialogService: DialogService,
-		private _shoppingCartControllerService: ShoppingCartControllerService
+		private _orderBFFControllerService: OrderBFFControllerService
 	) {}
 
 	public init() {
@@ -29,7 +29,7 @@ export class ShoppingCartService {
 			return;
 		}
 
-		this._shoppingCartControllerService.getCart().subscribe({
+		this._orderBFFControllerService.getCart().subscribe({
 			next: (cart) => {
 				if (!!cart) {
 					this.shoppingCart = cart;
@@ -133,7 +133,7 @@ export class ShoppingCartService {
 
 	public async updateUserCart() {
 		if (this._accountService.isLogged()) {
-			await lastValueFrom(this._shoppingCartControllerService.updateCart(this.shoppingCart!)).then();
+			await lastValueFrom(this._orderBFFControllerService.updateCart(this.shoppingCart!)).then();
 		}
 	}
 
