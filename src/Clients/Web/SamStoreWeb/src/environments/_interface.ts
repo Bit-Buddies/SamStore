@@ -1,5 +1,5 @@
 export interface IEnvironmentSettings {
-    authenticationApiBaseUrl: string;
-    catalogApiBaseUrl: string;
-    orderBffApiBaseUrl: string;
+    AUTHENTICATION_API_BASE_URL: string;
+    CATALOG_API_BASE_URL: string;
+    BFF_ORDERS_API_BASE_URL: string;
 }
