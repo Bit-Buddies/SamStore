@@ -11,7 +11,7 @@ import { environment } from "src/environments/environment";
 })
 export class OrderBFFControllerService extends BaseApiService {
 	constructor(private _httpClient: HttpClient) {
-		super(environment.orderBffApiBaseUrl);
+		super(environment.BFF_ORDERS_API_BASE_URL);
 	}
 
 	public getCart(): Observable<ShoppingCartDTO> {

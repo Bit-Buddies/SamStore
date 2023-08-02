@@ -10,7 +10,7 @@ import { environment } from "src/environments/environment";
 })
 export class CatalogControllerService extends BaseApiService {
 	constructor(private _httpClient: HttpClient) {
-		super(environment.catalogApiBaseUrl);
+		super(environment.CATALOG_API_BASE_URL);
 	}
 
 	getAllProducts(): Observable<Array<ProductDTO>> {

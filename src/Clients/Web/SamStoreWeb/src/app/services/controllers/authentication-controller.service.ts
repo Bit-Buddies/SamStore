@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment";
 })
 export class AuthenticationControllerService extends BaseApiService {
 	constructor(private _httpClient: HttpClient) {
-		super(environment.authenticationApiBaseUrl);
+		super(environment.AUTHENTICATION_API_BASE_URL);
 	}
 
 	registerUser(registerData: RegisterUserData): Observable<UserData> {
