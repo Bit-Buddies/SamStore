@@ -1,4 +1,6 @@
-﻿namespace SamStore.BFF.Orders.Configuration
+﻿using SamStore.WebAPI.Core.API.Middlewares;
+
+namespace SamStore.BFF.Orders.Configuration
 {
     public static class ApiConfiguration
     {
@@ -22,6 +24,8 @@
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseCors("CorsPolicy");
 

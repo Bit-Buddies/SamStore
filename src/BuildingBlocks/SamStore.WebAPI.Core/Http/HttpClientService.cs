@@ -43,6 +43,18 @@ namespace SamStore.WebAPI.Core.Http
             }
         }
 
+        public async Task<bool> PostAsync<TRequest>(string uri, TRequest dataRequest)
+        {
+            _httpClient.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(dataRequest));
+
+            using HttpResponseMessage response = await _httpClient.PostAsync(uri, content);
+
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<TResponse> PutAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
         {
             _httpClient.DefaultRequestHeaders.Accept
@@ -60,6 +72,18 @@ namespace SamStore.WebAPI.Core.Http
             }
         }
 
+        public async Task<bool> PutAsync<TRequest>(string uri, TRequest dataRequest)
+        {
+            _httpClient.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(dataRequest));
+
+            using HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
+
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<TResponse> PatchAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
         {
             _httpClient.DefaultRequestHeaders.Accept
@@ -75,6 +99,18 @@ namespace SamStore.WebAPI.Core.Http
 
                 return JsonConvert.DeserializeObject<TResponse>(responseBody);
             }
+        }
+
+        public async Task<bool> PatchAsync<TRequest>(string uri, TRequest dataRequest)
+        {
+            _httpClient.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(dataRequest));
+
+            using HttpResponseMessage response = await _httpClient.PatchAsync(uri, content);
+
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<bool> DeleteAsync<TRequest>(string uri)

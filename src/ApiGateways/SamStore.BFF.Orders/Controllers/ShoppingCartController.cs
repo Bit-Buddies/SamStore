@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SamStore.BFF.Orders.Interfaces;
+using SamStore.BFF.Orders.Models;
 using SamStore.WebAPI.Core.API.Controllers;
+using System.Net;
 
 namespace SamStore.BFF.Orders.Controllers
 {
@@ -14,22 +16,34 @@ namespace SamStore.BFF.Orders.Controllers
             _shoppingCartService = shoppingCartService;
         }
 
+        /// <summary>
+        /// Get customer cart
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetCustomerCart()
+        [ProducesResponseType(typeof(ShoppingCartDTO), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ShoppingCartDTO>> GetCart()
         {
-            return CustomResponse();
+            var cart = await _shoppingCartService.GetCustomerCartAsync();
+
+            if (cart == null)
+                return BadRequest("Couldn't take the shopping cart");
+
+            return CustomResponse(cart);
         }
 
+        /// <summary>
+        /// Update customer cart
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateCustomerCart()
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateCart(ShoppingCartDTO shoppingCart)
         {
-            return CustomResponse();
-        }
+            var result = await _shoppingCartService.UpdateCustomerCartAsync(shoppingCart);
 
-        [HttpDelete]
-        public async Task<IActionResult> ClearCustomerCart()
-        {
-            return CustomResponse();
+            return CustomResponse(result);     
         }
     }
 }
