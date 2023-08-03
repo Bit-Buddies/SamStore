@@ -46,6 +46,12 @@ namespace SamStore.BFF.Orders.Controllers
         {
             var result = await _shoppingCartService.UpdateCustomerCartAsync(shoppingCart);
 
+            if(result == false)
+            {
+                AddError("Couldn't update shopping cart.");
+                return CustomResponse(result);
+            }
+
             return CustomResponse(result);     
         }
     }

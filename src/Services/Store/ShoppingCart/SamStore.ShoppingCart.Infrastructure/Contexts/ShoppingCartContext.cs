@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
 using SamStore.Core.Infrastructure.Data.Extensions;
@@ -36,6 +37,8 @@ namespace SamStore.ShoppingCart.Infrastructure.Contexts
 
         public async Task<bool> Commit()
         {
+            ChangeTracker.DetectChanges();
+
             if (!ChangeTracker.HasChanges())
                 return true;
 

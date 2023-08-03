@@ -13,14 +13,16 @@ namespace SamStore.BFF.Orders.Services
 
         public async Task<ShoppingCartDTO> GetCustomerCartAsync()
         {
-            ShoppingCartDTO result = await GetAsync<ShoppingCartDTO>("ShoppingCart");
+            ShoppingCartDTO result = await EnsureSuccessStatusCode()
+                .GetAsync<ShoppingCartDTO>("ShoppingCart");
 
             return result;
         }
 
         public async Task<bool> UpdateCustomerCartAsync(ShoppingCartDTO shoppingCart)
         {
-            bool result = await PutAsync("/ShoppingCart", shoppingCart);
+            bool result = await EnsureSuccessStatusCode()
+                .PutAsync("ShoppingCart", shoppingCart);
 
             return result;
         }

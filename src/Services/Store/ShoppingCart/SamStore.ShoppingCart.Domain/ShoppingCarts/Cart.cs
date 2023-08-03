@@ -14,7 +14,7 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
     public class Cart : Entity, IAggregateRoot
     {
         public Guid CostumerId { get; private set; }
-        public ICollection<CartItem> Items { get; private set; } = new List<CartItem>();
+        public virtual ICollection<CartItem> Items { get; private set; } = new List<CartItem>();
 
         public Cart() { }
         public Cart(Guid costumerId)
@@ -61,6 +61,16 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
 
             Items.Remove(oldItem);
             Items.Add(item);
+        }
+
+        public void UpdateQuantity(Guid productId, int quantity)
+        {
+            var item = GetItemByProductId(productId);
+
+            item.SetQuantity(quantity);
+
+            if (item.Quantity <= 0)
+                Items.Remove(item);
         }
 
         public void RemoveItem(Guid productId)

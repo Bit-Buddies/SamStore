@@ -24,10 +24,7 @@ namespace SamStore.BFF.Orders.Configuration
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
             services.AddHttpClient<IShoppingCartService, ShoppingCartService>()
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                .AddPolicyHandler(PolicyExtensions.WaitAndTryAgain())
-                .AddTransientHttpErrorPolicy(options => 
-                    options.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
         }
 
         private static void ValidateBaseUrls(IConfiguration configuration)
