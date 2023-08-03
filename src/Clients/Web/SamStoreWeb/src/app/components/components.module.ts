@@ -13,6 +13,7 @@ import { RegisterCoreComponent } from "./authentication/register-core/register-c
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthenticationModalComponent } from "./authentication/authentication-modal/authentication-modal.component";
 import { ConfirmationDialogComponent } from "./main/confirmation-dialog/confirmation-dialog.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 const componentsModules = [
 	ModalHeaderComponent,
@@ -30,6 +31,12 @@ const componentsModules = [
 @NgModule({
 	declarations: [...componentsModules],
 	exports: [...componentsModules],
-	imports: [CommonModule, RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
+	imports: [
+		CommonModule, 
+		RouterModule, 
+		MaterialModule, 
+		FormsModule, 
+		ReactiveFormsModule, 
+	],
 })
 export class ComponentsModule {}

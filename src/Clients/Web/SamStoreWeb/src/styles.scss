@@ -337,6 +337,10 @@ mat-card-actions {
 	}
 }
 
+.no-animation {
+	animation: none;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {
 	.shopping-cart-container {

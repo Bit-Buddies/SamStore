@@ -4,11 +4,13 @@ import { CatalogControllerService } from "../../../../services/controllers/catal
 import { Component, OnInit } from "@angular/core";
 import { IBaseComponent } from "src/app/interfaces/base-component.interface";
 import { Subject, takeUntil } from "rxjs";
+import { fadeAnimation, staggerAnimation } from "src/app/utils/animation-collection";
 
 @Component({
   selector: "app-general-catalog",
   templateUrl: "./general-catalog.component.html",
   styleUrls: ["./general-catalog.component.scss"],
+  animations: [ staggerAnimation("45ms"), fadeAnimation("1000ms cubic-bezier(0.77,0,0.18,1)")]
 })
 export class GeneralCatalogComponent implements OnInit, IBaseComponent {
   public products: Array<ProductDTO> = [];

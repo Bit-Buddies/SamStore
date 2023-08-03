@@ -5,7 +5,10 @@
 	<section>
 		<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0; else NoContent">
 			<div class="items-container default-scroll">
-				<table style="border-bottom: 1px solid #ddd" mat-table
+				<table 
+					style="border-bottom: 1px solid #ddd" 
+					mat-table 
+					[@stagger]="this.shoppingCartService.shoppingCart!.items.length"
 					[dataSource]="this.shoppingCartService.shoppingCart!.items">
 					<!-- Image column -->
 					<ng-container matColumnDef="image">
@@ -82,32 +85,20 @@
 							{{ this.shoppingCartService.shoppingCart?.total | currency : "BRL" }}
 						</strong>
 					</h3>
-				</div>	
+				</div>
 			</section>
 
 			<div class="shopping-cart-footer" fxLayout="row wrap" fxLayoutAlign="end" fxLayoutAlign.lt-md="center">
-				<div 
-					fxFlex="40" 
-					fxFlex.sm="60" 
-					fxFlex.xs="100" 
-					gdGap="12px" 
-					gdAreas="header header | button1 button2">
+				<div fxFlex="40" fxFlex.sm="60" fxFlex.xs="100" gdGap="12px" gdAreas="header header | button1 button2">
 					<span *ngIf="this.loginAlert" class="alert-box" gdArea="header">
 						<ul>
 							<li>You need to login to proceed with your purchase.</li>
 						</ul>
 					</span>
-					<button 
-						mat-flat-button 
-						(click)="this.onClickContinueButton()" 
-						gdArea="button1">
+					<button mat-flat-button (click)="this.onClickContinueButton()" gdArea="button1">
 						Keep buying
 					</button>
-					<button 
-						mat-raised-button 
-						color="primary" 
-						(click)="this.checkout()"
-						gdArea="button2">
+					<button mat-raised-button color="primary" (click)="this.checkout()" gdArea="button2">
 						Checkout
 					</button>
 				</div>
@@ -117,10 +108,7 @@
 </section>
 
 <ng-template #NoContent>
-	<div 
-		fxLayout="column nowrap" 
-		fxLayoutAlign="center center" 
-		class="no-content-container">
+	<div fxLayout="column nowrap" fxLayoutAlign="center center" class="no-content-container">
 		<mat-icon class="mat-18 no-content-icon">production_quantity_limits</mat-icon>
 		<h2>Your shopping cart is empty</h2>
 	</div>
