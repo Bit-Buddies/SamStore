@@ -4,7 +4,18 @@
 @import "./palettes";
 
 :root {
-	--card-shadow: rgba(123, 163, 199, 0.3) 0px 13px 27px -5px, rgba(123, 163, 199, 0.3) 0px 8px 16px -8px;
+	--card-shadow: #7ba3c74d 0px 13px 27px -5px, rgba(123, 163, 199, 0.3) 0px 8px 16px -8px;
+	--card-init-animation: CardInitializeContent 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes CardInitializeContent{
+	0% {
+		opacity: 0;
+		transform: translateY(8px);
+	}to {
+		opacity: 100%;
+		transform: translateY(0px);
+	}
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -188,6 +199,10 @@ mat-card {
 	padding: 16px;
 }
 
+// .modal-main-background {
+// 	// animation: var(--card-init-animation);
+// }
+
 .toast-container .ngx-toastr {
 	box-shadow: none !important;
 }
@@ -229,6 +244,7 @@ mat-card-actions {
 }
 
 .mat-mdc-card {
+	animation: var(--card-init-animation);
 	box-shadow: var(--card-shadow) !important;
 	border-radius: 8px !important;
 }
@@ -280,7 +296,6 @@ mat-card-actions {
 
 .flex-dialog {
 	height: auto;
-	transition: all 5s ease;
 }
 
 .xs-dialog {

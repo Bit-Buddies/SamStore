@@ -75,7 +75,7 @@ export class ShoppingCartService {
 				this.updateShoppingCartIntoCookies();
 			}
 		} finally {
-			return await this.updateUserCart();
+			await this.updateUserCart();
 		}
 	}
 
@@ -132,9 +132,12 @@ export class ShoppingCartService {
 	}
 
 	public async updateUserCart() {
-		if (this._accountService.isLogged()) {
-			await lastValueFrom(this._orderBFFControllerService.updateCart(this.shoppingCart!)).then();
-		}
+		const isLogged = this._accountService.isLogged();
+
+		if(!isLogged)
+			return;	
+
+		await lastValueFrom(this._orderBFFControllerService.updateCart(this.shoppingCart!)).then();
 	}
 
 	public openShoppingCartModal() {
