@@ -47,24 +47,24 @@ export class RegisterCoreComponent implements OnInit {
 		this.registerForm = this._formBuilder.group({
 			name: [
 				"",
-				Validators.compose([
+				[
 					Validators.required,
 					Validators.minLength(3),
 					Validators.maxLength(50),
 					Validators.pattern(/^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,4}$/),
-				]),
+				],
 			],
-			cpf: ["", Validators.compose([Validators.required, ValidateCPF()])],
-			email: ["", Validators.compose([Validators.required, Validators.email])],
+			cpf: ["", [Validators.required, ValidateCPF()]],
+			email: ["", [Validators.required, Validators.email]],
 			password: [
 				"",
-				Validators.compose([
+				[
 					Validators.required,
 					Validators.minLength(8),
 					Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$/),
-				]),
+				],
 			],
-			repeatPassword: ["", Validators.compose([Validators.required])],
+			repeatPassword: ["", [Validators.required]],
 		});
 	}
 

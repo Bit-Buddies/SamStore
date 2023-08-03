@@ -32,14 +32,14 @@ export class LoginCoreComponent implements OnInit {
 		private _toastrService: ToastrService,
 		private _globalEventService: GlobalEventsService,
 		public loadingService: LoadingService
-	) {
-		this.loginForm = _formBuilder.group({
-			email: ["", Validators.compose([Validators.required, Validators.email])],
-			password: ["", Validators.required],
-		});
-	}
+	) { }
 
 	ngOnInit(): void {
+		this.loginForm = this._formBuilder.group({
+			email: ["", [Validators.required, Validators.email]],
+			password: ["", Validators.required],
+		});
+
 		this.loadingService.onLoadingChange.subscribe({
 			next: (isLoading) => {
 				if (isLoading) this.loginForm.disable();
