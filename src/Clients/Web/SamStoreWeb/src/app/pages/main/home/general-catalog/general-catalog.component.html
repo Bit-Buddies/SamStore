@@ -1,11 +1,16 @@
 <div
   class="container"
   style="padding-block: 24px">
-  <app-page-title-more title="Best sellers of the week" moreButtonDescription="See more" [moreButtonActionCallback]="this.onMoreButtonPressed"></app-page-title-more>
+  <app-page-title-more 
+    title="Best sellers of the week" 
+    moreButtonDescription="See more" 
+    [moreButtonActionCallback]="this.onMoreButtonPressed"></app-page-title-more>
   <div
     fxLayout="row wrap"
     fxLayout.xs="column"
-    fxLayoutGap="16px grid">
+    fxLayoutGap="16px grid"
+    [@stagger]="products.length"
+    @fade>
     <div
       fxFlex.lt-md="50"
       fxFlex.md="33"

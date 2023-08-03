@@ -1,4 +1,5 @@
 import {
+    AnimationTriggerMetadata,
     animate,
     keyframes,
     query,
@@ -9,19 +10,19 @@ import {
     trigger,
 } from "@angular/animations";
 
-export const fadeAnimation = (timing: string) =>
+export const fadeAnimation = (timing: string) : AnimationTriggerMetadata =>
     trigger(
         'fade', [
         transition(':enter', [
-            style({ opacity: 0}),
-            animate(timing, style({ opacity: 1 }))
+            style({ opacity: 0, transform: "translateY(12px)"}),
+            animate(timing, style({ opacity: 1, transform: "translateY(0px)" }))
         ]),
         transition(':leave', [
             style({opacity: 1}),
             animate(timing, style({opacity: 0}))
         ])])
 
-export const staggerAnimation = (delay: string) =>
+export const staggerAnimation = (delay: string) : AnimationTriggerMetadata =>
     trigger("stagger", [
         transition("* <=> *", [
             query(":enter", [
@@ -37,7 +38,7 @@ export const staggerAnimation = (delay: string) =>
                 animate("250ms cubic-bezier(0.79,0.14,0.15,0.86)", style(
                     { 
                         opacity: 0,
-                        transform: "scale(0.95, 0.2)"
+                        transform: "translateY(12px)"
                     })),
                 { optional: true})
             ]),

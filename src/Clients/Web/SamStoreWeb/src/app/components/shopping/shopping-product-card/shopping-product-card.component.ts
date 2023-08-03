@@ -6,11 +6,13 @@ import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { IBaseComponent } from "src/app/interfaces/base-component.interface";
 import { Subject, takeUntil } from "rxjs";
+import { fadeAnimation } from "src/app/utils/animation-collection";
 
 @Component({
 	selector: "app-shopping-product-card",
 	templateUrl: "./shopping-product-card.component.html",
 	styleUrls: ["./shopping-product-card.component.scss"],
+	animations: [ fadeAnimation("200ms ease-in-out") ]
 })
 export class ShoppingProductCardComponent implements IBaseComponent {
 	@Input() public product?: ProductDTO;
