@@ -32,8 +32,7 @@ export class DialogService {
 	): Observable<TResult> {
 		config = {
 			...config,
-			restoreFocus: false,
-			panelClass: "modal-main-background"
+			restoreFocus: false
 		};
 
 		return this.dialogService.open(componentRef, config).afterClosed();

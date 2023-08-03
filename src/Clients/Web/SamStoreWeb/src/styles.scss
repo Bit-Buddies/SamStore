@@ -199,10 +199,6 @@ mat-card {
 	padding: 16px;
 }
 
-// .modal-main-background {
-// 	// animation: var(--card-init-animation);
-// }
-
 .toast-container .ngx-toastr {
 	box-shadow: none !important;
 }
@@ -278,6 +274,10 @@ mat-card-actions {
 		font-size: smaller;
 		font-weight: bold;
 	}
+}
+
+.cdk-overlay-pane {
+	
 }
 
 .shopping-cart-container {

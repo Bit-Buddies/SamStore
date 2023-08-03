@@ -17,6 +17,9 @@
 
 .items-container {
 	margin-bottom: 24px;
+	max-height: calc(100vh - 300px); 
+	overflow-y: overlay; 
+	box-sizing: border-box
 
 	h3 {
 		font-weight: bold;
@@ -27,6 +30,18 @@
 		vertical-align: middle;
 		max-height: 135px;
 		padding: 12px;
+	}
+
+	.mat-mdc-row {
+		transition: background-color 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+		&:hover {
+			background-color: #EFEFEF;
+
+			* h3 {
+				font-weight: bold;
+			}
+		}	
 	}
 
 	.mat-column-image {
@@ -66,12 +81,20 @@
 		}
 	}
 
+	.mat-column-price {
+		h3 {
+			font-weight: 500;
+			margin: 0;
+		}
+	}
+
 	.mat-column-total {
 		padding: 12px;
 		text-align: end;
+		
+		h3 {
+			font-weight: 500;
+			margin: 0;
+		}
 	}
-}
-
-.cell-row-text {
-	font-weight: bold;
 }
