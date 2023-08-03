@@ -24,17 +24,25 @@ namespace SamStore.Costumer.Infrastructure.Contexts
 
         public async Task<bool> Commit()
         {
-            if (!ChangeTracker.HasChanges())
-                return true;
+            try
+            {
+                if (!ChangeTracker.HasChanges())
+                    return true;
 
-            ContextTrackerConfigurations.DetectChanges(ChangeTracker);
+                ContextTrackerConfigurations.DetectChanges(ChangeTracker);
 
-            var success = await SaveChangesAsync() > 0;
+                var success = await SaveChangesAsync() > 0;
 
-            if (success)
-                await _mediatorHandler.PublishEvents(this);
+                if (success)
+                    await _mediatorHandler.PublishEvents(this);
 
-            return success;
+                return success;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            } 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

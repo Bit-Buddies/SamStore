@@ -1,0 +1,13 @@
+:host ::ng-deep {
+    app-login-core {
+        form {
+            animation: var(--card-init-animation);
+        }
+    }
+
+    app-register-core {
+        form {
+            animation: var(--card-init-animation);
+        }
+    }
+}

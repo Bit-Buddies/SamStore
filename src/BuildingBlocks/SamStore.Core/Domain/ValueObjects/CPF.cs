@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SamStore.Core.Domain.ValueObjects
@@ -13,12 +14,14 @@ namespace SamStore.Core.Domain.ValueObjects
         public string Number { get; private set; }
 
         protected CPF() { }
-        public CPF(string number)
+        public CPF(string cpf)
         {
-            if (!Validate(number))
+            string onlyNumbers = Regex.Replace(cpf, @"[^\d]", "");
+
+            if (!Validate(onlyNumbers))
                 throw new DomainException();
 
-            Number = number;
+            Number = onlyNumbers;
         }
 
         public static bool Validate(string cpf)

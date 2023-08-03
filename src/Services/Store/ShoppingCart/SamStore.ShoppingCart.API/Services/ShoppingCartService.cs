@@ -3,16 +3,16 @@ using SamStore.ShoppingCart.Application.Extensions;
 using SamStore.ShoppingCart.Application.Models;
 using SamStore.ShoppingCart.Domain.ShoppingCarts;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
-using SamStore.WebAPI.Core.User;
+using SamStore.WebAPI.Core.Context;
 
 namespace SamStore.ShoppingCart.API.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
-        private readonly IContextUser _contextUser;
+        private readonly IHttpContextHandler _contextUser;
         private readonly ShoppingCartContext _context;
 
-        public ShoppingCartService(IContextUser contextUser, ShoppingCartContext context)
+        public ShoppingCartService(IHttpContextHandler contextUser, ShoppingCartContext context)
         {
             _contextUser = contextUser;
             _context = context;
@@ -32,31 +32,44 @@ namespace SamStore.ShoppingCart.API.Services
 
         public async Task UpdateCustomerCart(ShoppingCartDTO cartDTO)
         {
-            var cart = new Cart(_contextUser.GetUserId()) { Id = cartDTO.Id, };
-
-            var existantCart = await _context.Carts
+            var existingCart = await _context.Carts
                 .Include(x => x.Items)
                 .FirstOrDefaultAsync(x => x.Id == cartDTO.Id);
 
-            if (existantCart != null)
+            if (existingCart != null)
             {
-                if(existantCart.Items.Any()){
-                    _context.CartItems.RemoveRange(existantCart.Items);
-                    existantCart.Clear();
-                    _context.Carts.Update(existantCart);
-                    await CommitChanges();
+                ///Delete items
+                foreach (CartItem? item in existingCart.Items.ToList())
+                {
+                    if (!cartDTO.Items.Any(i => i.ProductId == item?.ProductId))
+                        _context.CartItems.Remove(item);
                 }
 
+                ///Update or insert items
                 foreach (var item in cartDTO.Items)
                 {
-                    existantCart.AddItem(new CartItem(item.ProductId, item.CartId, item.Name, item.Quantity, item.Price, item.ImagePath!));
-                }
+                    CartItem? existingItem = existingCart.Items.FirstOrDefault(i => i.ProductId == item?.ProductId);
 
-                _context.Carts.Update(existantCart);
-                _context.CartItems.AddRange(existantCart.Items);
+                    if (existingItem != null && item.Quantity != existingItem.Quantity)
+                    {
+                        existingItem.SetQuantity(item.Quantity);
+
+                        if (existingItem.Quantity <= 0)
+                            _context.CartItems.Remove(existingItem);
+                        else
+                            _context.CartItems.Update(existingItem);
+                    }
+                    else if (existingItem == null)
+                    {
+                        var newItem = new CartItem(item.ProductId, existingCart.Id, item.Name, item.Quantity, item.Price, item.ImagePath!);
+                        _context.CartItems.Add(newItem);
+                    }
+                }
             }
             else
             {
+                var cart = new Cart(_contextUser.GetUserId()) { Id = cartDTO.Id, };
+
                 foreach (var item in cartDTO.Items)
                     cart.AddItem(new CartItem(item.ProductId, item.CartId, item.Name, item.Quantity, item.Price, item.ImagePath!));
 

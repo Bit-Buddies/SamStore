@@ -22,10 +22,7 @@ namespace SamStore.Costumer.API.Services
 
         private void SetResponder()
         {
-            _messageBus.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(async request =>
-            {
-                return await RegisterCostumer(request);
-            });
+            _messageBus.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(RegisterCostumer);
 
             _messageBus.AdvancedBus.Connected += OnConnect; ;
         }

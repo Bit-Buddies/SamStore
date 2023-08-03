@@ -35,6 +35,9 @@ namespace SamStore.Costumer.Infrastructure.Contexts.Mappings
                     .IsRequired()
                     .HasColumnName("cpf")
                     .HasColumnType("VARCHAR(11)");
+
+                cpf.HasIndex(c => c.Number)
+                    .IsUnique();
             });
 
             builder.OwnsOne(x => x.Email, email =>

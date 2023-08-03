@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using SamStore.BFF.Orders.Models;
+﻿using SamStore.WebAPI.Core.API.Middlewares;
 
 namespace SamStore.BFF.Orders.Configuration
 {
@@ -10,8 +9,6 @@ namespace SamStore.BFF.Orders.Configuration
             services.AddControllers();
 
             services.AddEndpointsApiExplorer();
-
-            services.Configure<AppServicesSettings>(configuration);
 
             services.AddCors(options => 
                 options.AddPolicy("CorsPolicy", builder => builder
@@ -28,7 +25,7 @@ namespace SamStore.BFF.Orders.Configuration
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseCors("CorsPolicy");
 

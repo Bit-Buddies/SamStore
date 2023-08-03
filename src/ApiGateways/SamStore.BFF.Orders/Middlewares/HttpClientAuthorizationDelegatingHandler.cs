@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.Primitives;
-using SamStore.WebAPI.Core.User;
+using SamStore.WebAPI.Core.Context;
 using System.Net.Http.Headers;
 
 namespace SamStore.BFF.Orders.Middlewares
 {
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
-        private readonly IContextUser _contextUser;
+        private readonly IHttpContextHandler _contextUser;
 
-        public HttpClientAuthorizationDelegatingHandler(IContextUser contextUser)
+        public HttpClientAuthorizationDelegatingHandler(IHttpContextHandler contextUser)
         {
             _contextUser = contextUser;
         }
@@ -22,7 +22,7 @@ namespace SamStore.BFF.Orders.Middlewares
 
             string accessToken = authorizationHeader.ToString().Replace("Bearer ", string.Empty);
 
-            if (accessToken != null)
+            if (!string.IsNullOrWhiteSpace(accessToken))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             return base.SendAsync(request, cancellationToken);

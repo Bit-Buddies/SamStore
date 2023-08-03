@@ -13,7 +13,9 @@ namespace SamStore.Core.Infrastructure.Data.Helpers
     {
         public static void DetectChanges(ChangeTracker changeTracker)
         {
-            foreach (EntityEntry<Entity> entry in changeTracker.Entries<Entity>())
+            var entries = changeTracker.Entries<Entity>();
+
+            foreach (EntityEntry<Entity> entry in entries)
             {
                 switch (entry.State)
                 {

@@ -24,13 +24,17 @@ namespace SamStore.WebAPI.Core.API.Middlewares
             {
                 await HandleExceptionAsync(httpContext, exception, HttpStatusCode.Unauthorized);
             }
+            catch (HttpRequestException exception)
+            {
+                await HandleExceptionAsync(httpContext, exception, exception.StatusCode ?? HttpStatusCode.InternalServerError, "Extern Access - ");
+            }
             catch (Exception exception)
             {
                 await HandleExceptionAsync(httpContext, exception, HttpStatusCode.InternalServerError);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext httpContext, Exception exception, HttpStatusCode statusCode)
+        private Task HandleExceptionAsync(HttpContext httpContext, Exception exception, HttpStatusCode statusCode, string prefixMessage = "")
         {
             ResponseResult errorResponse;
 
@@ -38,12 +42,12 @@ namespace SamStore.WebAPI.Core.API.Middlewares
             {
                 errorResponse = new ResponseResult(statusCode.ToString(), (int)statusCode);
                 string inner = exception.InnerException != null ? $"- Inner : {exception.InnerException}" : "";
-                errorResponse.AddError($"{exception.Message} {inner}");
+                errorResponse.AddError($"{prefixMessage}{exception.Message} {inner}".Trim());
             }
             else
             {
                 errorResponse = new ResponseResult(statusCode.ToString(), (int)statusCode);
-                errorResponse.AddError($"{exception.Message}");
+                errorResponse.AddError($"{prefixMessage}{exception.Message}".Trim());
             }
 
             httpContext.Response.StatusCode = (int)statusCode;

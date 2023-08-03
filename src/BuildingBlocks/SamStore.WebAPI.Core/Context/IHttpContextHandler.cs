@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace SamStore.WebAPI.Core.User
+namespace SamStore.WebAPI.Core.Context
 {
-    public interface IContextUser
+    public interface IHttpContextHandler
     {
         Guid GetUserId();
         string GetUserEmail();

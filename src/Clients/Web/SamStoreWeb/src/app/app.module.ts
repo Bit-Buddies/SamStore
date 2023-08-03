@@ -16,7 +16,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { HomeComponent } from "./pages/main/home/home.component";
 import { NotfoundComponent } from "./pages/notfound/notfound.component";
 import { ToastrModule } from "ngx-toastr";
-import { NgxMaskDirective, NgxMaskPipe } from "ngx-mask";
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
 import { DialogService } from "./utils/dialog-service";
 import { ComponentsModule } from "./components/components.module";
 import { ShoppingCartService } from "./services/shopping-cart.service";
@@ -47,6 +47,7 @@ registerLocaleData(ptBr);
 		CatalogControllerService,
 		DialogService,
 		ShoppingCartService,
+		provideNgxMask(),
 		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
 		{ provide: LOCALE_ID, useValue: "pt" },

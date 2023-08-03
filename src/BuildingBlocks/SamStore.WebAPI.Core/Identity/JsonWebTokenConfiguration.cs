@@ -17,9 +17,9 @@ namespace SamStore.WebAPI.Core.Identity
         {
             var identitySettingsSection = configuration.GetSection("IdentitySettings");
 
-            services.Configure<IdentitySettings>(identitySettingsSection);
+            services.Configure<IdentitySettingsDTO>(identitySettingsSection);
 
-            IdentitySettings identitySettings = identitySettingsSection.Get<IdentitySettings>();
+            IdentitySettingsDTO identitySettings = identitySettingsSection.Get<IdentitySettingsDTO>();
 
             if (identitySettings == null)
                 throw new NullReferenceException("IdentitySettings cannot be empty");
@@ -34,7 +34,7 @@ namespace SamStore.WebAPI.Core.Identity
             {
                 options.RequireHttpsMetadata = true;
                 options.SaveToken = true;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),

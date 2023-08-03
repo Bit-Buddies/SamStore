@@ -2,42 +2,27 @@ import { ResponseApiError } from "./../../models/response-api-error";
 import { HttpHeaders } from "@angular/common/http";
 
 export enum ApiServiceEnum {
-  Identity,
-  Catalog,
-  ShoppingCart,
+	Identity,
+	Catalog,
+	ShoppingCart,
 }
 
 export abstract class BaseApiService {
-  private _identityBaseURL: string = "http://localhost:5274/api/v1/";
-  private _catalogBaseURL: string = "http://localhost:5229/api/v1/";
-  private _shoppingCartBaseURL: string = "http://localhost:5137/api/v1/";
+	protected _baseURL: string = "";
 
-  protected _baseURL: string = "";
+	constructor(protected baseUrl: string) {
+		this._baseURL = baseUrl;
+	}
 
-  constructor(protected controllerName: string, api: ApiServiceEnum) {
-    switch (api) {
-      case ApiServiceEnum.Identity:
-        this._baseURL = this._identityBaseURL;
-        break;
-      case ApiServiceEnum.Catalog:
-        this._baseURL = this._catalogBaseURL;
-        break;
-      case ApiServiceEnum.ShoppingCart:
-        this._baseURL = this._shoppingCartBaseURL;
-    }
+	protected getApplicationJsonHeader() {
+		return {
+			headers: new HttpHeaders({
+				"Content-Type": "application/json",
+			}),
+		};
+	}
 
-    this._baseURL += controllerName;
-  }
-
-  protected getApplicationJsonHeader() {
-    return {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-      }),
-    };
-  }
-
-  public extractErrors(response: Response | any) {
-    return response.error as ResponseApiError;
-  }
+	public extractErrors(response: Response | any) {
+		return response.error as ResponseApiError;
+	}
 }

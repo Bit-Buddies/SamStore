@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace SamStore.WebAPI.Core.API.Controllers
 {
     [ApiController]
-    public abstract class MainController : ControllerBase
+    public abstract class CustomController : ControllerBase
     {
         protected ICollection<string> Errors = new List<string>();
 
@@ -16,7 +16,7 @@ namespace SamStore.WebAPI.Core.API.Controllers
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                {"Mensagens", Errors.ToArray() },
+                {"ErrorMessages", Errors.ToArray() },
             }));
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace SamStore.WebAPI.Core.Identity
 {
-    public class IdentitySettings
+    public class IdentitySettingsDTO
     {
         public string Secret { get; set; }
         public int HoursToExpire { get; set; }

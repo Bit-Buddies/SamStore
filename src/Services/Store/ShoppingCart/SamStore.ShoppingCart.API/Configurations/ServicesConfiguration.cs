@@ -4,7 +4,7 @@ using SamStore.ShoppingCart.API.Services;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Configurations;
 using SamStore.WebAPI.Core.Identity;
-using SamStore.WebAPI.Core.User;
+using SamStore.WebAPI.Core.Context;
 
 namespace SamStore.ShoppingCart.API.Configurations
 {
@@ -26,7 +26,7 @@ namespace SamStore.ShoppingCart.API.Configurations
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IContextUser, ContextUser>();
+            services.AddScoped<IHttpContextHandler, HttpContextHandler>();
         }
 
         public static void AddServiceConfiguration(this IServiceCollection services, IConfiguration configuration)

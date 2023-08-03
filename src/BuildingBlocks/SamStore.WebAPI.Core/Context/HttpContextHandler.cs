@@ -1,19 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SamStore.WebAPI.Core.User
+namespace SamStore.WebAPI.Core.Context
 {
-    public class ContextUser : IContextUser
+    public class HttpContextHandler : IHttpContextHandler
     {
         private readonly IHttpContextAccessor _acessor;
         private string Name => _acessor.HttpContext.User.Identity.Name;
 
-        public ContextUser(IHttpContextAccessor acessor)
+        public HttpContextHandler(IHttpContextAccessor acessor)
         {
             _acessor = acessor;
         }

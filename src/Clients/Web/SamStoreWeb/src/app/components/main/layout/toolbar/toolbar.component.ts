@@ -34,6 +34,7 @@ export class ToolbarComponent implements OnInit {
 
 		this._globalEventService.userLoggedIn.subscribe(() => {
 			this.validateUserIsLogged();
+			this.shoppingCartService.init();
 		});
 	}
 

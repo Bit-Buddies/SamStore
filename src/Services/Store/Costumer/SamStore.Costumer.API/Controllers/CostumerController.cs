@@ -6,7 +6,7 @@ namespace SamStore.Costumer.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [Authorize]
-    public class CostumerController : MainController
+    public class CostumerController : CustomController
     {
         
     }
