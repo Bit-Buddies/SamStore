@@ -3,6 +3,8 @@ import { Component, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { Subject, takeUntil } from "rxjs";
+import { IBaseComponent } from "src/app/interfaces/base-component.interface";
 import { LoginData } from "src/app/models/login-data";
 import { ResponseApiError } from "src/app/models/response-api-error";
 import { AccountService } from "src/app/services/account.service";
@@ -16,7 +18,7 @@ import { LoadingService } from "src/app/services/loading.service";
 	templateUrl: "./login-core.component.html",
 	styleUrls: ["./login-core.component.scss"],
 })
-export class LoginCoreComponent implements OnInit {
+export class LoginCoreComponent implements OnInit, IBaseComponent {
 	@Output() public onLoginCompletedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 	@Output() public onButtonToChangeEvent: EventEmitter<void> = new EventEmitter<void>();
 
@@ -24,6 +26,8 @@ export class LoginCoreComponent implements OnInit {
 	public loginData!: LoginData;
 	public hidePassword: boolean = true;
 	public formErrorsService: FormErrorsService = new FormErrorsService();
+
+	unsubscribeAll$: Subject<void> = new Subject<void>;
 
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -34,18 +38,24 @@ export class LoginCoreComponent implements OnInit {
 		public loadingService: LoadingService
 	) { }
 
+	ngOnDestroy(): void {
+		this.unsubscribeAll$.next();
+		this.unsubscribeAll$.complete();
+	}
+
 	ngOnInit(): void {
 		this.loginForm = this._formBuilder.group({
 			email: ["", [Validators.required, Validators.email]],
 			password: ["", Validators.required],
 		});
 
-		this.loadingService.onLoadingChange.subscribe({
-			next: (isLoading) => {
-				if (isLoading) this.loginForm.disable();
-				else this.loginForm.enable();
-			},
-		});
+		this.loadingService.onLoadingChange
+			.pipe(takeUntil(this.unsubscribeAll$))
+			.subscribe({
+				next: (isLoading) => {
+					if (isLoading) this.loginForm.disable();
+					else this.loginForm.enable();
+				}});
 	}
 
 	login() {
@@ -57,27 +67,28 @@ export class LoginCoreComponent implements OnInit {
 
 		this.loginData = { ...this.loginData, ...this.loginForm.value };
 
-		this._authenticationService.login(this.loginData).subscribe({
-			next: (userData) => {
-				this._accountService.setCurrentUser(userData);
+		this._authenticationService.login(this.loginData)
+			.pipe(takeUntil(this.unsubscribeAll$))
+			.subscribe({
+				next: (userData) => {
+					this._accountService.setCurrentUser(userData);
 
-				this._globalEventService.userLoggedIn.next();
+					this._globalEventService.userLoggedIn.next();
 
-				this.onLoginCompletedEvent.emit(true);
-			},
-			error: (response) => {
-				const errors = this._authenticationService.extractErrors(response);
+					this.onLoginCompletedEvent.emit(true);
+				},
+				error: (response) => {
+					const errors = this._authenticationService.extractErrors(response);
 
-				if (!!errors.errors) {
-					this.formErrorsService.errors = errors.errors.ErrorMessages;
-				} else
-					this._toastrService.error("An error has ocourred", undefined, {
-						positionClass: "toast-bottom-right",
-					});
+					if (!!errors.errors) {
+						this.formErrorsService.errors = errors.errors.ErrorMessages;
+					} else
+						this._toastrService.error("An error has ocourred", undefined, {
+							positionClass: "toast-bottom-right",
+						});
 
-				this.onLoginCompletedEvent.emit(false);
-			},
-		});
+					this.onLoginCompletedEvent.emit(false);
+				}});
 	}
 
 	getControlError(controlName: string, errorCode: string) {

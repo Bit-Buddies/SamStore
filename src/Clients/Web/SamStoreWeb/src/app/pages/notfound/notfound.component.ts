@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class NotfoundComponent {
   constructor(private _router: Router) { }
+  
   public onButtonHomePressed(){
     this._router.navigate(["/home"])
   }

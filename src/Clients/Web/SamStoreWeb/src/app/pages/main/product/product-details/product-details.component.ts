@@ -65,13 +65,13 @@ export class ProductDetailsComponent implements OnInit {
 	}
 
 	public async addToCart() {
-			await this._shoppingCartService.addOrUpdateItem(this.product!, 1);
+		await this._shoppingCartService.addOrUpdateItem(this.product!, 1);
 
-			this.productAddedToCart = true;
+		this.productAddedToCart = true;
 
-			this._snackbar.open("Item added to shopping cart", undefined, {
-				duration: 2000,
-			});
+		this._snackbar.open("Item added to shopping cart", undefined, {
+			duration: 2000,
+		});
 	}
 
   private resetPage() {

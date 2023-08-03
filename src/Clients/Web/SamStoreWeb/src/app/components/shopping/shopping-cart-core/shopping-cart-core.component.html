@@ -85,17 +85,27 @@
 			</div>
 
 			<div class="shopping-cart-footer" fxLayout="row wrap" fxLayoutAlign="end" fxLayoutAlign.lt-md="center">
-				<div fxFlex="40" fxFlex.sm="60" fxFlex.xs="80" fxLayout="row wrap" fxLayoutAlign="end">
-					<span *ngIf="this.loginAlert" class="alert-box" style="margin-bottom: 12px" fxFlex="100">
+				<div 
+					fxFlex="60" 
+					fxFlex.xs="100" 
+					gdGap="12px" 
+					gdAreas="header header | button1 button2">
+					<span *ngIf="this.loginAlert" class="alert-box" gdArea="header">
 						<ul>
 							<li>You need to login to proceed with your purchase.</li>
 						</ul>
 					</span>
-					<button mat-flat-button (click)="this.onClickContinueButton()" fxFlex="48">
+					<button 
+						mat-flat-button 
+						(click)="this.onClickContinueButton()" 
+						gdArea="button1">
 						Keep buying
 					</button>
-					<button mat-raised-button color="primary" style="margin-left: 8px" (click)="this.checkout()"
-						fxFlex="49">
+					<button 
+						mat-raised-button 
+						color="primary" 
+						(click)="this.checkout()"
+						gdArea="button2">
 						Checkout
 					</button>
 				</div>
