@@ -3,7 +3,7 @@ import { Component, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { Subject, takeUntil } from "rxjs";
+import { Subject, delay, map, pipe, takeUntil } from "rxjs";
 import { IBaseComponent } from "src/app/interfaces/base-component.interface";
 import { LoginData } from "src/app/models/login-data";
 import { ResponseApiError } from "src/app/models/response-api-error";

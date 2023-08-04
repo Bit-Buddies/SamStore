@@ -15,8 +15,8 @@
 	0% {
 		transform: scale(100%);
 	}
-	10% {
-		transform: scale(135%);
+	50% {
+		transform: scale(128%);
 	}
 	100% {
 		transform: scale(100%);
@@ -28,7 +28,8 @@
 	opacity: 100%;
 	transform: translate(0, 0);
 	color: secondary(500);
-	animation: is-favorite 0.6s forwards ease-out;
+	animation: is-favorite 0.5s forwards cubic-bezier(0.17,0.84,0.44,1);
+	animation-delay: 50ms;
 }
 
 .card-product-price-discount {
