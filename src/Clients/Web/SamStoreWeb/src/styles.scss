@@ -4,7 +4,7 @@
 @import "./palettes";
 
 :root {
-	--card-shadow: #7ba3c74d 0px 13px 27px -5px, rgba(123, 163, 199, 0.3) 0px 8px 16px -8px;
+	--card-shadow: rgba(50, 50, 93, 0.10) 0px 13px 30px -5px, rgba(0, 0, 0, 0.14) 0px 8px 20px -8px;
 	--card-init-animation: CardInitializeContent 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
