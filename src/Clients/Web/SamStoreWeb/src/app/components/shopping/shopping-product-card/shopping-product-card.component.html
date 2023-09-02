@@ -18,6 +18,28 @@
 			<p class="card-product-price-actual">{{ this.product?.value | currency : "BRL" }}</p>
 		</div>
 	</mat-card-content>
+	<mat-card-footer style="padding: 12px;">
+		<button
+			[ngClass]="{ 'product-added': this.productAddedToCart }"
+			mat-flat-button
+			(click)="this.addToCart()"
+			color="primary"
+			[disabled]="this.productAddedToCart || (this.tryingAddToCart == true && this.loadingService.isLoading())"
+			[ngSwitch]="this.tryingAddToCart == true && this.loadingService.isLoading()">
+			<mat-spinner
+				*ngSwitchCase="true"
+				color="primary"
+				diameter="28"></mat-spinner>
+			<ng-container *ngSwitchDefault>{{
+				this.productAddedToCart ? "ITEM ADDED" : "ADD TO CART"
+			}}</ng-container>
+			<mat-icon
+				*ngIf="this.productAddedToCart"
+				class="mat-18"
+				>check</mat-icon
+			>
+		</button>
+	</mat-card-footer>
 
 	<button mat-mini-fab class="favorite-button" [ngClass]="{ isfavorite: this.isFavorite }"
 		(click)="this.favoriteProduct()">
