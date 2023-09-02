@@ -26,6 +26,9 @@
     </div>
   </section>
   <main>
-      <app-general-catalog/>
+    <section class="catalog-container container" id="sellers-of-the-week">
+      <app-page-title-more title="Sellers of the week" moreButtonDescription="See more"></app-page-title-more>
+      <app-product-catalog [products]="this.productsSellersOfTheWeek"/>
+    </section>
   </main>
 </div>

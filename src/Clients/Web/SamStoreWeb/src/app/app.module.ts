@@ -1,6 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { CatalogControllerService } from "./services/controllers/catalog-controller.service";
-import { GeneralCatalogComponent } from "./pages/main/home/general-catalog/general-catalog.component";
 import { AccountService } from "./services/account.service";
 import { MaterialModule } from "./material.module";
 import { AppRoutingModule } from "./app-routing.module";
@@ -25,11 +24,12 @@ import { ProductDetailsComponent } from "./pages/main/product/product-details/pr
 import ptBr from "@angular/common/locales/pt";
 import { registerLocaleData } from "@angular/common";
 import { AuthenticationInterceptor } from "./services/interceptors/authentication.interceptor";
+import { ProductCatalogComponent } from "./pages/main/home/general-catalog/product-catalog.component";
 
 registerLocaleData(ptBr);
 
 @NgModule({
-	declarations: [AppComponent, HomeComponent, NotfoundComponent, GeneralCatalogComponent],
+	declarations: [AppComponent, HomeComponent, NotfoundComponent, ProductCatalogComponent],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
