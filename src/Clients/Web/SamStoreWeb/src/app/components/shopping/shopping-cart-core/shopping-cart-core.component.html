@@ -2,7 +2,7 @@
 	<div class="modal-wrapper">
 		<app-modal-header [matDialogRef]="this.dialogRef" title="Shopping Cart" [useExitButton]="true"></app-modal-header>
 	
-		<section>
+		<div>
 			<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0; else NoContent">
 				<div class="items-container default-scroll">
 					<table 
@@ -88,7 +88,7 @@
 					</div>
 				</section>
 			</div>
-		</section>
+		</div>
 	</div>
 
 	<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0" class="shopping-cart-footer" fxLayout="row wrap" fxLayoutAlign="end" fxLayoutAlign.lt-md="center">
@@ -109,7 +109,7 @@
 </section>
 
 <ng-template #NoContent>
-	<div fxLayout="column nowrap" fxLayoutAlign="center center" class="no-content-container">
+	<div fxLayout="column" fxLayoutAlign="center center" class="no-content-container">
 		<mat-icon class="mat-18 no-content-icon">production_quantity_limits</mat-icon>
 		<h2>Your shopping cart is empty</h2>
 	</div>

@@ -18,6 +18,10 @@
 	}
 }
 
+html {
+	overflow-x: hidden;
+}
+
 html,
 body,
 div,
@@ -267,6 +271,7 @@ mat-card-actions {
 .modal-container {
 	padding: 16px 24px 24px 24px;
 	transition: all 0.5s cubic-bezier(0.65,0.05,0.36,1);
+	overflow: hidden;
 }
 
 .star-rating-container {

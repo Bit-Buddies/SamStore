@@ -61,9 +61,9 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 	}
 
 	public onClickRemoveItem(item: ShoppingCartItemDTO) {
-		if(this.modalContainerRef && this.tableRows!?.length < 5){
+		if(this.modalContainerRef && this.tableRows!?.length <= 3){
 			const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
-			const heightToRemove = this.tableRows!?.length == 4 ? 29 : 159;
+			const heightToRemove = 159;
 
 			this._renderer.setStyle(
 				this.modalContainerRef.nativeElement, 

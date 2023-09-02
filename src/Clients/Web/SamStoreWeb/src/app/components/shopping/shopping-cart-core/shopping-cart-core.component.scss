@@ -6,9 +6,21 @@
 	width: 64px;
 }
 
+
+@keyframes NoContentFadeIn {
+	from {
+		opacity: 0;
+	} 
+
+	to {
+		opacity: 100%;
+	}
+}
+
 .no-content-container {
 	text-align: center;
 	margin-block: 42px;
+	animation: NoContentFadeIn 0.4s forwards cubic-bezier(0.46,0.03,0.52,0.96);
 
 	h2 {
 		margin-block: 8px;
