@@ -1,15 +1,15 @@
 
 $my-primary-palette: (
-  50: #f8f8f8,
-  100: #f3f3f3,
-  200: #eeeeee,
- 300: #cfcfcf,
- 400: #b2b2b2,
- 500: #878787,
- 600: #727272,
- 700: #525252,
- 800: #303030,
- 900: #090909,
+  50: #ffffff,
+  100: #f8f8f8,
+  200: #f3f3f3,
+ 300: #eeeeee,
+ 400: #cfcfcf,
+ 500: #b2b2b2,
+ 600: #878787,
+ 700: #727272,
+ 800: #525252,
+ 900: #303030,
  contrast: (
    50: rgba(black, 0.87),
    100: rgba(black, 0.87),
@@ -24,28 +24,17 @@ $my-primary-palette: (
  )
 );
 
-// 50: #f5e6ff,
-// 100: #e5c0fe,
-// 200: #d495ff,
-// 300: #c267ff,
-// 400: #b240fe,
-// 500: #a303fc,
-// 600: #8f0df6,
-// 700: #7111ef,
-// 800: #5213ea,
-// 900: #0016e5,
-
 $my-secondary-palette: (
-  50: #f5e6ff,
- 100: #e5c0fe,
- 200: #d495ff,
- 300: #c267ff,
- 400: #b240fe,
- 500: #a303fc,
- 600: #8f0df6,
- 700: #7111ef,
- 800: #5213ea,
- 900: #0016e5,
+  50: #ffcab5,
+ 100: #ffb394,
+ 200: #ff9e77,
+ 300: #ff8859,
+ 400: #ff7b47,
+ 500: #ff6426,
+ 600: #e6551c,
+ 700: #c94714,
+ 800: #ac3b0e,
+ 900: #8d2f0a,
  contrast: (
    50: #242424,
    100: #242424,
@@ -59,6 +48,16 @@ $my-secondary-palette: (
    900: white
    )
    );
+
+@function pMain(){
+  $color: map-get($my-primary-palette, 900);
+  @return $color;
+}
+
+@function sMain(){
+  $color: map-get($my-secondary-palette, 500);
+  @return $color;
+}
 
 @function primary($level){
   $color: map-get($my-primary-palette, $level);

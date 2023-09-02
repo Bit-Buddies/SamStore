@@ -1,6 +1,7 @@
 <mat-toolbar
 	class="toolbar"
-	color="primary">
+	color="primary"
+	*ngIf="this.validateShowNavbar == false || (this.validateShowNavbar == true && this.showNavbar == true)">
 	<mat-toolbar-row class="container">
 		<span
 			id="logo-name"

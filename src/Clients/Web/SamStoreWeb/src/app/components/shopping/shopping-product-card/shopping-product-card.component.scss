@@ -2,13 +2,13 @@
 
 .favorite-button {
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	right: 4px;
+	top: 4px;
 	box-shadow: none;
-	transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 	opacity: 0;
 	background-color: white;
-	color: primary(900);
+	color: pMain();
 }
 
 @keyframes is-favorite {
@@ -27,25 +27,13 @@
 	box-shadow: none;
 	opacity: 100%;
 	transform: translate(0, 0);
+	background-color: transparent;
 	color: secondary(500);
-	animation: is-favorite 0.5s forwards cubic-bezier(0.17,0.84,0.44,1);
-	animation-delay: 50ms;
-}
-
-.card-product-price-discount {
-	font-size: smaller;
-	font-weight: normal;
-	margin: 0;
-	padding: 0;
-}
-
-.card-product-price-actual {
-	font-size: large;
-	font-weight: bold;
 }
 
 .card-product {
 	overflow: hidden;
+	padding: 0;
 
 	&:hover {
 		.favorite-button {
@@ -62,17 +50,39 @@
 }
 
 .card-product-header {
-	max-width: 100%;
+	margin: 0;
 	padding: 0 !important;
-	height: 228px;
+	aspect-ratio: 1/1;
 
 	img {
 		width: 100%;
 		height: 100%;
-		object-fit: contain;
+		object-fit: cover;
 	}
 
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+.card-product-body {
+	padding: 16px;
+
+	h3 {
+		font-weight: bold;
+	}
+
+	.card-product-price-discount {
+		font-weight: normal;
+		color: #111;
+		margin: 0;
+		padding: 0;
+		font-size: 12px;
+	}
+	
+	.card-product-price-actual {
+		font-size: large;
+		font-weight: bold;
+		font-size: 14px;
 	}
 }

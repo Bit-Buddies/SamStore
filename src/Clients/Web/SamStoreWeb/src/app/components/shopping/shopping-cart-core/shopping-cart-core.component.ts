@@ -1,5 +1,5 @@
 
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, OnChanges, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -20,7 +20,10 @@ import { ModalDialogComponent } from "src/app/utils/modal-dialog";
 		staggerAnimation("50ms"), 
 		fadeAnimation("100ms cubic-bezier(0.79,0.14,0.15,0.86)")]
 })
-export class ShoppingCartCoreComponent extends ModalDialogComponent implements IBaseComponent {
+export class ShoppingCartCoreComponent extends ModalDialogComponent implements IBaseComponent, AfterViewInit {
+	@ViewChild("modalContainer") modalContainerRef? : ElementRef;
+	@ViewChildren("tableRow") tableRows?: QueryList<ElementRef>;
+
 	public displayedColumns = ["image", "details", "price", "total", "actions"];
 	public loginAlert: boolean = false;
 	public unsubscribeAll$: Subject<void> = new Subject()
@@ -29,13 +32,25 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 		private _accountService: AccountService,
 		private _toastrService: ToastrService,
 		private _dialogService: DialogService,
+		private _renderer: Renderer2,
+		private _router: Router,
 		public shoppingCartService: ShoppingCartService,
 		public dialogRef: MatDialogRef<ShoppingCartCoreComponent>,
-		private _router: Router
-
 	) {
 		super();
 	}
+	
+	ngAfterViewInit(): void {
+		if(this.modalContainerRef){
+			const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
+
+			this._renderer.setStyle(
+				this.modalContainerRef.nativeElement, 
+				"height",
+				modalOriginalHeight + "px");
+		}
+	}
+	
 	ngOnDestroy(): void {
 		this.unsubscribeAll$.next();
 		this.unsubscribeAll$.complete();
@@ -46,10 +61,23 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 	}
 
 	public onClickRemoveItem(item: ShoppingCartItemDTO) {
+		if(this.modalContainerRef && this.tableRows!?.length < 5){
+			const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
+			const heightToRemove = this.tableRows!?.length == 4 ? 29 : 159;
+
+			this._renderer.setStyle(
+				this.modalContainerRef.nativeElement, 
+				"height",
+				(modalOriginalHeight - heightToRemove) + "px");
+		}
+
 		this.shoppingCartService.removeItem(item.productId);
 	}
 
 	public checkout() {
+		console.log(this.modalContainerRef);
+		console.log(this.tableRows)
+
 		if (!this._accountService.isLogged()) {
 			this._accountService.callLogin()
 				.pipe(takeUntil(this.unsubscribeAll$))

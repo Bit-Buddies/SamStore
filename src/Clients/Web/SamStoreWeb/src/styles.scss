@@ -1,5 +1,5 @@
 @import "bootstrap/dist/css/bootstrap-grid.min.css";
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,900;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700;1,900&display=swap');
 @import "ngx-toastr/toastr";
 @import "./palettes";
 
@@ -17,11 +17,6 @@
 		transform: translateY(0px);
 	}
 }
-
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
 html,
 body,
@@ -147,7 +142,7 @@ table {
 }
 
 * {
-	font-family: "Nunito";
+	font-family: "Roboto";
 }
 
 html::-webkit-scrollbar {
@@ -193,6 +188,13 @@ mat-card-title {
 
 mat-card-header {
 	margin-bottom: 16px;
+}
+
+:host::ng-deep {
+	mat-toolbar {
+		transition: background 2s ease;
+		transition: background-color 2s ease;
+	}
 }
 
 mat-card {
@@ -264,6 +266,7 @@ mat-card-actions {
 
 .modal-container {
 	padding: 16px 24px 24px 24px;
+	transition: all 0.5s cubic-bezier(0.65,0.05,0.36,1);
 }
 
 .star-rating-container {

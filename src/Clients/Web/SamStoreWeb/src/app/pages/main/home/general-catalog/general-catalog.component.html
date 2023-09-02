@@ -12,9 +12,10 @@
     [@stagger]="products.length"
     @fade>
     <div
-      fxFlex.lt-md="50"
-      fxFlex.md="33"
-      fxFlex="25"
+      fxFlex="50"
+      fxFlex.xs="50"
+      fxFlex.gt-sm="33"
+      fxFlex.gt-md="25"
       *ngFor="let product of products">
       <app-shopping-product-card [product]="product"></app-shopping-product-card>
     </div>

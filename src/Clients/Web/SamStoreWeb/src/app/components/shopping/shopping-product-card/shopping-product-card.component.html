@@ -1,22 +1,17 @@
-<mat-card
-	fxFlex
-	class="card-product no-animation">
-	<mat-card-header
-		class="card-product-header"
-		(click)="this.openProductDetails()"
-		fxLayoutAlign="center">
-		<img
-			src="https://secure-static.vans.com.br/medias/sys_master/vans/vans/h0c/hd5/h00/h00/11122230460446/1002000850150U-01-BASEIMAGE-Hires.jpg"
+<mat-card fxFlex class="card-product no-animation">
+	<mat-card-header class="card-product-header" (click)="this.openProductDetails()" fxLayoutAlign="center">
+		<img src="https://secure-static.vans.com.br/medias/sys_master/vans/vans/h0c/hd5/h00/h00/11122230460446/1002000850150U-01-BASEIMAGE-Hires.jpg"
 			alt="{{ this.product?.name }}" />
 	</mat-card-header>
 	<mat-card-content class="card-product-body">
-		<div
-			fxLayout="column nowrap"
-			fxLayoutAlign="space-between">
+		<div fxLayout="column nowrap" fxLayoutAlign="space-between">
 			<span>
-				<p class="m-0">{{ this.product?.name }}</p>
-				<app-shopping-product-rating [setProductRating]="this.product?.productRating"></app-shopping-product-rating>
+				<h3 class="m-0">{{ this.product?.name }}</h3>
+				<app-shopping-product-rating 
+					[setProductRating]="this.product?.productRating">
+				</app-shopping-product-rating>
 			</span>
+
 			<p class="card-product-price-discount">
 				<s>{{ this.product?.value | currency : "BRL" }}</s>
 			</p>
@@ -24,10 +19,7 @@
 		</div>
 	</mat-card-content>
 
-	<button
-		mat-mini-fab
-		class="favorite-button"
-		[ngClass]="{ isfavorite: this.isFavorite }"
+	<button mat-mini-fab class="favorite-button" [ngClass]="{ isfavorite: this.isFavorite }"
 		(click)="this.favoriteProduct()">
 		<mat-icon>{{ this.isFavorite ? "favorite" : "favorite_border" }}</mat-icon>
 	</button>

@@ -1,110 +1,111 @@
-<section class="modal-container">
-	<app-modal-header [matDialogRef]="this.dialogRef" title="Shopping Cart" [useExitButton]="true">
-	</app-modal-header>
-
-	<section>
-		<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0; else NoContent">
-			<div class="items-container default-scroll">
-				<table 
-					style="border-bottom: 1px solid #ddd" 
-					mat-table 
-					[@stagger]="this.shoppingCartService.shoppingCart!.items.length"
-					[dataSource]="this.shoppingCartService.shoppingCart!.items">
-					<!-- Image column -->
-					<ng-container matColumnDef="image">
-						<th fxHide.lt-sm mat-header-cell *matHeaderCellDef>
-							<h3>Details</h3>
-						</th>
-						<td class="image-row" fxHide.lt-sm mat-cell *matCellDef="let product">
-							<img class="product-image" matTooltip="See product"
-								(click)="this.redirectToProductDetails(product.productId)"
-								src="https://secure-static.vans.com.br/medias/sys_master/vans/vans/h0c/hd5/h00/h00/11122230460446/1002000850150U-01-BASEIMAGE-Hires.jpg" />
-						</td>
-					</ng-container>
-
-					<!-- Details column -->
-					<ng-container matColumnDef="details">
-						<th mat-header-cell *matHeaderCellDef></th>
-						<td mat-cell *matCellDef="let product">
-							<div class="product-details-row-container" fxLayout="column nowrap"
-								fxLayoutAlign="space-between">
-								<span>
-									<h3>{{ product.name }}</h3>
-									<p>Quantity: {{ product.quantity }}</p>
-								</span>
-								<app-shopping-product-rating></app-shopping-product-rating>
-							</div>
-						</td>
-					</ng-container>
-
-					<!-- Price column -->
-					<ng-container matColumnDef="price">
-						<th mat-header-cell *matHeaderCellDef>
-							<h3>Price</h3>
-						</th>
-						<td mat-cell *matCellDef="let product">
-							<h3>{{ product.price | currency : "BRL" }}</h3>
-						</td>
-					</ng-container>
-
-					<!-- Total column -->
-					<ng-container matColumnDef="total">
-						<th mat-header-cell *matHeaderCellDef fxHide.lt-md>
-							<h3>Total</h3>
-						</th>
-						<td mat-cell class="cell-row-text" *matCellDef="let product" fxHide.lt-md>
-							<h3>
-								{{ (product.price * product.quantity) | currency : "BRL"}} &nbsp; ({{product.quantity}})
-							</h3>
-						</td>
-					</ng-container>
-
-					<!-- Action column -->
-					<ng-container matColumnDef="actions">
-						<th mat-header-cell *matHeaderCellDef fxHide.lt-md></th>
-						<td mat-cell class="cell-row-text" *matCellDef="let product" fxHide.lt-md>
-							<div style="padding-right: 12px" fxLayout="row nowrap" fxLayoutAlign="end">
-								<button mat-mini-fab (click)="this.onClickRemoveItem(product)" color="primary">
-									<mat-icon>delete</mat-icon>
-								</button>
-							</div>
-						</td>
-					</ng-container>
-
-					<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-					<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-				</table>
-			</div>
-
-			<section fxLayout="column" fxLayoutAlign="start end" style="margin-block: 24px">
-				<div fxLayout="row nowrap" fxLayoutAlign="space-between" fxFlex="40">
-					<h3>
-						Subtotal ({{ this.shoppingCartService.getTotalQuantity() }}
-						{{ this.shoppingCartService.getTotalQuantity() > 1 ? "items" : "item" }}):
-						<strong>
-							{{ this.shoppingCartService.shoppingCart?.total | currency : "BRL" }}
-						</strong>
-					</h3>
+<section class="modal-container" fxLayout="column" fxLayoutAlign="space-between" #modalContainer>
+	<div class="modal-wrapper">
+		<app-modal-header [matDialogRef]="this.dialogRef" title="Shopping Cart" [useExitButton]="true"></app-modal-header>
+	
+		<section>
+			<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0; else NoContent">
+				<div class="items-container default-scroll">
+					<table 
+						style="border-bottom: 1px solid #ddd" 
+						mat-table 
+						[@stagger]="this.shoppingCartService.shoppingCart!.items.length"
+						[dataSource]="this.shoppingCartService.shoppingCart!.items">
+						<!-- Image column -->
+						<ng-container matColumnDef="image">
+							<th fxHide.lt-sm mat-header-cell *matHeaderCellDef>
+								<h3>Details</h3>
+							</th>
+							<td class="image-row" fxHide.lt-sm mat-cell *matCellDef="let product">
+								<img class="product-image" matTooltip="See product"
+									(click)="this.redirectToProductDetails(product.productId)"
+									src="https://secure-static.vans.com.br/medias/sys_master/vans/vans/h0c/hd5/h00/h00/11122230460446/1002000850150U-01-BASEIMAGE-Hires.jpg" />
+							</td>
+						</ng-container>
+	
+						<!-- Details column -->
+						<ng-container matColumnDef="details">
+							<th mat-header-cell *matHeaderCellDef></th>
+							<td mat-cell *matCellDef="let product">
+								<div class="product-details-row-container" fxLayout="column nowrap"
+									fxLayoutAlign="space-between">
+									<span>
+										<h3>{{ product.name }}</h3>
+										<p>Quantity: {{ product.quantity }}</p>
+									</span>
+									<app-shopping-product-rating></app-shopping-product-rating>
+								</div>
+							</td>
+						</ng-container>
+	
+						<!-- Price column -->
+						<ng-container matColumnDef="price">
+							<th mat-header-cell *matHeaderCellDef>
+								<h3>Price</h3>
+							</th>
+							<td mat-cell *matCellDef="let product">
+								<h3>{{ product.price | currency : "BRL" }}</h3>
+							</td>
+						</ng-container>
+	
+						<!-- Total column -->
+						<ng-container matColumnDef="total">
+							<th mat-header-cell *matHeaderCellDef fxHide.lt-md>
+								<h3>Total</h3>
+							</th>
+							<td mat-cell class="cell-row-text" *matCellDef="let product" fxHide.lt-md>
+								<h3>
+									{{ (product.price * product.quantity) | currency : "BRL"}} &nbsp; ({{product.quantity}})
+								</h3>
+							</td>
+						</ng-container>
+	
+						<!-- Action column -->
+						<ng-container matColumnDef="actions">
+							<th mat-header-cell *matHeaderCellDef fxHide.lt-md></th>
+							<td mat-cell class="cell-row-text" *matCellDef="let product" fxHide.lt-md>
+								<div style="padding-right: 12px" fxLayout="row nowrap" fxLayoutAlign="end">
+									<button mat-mini-fab (click)="this.onClickRemoveItem(product)" color="primary">
+										<mat-icon>delete</mat-icon>
+									</button>
+								</div>
+							</td>
+						</ng-container>
+	
+						<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+						<tr #tableRow mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+					</table>
 				</div>
-			</section>
-
-			<div class="shopping-cart-footer" fxLayout="row wrap" fxLayoutAlign="end" fxLayoutAlign.lt-md="center">
-				<div fxFlex="40" fxFlex.sm="60" fxFlex.xs="100" gdGap="12px" gdAreas="header header | button1 button2">
-					<span *ngIf="this.loginAlert" class="alert-box" gdArea="header">
-						<ul>
-							<li>You need to login to proceed with your purchase.</li>
-						</ul>
-					</span>
-					<button mat-flat-button (click)="this.onClickContinueButton()" gdArea="button1">
-						Keep buying
-					</button>
-					<button mat-raised-button color="primary" (click)="this.checkout()" gdArea="button2">
-						Checkout
-					</button>
-				</div>
+	
+				<section fxLayout="column" fxLayoutAlign="start end" style="margin-block: 24px">
+					<div fxLayout="row nowrap" fxLayoutAlign="space-between" fxFlex="40">
+						<h3>
+							Subtotal ({{ this.shoppingCartService.getTotalQuantity() }}
+							{{ this.shoppingCartService.getTotalQuantity() > 1 ? "items" : "item" }}):
+							<strong>
+								{{ this.shoppingCartService.shoppingCart?.total | currency : "BRL" }}
+							</strong>
+						</h3>
+					</div>
+				</section>
 			</div>
+		</section>
+	</div>
+
+	<div *ngIf="this.shoppingCartService.shoppingCart!.items.length > 0" class="shopping-cart-footer" fxLayout="row wrap" fxLayoutAlign="end" fxLayoutAlign.lt-md="center">
+		<div fxFlex="40" fxFlex.sm="60" fxFlex.xs="100" gdGap="12px" gdAreas="header header | button1 button2">
+			<span *ngIf="this.loginAlert" class="alert-box" gdArea="header">
+				<ul>
+					<li>You need to login to proceed with your purchase.</li>
+				</ul>
+			</span>
+			<button mat-flat-button (click)="this.onClickContinueButton()" gdArea="button1">
+				Keep buying
+			</button>
+			<button mat-raised-button color="primary" (click)="this.checkout()" gdArea="button2">
+				Checkout
+			</button>
 		</div>
-	</section>
+	</div>
 </section>
 
 <ng-template #NoContent>

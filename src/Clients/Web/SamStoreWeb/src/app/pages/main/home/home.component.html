@@ -1,54 +1,30 @@
 <div>
-  <header class="home-ad-background">
+  <section class="home-header-container">
+    <div class="home-header-background"></div>
+    <app-toolbar [validateShowNavbar]="false"></app-toolbar>
     <div
       class="container"
       style="height: 100%">
       <div
-        class="home-ad"
-        fxLayout="row wrap"
+        class="home-header"
+        fxLayout="column"
+        fxLayoutAlign="center end"
+        fxLayoutAlign.lt-md="center center"
         style="height: 100%">
-        <div
-          class="home-ad-description"
-          fxLayout="column nowrap"
-          fxLayoutAlign.xs="center center"
-          fxLayoutAlign.sm="center center"
-          fxLayoutAlign="center start"
-          fxFlex.xs="100"
-          fxFlex.sm="100"
-          fxFlex="50"
-          [ngStyle.xs]="{ 'text-align': 'center' }"
-          [ngStyle.sm]="{ 'text-align': 'center' }"
-          [ngStyle]="{ 'text-align': 'end' }">
-          <div
-            class="consumer-depoyiment-container"
-            fxLayout="column nowrap"
-            fxLayoutAlign.xs="center center"
-            fxLayoutAlign.sm="center center"
-            fxLayoutAlign="center end">
-            <h1>
-              <i>"Elevated my lifestyle with quality and innovation"</i>
-            </h1>
-            <p>- Samuel de Carvalho</p>
+          <div>
+            <p class="home-header-announce-type" ngStyle.lt-md="text-align: center">NEW COLLECTIONS</p>
+            <h2 class="home-header-announce-title" ngStyle.lt-md="text-align: center">SHOES</h2>
+            <h3 class="home-header-announce-description" ngStyle.lt-md="text-align: center">10% OFF</h3>
           </div>
-        </div>
-        <div
-          fxLayout="column nowrap"
-          fxLayoutAlign="center center"
-          fxFlex.xs="100"
-          fxFlex.sm="100"
-          fxFlex="50">
           <button
-            [ngStyle.xs]="{ 'margin-top': '24px' }"
-            [ngStyle.sm]="{ 'margin-top': '24px' }"
             class="default-button"
-            mat-raised-button
+            mat-flat-button
             color="accent">
-            SEE ALL MODELS
+            SEE All MODELS
           </button>
-        </div>
       </div>
     </div>
-  </header>
+  </section>
   <main>
       <app-general-catalog/>
   </main>

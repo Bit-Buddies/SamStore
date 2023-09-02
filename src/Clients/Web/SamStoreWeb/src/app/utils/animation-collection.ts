@@ -37,8 +37,7 @@ export const staggerAnimation = (delay: string) : AnimationTriggerMetadata =>
             query(':leave',
                 animate("250ms cubic-bezier(0.79,0.14,0.15,0.86)", style(
                     { 
-                        opacity: 0,
-                        transform: "translateY(12px)"
+                        opacity: 0
                     })),
                 { optional: true})
             ]),
