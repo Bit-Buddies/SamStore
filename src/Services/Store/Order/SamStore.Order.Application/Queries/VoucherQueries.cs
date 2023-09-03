@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using SamStore.Core.CQRS;
+using SamStore.Core.Helpers;
 using SamStore.Order.Application.Interfaces;
 using SamStore.Order.Application.Models;
 using SamStore.Order.Application.Validators;
@@ -22,12 +23,15 @@ namespace SamStore.Order.Application.Queries
 
         public async Task<RequestResponse<VoucherDTO>> GetByKey(string key)
         {
+            var guid = Guid.NewGuid();
+
             Voucher voucher = await _voucherRepository.FirstOrDefaultAsync(x => x.Key == key);
 
-            var validationResult = new VoucherStateValidator(Guid.NewGuid(), _voucherRepository)
-                .Validate(voucher);
+            var validationResult = voucher is null ? 
+                ValidationResultHelper.CreateValidationResult("Voucher not found") : 
+                new VoucherStateValidator(Guid.NewGuid(), _voucherRepository).Validate(voucher);
 
-            if(!validationResult.IsValid)
+            if(voucher is null || !validationResult.IsValid)
                 return new RequestResponse<VoucherDTO>(false, validationResult);
 
             VoucherDTO voucherDTO = _mapper.Map<VoucherDTO>(voucher);

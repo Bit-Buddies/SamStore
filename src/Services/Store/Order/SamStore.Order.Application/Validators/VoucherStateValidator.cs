@@ -15,10 +15,6 @@ namespace SamStore.Order.Application.Validators
     {
         public VoucherStateValidator(Guid customerId, IVoucherRepository voucherRepository) 
         {
-            RuleFor(x => x)
-                .NotNull()
-                .WithMessage("Voucher not found");
-
             RuleFor(x =>
                 x.VoucherType == VoucherTypeEnum.Expire &&
                 x.ExpireAt < DateTime.Now)
@@ -31,15 +27,15 @@ namespace SamStore.Order.Application.Validators
                     .Must(x => false)
                     .WithMessage("Voucher is sold out");
 
-            RuleFor(voucher => voucher)
-                .MustAsync(async (voucher, cancellationToken) =>
-                {
-                    if (voucher.VoucherType == VoucherTypeEnum.OncePerAccount)
-                        return true;
+            //RuleFor(voucher => voucher)
+            //    .MustAsync(async (voucher, cancellationToken) =>
+            //    {
+            //        if (voucher.VoucherType == VoucherTypeEnum.OncePerAccount)
+            //            return true;
 
-                    return true;
-                })
-                .WithMessage("Already used");
+            //        return true;
+            //    })
+            //    .WithMessage("Already used");
         }
     }
 }

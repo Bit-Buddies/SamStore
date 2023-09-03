@@ -22,6 +22,7 @@ namespace SamStore.BFF.Orders.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(ShoppingCartDTO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<ShoppingCartDTO>> GetCart()
         {
             var cart = await _shoppingCartService.GetCustomerCartAsync();
@@ -42,6 +43,7 @@ namespace SamStore.BFF.Orders.Controllers
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> UpdateCart(ShoppingCartDTO shoppingCart)
         {
             var result = await _shoppingCartService.UpdateCustomerCartAsync(shoppingCart);
