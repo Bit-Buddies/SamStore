@@ -61,9 +61,11 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 	}
 
 	public onClickRemoveItem(item: ShoppingCartItemDTO) {
-		if(this.modalContainerRef && this.tableRows!?.length <= 3){
+		if(this.modalContainerRef && this.tableRows!?.length <= 4){
 			const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
-			const heightToRemove = 159;
+			const heightToRemove = 
+				(this.tableRows!?.length == 4 ? 29 : 156) + 
+				(this.tableRows!?.length == 1 && this.loginAlert ? 46 : 0);
 
 			this._renderer.setStyle(
 				this.modalContainerRef.nativeElement, 
@@ -86,6 +88,16 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 						if (success) {
 							//TODO REDIRECT TO PURCHASE PAGE
 						} else {
+							if(this.loginAlert == false && this.modalContainerRef){
+								const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
+								const heightToAdd = 46;
+
+								this._renderer.setStyle(
+									this.modalContainerRef.nativeElement, 
+									"height",
+									(modalOriginalHeight + heightToAdd) + "px");
+							}
+
 							this.loginAlert = true;
 						}
 					}});
