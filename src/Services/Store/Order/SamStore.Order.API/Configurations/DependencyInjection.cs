@@ -25,10 +25,13 @@ namespace SamStore.Order.API.Configurations
                 throw new ArgumentNullException(nameof(connectionString));
 
             services.AddDbContext<OrderContext>(options => options
-                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), config => config
+                    .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
                 .UseSnakeCaseNamingConvention());
 
-            services.AddMediatR(AppDomain.CurrentDomain.Load("SamStore.Order.Application"));
+            services.AddMediatR(options => 
+                options.RegisterServicesFromAssembly(AppDomain.CurrentDomain.Load("SamStore.Order.Application")));
+
             services.AddMessageBus(configuration.GetMessageQueueConnection("MessageBus"));
         }
     }

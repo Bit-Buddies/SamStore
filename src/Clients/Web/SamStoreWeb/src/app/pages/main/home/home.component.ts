@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     window.onscroll = function() {
       if (window.scrollY > 0 ) {
-        document.getElementById("fixed-toolbar")!.style!.opacity = "0";
         document.getElementById("scrolled-toolbar")!.style!.opacity = "100%";
+        document.getElementById("fixed-toolbar")!.style!.opacity = "0";
       } else {
         document.getElementById("fixed-toolbar")!.style!.opacity = "100%";
         document.getElementById("scrolled-toolbar")!.style!.opacity = "0";

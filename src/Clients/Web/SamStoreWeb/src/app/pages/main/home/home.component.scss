@@ -3,7 +3,6 @@
 :host::ng-deep {
 	#fixed-toolbar mat-toolbar {
 		background: transparent !important;
-		transition: opacity 0.8s ease;
 	}
 
 	#scrolled-toolbar {
@@ -11,7 +10,7 @@
 		opacity: 0;
 		width: 100%;
 		z-index: 999;
-		transition: opacity 0.2s cubic-bezier(0.17,0.84,0.44,1);;
+		transition: opacity 0.4s ease;
 		box-shadow: rgba($color: #000000, $alpha: 0.4) 0 0 24px;
 	}
 }

@@ -15,6 +15,10 @@ namespace SamStore.Order.Application.Validators
     {
         public VoucherStateValidator(Guid customerId, IVoucherRepository voucherRepository) 
         {
+            RuleFor(x => x)
+                .NotNull()
+                .WithMessage("Voucher not found");
+
             RuleFor(x =>
                 x.VoucherType == VoucherTypeEnum.Expire &&
                 x.ExpireAt < DateTime.Now)

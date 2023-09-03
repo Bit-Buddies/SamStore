@@ -6,5 +6,6 @@ namespace SamStore.BFF.Orders.Interfaces
     {
         Task<ShoppingCartDTO> GetCustomerCartAsync();
         Task<bool> UpdateCustomerCartAsync(ShoppingCartDTO shoppingCart);
+        Task<VoucherDTO> GetVoucherByKey(string key);
     }
 }

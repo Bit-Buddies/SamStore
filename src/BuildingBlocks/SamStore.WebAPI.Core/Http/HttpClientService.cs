@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace SamStore.WebAPI.Core.Http
@@ -13,12 +14,15 @@ namespace SamStore.WebAPI.Core.Http
             _httpClient = httpClient;
         }
 
-        public async Task<T> GetAsync<T>(string uri)
+        public async Task<T> GetAsync<T>(string uri, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            using (HttpResponseMessage response = await _httpClient.GetAsync(uri))
+
+            using (HttpResponseMessage response = await httpClient.GetAsync(uri))
             {
                 if (_ensureSuccessStatusCode)
                     response.EnsureSuccessStatusCode();
@@ -26,17 +30,20 @@ namespace SamStore.WebAPI.Core.Http
                 string responseBody = await response.Content.ReadAsStringAsync();
 
                 return JsonConvert.DeserializeObject<T>(responseBody);
-            }   
+            }
         }
 
-        public async Task<TResponse> PostAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(string uri, TRequest dataRequest, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
 
             StringContent content = CreateStringContent(dataRequest);
 
-            using (HttpResponseMessage response = await _httpClient.PostAsync(uri, content))
+            using (HttpResponseMessage response = await httpClient.PostAsync(uri, content))
             {
                 if (_ensureSuccessStatusCode)
                     response.EnsureSuccessStatusCode();
@@ -47,14 +54,16 @@ namespace SamStore.WebAPI.Core.Http
             }
         }
 
-        public async Task<bool> PostAsync<TRequest>(string uri, TRequest dataRequest)
+        public async Task<bool> PostAsync<TRequest>(string uri, TRequest dataRequest, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = CreateStringContent(dataRequest);
 
-            using HttpResponseMessage response = await _httpClient.PostAsync(uri, content);
+            using HttpResponseMessage response = await httpClient.PostAsync(uri, content);
 
             if (_ensureSuccessStatusCode)
                 response.EnsureSuccessStatusCode();
@@ -62,14 +71,16 @@ namespace SamStore.WebAPI.Core.Http
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<TResponse> PutAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
+        public async Task<TResponse> PutAsync<TRequest, TResponse>(string uri, TRequest dataRequest, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = CreateStringContent(dataRequest);
 
-            using (HttpResponseMessage response = await _httpClient.PutAsync(uri, content))
+            using (HttpResponseMessage response = await httpClient.PutAsync(uri, content))
             {
                 if (_ensureSuccessStatusCode)
                     response.EnsureSuccessStatusCode();
@@ -80,14 +91,16 @@ namespace SamStore.WebAPI.Core.Http
             }
         }
 
-        public async Task<bool> PutAsync<TRequest>(string uri, TRequest dataRequest)
+        public async Task<bool> PutAsync<TRequest>(string uri, TRequest dataRequest, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = CreateStringContent(dataRequest);
 
-            using HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
+            using HttpResponseMessage response = await httpClient.PutAsync(uri, content);
 
             if (_ensureSuccessStatusCode)
                 response.EnsureSuccessStatusCode();
@@ -95,14 +108,16 @@ namespace SamStore.WebAPI.Core.Http
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<TResponse> PatchAsync<TRequest, TResponse>(string uri, TRequest dataRequest)
+        public async Task<TResponse> PatchAsync<TRequest, TResponse>(string uri, TRequest dataRequest, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = CreateStringContent(dataRequest);
 
-            using (HttpResponseMessage response = await _httpClient.PatchAsync(uri, content))
+            using (HttpResponseMessage response = await httpClient.PatchAsync(uri, content))
             {
                 if (_ensureSuccessStatusCode)
                     response.EnsureSuccessStatusCode();
@@ -113,14 +128,16 @@ namespace SamStore.WebAPI.Core.Http
             }
         }
 
-        public async Task<bool> PatchAsync<TRequest>(string uri, TRequest dataRequest)
+        public async Task<bool> PatchAsync<TRequest>(string uri, TRequest dataRequest, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             StringContent content = CreateStringContent(dataRequest);
 
-            using HttpResponseMessage response = await _httpClient.PatchAsync(uri, content);
+            using HttpResponseMessage response = await httpClient.PatchAsync(uri, content);
 
             if (_ensureSuccessStatusCode)
                 response.EnsureSuccessStatusCode();
@@ -128,16 +145,18 @@ namespace SamStore.WebAPI.Core.Http
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteAsync<TRequest>(string uri)
+        public async Task<bool> DeleteAsync<TRequest>(string uri, HttpClient? httpClient = null)
         {
-            _httpClient.DefaultRequestHeaders.Accept
+            httpClient ??= _httpClient;
+
+            httpClient.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            using HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
+            using HttpResponseMessage response = await httpClient.DeleteAsync(uri);
 
             if (_ensureSuccessStatusCode)
                 response.EnsureSuccessStatusCode();
-            
+
             return response.IsSuccessStatusCode;
         }
 
@@ -151,6 +170,22 @@ namespace SamStore.WebAPI.Core.Http
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(data), new MediaTypeHeaderValue("application/json"));
             return content;
+        }
+
+        protected HttpClient CreateTransientHttpClient(string baseAddress)
+        {
+            ValidateUri(baseAddress);
+
+            return new HttpClient()
+            {
+                BaseAddress = new Uri(baseAddress)
+            };
+        }
+
+        public static void ValidateUri(string address)
+        {
+            if (!Uri.TryCreate(address, UriKind.RelativeOrAbsolute, out _))
+                throw new InvalidCastException("Invalid URI " + address);
         }
     }
 }
