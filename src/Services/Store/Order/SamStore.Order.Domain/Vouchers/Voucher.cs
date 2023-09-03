@@ -13,7 +13,7 @@ namespace SamStore.Order.Domain.Vouchers
     {
         public string Key { get; private set; }
         public VoucherDiscountTypeEnum VoucherDiscountType { get; private set; }
-        public VoucherTypeEnum VoucherType { get; private set; }    
+        public VoucherTypeEnum VoucherType { get; private set; }
         public decimal Discount { get; private set; }
         public int Quantity { get; private set; }
         public int QuantityUsed { get; private set; } = 0;
@@ -46,25 +46,6 @@ namespace SamStore.Order.Domain.Vouchers
 
             if (!IsValid())
                 throw new Exception("Voucher is not valid to be used.");
-        }
-
-        public override bool IsValid()
-        {
-            switch (VoucherType)
-            {
-                case VoucherTypeEnum.Default:
-                    if (QuantityUsed > Quantity)
-                        return false;
-                    break;
-                case VoucherTypeEnum.Expire:
-                    if (DateTime.Now.Date > ExpireAt.Date)
-                        return false;
-                    break;
-                default:
-                    break;
-            }
-
-            return true;
         }
     }
 }

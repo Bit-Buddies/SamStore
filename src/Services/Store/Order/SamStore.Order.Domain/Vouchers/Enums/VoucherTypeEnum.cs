@@ -11,5 +11,6 @@ namespace SamStore.Order.Domain.Vouchers.Enums
         Default = 1,
         Expire = 2,
         Unlimited = 3,
+        OncePerAccount = 4
     }
 }

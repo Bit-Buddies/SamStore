@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SamStore.Core.CQRS
 {
-    public class MessageResponse<TResponse>
+    public class RequestResponse<TResponse>
     {
         public TResponse Response { get; private set; }
         public bool Success { get; private set; }   
         public ValidationResult ValidationResult { get; private set; }
 
-        public MessageResponse(bool success, ValidationResult validationResult, TResponse response = default)
+        public RequestResponse(bool success, ValidationResult validationResult, TResponse response = default)
         {
             ValidationResult = validationResult;
             Success = success;

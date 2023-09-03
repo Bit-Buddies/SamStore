@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SamStore.Core.CQRS;
 using SamStore.Order.Application.Interfaces;
 using SamStore.Order.Application.Models;
 using SamStore.WebAPI.Core.API.Controllers;
@@ -24,18 +25,22 @@ namespace SamStore.Order.API.Controllers
         /// <returns></returns>
         [HttpGet("{key}")]
         [ProducesResponseType(typeof(VoucherDTO), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<VoucherDTO>> GetByKey(string key)
         {
             if (string.IsNullOrEmpty(key))
-                return NotFound();
+            {
+                AddError("Voucher key cannot be empty");
+                return CustomResponse();
+            }
 
-            VoucherDTO voucher = await _voucherQueries.GetByKey(key);
+            RequestResponse<VoucherDTO> result = 
+                await _voucherQueries.GetByKey(key);
 
-            if (voucher == null)
-                return NotFound();
+            if (result.Success == false)
+                return CustomResponse(result.ValidationResult);
 
-            return CustomResponse(voucher);
+            return CustomResponse(result.Response);
         }
     }
 }
