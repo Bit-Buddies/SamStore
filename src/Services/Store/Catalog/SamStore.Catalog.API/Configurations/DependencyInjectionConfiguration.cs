@@ -15,8 +15,10 @@ namespace SamStore.Catalog.API.Configurations
             if (string.IsNullOrWhiteSpace(connectionString))
                 throw new ArgumentNullException(nameof(connectionString));
 
-            services.AddDbContext<CatalogDbContext>(options =>
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            services.AddDbContext<CatalogDbContext>(options => options
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+                    config => config.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+                .UseSnakeCaseNamingConvention());
 
             services.AddScoped<IProductRepository, ProductRepository>();
         }

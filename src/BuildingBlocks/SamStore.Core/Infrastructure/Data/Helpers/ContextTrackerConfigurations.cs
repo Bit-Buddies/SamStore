@@ -11,7 +11,7 @@ namespace SamStore.Core.Infrastructure.Data.Helpers
 {
     public static class ContextTrackerConfigurations
     {
-        public static void DetectChanges(ChangeTracker changeTracker)
+        public static void MapChanges(ChangeTracker changeTracker)
         {
             var entries = changeTracker.Entries<Entity>();
 

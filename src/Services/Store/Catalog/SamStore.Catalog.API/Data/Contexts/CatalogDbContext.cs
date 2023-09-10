@@ -20,7 +20,7 @@ namespace SamStore.Catalog.API.Data.Contexts
             if (!ChangeTracker.HasChanges())
                 return true;
 
-            ContextTrackerConfigurations.DetectChanges(ChangeTracker);
+            ContextTrackerConfigurations.MapChanges(ChangeTracker);
 
             return await SaveChangesAsync() > 0;
         }

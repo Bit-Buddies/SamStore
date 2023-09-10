@@ -36,7 +36,7 @@ namespace SamStore.Order.Infrastructure.Contexts
             if (!ChangeTracker.HasChanges())
                 return true;
 
-            ContextTrackerConfigurations.DetectChanges(ChangeTracker);
+            ContextTrackerConfigurations.MapChanges(ChangeTracker);
 
             var success = (await SaveChangesAsync()) > 0;
 

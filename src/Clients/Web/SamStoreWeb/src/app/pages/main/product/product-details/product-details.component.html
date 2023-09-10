@@ -78,16 +78,18 @@
 						</ng-template>
 						<div class="tab-content-container">
 							<form>
-								<mat-form-field class="example-full-width">
+								<mat-form-field>
 									<mat-label>Type your postal code</mat-label>
 									<input
 										matInput
+										required
 										maxlength="8"
-										placeholder="Ex. 39900000..." />
+										placeholder="Ex. 89900000" />
 								</mat-form-field>
 								<button
-									style="max-width: 100% !important"
 									mat-flat-button
+									type="submit"
+									style="max-width: 100% !important"
 									color="warn">
 									Calculate
 								</button>

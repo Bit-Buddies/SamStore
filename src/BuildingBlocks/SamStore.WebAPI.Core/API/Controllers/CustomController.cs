@@ -45,7 +45,14 @@ namespace SamStore.WebAPI.Core.API.Controllers
         }
 
         protected bool OperationIsValid() => !Errors.Any();
-        protected void AddError(string error) => Errors.Add(error);
+        protected void AddError(params string[] errors)
+        {
+            foreach (string error in errors)
+            {
+                Errors.Add(error);
+            };
+        }
+
         protected void ClearErrors() => Errors.Clear();
     }
 }

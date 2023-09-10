@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using SamStore.BFF.Orders.Interfaces;
 using SamStore.BFF.Orders.Models;
 using SamStore.WebAPI.Core.API.Controllers;
@@ -10,10 +11,12 @@ namespace SamStore.BFF.Orders.Controllers
     public class ShoppingCartController : CustomController
     {
         private readonly IShoppingCartService _shoppingCartService;
+        private readonly IOrderService _orderService;
 
-        public ShoppingCartController(IShoppingCartService shoppingCartService)
+        public ShoppingCartController(IShoppingCartService shoppingCartService, IOrderService orderService)
         {
             _shoppingCartService = shoppingCartService;
+            _orderService = orderService;
         }
 
         /// <summary>
@@ -42,7 +45,7 @@ namespace SamStore.BFF.Orders.Controllers
         /// <param name="cart"></param>
         /// <returns></returns>
         [HttpPut]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> UpdateCart(ShoppingCartDTO shoppingCart)
         {
@@ -55,6 +58,29 @@ namespace SamStore.BFF.Orders.Controllers
             }
 
             return CustomResponse(result);     
+        }
+
+        /// <summary>
+        /// Apply voucher into shopping cart
+        /// </summary>
+        /// <param name="voucherKey"></param>
+        /// <returns></returns>
+        [HttpPost("voucher")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> ApplyVoucher([FromBody] string voucherKey)
+        {
+            var voucher = await _orderService.GetVoucherByKey(voucherKey);
+
+            if(voucher is null)
+            {
+                AddError("Voucher was not found or is invalid");
+                return CustomResponse();
+            }
+
+            await _shoppingCartService.ApplyVoucher(voucher);
+
+            return CustomResponse();
         }
     }
 }

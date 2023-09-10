@@ -4,8 +4,8 @@ namespace SamStore.BFF.Orders.Interfaces
 {
     public interface IShoppingCartService
     {
+        Task ApplyVoucher(VoucherDTO voucher);
         Task<ShoppingCartDTO> GetCustomerCartAsync();
         Task<bool> UpdateCustomerCartAsync(ShoppingCartDTO shoppingCart);
-        Task<VoucherDTO> GetVoucherByKey(string key);
     }
 }

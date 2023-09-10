@@ -8,6 +8,7 @@ using System.Net;
 
 namespace SamStore.Order.API.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class VoucherController : CustomController
     {
@@ -28,9 +29,9 @@ namespace SamStore.Order.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<VoucherDTO>> GetByKey(string key)
         {
-            if (string.IsNullOrEmpty(key))
+            if (string.IsNullOrWhiteSpace(key))
             {
-                AddError("Voucher key cannot be empty");
+                AddError("Please, type a correct key.");
                 return CustomResponse();
             }
 

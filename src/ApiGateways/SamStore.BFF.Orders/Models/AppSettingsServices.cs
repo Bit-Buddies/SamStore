@@ -1,6 +1,6 @@
 ﻿namespace SamStore.BFF.Orders.Models
 {
-    public class AppServicesSettingsDTO
+    public class AppSettingsServices
     {
         public string CatalogBaseURL { get; set; }
         public string ProductBaseURL { get; set; }

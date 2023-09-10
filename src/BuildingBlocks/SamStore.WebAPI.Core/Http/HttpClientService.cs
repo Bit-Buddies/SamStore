@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -13,6 +14,8 @@ namespace SamStore.WebAPI.Core.Http
         {
             _httpClient = httpClient;
         }
+
+        protected abstract void Setup();
 
         public async Task<T> GetAsync<T>(string uri, HttpClient? httpClient = null)
         {

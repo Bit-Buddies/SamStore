@@ -42,7 +42,7 @@ namespace SamStore.ShoppingCart.Infrastructure.Contexts
             if (!ChangeTracker.HasChanges())
                 return true;
 
-            ContextTrackerConfigurations.DetectChanges(ChangeTracker);
+            ContextTrackerConfigurations.MapChanges(ChangeTracker);
 
             try
             {

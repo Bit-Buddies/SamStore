@@ -9,12 +9,12 @@ namespace SamStore.ShoppingCart.API.Services
 {
     public class ShoppingCartService : IShoppingCartService
     {
-        private readonly IHttpContextHandler _contextUser;
+        private readonly IHttpContextHandler _httpContextHandler;
         private readonly ShoppingCartContext _context;
 
-        public ShoppingCartService(IHttpContextHandler contextUser, ShoppingCartContext context)
+        public ShoppingCartService(IHttpContextHandler httpContextHandler, ShoppingCartContext context)
         {
-            _contextUser = contextUser;
+            _httpContextHandler = httpContextHandler;
             _context = context;
         }
 
@@ -22,10 +22,10 @@ namespace SamStore.ShoppingCart.API.Services
         {
             var cart = await _context.Carts
                 .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.CostumerId == _contextUser.GetUserId());
+                .FirstOrDefaultAsync(c => c.CostumerId == _httpContextHandler.GetUserId());
 
             if (cart == null)
-                cart = new Cart(_contextUser.GetUserId());
+                cart = new Cart(_httpContextHandler.GetUserId());
 
             return cart.ToDTO();
         }
@@ -68,7 +68,7 @@ namespace SamStore.ShoppingCart.API.Services
             }
             else
             {
-                var cart = new Cart(_contextUser.GetUserId()) { Id = cartDTO.Id, };
+                var cart = new Cart(_httpContextHandler.GetUserId()) { Id = cartDTO.Id, };
 
                 foreach (var item in cartDTO.Items)
                     cart.AddItem(new CartItem(item.ProductId, item.CartId, item.Name, item.Quantity, item.Price, item.ImagePath!));

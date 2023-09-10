@@ -9,13 +9,14 @@ namespace SamStore.BFF.Orders.Services
 {
     public class ShoppingCartService : HttpClientService, IShoppingCartService
     {
-        private IOptions<AppServicesSettingsDTO> _settings;
+        private readonly IOptions<AppSettingsServices> _settings;
 
-        public ShoppingCartService(HttpClient httpClient, IOptions<AppServicesSettingsDTO> settings) : base(httpClient) 
+        public ShoppingCartService(HttpClient httpClient, IOptions<AppSettingsServices> settings) : base(httpClient) 
         {
             _settings = settings;
-            _httpClient.BaseAddress = new Uri(_settings.Value.ShoppingCartBaseURL);
-        } 
+
+            Setup();
+        }
 
         public async Task<ShoppingCartDTO> GetCustomerCartAsync()
         {
@@ -33,15 +34,15 @@ namespace SamStore.BFF.Orders.Services
             return result;
         }
 
-        public async Task<VoucherDTO> GetVoucherByKey(string key)
+        public async Task ApplyVoucher(VoucherDTO voucher)
         {
-            using (var httpClient = CreateTransientHttpClient(_settings.Value.OrderBaseURL))
-            {
-                var result = await EnsureSuccessStatusCode()
-                    .GetAsync<VoucherDTO>($"Voucher/{key}", httpClient);
+            await EnsureSuccessStatusCode()
+                .PostAsync("ShoppingCart/voucher", voucher);
+        }
 
-                return result;
-            }
+        protected override void Setup()
+        {
+            _httpClient.BaseAddress = new Uri(_settings.Value.ShoppingCartBaseURL);
         }
     }
 }

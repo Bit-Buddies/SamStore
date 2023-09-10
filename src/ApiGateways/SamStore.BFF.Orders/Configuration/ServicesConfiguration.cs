@@ -13,23 +13,28 @@ namespace SamStore.BFF.Orders.Configuration
     {
         public static void AddDiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            ValidateBaseUrls(configuration);
+            configuration.ValidateBaseUrls();
 
-            services.Configure<AppServicesSettingsDTO>(configuration.GetSection("ApiBaseUrls"));
+            services.Configure<AppSettingsServices>(configuration.GetSection("ApiBaseUrls"));
 
             services.AddHttpContextAccessor();
             services.AddScoped<IHttpContextHandler, HttpContextHandler>();
+
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
             services.AddHttpClient<IShoppingCartService, ShoppingCartService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            services.AddHttpClient<IOrderService, OrderService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
         }
 
-        private static void ValidateBaseUrls(IConfiguration configuration)
+        private static void ValidateBaseUrls(this IConfiguration configuration)
         {
-            var settings = configuration.GetSection("ApiBaseUrls").Get<AppServicesSettingsDTO>();
+            var settings = configuration.GetSection("ApiBaseUrls").Get<AppSettingsServices>();
 
             foreach (var property in settings.GetType().GetProperties())
             {

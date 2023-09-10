@@ -20,7 +20,7 @@ import { ModalDialogComponent } from "src/app/utils/modal-dialog";
 		staggerAnimation("50ms"), 
 		fadeAnimation("100ms cubic-bezier(0.79,0.14,0.15,0.86)")]
 })
-export class ShoppingCartCoreComponent extends ModalDialogComponent implements IBaseComponent, AfterViewInit {
+export class ShoppingCartCoreComponent extends ModalDialogComponent implements IBaseComponent {
 	@ViewChild("modalContainer") modalContainerRef? : ElementRef;
 	@ViewChildren("tableRow") tableRows?: QueryList<ElementRef>;
 
@@ -40,17 +40,6 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 		super();
 	}
 	
-	ngAfterViewInit(): void {
-		if(this.modalContainerRef){
-			const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
-
-			this._renderer.setStyle(
-				this.modalContainerRef.nativeElement, 
-				"height",
-				modalOriginalHeight + "px");
-		}
-	}
-	
 	ngOnDestroy(): void {
 		this.unsubscribeAll$.next();
 		this.unsubscribeAll$.complete();
@@ -61,18 +50,6 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 	}
 
 	public onClickRemoveItem(item: ShoppingCartItemDTO) {
-		if(this.modalContainerRef && this.tableRows!?.length <= 4){
-			const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
-			const heightToRemove = 
-				(this.tableRows!?.length == 4 ? 29 : 156) + 
-				(this.tableRows!?.length == 1 && this.loginAlert ? 46 : 0);
-
-			this._renderer.setStyle(
-				this.modalContainerRef.nativeElement, 
-				"height",
-				(modalOriginalHeight - heightToRemove) + "px");
-		}
-
 		this.shoppingCartService.removeItem(item.productId);
 	}
 
@@ -88,16 +65,6 @@ export class ShoppingCartCoreComponent extends ModalDialogComponent implements I
 						if (success) {
 							//TODO REDIRECT TO PURCHASE PAGE
 						} else {
-							if(this.loginAlert == false && this.modalContainerRef){
-								const modalOriginalHeight = this.modalContainerRef.nativeElement.offsetHeight;
-								const heightToAdd = 46;
-
-								this._renderer.setStyle(
-									this.modalContainerRef.nativeElement, 
-									"height",
-									(modalOriginalHeight + heightToAdd) + "px");
-							}
-
 							this.loginAlert = true;
 						}
 					}});
