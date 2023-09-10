@@ -34,7 +34,7 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             CartId = cartId;
         }
 
-        public decimal CalcPrice()
+        public decimal GetTotal()
         {
             return Price * Quantity;
         }

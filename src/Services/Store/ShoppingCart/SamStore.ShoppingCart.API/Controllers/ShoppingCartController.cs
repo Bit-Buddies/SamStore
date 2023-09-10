@@ -47,5 +47,19 @@ namespace SamStore.ShoppingCart.API.Controllers
             await _shoppingCartService.UpdateCustomerCart(cart);
             return CustomResponse();
         }
+
+        /// <summary>
+        /// Apply voucher into the shopping cart
+        /// </summary>
+        /// <param name="voucher"></param>
+        /// <returns></returns>
+        [HttpPost("voucher")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> ApplyVoucher(VoucherDTO voucher)
+        {
+            await _shoppingCartService.ApplyVoucher(voucher);
+
+            return CustomResponse();
+        }
     }
 }

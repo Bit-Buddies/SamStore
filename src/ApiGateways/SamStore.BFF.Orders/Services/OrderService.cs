@@ -7,12 +7,8 @@ namespace SamStore.BFF.Orders.Services
 {
     public class OrderService : HttpClientService, IOrderService
     {
-        private readonly IOptions<AppSettingsServices> _settings;
-
-        public OrderService(HttpClient httpClient, IOptions<AppSettingsServices> settings) : base(httpClient)
-        {
-            _settings = settings;
-        }
+        public OrderService(HttpClient httpClient, IOptions<AppSettingsServices> settings) : base(httpClient, settings.Value.OrderBaseURL)
+        { }
 
         public async Task<VoucherDTO> GetVoucherByKey(string key)
         {
@@ -26,11 +22,6 @@ namespace SamStore.BFF.Orders.Services
                 .GetAsync<VoucherDTO>($"Voucher/{key}", httpClient);
 
             return result;
-        }
-
-        protected override void Setup()
-        {
-            _httpClient.BaseAddress = new Uri(_settings.Value.OrderBaseURL);
         }
     }
 }

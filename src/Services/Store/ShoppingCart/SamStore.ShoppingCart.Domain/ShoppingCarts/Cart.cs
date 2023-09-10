@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
 using SamStore.ShoppingCart.Domain.Vouchers;
+using SamStore.ShoppingCart.Domain.Vouchers.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +91,28 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
 
             Items.Remove(itemToRemove);
         }
+
+        public decimal GetTotal()
+        {
+            var total = Items.Sum(item => item.GetTotal());
+            
+            if(Voucher != null)
+            {
+                switch (Voucher.DiscountType)
+                {
+                    case VoucherDiscountTypeEnum.Percentual:
+                        total -= total * (Voucher.Discount!.Value / 100);
+                        break;
+                    case VoucherDiscountTypeEnum.Value:
+                        total -= Voucher.Discount!.Value;
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+
+            return total;
+        } 
 
         public void Clear()
         {

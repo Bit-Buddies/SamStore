@@ -2,6 +2,7 @@
 using SamStore.ShoppingCart.Application.Extensions;
 using SamStore.ShoppingCart.Application.Models;
 using SamStore.ShoppingCart.Domain.ShoppingCarts;
+using SamStore.ShoppingCart.Domain.Vouchers;
 using SamStore.ShoppingCart.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.Context;
 
@@ -18,17 +19,30 @@ namespace SamStore.ShoppingCart.API.Services
             _context = context;
         }
 
+        public async Task ApplyVoucher(VoucherDTO voucher)
+        {
+            Cart cart = await GetCart();
+            Voucher newVoucher = new Voucher(
+                voucher.Key, 
+                voucher.Discount, 
+                voucher.VoucherDiscountType);
+
+            cart.ApplyVoucher(newVoucher);
+
+            if (_context.Carts.Any(c => c.Id == cart.Id))
+                _context.Carts.Update(cart);
+            else
+                _context.Carts.Add(cart);
+
+            await CommitChanges();
+        }
+
         public async Task<ShoppingCartDTO> GetCustomerCart()
         {
-            var cart = await _context.Carts
-                .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.CostumerId == _httpContextHandler.GetUserId());
-
-            if (cart == null)
-                cart = new Cart(_httpContextHandler.GetUserId());
-
+            var cart = await GetCart();
             return cart.ToDTO();
         }
+
 
         public async Task UpdateCustomerCart(ShoppingCartDTO cartDTO)
         {
@@ -38,14 +52,12 @@ namespace SamStore.ShoppingCart.API.Services
 
             if (existingCart != null)
             {
-                ///Delete items
                 foreach (CartItem? item in existingCart.Items.ToList())
                 {
                     if (!cartDTO.Items.Any(i => i.ProductId == item?.ProductId))
                         _context.CartItems.Remove(item);
                 }
 
-                ///Update or insert items
                 foreach (var item in cartDTO.Items)
                 {
                     CartItem? existingItem = existingCart.Items.FirstOrDefault(i => i.ProductId == item?.ProductId);
@@ -77,6 +89,19 @@ namespace SamStore.ShoppingCart.API.Services
             }
 
             await CommitChanges();
+        }
+
+        private async Task<Cart> GetCart()
+        {
+            var userId = _httpContextHandler.GetUserId();
+
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.CostumerId.Equals(userId));
+
+            cart ??= new Cart(userId);
+
+            return cart;
         }
 
         private async Task<bool> CommitChanges()

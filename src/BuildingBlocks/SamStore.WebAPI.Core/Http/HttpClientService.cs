@@ -10,12 +10,13 @@ namespace SamStore.WebAPI.Core.Http
         protected HttpClient _httpClient;
         private bool _ensureSuccessStatusCode = false;
 
-        public HttpClientService(HttpClient httpClient)
+        public HttpClientService(HttpClient httpClient, string? baseUrl = null)
         {
             _httpClient = httpClient;
-        }
 
-        protected abstract void Setup();
+            if(baseUrl is not null)
+                _httpClient.BaseAddress = new Uri(baseUrl);
+        }
 
         public async Task<T> GetAsync<T>(string uri, HttpClient? httpClient = null)
         {

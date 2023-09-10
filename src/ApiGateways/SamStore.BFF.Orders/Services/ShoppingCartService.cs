@@ -9,14 +9,8 @@ namespace SamStore.BFF.Orders.Services
 {
     public class ShoppingCartService : HttpClientService, IShoppingCartService
     {
-        private readonly IOptions<AppSettingsServices> _settings;
-
-        public ShoppingCartService(HttpClient httpClient, IOptions<AppSettingsServices> settings) : base(httpClient) 
-        {
-            _settings = settings;
-
-            Setup();
-        }
+        public ShoppingCartService(HttpClient httpClient, IOptions<AppSettingsServices> settings) : base(httpClient, settings.Value.ShoppingCartBaseURL) 
+        { }
 
         public async Task<ShoppingCartDTO> GetCustomerCartAsync()
         {
@@ -38,11 +32,6 @@ namespace SamStore.BFF.Orders.Services
         {
             await EnsureSuccessStatusCode()
                 .PostAsync("ShoppingCart/voucher", voucher);
-        }
-
-        protected override void Setup()
-        {
-            _httpClient.BaseAddress = new Uri(_settings.Value.ShoppingCartBaseURL);
         }
     }
 }
