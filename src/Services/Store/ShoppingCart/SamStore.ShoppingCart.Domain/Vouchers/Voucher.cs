@@ -12,9 +12,9 @@ namespace SamStore.ShoppingCart.Domain.Vouchers
 {
     public class Voucher : IValueObject
     {
-        public string Key { get; set; }
-        public decimal Discount { get; set; }
-        public VoucherDiscountTypeEnum VoucherDiscountType { get; set; }
-        public int Quantity { get; set; }
+        public bool Used { get; set; } = false;
+        public string? Key { get; set; }
+        public decimal? Discount { get; set; }
+        public VoucherDiscountTypeEnum? DiscountType { get; set; }
     }
 }

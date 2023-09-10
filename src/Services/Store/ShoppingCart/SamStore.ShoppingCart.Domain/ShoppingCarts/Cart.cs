@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore.Storage;
 using SamStore.Core.Domain;
 using SamStore.Core.Infrastructure.Data;
+using SamStore.ShoppingCart.Domain.Vouchers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
     public class Cart : Entity, IAggregateRoot
     {
         public Guid CostumerId { get; private set; }
+        public Voucher Voucher { get; private set; }
         public virtual ICollection<CartItem> Items { get; private set; } = new List<CartItem>();
 
         public Cart() { }

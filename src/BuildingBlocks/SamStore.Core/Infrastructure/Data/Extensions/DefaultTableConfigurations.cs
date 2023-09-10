@@ -21,7 +21,7 @@ namespace SamStore.Core.Infrastructure.Data.Extensions
 
             foreach (var prop in properties.Where(p => p.ClrType == typeof(decimal)))
             {
-                prop.SetColumnType("DECIMAL(65,4)");
+                prop.SetColumnType("DECIMAL(65,2)");
             }
 
             foreach (var prop in properties.Where(p => p.ClrType == typeof(DateTime)))

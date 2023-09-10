@@ -20,8 +20,17 @@ namespace SamStore.ShoppingCart.Infrastructure.Contexts.Mappings
                 .HasForeignKey(x => x.CartId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasIndex(c => c.CostumerId)
-                .HasDatabaseName("IDX_Costumer");
+            builder.Ignore(x => x.Voucher)
+                .OwnsOne(cart => cart.Voucher, voucher =>
+                {
+                    voucher.Property(x => x.Key)
+                        .HasMaxLength(50);
+
+                    voucher.Property(x => x.Discount)
+                        .HasColumnType("DECIMAL(10,2)");
+                });
+
+            builder.HasIndex(c => c.CostumerId);
         }
     }
 }

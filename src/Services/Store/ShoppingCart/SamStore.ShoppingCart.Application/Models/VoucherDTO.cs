@@ -1,5 +1,4 @@
-﻿using SamStore.ShoppingCart.Application.Models.Enums;
-using SamStore.ShoppingCart.Domain.Vouchers.Enums;
+﻿using SamStore.ShoppingCart.Domain.Vouchers.Enums;
 
 namespace SamStore.ShoppingCart.Application.Models
 {
