@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SamStore.ShoppingCart.Application.Models
 {
-    public class ShoppingCartDTO
+    public record ShoppingCartDTO
     {
         public Guid Id { get; set; }
         public Guid CostumerId { get; set; }

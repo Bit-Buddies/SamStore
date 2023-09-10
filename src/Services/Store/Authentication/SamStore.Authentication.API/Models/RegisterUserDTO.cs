@@ -2,7 +2,7 @@
 
 namespace SamStore.Authentication.API.Models
 {
-    public class RegisterUserDTO
+    public record RegisterUserDTO
     {
         [Required(ErrorMessage = "{0} is required")]
         public string Name { get; set; }

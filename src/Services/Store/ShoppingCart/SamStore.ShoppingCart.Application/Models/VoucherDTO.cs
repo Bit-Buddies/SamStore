@@ -1,18 +1,13 @@
-﻿using SamStore.Order.Domain.Vouchers.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SamStore.ShoppingCart.Application.Models.Enums;
 
-namespace SamStore.Order.Application.Models
+namespace SamStore.ShoppingCart.Application.Models
 {
     public record VoucherDTO
     {
         public string Key { get; set; }
+        public decimal Discount { get; set; }
         public VoucherDiscountTypeEnum VoucherDiscountType { get; set; }
         public VoucherTypeEnum VoucherType { get; set; }
-        public decimal Discount { get; set; }
         public int Quantity { get; set; }
     }
 }

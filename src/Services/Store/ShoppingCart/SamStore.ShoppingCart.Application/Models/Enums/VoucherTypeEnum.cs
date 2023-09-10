@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SamStore.Order.Domain.Vouchers.Enums
+namespace SamStore.ShoppingCart.Application.Models.Enums
 {
     public enum VoucherTypeEnum
     {

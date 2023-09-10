@@ -2,7 +2,7 @@
 
 namespace SamStore.Authentication.API.Models
 {
-    public class LoginDTO
+    public record LoginDTO
     {
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [EmailAddress(ErrorMessage = "O campo {0} está inválido")]

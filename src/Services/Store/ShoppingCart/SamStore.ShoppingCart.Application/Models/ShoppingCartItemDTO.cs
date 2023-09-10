@@ -1,6 +1,6 @@
 ﻿namespace SamStore.ShoppingCart.Application.Models
 {
-    public class ShoppingCartItemDTO
+    public record ShoppingCartItemDTO
     {
         public Guid Id { get; set; }
         public Guid CartId { get; set; }
