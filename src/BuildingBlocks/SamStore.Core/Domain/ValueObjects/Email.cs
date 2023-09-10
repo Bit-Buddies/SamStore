@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SamStore.Core.Domain.ValueObjects
 {
-    public class Email 
+    public class Email : IValueObject
     {
         public string Address { get; private set; }
 

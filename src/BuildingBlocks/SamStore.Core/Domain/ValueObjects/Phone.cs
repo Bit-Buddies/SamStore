@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SamStore.Core.Domain.ValueObjects
 {
-    public class Phone
+    public class Phone : IValueObject
     {
         public string PrincipalPhone { get; private set; } = string.Empty;
         public string SecundaryPhone { get; private set; } = string.Empty;

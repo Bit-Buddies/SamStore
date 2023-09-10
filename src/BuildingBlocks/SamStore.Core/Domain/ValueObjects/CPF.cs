@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SamStore.Core.Domain.ValueObjects
 {
-    public class CPF
+    public class CPF : IValueObject
     {
         public const int CPFMaxLength = 11;
         public string Number { get; private set; }
