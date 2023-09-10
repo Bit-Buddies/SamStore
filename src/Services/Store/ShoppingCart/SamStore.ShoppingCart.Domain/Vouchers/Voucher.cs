@@ -12,9 +12,31 @@ namespace SamStore.ShoppingCart.Domain.Vouchers
 {
     public class Voucher : IValueObject
     {
-        public bool Used { get; set; } = false;
-        public string? Key { get; set; }
-        public decimal? Discount { get; set; }
-        public VoucherDiscountTypeEnum? DiscountType { get; set; }
+        public bool Used { get; private set; } = false;
+        public string? Key { get; private set; }
+        public decimal? Discount { get; private set; }
+        public VoucherDiscountTypeEnum? DiscountType { get; private set; }
+
+        public Voucher(string key, decimal discount, VoucherDiscountTypeEnum discountType)
+        {
+            Key = key;
+            Discount = discount;
+            DiscountType = discountType;
+            Used = true;
+
+            IsValid();
+        }
+
+        private void IsValid()
+        {
+            if (string.IsNullOrWhiteSpace(Key))
+                throw new ArgumentException(nameof(Key));
+
+            if (Discount == null || Discount <= 0)
+                throw new ArgumentException(nameof(Discount));
+
+            if (DiscountType == null)
+                throw new ArgumentException(nameof(DiscountType));
+        }
     }
 }

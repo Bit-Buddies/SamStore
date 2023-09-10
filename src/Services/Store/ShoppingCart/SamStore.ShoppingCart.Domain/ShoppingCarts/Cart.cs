@@ -34,6 +34,11 @@ namespace SamStore.ShoppingCart.Domain.ShoppingCarts
             return Items.FirstOrDefault(i => i.ProductId == productId);
         }
 
+        public void ApplyVoucher(Voucher voucher)
+        {
+            Voucher = voucher;
+        }
+
         public void AddItem(CartItem item)
         {
             if (!item.IsValid())
