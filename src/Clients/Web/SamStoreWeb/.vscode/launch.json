@@ -6,7 +6,7 @@
       "name": "Launch Chrome",
       "request": "launch",
       "type": "chrome",
-      "url": "http://localhost:4200",
+      "url": "http://localhost:4200"
     },
     {
       "name": "ng serve",
@@ -21,6 +21,13 @@
       "request": "launch",
       "preLaunchTask": "npm: test",
       "url": "http://localhost:9876/debug.html"
+    },
+    {
+      "name": "Docker Node.js Launch",
+      "type": "docker",
+      "request": "launch",
+      "preLaunchTask": "docker-run: debug",
+      "platform": "node"
     }
   ]
 }
