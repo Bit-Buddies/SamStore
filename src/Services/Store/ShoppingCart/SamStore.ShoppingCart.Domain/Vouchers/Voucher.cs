@@ -17,6 +17,7 @@ namespace SamStore.ShoppingCart.Domain.Vouchers
         public decimal? Discount { get; private set; }
         public VoucherDiscountTypeEnum? DiscountType { get; private set; }
 
+        protected Voucher() { }
         public Voucher(string key, decimal discount, VoucherDiscountTypeEnum discountType)
         {
             Key = key;

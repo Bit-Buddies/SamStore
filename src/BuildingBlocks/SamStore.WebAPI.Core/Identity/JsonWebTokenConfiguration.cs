@@ -15,16 +15,13 @@ namespace SamStore.WebAPI.Core.Identity
     {
         public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            var identitySettingsSection = configuration.GetSection("IdentitySettings");
-
+            IConfigurationSection identitySettingsSection = configuration.GetSection("IdentitySettings") ?? throw new NullReferenceException("IdentitySettings cannot be empty");
+            
             services.Configure<IdentitySettingsDTO>(identitySettingsSection);
 
-            IdentitySettingsDTO identitySettings = identitySettingsSection.Get<IdentitySettingsDTO>();
+            IdentitySettingsDTO identitySettings = identitySettingsSection.Get<IdentitySettingsDTO>()!;
 
-            if (identitySettings == null)
-                throw new NullReferenceException("IdentitySettings cannot be empty");
-
-            var key = Encoding.ASCII.GetBytes(identitySettings.Secret);
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(identitySettings.Secret));
 
             services.AddAuthentication(options =>
             {
@@ -37,7 +34,7 @@ namespace SamStore.WebAPI.Core.Identity
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = key,
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidAudience = identitySettings.Audience,

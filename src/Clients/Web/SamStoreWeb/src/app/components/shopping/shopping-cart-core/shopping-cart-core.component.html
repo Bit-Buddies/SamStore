@@ -63,10 +63,8 @@
 						<ng-container matColumnDef="actions">
 							<th mat-header-cell *matHeaderCellDef fxHide.lt-md></th>
 							<td mat-cell class="cell-row-text" *matCellDef="let product" fxHide.lt-md>
-								<div style="padding-right: 12px" fxLayout="row nowrap" fxLayoutAlign="end">
-									<button mat-mini-fab (click)="this.onClickRemoveItem(product)" color="primary">
-										<mat-icon>delete</mat-icon>
-									</button>
+								<div style="padding-right: 12px" fxLayout="row nowrap" fxLayoutAlign="end center">
+									<a (click)="this.onClickRemoveItem(product)">Remove</a>
 								</div>
 							</td>
 						</ng-container>
@@ -76,7 +74,19 @@
 					</table>
 				</div>
 	
-				<section fxLayout="column" fxLayoutAlign="start end" style="margin-block: 24px">
+				<section fxLayoutAlign="end">
+					<form fxLayout="column" fxFlex="40" fxFlex.sm="80" fxFlex.xs="100">
+						<mat-form-field appearance="outline" class="voucher-input-container">
+							<mat-label>Voucher</mat-label>
+							<input matInput placeholder="Your voucher code..." />
+							<button style="margin-right: 6px" color="primary" mat-mini-fab matSuffix>
+								<mat-icon>add</mat-icon>
+							</button>
+						</mat-form-field>
+					</form>
+				</section>
+				
+				<section fxLayout="column" fxLayoutAlign="start end" style="margin-top: 24px">
 					<div fxLayout="row nowrap" fxLayoutAlign="space-between" fxFlex="40">
 						<h3>
 							Subtotal ({{ this.shoppingCartService.getTotalQuantity() }}
@@ -87,6 +97,7 @@
 						</h3>
 					</div>
 				</section>
+
 			</div>
 		</div>
 	</div>

@@ -15,11 +15,8 @@ namespace SamStore.BFF.Orders.Services
             if (string.IsNullOrWhiteSpace(key))
                 return null;
 
-            using HttpClient httpClient =
-                CreateTransientHttpClient(_settings.Value.OrderBaseURL);
-
             var result = await EnsureSuccessStatusCode()
-                .GetAsync<VoucherDTO>($"Voucher/{key}", httpClient);
+                .GetAsync<VoucherDTO>($"Voucher/{key}");
 
             return result;
         }
