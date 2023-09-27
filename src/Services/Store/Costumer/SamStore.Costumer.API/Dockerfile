@@ -14,7 +14,7 @@ COPY ["Services/Store/Costumer/SamStore.Costumer.Infrastructure/SamStore.Costume
 COPY ["BuildingBlocks/SamStore.Core/SamStore.Core.csproj", "BuildingBlocks/SamStore.Core/"]
 COPY ["BuildingBlocks/SamStore.WebAPI.Core/SamStore.WebAPI.Core.csproj", "BuildingBlocks/SamStore.WebAPI.Core/"]
 
-RUN dotnet restore "Services/Store/Authentication/SamStore.Costumer.API/SamStore.Costumer.API.csproj"
+RUN dotnet restore "Services/Store/Costumer/SamStore.Costumer.API/SamStore.Costumer.API.csproj"
 
 COPY . .
 WORKDIR "/src/Services/Store/Costumer/SamStore.Costumer.API/"

@@ -35,10 +35,7 @@ namespace SamStore.Costumer.API.Services
 
         private void OnConnect(object? sender, ConnectedEventArgs e)
         {
-            _messageBus.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(async request =>
-            {
-                return await RegisterCostumer(request);
-            });
+            _messageBus.RespondAsync<RegisteredUserIntegrationEvent, ResponseMessage>(RegisterCostumer);
         }
 
         private async Task<ResponseMessage> RegisterCostumer(RegisteredUserIntegrationEvent request)
