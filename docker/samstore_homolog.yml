@@ -24,7 +24,7 @@ services:
     container_name: samstore-rabbitmq-homolog
     environment:  
       RABBITMQ_DEFAULT_USER: "samstore"
-      RABBITMQ_DEFAULT_PASS: "samstore"
+      RABBITMQ_DEFAULT_PASS: "uRrEp8sxXrw6cJ7teWxdKdVz"
     ports:
       - 5672:5672
       - 15672:15672
@@ -60,6 +60,22 @@ services:
     depends_on: 
       - rabbitmq
       - samstore-mysql
+
+  costumer-api: 
+    image: bit-buddies/samstore-costumer-api-homolog:latest
+    container_name: samstore-costumer-api-homolog
+    build: 
+      context: ../src
+      dockerfile: Services/Store/Costumer/SamStore.Costumer.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Homolog
+      - ASPNETCORE_URLS=http://*:5225
+    ports:
+      - 5225:5225
+    depends_on: 
+      - rabbitmq
+      - samstore-mysql
+      - authentication-api
 
 
   client-web: 
