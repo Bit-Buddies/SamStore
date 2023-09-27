@@ -6,21 +6,18 @@
 	width: 64px;
 }
 
-
-@keyframes NoContentFadeIn {
+@keyframes ContainerInit {
 	from {
 		opacity: 0;
-	} 
-
-	to {
+	}to {
 		opacity: 100%;
-	}
+	}	
 }
 
 .no-content-container {
 	text-align: center;
 	margin-block: 42px;
-	animation: NoContentFadeIn 0.4s forwards cubic-bezier(0.46,0.03,0.52,0.96);
+	animation: ContainerInit 0.4s forwards cubic-bezier(0.46,0.03,0.52,0.96);
 
 	h2 {
 		margin-block: 8px;
@@ -31,7 +28,8 @@
 	margin-bottom: 24px;
 	max-height: calc(100vh - 400px); 
 	overflow-y: overlay; 
-	box-sizing: border-box
+	box-sizing: border-box;
+	animation: ContainerInit 0.4s forwards cubic-bezier(0.25,0.46,0.45,0.94);
 
 	h3 {
 		font-weight: bold;
@@ -106,7 +104,27 @@
 		}
 	}
 
-	.voucher-input-container .mat-form-field-wrapper {
-		margin-bottom: -1.25em;
-  }
+	#voucher-input-container {
+		margin-bottom: -12px;
+  	}
+
+	.actions-button {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+		transition: color 0.2s cubic-bezier(0.25,0.46,0.45,0.94);
+
+		&:hover {
+			cursor: pointer;
+			color: sMain();
+		}
+	}
+}
+
+.values-container { 
+	margin-bottom: 24px;
+	animation: ContainerInit 0.4s forwards cubic-bezier(0.25,0.46,0.45,0.94);
+	h3 {
+		margin: 0 !important;
+		font-size: 14px;
+	}
 }

@@ -115,12 +115,14 @@ export class ShoppingCartService {
 	private updateShoppingCartIntoCookies() {
 		this._cookieService.deleteAll(this.shoppingCartCookieToken);
 
-		let totalValue = 0;
+		let totalEstimated = 0;
 
 		if (this.shoppingCart!.items.length > 0)
-			totalValue = this.shoppingCart!.items.reduce((total, item) => (total += item.price * item.quantity), 0);
+			totalEstimated = this.shoppingCart!.items.reduce((total, item) => (total += item.price * item.quantity), 0);
 
-		this.shoppingCart!.total = totalValue;
+			this.shoppingCart!.totalEstimated = totalEstimated;
+			this.shoppingCart!.discount = 0;
+			this.shoppingCart!.total = totalEstimated - this.shoppingCart!.discount;
 
 		this._cookieService.set(this.shoppingCartCookieToken, JSON.stringify(this.shoppingCart));
 	}
