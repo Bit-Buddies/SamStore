@@ -77,6 +77,23 @@ services:
       - samstore-mysql
       - authentication-api
 
+  shoppingcart-api: 
+    image: bit-buddies/samstore-shoppingcart-api-homolog:latest
+    container_name: samstore-shoppingcart-api-homolog
+    build: 
+      context: ../src
+      dockerfile: Services/Store/ShoppingCart/SamStore.ShoppingCart.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Homolog
+      - ASPNETCORE_URLS=http://*:5137
+    ports:
+      - 5137:5137
+    depends_on: 
+      - rabbitmq
+      - samstore-mysql
+      - authentication-api 
+      - costumer-api     
+
 
   client-web: 
     image: bit-buddies/sam-store-web-homolog:latest
@@ -89,3 +106,6 @@ services:
     command: "ng serve --host 0.0.0.0 --configuration=homolog --port 4200 --disable-host-check"
     depends_on: 
       - catalog-api
+      - costumer-api
+      - authentication-api
+      - shoppingcart-api
