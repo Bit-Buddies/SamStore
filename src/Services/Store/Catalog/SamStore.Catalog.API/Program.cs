@@ -32,6 +32,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
+    context.Database.Migrate();
+}
+
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
