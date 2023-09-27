@@ -1,6 +1,15 @@
-version: "3"
+version: "3.5"
 
 services: 
+  samstore-mysql:
+    image: mysql:8.0
+    container_name: samstore-mysql-homolog
+    restart: always
+    ports:
+      - 3309:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ZaAbVs6CTmgia0QXxe
+
 
   rabbitmq:
     image: rabbitmq:3.12-management
@@ -9,8 +18,9 @@ services:
       RABBITMQ_DEFAULT_USER: "samstore"
       RABBITMQ_DEFAULT_PASS: "samstore"
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - 5672:5672
+      - 15672:15672
+
 
   catalog-api: 
     image: bit-buddies/samstore-catalog-api-homolog:latest
@@ -21,8 +31,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Homolog
       - ASPNETCORE_URLS=http://*:5229
+    ports:
+      - 5229:5229
     depends_on: 
       - rabbitmq
+      - samstore-mysql
+
 
   client-web: 
     image: bit-buddies/sam-store-web-homolog:latest
@@ -31,7 +45,7 @@ services:
       context: ../src/Clients/Web/SamStoreWeb/
       dockerfile: Dockerfile
     ports:
-      - "4201:4200"
+      - 4201:4200
     command: "ng serve --host 0.0.0.0 --configuration=homolog --port 4200 --disable-host-check"
     depends_on: 
       - catalog-api
