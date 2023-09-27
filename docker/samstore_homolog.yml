@@ -1,6 +1,6 @@
 version: "3.5"
 
-name: sam-store-homolog
+name: samstore-homolog
 
 volumes: 
   sam-store-homolog-volume:
@@ -36,6 +36,7 @@ services:
     build: 
       context: ../src
       dockerfile: Services/Store/Catalog/SamStore.Catalog.API/Dockerfile
+    restart: on-failure:5
     environment:
       - ASPNETCORE_ENVIRONMENT=Homolog
       - ASPNETCORE_URLS=http://*:5229
@@ -55,6 +56,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Homolog
       - ASPNETCORE_URLS=http://*:5274
+    restart: on-failure:5
     ports:
       - 5274:5274
     depends_on: 
@@ -70,6 +72,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Homolog
       - ASPNETCORE_URLS=http://*:5225
+    restart: on-failure:5
     ports:
       - 5225:5225
     depends_on: 
@@ -86,6 +89,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Homolog
       - ASPNETCORE_URLS=http://*:5137
+    restart: on-failure:5
     ports:
       - 5137:5137
     depends_on: 
@@ -101,6 +105,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Homolog
       - ASPNETCORE_URLS=http://*:5067
+    restart: on-failure:5
     ports:
       - 5067:5067
     depends_on: 
@@ -108,6 +113,22 @@ services:
       - samstore-mysql
       - costumer-api
       - authentication-api
+      - shoppingcart-api
+
+  api-gateway-orders: 
+    image: bit-buddies/api-gateway-orders-homolog:latest
+    container_name: samstore-api-gateway-orders-homolog
+    build: 
+      context: ../src
+      dockerfile: ApiGateways/SamStore.BFF.Orders/Dockerfile
+    restart: on-failure:5
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Homolog
+      - ASPNETCORE_URLS=http://*:5159
+    ports:
+      - 5159:5159
+    depends_on: 
+      - order-api
       - shoppingcart-api
 
   client-web: 
