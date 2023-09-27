@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using SamStore.Authentication.API.Configurations;
+using SamStore.Authentication.API.Data;
 using SamStore.Costumer.API.Configurations;
 using SamStore.WebAPI.Core.API.Configurations;
 using SamStore.WebAPI.Core.API.Middlewares;
@@ -9,7 +11,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", config =>
     {
-        config.WithOrigins("http://localhost", "http://localhost:4200");
+        config.AllowAnyOrigin();
         config.AllowAnyMethod();
         config.AllowAnyHeader();
     });
@@ -27,10 +29,13 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI();
+
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var context = scope.ServiceProvider.GetRequiredService<IdentidadeDbContext>();
+    context.Database.Migrate();
 }
 
 app.UseCors("CorsPolicy");
