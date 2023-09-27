@@ -1,5 +1,5 @@
 # SamStore
-Training APP to study about Microsservices, DDD, CQRS, EDA, Event Notification, RabbitMQ, Abstractions and Clean Code.
+Training APP to study about Angular, Angular Material, .NET, Microsservices, DDD, CQRS, EDA, RabbitMQ, Abstractions and Clean Code.
 
 # Docs
 (...) Building...
