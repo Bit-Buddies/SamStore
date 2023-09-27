@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using SamStore.Order.API.Configurations;
+using SamStore.Order.Infrastructure.Contexts;
 using SamStore.WebAPI.Core.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,7 @@ builder.Services.AddCors(setup =>
 {
     setup.AddPolicy("CorsPolicy", options =>
         options
-            .WithOrigins("http://localhost", "http://localhost:4200")
+            .SetIsOriginAllowed(_ => true)
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
@@ -23,11 +25,14 @@ builder.Services.AddCors(setup =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI();
+
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    var context = scope.ServiceProvider.GetRequiredService<OrderContext>();
+    context.Database.Migrate();
+} 
 
 app.UseCors("CorsPolicy");
 
