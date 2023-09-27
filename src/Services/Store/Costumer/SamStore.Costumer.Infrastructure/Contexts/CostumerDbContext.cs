@@ -10,14 +10,14 @@ using SamStore.Core.Infrastructure.Data.Helpers;
 
 namespace SamStore.Costumer.Infrastructure.Contexts
 {
-    public class CustomerDbContext : DbContext, IUnitOfWork
+    public class CostumerDbContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerAddress> CustomerAddresses { get; set; }
 
-        public CustomerDbContext(DbContextOptions<CustomerDbContext> options, IMediatorHandler mediatorHandler) : base(options)
+        public CostumerDbContext(DbContextOptions<CostumerDbContext> options, IMediatorHandler mediatorHandler) : base(options)
         {
             _mediatorHandler = mediatorHandler;
         }
@@ -54,7 +54,7 @@ namespace SamStore.Costumer.Infrastructure.Contexts
             }
 
             modelBuilder.UseDefaultTableConfiguration();
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CostumerDbContext).Assembly);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

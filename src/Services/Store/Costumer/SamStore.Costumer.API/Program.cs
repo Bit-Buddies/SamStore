@@ -16,7 +16,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 if (string.IsNullOrWhiteSpace(connectionString))
     throw new ArgumentNullException(nameof(connectionString));
 
-builder.Services.AddDbContext<CustomerDbContext>(options =>
+builder.Services.AddDbContext<CostumerDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddDIConfiguration(builder.Configuration);
@@ -32,7 +32,7 @@ builder.Services.AddCors(setup =>
 {
     setup.AddPolicy("CorsPolicy", options =>
         options
-            .WithOrigins("http://localhost", "http://localhost:4200")
+            .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
@@ -42,10 +42,13 @@ builder.Services.AddCors(setup =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI();
+
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var context = scope.ServiceProvider.GetRequiredService<CostumerDbContext>();
+    context.Database.Migrate();
 }
 
 app.UseCors("CorsPolicy");

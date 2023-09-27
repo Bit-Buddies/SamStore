@@ -14,10 +14,10 @@ namespace SamStore.Costumer.Infrastructure.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly CustomerDbContext _context;
+        private readonly CostumerDbContext _context;
         public IUnitOfWork UnitOfWork => _context;
 
-        public CustomerRepository(CustomerDbContext context)
+        public CustomerRepository(CostumerDbContext context)
         {
             _context = context;
         }

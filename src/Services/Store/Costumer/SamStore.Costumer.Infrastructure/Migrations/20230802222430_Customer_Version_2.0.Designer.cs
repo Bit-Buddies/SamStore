@@ -10,7 +10,7 @@ using SamStore.Costumer.Infrastructure.Contexts;
 
 namespace SamStore.Costumer.Infrastructure.Migrations
 {
-    [DbContext(typeof(CustomerDbContext))]
+    [DbContext(typeof(CostumerDbContext))]
     [Migration("20230802222430_Customer_Version_2.0")]
     partial class Customer_Version_20
     {

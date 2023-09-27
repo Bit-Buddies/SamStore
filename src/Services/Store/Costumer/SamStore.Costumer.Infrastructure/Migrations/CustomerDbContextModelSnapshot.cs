@@ -9,7 +9,7 @@ using SamStore.Costumer.Infrastructure.Contexts;
 
 namespace SamStore.Costumer.Infrastructure.Migrations
 {
-    [DbContext(typeof(CustomerDbContext))]
+    [DbContext(typeof(CostumerDbContext))]
     partial class CustomerDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
