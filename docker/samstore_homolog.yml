@@ -91,9 +91,24 @@ services:
     depends_on: 
       - rabbitmq
       - samstore-mysql
-      - authentication-api 
-      - costumer-api     
 
+  order-api: 
+    image: bit-buddies/samstore-order-api-homolog:latest
+    container_name: samstore-order-api-homolog
+    build: 
+      context: ../src
+      dockerfile: Services/Store/Order/SamStore.Order.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Homolog
+      - ASPNETCORE_URLS=http://*:5067
+    ports:
+      - 5067:5067
+    depends_on: 
+      - rabbitmq
+      - samstore-mysql
+      - costumer-api
+      - authentication-api
+      - shoppingcart-api
 
   client-web: 
     image: bit-buddies/sam-store-web-homolog:latest
@@ -109,3 +124,4 @@ services:
       - costumer-api
       - authentication-api
       - shoppingcart-api
+      - order-api
