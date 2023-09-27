@@ -1,0 +1,22 @@
+version: "3"
+
+services: 
+  client-web: 
+    image: bit-buddies/sam-store-web-homolog:latest
+    container_name: sam-store-web-homolog
+    build:
+      context: ../src/Clients/Web/SamStoreWeb/
+      dockerfile: Dockerfile
+    ports:
+      - "4201:4200"
+    command: "ng serve --host 0.0.0.0 --configuration=homolog --port 4200 --disable-host-check"
+
+  catalog-api: 
+    image: bit-buddies/samstore-catalog-api-homolog:latest
+    container_name: samstore-catalog-api-homolog
+    build: 
+      context: ../src
+      dockerfile: Services/Store/Catalog/SamStore.Catalog.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Homolog
+      - ASPNETCORE_URLS=http://*:5229
