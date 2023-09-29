@@ -31,7 +31,7 @@ services:
 
 
   catalog-api: 
-    image: bit-buddies/samstore-catalog-api-homolog:latest
+    image: samstore-catalog-api-homolog:latest
     container_name: samstore-catalog-api-homolog
     build: 
       context: ../src
@@ -48,7 +48,7 @@ services:
 
 
   authentication-api: 
-    image: bit-buddies/samstore-authentication-api-homolog:latest
+    image: samstore-authentication-api-homolog:latest
     container_name: samstore-authentication-api-homolog
     build: 
       context: ../src
@@ -64,7 +64,7 @@ services:
       - samstore-mysql
 
   costumer-api: 
-    image: bit-buddies/samstore-costumer-api-homolog:latest
+    image: samstore-costumer-api-homolog:latest
     container_name: samstore-costumer-api-homolog
     build: 
       context: ../src
@@ -81,7 +81,7 @@ services:
       - authentication-api
 
   shoppingcart-api: 
-    image: bit-buddies/samstore-shoppingcart-api-homolog:latest
+    image: samstore-shoppingcart-api-homolog:latest
     container_name: samstore-shoppingcart-api-homolog
     build: 
       context: ../src
@@ -97,7 +97,7 @@ services:
       - samstore-mysql
 
   order-api: 
-    image: bit-buddies/samstore-order-api-homolog:latest
+    image: samstore-order-api-homolog:latest
     container_name: samstore-order-api-homolog
     build: 
       context: ../src
@@ -116,7 +116,7 @@ services:
       - shoppingcart-api
 
   api-gateway-orders: 
-    image: bit-buddies/api-gateway-orders-homolog:latest
+    image: api-gateway-orders-homolog:latest
     container_name: samstore-api-gateway-orders-homolog
     build: 
       context: ../src
@@ -132,14 +132,15 @@ services:
       - shoppingcart-api
 
   client-web: 
-    image: bit-buddies/sam-store-web-homolog:latest
+    image: samueldcarvalho/sam-store-web-homolog:latest
     container_name: samstore-web-homolog
     build:
       context: ../src/Clients/Web/SamStoreWeb/
       dockerfile: Dockerfile
+      args:
+        ENVIRONMENT_CONFIGURATION: homolog
     ports:
-      - 4201:4200
-    command: "ng serve --host 0.0.0.0 --configuration=homolog --port 4200 --disable-host-check"
+      - 8081:80
     depends_on: 
       - catalog-api
       - costumer-api
